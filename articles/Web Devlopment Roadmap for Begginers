@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A practical, modern web development roadmap that takes you from absolute beginner to building full-stack web applications — phase by phase, no fluff.">
+  <title>The Web Development Roadmap Nobody Shows Beginners — Codenosis</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articles">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+
+      <div class="article-meta">
+        <span class="category-badge">Roadmap</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 10 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 12, 2026</span>
+      </div>
+
+      <h1 class="article-title">The Web Development Roadmap Nobody Shows Beginners</h1>
+
+      <p class="article-subtitle">A practical, phase-by-phase path from absolute zero to building full-stack web applications — with real milestones and zero tutorial hell.</p>
+
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        Think of building a website like building a house: HTML is the blueprint and framing, CSS is the paint and interior design, and JavaScript is the electricity and plumbing. This practical, modern roadmap is designed to take you from absolute beginner to building your own full-stack web applications — step by step, phase by phase.
+      </p>
+
+      <h2>Phase 1: The Internet & Your Workspace (Week 1)</h2>
+      <p>
+        Before writing a single line of code, you need to understand how the web actually works and get your computer ready for the journey.
+      </p>
+      <ul>
+        <li><strong>How the Web Works:</strong> Learn what happens when you type a URL into a browser. Understand the relationship between a Client (your browser) and a Server (where the website files live), and what HTTP/HTTPS requests are.</li>
+        <li><strong>Your Code Editor:</strong> Download and install VS Code (Visual Studio Code). It is the industry standard — free, lightweight, and works on any machine.</li>
+        <li><strong>Browser Developer Tools:</strong> Learn how to right-click on any webpage and select "Inspect" to view its underlying code. This habit alone will teach you more than any tutorial.</li>
+      </ul>
+
+      <h2>Phase 2: The Frontend Foundations (Weeks 2–6)</h2>
+      <p>
+        This is where you build what the user actually sees and interacts with. Take your time here — this foundation holds everything else up.
+      </p>
+
+      <h2>1. HTML5 — The Structure</h2>
+      <p>
+        HTML is the skeleton of every website. It is not a programming language — it is a structure language, and it is the easiest thing you will learn on this entire journey.
+      </p>
+      <ul>
+        <li><strong>Key Concepts:</strong> Tags, attributes, headings, paragraphs, lists, links, and images.</li>
+        <li><strong>Semantic HTML:</strong> Use <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> instead of generic <code>&lt;div&gt;</code> tags — this helps with both accessibility and SEO.</li>
+      </ul>
+
+      <h2>2. CSS3 — The Styling</h2>
+      <p>
+        CSS makes your layout look beautiful and professional. This is where your site stops looking like a school project and starts looking like something real.
+      </p>
+      <ul>
+        <li><strong>The Box Model:</strong> Understanding margins, borders, padding, and content sizing — the foundation of every layout.</li>
+        <li><strong>Layouts:</strong> Master Flexbox for one-dimensional rows and columns, then CSS Grid for complex two-dimensional layouts.</li>
+        <li><strong>Responsive Design:</strong> Use Media Queries to make your website look great on phones, tablets, and desktops alike.</li>
+        <li><strong>Modern Shortcut:</strong> Once you understand core CSS, learn Tailwind CSS — a utility-first framework heavily favored by developers today for rapid, clean styling.</li>
+      </ul>
+
+      <h2>3. JavaScript — The Logic</h2>
+      <p>
+        JavaScript turns your static pages into interactive web applications. This is where the real programming begins.
+      </p>
+      <ul>
+        <li><strong>Basics:</strong> Variables, data types, loops, conditionals, and functions.</li>
+        <li><strong>DOM Manipulation:</strong> Use JavaScript to change HTML elements, listen for button clicks, and update styles dynamically.</li>
+        <li><strong>Fetch API / Async JS:</strong> Learn how to pull live data from external APIs — like displaying real-time weather on your page.</li>
+      </ul>
+
+      <div class="article-challenge">
+        <i class="fas fa-hammer"></i>
+        <p><strong>Phase 2 Project Milestones:</strong> Build a personal portfolio website using semantic HTML and custom CSS. Then build a fully interactive To-Do List or Calculator using JavaScript. No tutorials open — just you and your code editor.</p>
+      </div>
+
+      <h2>Phase 3: Version Control & Git (Week 7)</h2>
+      <p>
+        Before moving to advanced topics, you need a safety net for your code. Skipping this phase is one of the biggest mistakes beginner developers make.
+      </p>
+      <ul>
+        <li><strong>Git:</strong> A tool to track changes in your code so you can roll back if you break something. Learn: <code>git init</code>, <code>git add</code>, <code>git commit</code>, and <code>git push</code>.</li>
+        <li><strong>GitHub:</strong> A cloud platform to store your Git repositories. It acts as your public portfolio where future employers and clients can see your actual work.</li>
+      </ul>
+
+      <h2>Phase 4: Frontend Frameworks (Weeks 8–11)</h2>
+      <p>
+        As websites grow larger, writing raw JavaScript becomes difficult to manage. Frameworks let you build complex apps using reusable building blocks called components.
+      </p>
+      <ul>
+        <li><strong>Pick ONE Framework:</strong> Don't try to learn everything. React is currently the most popular choice with the largest job market, though Vue or Svelte are also excellent options.</li>
+        <li><strong>Key Concepts (React):</strong> Components, JSX, Props, and State management using <code>useState</code>.</li>
+        <li><strong>Build Tool:</strong> Use Vite to spin up modern frontend projects in seconds — it is the industry standard for React development today.</li>
+      </ul>
+
+      <h2>Phase 5: The Backend & Databases (Weeks 12–16)</h2>
+      <p>
+        If you want your web app to handle user logins, save data securely, and perform calculations behind the scenes, you need backend development. This is where your app becomes truly powerful.
+      </p>
+
+      <h2>Node.js & Express</h2>
+      <p>
+        You can use your existing JavaScript knowledge on the server side using Node.js. Express.js is a minimal framework built on top of Node that helps you handle backend logic cleanly.
+      </p>
+      <ul>
+        <li><strong>Key Concepts:</strong> Creating a server, routing (handling URLs like <code>/api/users</code>), and building RESTful APIs using HTTP methods — GET, POST, PUT, and DELETE.</li>
+      </ul>
+
+      <h2>Databases</h2>
+      <p>
+        Every real application needs a place to save data permanently. You have two main options depending on your project:
+      </p>
+      <ul>
+        <li><strong>Relational (SQL):</strong> PostgreSQL is the dominant, highly robust industry favorite. Data fits into tables, rows, and columns — structured and reliable.</li>
+        <li><strong>Non-Relational (NoSQL):</strong> MongoDB is a beginner-friendly option that stores data as JSON-like documents — flexible and fast to set up.</li>
+      </ul>
+
+      <h2>Phase 6: Deployment (Week 17+)</h2>
+      <p>
+        A website is not real until it is live on the internet. This phase turns your localhost project into something you can actually share with the world.
+      </p>
+      <ul>
+        <li><strong>Frontend Deployment:</strong> Host your static sites or React apps for free on Vercel, Netlify, or GitHub Pages.</li>
+        <li><strong>Full-Stack Deployment:</strong> Host your backend servers and databases using developer-friendly platforms like Render, Railway, or Supabase.</li>
+      </ul>
+
+      <h2>Crucial Tips for Your Journey</h2>
+      <p>
+        The roadmap above is only as useful as the habits you build around it. Here are the three things that actually separate developers who make it from those who don't:
+      </p>
+      <ul>
+        <li><strong>Don't get stuck in Tutorial Hell:</strong> It is easy to watch hours of coding videos and feel like you are learning. You only actually learn when you close the video, open VS Code, and struggle through building something on your own.</li>
+        <li><strong>Google and AI are your friends:</strong> Professional developers search for answers constantly. Learning how to properly read error messages and look up documentation is a genuine superpower.</li>
+        <li><strong>Consistency beats intensity:</strong> Spending 30 to 60 minutes coding every single day is infinitely better than pulling an 8-hour marathon once every two weeks. Show up small, show up every day.</li>
+      </ul>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Here is your action step: Print this roadmap. Pin it somewhere visible. Open Phase 1 today. The only difference between developers who make it and those who don't is that they never stopped showing up.</p>
+      </div>
+
+      <p class="article-cta-text">Which phase are you currently on? Drop a comment below — let's track your progress together.</p>
+
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="how-to-start-web-development.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-rocket"></i></div>
+          <div>
+            <span class="category-badge">Beginner's Guide</span>
+            <p>How to Start Learning Web Development From Zero — Honest Guide</p>
+          </div>
+        </a>
+
+        <a href="html-css-js-explained.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-layer-group"></i></div>
+          <div>
+            <span class="category-badge">Fundamentals</span>
+            <p>HTML, CSS and JavaScript — What Are They and Which Comes First?</p>
+          </div>
+        </a>
+
+        <a href="coding-mistakes-beginners.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div>
+            <span class="category-badge">Personal</span>
+            <p>Mistakes I Made When I Started Coding — Don't Repeat Them</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="coding-mistakes-beginners.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#articles">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+
+</body>
+</html>
