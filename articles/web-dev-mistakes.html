@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="8 honest mistakes I made while learning web development — and what I'd do differently. A personal guide for beginners." />
-  <title>Mistakes I Made While Learning Web Development</title>
+  <title>Mistakes I Made While Learning Web Development — Codenosis</title>
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../article.css" />
@@ -20,98 +20,243 @@
     gtag('config', 'G-24SHHE3YCP');
   </script>
 </head>
-<body>
+<body class="dark-mode">
 
-  <header>
-    <p>Personal Essay · Web Development</p>
-    <h1>Mistakes I Made While Learning Web Dev</h1>
-    <div>
-      <span>By Yogesh</span>
-      <span>·</span>
-      <span>8 min read</span>
-      <span>·</span>
-      <span>8 mistakes</span>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articles">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <article>
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
 
-    <p>
-      I still remember the day I decided to learn web development. I was convinced that within a few months, I'd be building the next big thing. I had a laptop, a YouTube playlist, and way too much confidence. What I didn't have was a clue.
-    </p>
+      <div class="article-meta">
+        <span class="category-badge">Personal Essay</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 8 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 13, 2026</span>
+      </div>
 
-    <div>
-      <span>Mistake 01</span>
-      <h2>I Treated Tutorials Like Accomplishments</h2>
-      <p>I would finish a tutorial — build a to-do app, follow along with a full-stack project, complete a CSS layout — and feel genuinely proud. Like I had <em>learned</em> something. But the moment I closed the tab and tried to build anything from scratch, I was completely stuck.</p>
-      <blockquote>"Tutorial completion is not the same as understanding. I was coding on autopilot, copying without questioning why anything worked."</blockquote>
-      <p>The fix was painful but simple: pause. Close the tutorial halfway. Try to finish it yourself. Break it. Google the error. That discomfort is the actual learning.</p>
+      <h1 class="article-title">Mistakes I Made While Learning Web Development</h1>
+
+      <p class="article-subtitle">8 honest mistakes I made while learning web dev — and what I'd do differently. So you don't have to learn the hard way.</p>
+
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <p class="author-name">Yogesh</p>
+          <p class="author-tag">Web Developer & Writer at Codenosis</p>
+        </div>
+      </div>
+
     </div>
+  </section>
 
-    <div>
-      <span>Mistake 02</span>
-      <h2>I Skipped CSS Because It "Wasn't Real Programming"</h2>
-      <p>I believed it. I rushed through CSS, barely touched Flexbox, completely ignored Grid, and just copy-pasted styles I didn't understand. Then I got to an actual project and couldn't center a div to save my life.</p>
-      <p>CSS is deep. It has a logic. It has quirks. Ignoring it because it feels less "serious" than JavaScript is one of the most expensive mistakes a web dev beginner can make. The front-end is literally what users see — and if it looks broken, nothing else matters.</p>
-    </div>
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
 
-    <div>
-      <span>Mistake 03</span>
-      <h2>I Jumped to Frameworks Before Understanding the Basics</h2>
-      <p>React. Vue. Next.js. Everyone was talking about them. So I jumped straight in. And I struggled. Hard.</p>
-      <p>Not because frameworks are impossible — but because I didn't understand what problem they were solving. When you don't know vanilla JavaScript well enough, learning React feels like trying to read a novel in a language you don't speak yet.</p>
-      <blockquote>"The framework is just a layer on top. If the foundation is shaky, everything wobbles."</blockquote>
-    </div>
+      <p class="article-intro">
+        I still remember the day I decided to learn web development. I was convinced that within a few months, I'd be building the next big thing. I had a laptop, a YouTube playlist, and way too much confidence. What I didn't have was a clue.
+      </p>
 
-    <div>
-      <span>Mistake 04</span>
-      <h2>I Never Read Error Messages Properly</h2>
-      <p>Early me had a strategy for error messages: panic, copy the red text, paste it into Google, click the first Stack Overflow link, paste the accepted answer, pray.</p>
-      <p>It worked sometimes. But it also meant I never actually understood what was going wrong. I was treating symptoms, not diagnosing problems.</p>
-      <p>Error messages exist for a reason. Learning to read them — actually read them, line by line — is one of the highest-leverage skills in development. It took me embarrassingly long to figure this out.</p>
-    </div>
+      <h2>1. I Treated Tutorials Like Accomplishments</h2>
+      <p>
+        I would finish a tutorial — build a to-do app, follow along with a full-stack project, complete a CSS layout — and feel genuinely proud. Like I had <em>learned</em> something. But the moment I closed the tab and tried to build anything from scratch, I was completely stuck.
+      </p>
+      <p>
+        The problem? I was watching and typing, not <em>thinking</em>. Tutorial completion is not the same as understanding. I was coding on autopilot, copying without questioning <em>why</em> anything worked.
+      </p>
+      <p>
+        The fix was painful but simple: pause. Close the tutorial halfway. Try to finish it yourself. Break it. Google the error. That discomfort is the actual learning.
+      </p>
 
-    <div>
-      <span>Mistake 05</span>
-      <h2>I Built Nothing Original</h2>
-      <p>For the longest time, my portfolio was just tutorial projects. A weather app that followed a YouTube video. A landing page from a course. A clone of something I saw online.</p>
-      <p>These aren't bad exercises. But they're not proof that you can build. The best thing I did for my growth was to think of a small, dumb project that <em>I</em> actually wanted — something no tutorial covered — and figure it out myself. It was messy. But it was mine. And I learned ten times more doing it.</p>
-    </div>
+      <h2>2. I Skipped CSS Because It "Wasn't Real Programming"</h2>
+      <p>
+        I believed it. I rushed through CSS, barely touched Flexbox, completely ignored Grid, and just copy-pasted styles I didn't understand. Then I got to an actual project and couldn't center a div to save my life.
+      </p>
+      <p>
+        CSS is deep. It has a logic. It has quirks. Ignoring it because it feels less "serious" than JavaScript is one of the most expensive mistakes a web dev beginner can make. The front-end is literally what users see — and if it looks broken, nothing else matters.
+      </p>
 
-    <div>
-      <span>Mistake 06</span>
-      <h2>I Ignored Version Control Until It Was Too Late</h2>
-      <p>I deleted a working feature once trying to add a new one. The old code? Gone. No backup. No Git. Just me staring at the screen wondering what I had done.</p>
-      <blockquote>"Git isn't optional. It's not a 'professional' thing you learn later. It's basic survival as a developer."</blockquote>
-      <p>Learn it early, use it always, commit often.</p>
-    </div>
+      <h2>3. I Jumped to Frameworks Before Understanding the Basics</h2>
+      <p>
+        React. Vue. Next.js. Everyone was talking about them. So I jumped straight in. And I struggled. Hard.
+      </p>
+      <p>
+        Not because frameworks are impossible — but because I didn't understand what problem they were solving. When you don't know vanilla JavaScript well enough, learning React feels like trying to read a novel in a language you don't speak yet.
+      </p>
+      <p>
+        I should have spent more time with plain HTML, CSS, and JavaScript. The framework is just a layer on top. If the foundation is shaky, everything wobbles.
+      </p>
 
-    <div>
-      <span>Mistake 07</span>
-      <h2>I Compared My Journey to Everyone Else's</h2>
-      <p>The internet is full of people sharing their wins. "I got a job in 3 months." "I built a SaaS in 2 weeks." I read these constantly. And every time, I felt behind. Inadequate.</p>
-      <p>Here's the truth: you're not seeing their full picture. You don't see the prior experience, the hours, the failures, the support system, the luck. Comparison is a trap that burns your energy without producing anything useful.</p>
-      <p>Your timeline is your timeline. The only real benchmark is: <em>am I better than I was last week?</em></p>
-    </div>
+      <h2>4. I Never Read Error Messages Properly</h2>
+      <p>
+        Early me had a strategy for error messages: panic, copy the red text, paste it into Google, click the first Stack Overflow link, paste the accepted answer, pray.
+      </p>
+      <p>
+        It worked sometimes. But it also meant I never actually understood what was going wrong. I was treating symptoms, not diagnosing problems.
+      </p>
+      <p>
+        Error messages exist for a reason. They tell you <em>what</em> went wrong, <em>where</em> it happened, and sometimes even <em>why</em>. Learning to read them — actually read them, line by line — is one of the highest-leverage skills in development. It took me embarrassingly long to figure this out.
+      </p>
 
-    <div>
-      <span>Mistake 08</span>
-      <h2>I Didn't Build in Public or Ask for Help</h2>
-      <p>I was afraid to share unfinished work. Afraid to ask "dumb" questions. Afraid to post my projects because they weren't good enough. This kept me isolated and slow.</p>
-      <p>The moment I started sharing work — even rough, incomplete stuff — I got feedback that improved my code and made me accountable. Nobody is judging you as hard as you're judging yourself.</p>
-      <blockquote>"Post the project. Ask the question."</blockquote>
-    </div>
+      <h2>5. I Built Nothing Original</h2>
+      <p>
+        For the longest time, my portfolio was just tutorial projects. A weather app that followed a YouTube video. A landing page from a course. A clone of something I saw online.
+      </p>
+      <p>
+        These aren't bad exercises. But they're not proof that you can build. Employers, clients, and even you yourself need evidence that you can take an idea from zero to something real.
+      </p>
+      <p>
+        The best thing I did for my growth was to think of a small, dumb project that <em>I</em> actually wanted — something no tutorial covered — and figure it out myself. It was messy, it took longer, and it didn't look great. But it was mine. And I learned ten times more doing it.
+      </p>
 
-    <div>
+      <h2>6. I Ignored Version Control Until It Was Too Late</h2>
+      <p>
+        I deleted a working feature once trying to add a new one. The old code? Gone. No backup. No Git. Just me staring at the screen wondering what I had done.
+      </p>
+      <p>
+        Git isn't optional. It's not a "professional" thing you learn later. It's basic survival as a developer. Even for solo projects. Even for practice. Learn it early, use it always, commit often.
+      </p>
+
+      <h2>7. I Compared My Journey to Everyone Else's</h2>
+      <p>
+        The internet is full of people sharing their wins. "I got a job in 3 months." "I built a SaaS in 2 weeks." "I'm 19 and earning 6 figures." I read these constantly. And every time, I felt behind. Inadequate. Like I was doing it wrong.
+      </p>
+      <p>
+        Here's the truth: you're not seeing their full picture. You don't see the prior experience, the hours, the failures, the support system, the luck. Comparison is a trap that burns your energy without producing anything useful.
+      </p>
+      <p>
+        Your timeline is your timeline. The only real benchmark is: <em>am I better than I was last week?</em>
+      </p>
+
+      <h2>8. I Didn't Build in Public or Ask for Help</h2>
+      <p>
+        I was afraid to share unfinished work. Afraid to ask "dumb" questions. Afraid to post my projects because they weren't good enough. This kept me isolated and slow.
+      </p>
+      <p>
+        The moment I started sharing work — even rough, incomplete stuff — I got feedback that improved my code and, more importantly, made me accountable. Asking questions online, joining communities, showing up even when I felt like a beginner — all of it accelerated my learning more than any course.
+      </p>
+      <p>
+        Nobody is judging you as hard as you're judging yourself. Post the project. Ask the question.
+      </p>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Here's my challenge to you: pick one mistake from this list that you're currently making — and fix it today. Not tomorrow. Today.</p>
+      </div>
+
       <h2>What I'd Tell My Past Self</h2>
-      <p>Stop watching, start building. Read the errors. Learn CSS properly. Touch grass occasionally.</p>
-      <p>But more than anything: be patient with yourself. Web development is genuinely hard. The learning curve is steep. The field is wide. And everyone who looks confident online was once confused about <code>position: relative</code> and why their div wouldn't center.</p>
-      <p>You'll get there. Just don't make the same mistakes I did.</p>
+      <p>
+        Stop watching, start building. Read the errors. Learn CSS properly. Touch grass occasionally.
+      </p>
+      <p>
+        But more than anything: be patient with yourself. Web development is genuinely hard. The learning curve is steep. The field is wide. And everyone who looks confident online was once confused about <code>position: relative</code> and why their div wouldn't center.
+      </p>
+      <p>
+        You'll get there. Just don't make the same mistakes I did.
+      </p>
+
+      <p class="article-cta-text">Drop a comment below — which of these mistakes hit closest to home? Let's talk about it.</p>
+
     </div>
-
-    <p><em>Written from experience — and a lot of Stack Overflow tabs.</em></p>
-
   </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="how-to-start-web-development.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-rocket"></i></div>
+          <div>
+            <span class="category-badge">Beginner's Guide</span>
+            <p>How to Start Learning Web Development From Zero — Honest Guide</p>
+          </div>
+        </a>
+
+        <a href="html-css-js-explained.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-layer-group"></i></div>
+          <div>
+            <span class="category-badge">Fundamentals</span>
+            <p>HTML, CSS and JavaScript — What Are They and Which Comes First?</p>
+          </div>
+        </a>
+
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <span class="category-badge">Roadmap</span>
+            <p>The Web Development Roadmap Nobody Shows Beginners</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="coding-mistakes-beginners.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#articles">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 
 </body>
 </html>
