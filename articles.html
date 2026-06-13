@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse all articles on Codenosis — honest web development guides, roadmaps, and tips written for beginners.">
+  <title>All Articles — Codenosis</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="articles-hero">
+    <div class="article-container" style="max-width:1200px">
+      <div class="section-label">
+        <i class="fas fa-newspaper"></i>
+        <span>All Articles</span>
+      </div>
+      <h1>Everything on Codenosis</h1>
+      <p>Honest guides, real roadmaps, and practical tips — written for beginners by people who've been there.</p>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search articles..." />
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-pills">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="Beginner's Guide">Beginner's Guide</button>
+        <button class="pill" data-filter="Fundamentals">Fundamentals</button>
+        <button class="pill" data-filter="Roadmap">Roadmap</button>
+        <button class="pill" data-filter="Reality Check">Reality Check</button>
+        <button class="pill" data-filter="Personal">Personal</button>
+        <button class="pill" data-filter="Full Stack">Full Stack</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Articles List -->
+  <section class="articles-list">
+    <div class="all-articles-container">
+
+      <div class="all-articles-grid" id="articlesGrid">
+
+        <a href="articles/how-to-start-web-development.html" class="all-article-card" data-category="Beginner's Guide" data-title="How to Start Learning Web Development From Zero Honest Guide">
+          <div class="all-card-icon"><i class="fas fa-code"></i></div>
+          <div class="all-card-content">
+            <div class="article-meta">
+              <span class="category-badge">Beginner's Guide</span>
+              <span class="meta-info"><i class="fas fa-clock"></i> 8 min</span>
+              <span class="meta-info"><i class="fas fa-calendar"></i> June 11, 2026</span>
+            </div>
+            <h3>How to Start Learning Web Development From Zero — Honest Guide</h3>
+            <p>No overwhelm. No confusion. Just the clear path I wish someone had given me on day one.</p>
+            <span class="all-card-author"><i class="fas fa-user"></i> Sarthak</span>
+          </div>
+        </a>
+
+        <a href="articles/html-css-js-explained.html" class="all-article-card" data-category="Fundamentals" data-title="HTML CSS and JavaScript What Are They and Which Comes First">
+          <div class="all-card-icon"><i class="fas fa-layer-group"></i></div>
+          <div class="all-card-content">
+            <div class="article-meta">
+              <span class="category-badge">Fundamentals</span>
+              <span class="meta-info"><i class="fas fa-clock"></i> 6 min</span>
+              <span class="meta-info"><i class="fas fa-calendar"></i> June 12, 2026</span>
+            </div>
+            <h3>HTML, CSS and JavaScript — What Are They and Which Comes First?</h3>
+            <p>Everyone throws these three words at beginners but nobody explains them simply. Here's exactly what they are.</p>
+            <span class="all-card-author"><i class="fas fa-user"></i> Sarthak</span>
+          </div>
+        </a>
+
+        <a href="articles/web-dev-roadmap.html" class="all-article-card" data-category="Roadmap" data-title="The Web Development Roadmap Nobody Shows Beginners">
+          <div class="all-card-icon"><i class="fas fa-map"></i></div>
+          <div class="all-card-content">
+            <div class="article-meta">
+              <span class="category-badge">Roadmap</span>
+              <span class="meta-info"><i class="fas fa-clock"></i> 10 min</span>
+              <span class="meta-info"><i class="fas fa-calendar"></i> June 12, 2026</span>
+            </div>
+            <h3>The Web Development Roadmap Nobody Shows Beginners</h3>
+            <p>Not another overwhelming chart. A real, step by step path that actually makes sense.</p>
+            <span class="all-card-author"><i class="fas fa-user"></i> Sarthak</span>
+          </div>
+        </a>
+
+        <a href="articles/how-long-to-become-developer.html" class="all-article-card" data-category="Reality Check" data-title="How Long Does it Actually Take to Become a Web Developer">
+          <div class="all-card-icon"><i class="fas fa-hourglass-half"></i></div>
+          <div class="all-card-content">
+            <div class="article-meta">
+              <span class="category-badge">Reality Check</span>
+              <span class="meta-info"><i class="fas fa-clock"></i> 5 min</span>
+              <span class="meta-info"><i class="fas fa-calendar"></i> June 13, 2026</span>
+            </div>
+            <h3>How Long Does it Actually Take to Become a Web Developer?</h3>
+            <p>The honest answer nobody wants to give you — no fake promises, no nonsense.</p>
+            <span class="all-card-author"><i class="fas fa-user"></i> Sarthak</span>
+          </div>
+        </a>
+
+        <a href="articles/coding-mistakes-beginners.html" class="all-article-card" data-category="Personal" data-title="Mistakes I Made While Learning Web Development Don't Repeat Them">
+          <div class="all-card-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div class="all-card-content">
+            <div class="article-meta">
+              <span class="category-badge">Personal</span>
+              <span class="meta-info"><i class="fas fa-clock"></i> 8 min</span>
+              <span class="meta-info"><i class="fas fa-calendar"></i> June 13, 2026</span>
+            </div>
+            <h3>Mistakes I Made While Learning Web Development — Don't Repeat Them</h3>
+            <p>8 honest mistakes that cost months of progress — so you can skip straight past them.</p>
+            <span class="all-card-author"><i class="fas fa-user"></i> Yogesh</span>
+          </div>
+        </a>
+
+        <a href="articles/frontend-backend-fullstack.html" class="all-article-card" data-category="Full Stack" data-title="Frontend vs Backend vs Full Stack Whats the Difference">
+          <div class="all-card-icon"><i class="fas fa-sitemap"></i></div>
+          <div class="all-card-content">
+            <div class="article-meta">
+              <span class="category-badge">Full Stack</span>
+              <span class="meta-info"><i class="fas fa-clock"></i> 6 min</span>
+              <span class="meta-info"><i class="fas fa-calendar"></i> June 14, 2026</span>
+            </div>
+            <h3>Frontend vs Backend vs Full Stack — What's the Difference?</h3>
+            <p>Everyone throws these terms around but nobody explains them simply. Here's exactly what they mean.</p>
+            <span class="all-card-author"><i class="fas fa-user"></i> Yogesh</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" id="noResults" style="display:none;">
+        <i class="fas fa-search"></i>
+        <p>No articles found for "<span id="searchTerm"></span>"</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="articles/how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="articles/html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="articles/web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="articles/how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="articles/coding-mistakes-beginners.html">Mistakes I Made</a></li>
+            <li><a href="articles/frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="articles.html">Articles</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

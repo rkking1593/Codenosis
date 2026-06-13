@@ -140,3 +140,54 @@ revealElements.forEach(el => {
   el.classList.add('hidden');
   revealObserver.observe(el);
 });
+
+
+
+// ===== ARTICLES PAGE SEARCH & FILTER =====
+const searchInput = document.getElementById('searchInput');
+
+if (searchInput) {
+  const noResults = document.getElementById('noResults');
+  const searchTerm = document.getElementById('searchTerm');
+  const cards = document.querySelectorAll('.all-article-card');
+  const pills = document.querySelectorAll('.pill');
+
+  let activeFilter = 'all';
+
+  function filterArticles() {
+    const query = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const title = card.getAttribute('data-title').toLowerCase();
+      const category = card.getAttribute('data-category');
+      const matchesSearch = title.includes(query);
+      const matchesFilter = activeFilter === 'all' || category === activeFilter;
+
+      if (matchesSearch && matchesFilter) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0) {
+      noResults.style.display = 'flex';
+      searchTerm.textContent = query || activeFilter;
+    } else {
+      noResults.style.display = 'none';
+    }
+  }
+
+  searchInput.addEventListener('input', filterArticles);
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.getAttribute('data-filter');
+      filterArticles();
+    });
+  });
+}
