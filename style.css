@@ -580,6 +580,46 @@ body.light-mode .navbar.scrolled {
   font-size: 0.95rem;
 }
 
+/* ===== ABOUT CARDS ===== */
+.about-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.about-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: border-color 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: var(--accent);
+}
+
+.about-role {
+  display: block;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+}
+
+.about-text h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
 /* ===== MOBILE ABOUT ===== */
 @media (max-width: 768px) {
   .about-inner {
@@ -587,6 +627,18 @@ body.light-mode .navbar.scrolled {
     text-align: center;
     padding: 2rem;
     gap: 1.5rem;
+  }
+}
+
+/* ===== MOBILE ABOUT CARDS ===== */
+@media (max-width: 768px) {
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card {
+    flex-direction: column;
+    padding: 1.5rem;
   }
 }
 
