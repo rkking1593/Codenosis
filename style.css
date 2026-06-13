@@ -535,44 +535,38 @@ body.light-mode .navbar.scrolled {
   background: var(--bg-secondary);
 }
 
-.about-inner {
-  width: 100%;
-}
-
-.about-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.about-card {
+.about-stack {
   display: flex;
-  align-items: flex-start;
-  gap: 1.2rem;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-inner {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
+  border-radius: 16px;
+  padding: 3rem;
   transition: border-color 0.3s ease;
 }
 
-.about-card:hover {
+.about-inner:hover {
   border-color: var(--accent);
 }
 
 .about-icon {
   flex-shrink: 0;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background: rgba(99, 102, 241, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: var(--accent);
-  margin-top: 4px;
 }
 
 .about-text {
@@ -580,7 +574,7 @@ body.light-mode .navbar.scrolled {
 }
 
 .about-text h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.3rem;
@@ -604,13 +598,11 @@ body.light-mode .navbar.scrolled {
 
 /* ===== MOBILE ABOUT ===== */
 @media (max-width: 768px) {
-  .about-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .about-card {
+  .about-inner {
     flex-direction: column;
-    padding: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+    gap: 1.5rem;
   }
 }
 
