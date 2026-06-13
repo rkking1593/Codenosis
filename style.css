@@ -535,19 +535,8 @@ body.light-mode .navbar.scrolled {
   background: var(--bg-secondary);
 }
 
-.about-inner {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 3rem;
-  transition: border-color 0.3s ease;
-}
-
-.about-inner:hover {
-  border-color: var(--accent);
+.about-inner{
+  width: 100%;
 }
 
 .about-icon {
