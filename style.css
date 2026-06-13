@@ -541,26 +541,20 @@ body.light-mode .navbar.scrolled {
 
 .about-icon {
   flex-shrink: 0;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   background: rgba(99, 102, 241, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   color: var(--accent);
+  margin-top: 4px;
 }
 
 .about-text {
   flex: 1;
-}
-
-.about-text h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
-  color: var(--text-primary);
 }
 
 .about-text p {
