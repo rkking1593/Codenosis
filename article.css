@@ -211,3 +211,12 @@
     font-size: 1.6rem;
   }
 }
+
+.article-featured-image {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
