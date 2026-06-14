@@ -1,1 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Not another 50-step overwhelming chart. This is the real, honest AI learning roadmap with phases, timelines, and the truth about how long it actually takes.">
+  <title>The Honest AI Learning Roadmap Nobody Talks About — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+</head>
+<body class="dark-mode">
 
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articles">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge">Roadmap</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 12 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 14, 2026</span>
+      </div>
+      <h1 class="article-title">The Honest AI Learning Roadmap Nobody Talks About</h1>
+      <p class="article-subtitle">Not another overwhelming chart with 50 technologies. Just the real, step-by-step path — with the dead ends marked, the prerequisites nobody tells you, and the actual truth about how long it takes.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        There's a version of this article where I tell you to watch one YouTube playlist, finish a Coursera course, and land a job at Google in six months. This is not that article. What I'm giving you instead is the actual roadmap — the one with the dead ends marked, the prerequisites you'll wish someone had mentioned, and the honest answer to the question everyone avoids: how long does this actually take?
+      </p>
+
+      <h2>Why Most AI Roadmaps Fail You</h2>
+      <p>
+        Open any "Learn AI in 2025" thread and you'll find the same advice recycled a thousand times: start with Python, learn NumPy and Pandas, do Andrew Ng's course, build projects, get hired. That's not wrong. It's just incomplete in a way that breaks beginners.
+      </p>
+      <p>
+        It treats AI as a single destination when it's really a continent — one with machine learning, deep learning, computer vision, NLP, MLOps, and reinforcement learning all living in completely different neighborhoods. Telling someone to "learn AI" without a direction is like telling someone to "learn science." Before you touch a single library, you need to answer one question first.
+      </p>
+
+      <h2>Step 0: Pick Your Corner of the Map</h2>
+      <p>
+        AI is not one thing. It's a family of fields. Before you study anything, decide which of these describes your actual goal — then commit to that lane. The fundamentals overlap; you'll pick up the rest naturally.
+      </p>
+      <ul>
+        <li><strong>Build chatbots or text tools</strong> — NLP / LLMs / Prompt Engineering</li>
+        <li><strong>Work with images or video</strong> — Computer Vision</li>
+        <li><strong>Analyze data and make predictions</strong> — Classical ML / Data Science</li>
+        <li><strong>Build or fine-tune AI models professionally</strong> — Deep Learning + MLOps</li>
+        <li><strong>Use AI in apps without building models</strong> — AI Application Development (APIs)</li>
+      </ul>
+      <p>
+        Most beginners try to learn everything simultaneously and burn out around week six. Pick one lane. You'll thank yourself for it.
+      </p>
+
+      <h2>Phase 1: The Foundation You Can't Skip (4–8 Weeks)</h2>
+      <p>
+        This phase is unglamorous. Nobody posts about it on LinkedIn. But skipping it is the single biggest reason people quit before they build anything real.
+      </p>
+      <p>
+        <strong>Mathematics — the light version.</strong> You do not need a PhD in linear algebra. You need enough to understand why things work, so when a model misbehaves, you have intuition — not just a prayer. Focus on linear algebra for vectors and matrices, probability and statistics for distributions and Bayes' theorem, and calculus basics — not to compute derivatives by hand, but to understand what a gradient actually represents. 3Blue1Brown's "Essence of Linear Algebra" and "Essence of Calculus" on YouTube are the best place to start. Watch them like films, not lectures.
+      </p>
+      <p>
+        <strong>Python — the real kind.</strong> Not "copy code from Stack Overflow" Python. You need clean control flow, functions, and classes; file handling and working with data; an understanding of how memory and objects work; and comfort with reading error messages. That last one is non-negotiable. One week of deliberate practice is worth three weeks of half-hearted tutorial following.
+      </p>
+      <p><strong>The core stack to get comfortable with before touching any ML library:</strong></p>
+      <ul>
+        <li><strong>NumPy</strong> — arrays, broadcasting, vectorized operations</li>
+        <li><strong>Pandas</strong> — DataFrames, cleaning, grouping, merging</li>
+        <li><strong>Matplotlib / Seaborn</strong> — making plots you can actually read</li>
+      </ul>
+
+      <h2>Phase 2: Classical Machine Learning (6–10 Weeks)</h2>
+      <p>
+        This is where most people want to skip ahead. Don't. Classical ML teaches you how models think — and that knowledge transfers directly to deep learning. If you jump straight to neural networks, you'll be an engineer who can run code but can't debug it.
+      </p>
+      <p><strong>Algorithms to understand, not memorize:</strong></p>
+      <ul>
+        <li><strong>Linear and Logistic Regression</strong> — the absolute bedrock</li>
+        <li><strong>Decision Trees and Random Forests</strong> — intuitive and powerful</li>
+        <li><strong>Support Vector Machines</strong> — understand the concept; implementation is secondary</li>
+        <li><strong>K-Means Clustering and PCA</strong> — your entry into unsupervised thinking</li>
+      </ul>
+      <p><strong>Concepts that matter more than any algorithm:</strong></p>
+      <ul>
+        <li>Train/validation/test split — why it exists and why you never skip it</li>
+        <li>Overfitting and underfitting — spot them before they spot you</li>
+        <li>Cross-validation — the right way to evaluate a model</li>
+        <li>Feature engineering — turning raw data into what models actually need</li>
+        <li>Evaluation metrics — accuracy is often the wrong metric; understand why</li>
+      </ul>
+      <p>
+        For your Phase 2 project: train a model on a real dataset from Kaggle. Clean the data yourself. Try at least three algorithms. Compare them honestly. Write down what didn't work and why. That write-up is worth more on a portfolio than ten notebooks that just print "Accuracy: 94%."
+      </p>
+
+      <h2>Phase 3: Deep Learning (8–14 Weeks)</h2>
+      <p>
+        Now you can run toward neural networks. Deep learning is where the intuition you built in Phase 2 pays off. You'll finally understand why certain architectures work for certain problems — and why people keep inventing new ones.
+      </p>
+      <p><strong>Start here:</strong></p>
+      <ul>
+        <li><strong>Neural networks from scratch</strong> — build a simple one in NumPy before touching any framework. One night, one file, no libraries. It will change how you see everything after.</li>
+        <li><strong>Backpropagation</strong> — understand it conceptually. You won't implement it manually in production, but knowing what it does makes you dangerous.</li>
+        <li><strong>Activation functions, loss functions, optimizers</strong> — what they are, why they differ, when you'd choose one over another</li>
+      </ul>
+      <p><strong>Pick one framework and go deep:</strong></p>
+      <ul>
+        <li><strong>PyTorch</strong> — if you want to understand how things work and explore research</li>
+        <li><strong>TensorFlow / Keras</strong> — if you want production speed and Google's ecosystem</li>
+      </ul>
+      <p><strong>Architectures to study, in this order:</strong></p>
+      <ul>
+        <li>Feedforward / Dense networks — classification and regression</li>
+        <li>Convolutional Neural Networks (CNNs) — images, spatial data</li>
+        <li>Recurrent Neural Networks / LSTMs — sequences, time series</li>
+        <li>Transformers — the architecture powering nearly everything today</li>
+      </ul>
+
+      <h2>Phase 4: Specialization (3–6 Months)</h2>
+      <p>
+        By now, you know enough to be genuinely useful. Phase 4 is where you go deep in the corner you picked at Step 0.
+      </p>
+      <p><strong>If you chose NLP / LLMs:</strong></p>
+      <ul>
+        <li>Hugging Face ecosystem — transformers, datasets, tokenizers</li>
+        <li>Fine-tuning pre-trained models like BERT and GPT-style architectures</li>
+        <li>Retrieval-Augmented Generation (RAG)</li>
+        <li>Prompt engineering — not a gimmick; it's a real skill with measurable impact</li>
+      </ul>
+      <p><strong>If you chose Computer Vision:</strong></p>
+      <ul>
+        <li>Image classification, object detection, segmentation</li>
+        <li>YOLO architectures — still the industry workhorse</li>
+        <li>Vision Transformers (ViT)</li>
+        <li>OpenCV for pre and post-processing</li>
+      </ul>
+      <p><strong>If you chose Classical ML / Data Science:</strong></p>
+      <ul>
+        <li>Time series analysis and anomaly detection</li>
+        <li>Feature stores and ML pipelines</li>
+        <li>Model interpretability — SHAP and LIME</li>
+      </ul>
+      <p><strong>If you chose AI Application Development:</strong></p>
+      <ul>
+        <li>Working with APIs — OpenAI, Anthropic, Gemini</li>
+        <li>LangChain and LlamaIndex for building pipelines</li>
+        <li>Vector databases like Pinecone or pgvector</li>
+        <li>Deployment basics — Docker, FastAPI, simple cloud hosting</li>
+      </ul>
+
+      <h2>Phase 5: Build in Public (The Phase That Actually Gets You Hired)</h2>
+      <p>
+        Every hiring manager I've spoken to says the same thing: GitHub and deployed projects beat certificates every time. Three projects done well are worth more than thirty projects done quickly.
+      </p>
+      <p><strong>What makes a project "done well"?</strong></p>
+      <ul>
+        <li>A real problem it solves, even a small one</li>
+        <li>Clean, readable code with comments</li>
+        <li>A README that explains what it does and why you built it</li>
+        <li>Something actually deployed — even a Streamlit app or a Hugging Face Space</li>
+        <li>An honest section on what didn't work</li>
+      </ul>
+      <p><strong>Project ideas that stand out:</strong></p>
+      <ul>
+        <li>A RAG-based chatbot over a domain-specific PDF collection</li>
+        <li>A fine-tuned classifier for a niche problem — medical text, regional language, legal documents</li>
+        <li>A time series forecaster for data you actually care about</li>
+        <li>An end-to-end ML pipeline with data cleaning, training, evaluation, and a simple API</li>
+      </ul>
+
+      <h2>The Timeline, Honestly</h2>
+      <p>Here's what no one wants to say out loud:</p>
+      <ul>
+        <li><strong>Foundation</strong> — 4–8 weeks. Most people underestimate the math.</li>
+        <li><strong>Classical ML</strong> — 6–10 weeks. Understanding concepts, not just running code.</li>
+        <li><strong>Deep Learning</strong> — 8–14 weeks. Debugging takes longer than you think.</li>
+        <li><strong>Specialization</strong> — 3–6 months. Going deep takes real time.</li>
+        <li><strong>Portfolio projects</strong> — Ongoing. The best ones take weeks, not weekends.</li>
+      </ul>
+      <p>
+        Total to be job-ready at entry level: <strong>12–20 months of consistent, daily effort.</strong> Anyone telling you 3 months is selling you something.
+      </p>
+
+      <h2>The Mindset That Makes the Difference</h2>
+      <p>
+        I've watched people with average technical backgrounds outpace people with computer science degrees. The difference is never raw intelligence. It's always the same five things:
+      </p>
+      <ul>
+        <li><strong>Consistency over intensity.</strong> One hour every day beats eight hours on Sunday.</li>
+        <li><strong>Building before you feel ready.</strong> The project teaches you what no course can.</li>
+        <li><strong>Reading error messages instead of pasting them immediately.</strong> Learn what errors mean. This is how intuition forms.</li>
+        <li><strong>Staying curious about failure.</strong> The model that doesn't work teaches you more than the one that does.</li>
+        <li><strong>Community.</strong> Find two or three people learning alongside you. Accountability is wildly underrated.</li>
+      </ul>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Open a Python file right now. Write a script that loads any CSV you find interesting, computes the mean and standard deviation of one column, and prints a histogram. NumPy and Matplotlib only. If you can do that cleanly, you're ready for Phase 1. If you can't — you just found exactly where to start.</p>
+      </div>
+
+      <p class="article-cta-text">
+        The field will keep changing. The fundamentals won't. Learn to think, not just to run code — and you'll still be relevant no matter what comes next. Got questions about a specific phase? Drop them in the comments.
+      </p>
+
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <span class="category-badge">Roadmap</span>
+            <p>The Web Development Roadmap Nobody Shows Beginners</p>
+          </div>
+        </a>
+
+        <a href="how-to-start-web-development.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge">Beginner's Guide</span>
+            <p>How to Start Learning Web Development From Zero — Honest Guide</p>
+          </div>
+        </a>
+
+        <a href="how-long-to-become-developer.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-hourglass-half"></i></div>
+          <div>
+            <span class="category-badge">Reality Check</span>
+            <p>How Long Does it Actually Take to Become a Web Developer?</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development and AI the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="ai-learning-roadmap.html">AI Learning Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#articles">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+
+</body>
+  </html>
