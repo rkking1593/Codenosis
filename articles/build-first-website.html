@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ready to build your first website but don't know where to start? Here's the exact step by step process — from blank file to live website — no experience needed.">
+  <title>How to Build Your First Website From Scratch — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <style>
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      font-family: 'Courier New', monospace;
+    }
+
+    .code-block code {
+      color: #cdd6f4;
+    }
+
+    .tag { color: #89b4fa; }
+    .attr { color: #fab387; }
+    .val { color: #a6e3a1; }
+    .comment { color: #6c7086; font-style: italic; }
+    .keyword { color: #cba6f7; }
+    .string { color: #a6e3a1; }
+    .function { color: #89dceb; }
+
+    .code-note {
+      background: rgba(99, 102, 241, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-beginners">Beginner's Guide</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 7 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 15, 2026</span>
+      </div>
+      <h1 class="article-title">How to Build Your First Website From Scratch</h1>
+      <p class="article-subtitle">Stop overthinking and start building. Here's the exact step by step process — from a blank file to a real webpage in your browser.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        There is quite a difference between learning about web development and actually taking the plunge and coding something yourself. I will never forget the first time I opened my own page in a browser — it was simple, it was bad — and it was the coolest thing I had accomplished in my coding career at that time. This article will save you some time and get you to that moment faster.
+      </p>
+
+      <h2>What You Need Before You Start</h2>
+      <p>
+        Getting started is way simpler than people actually tell it is, and you don't need a supercomputer or expensive tools. First, go ahead and download VS Code — the gold-standard text editor used by almost every modern developer. Make sure you also have Google Chrome installed — its built-in developer tools are perfect for testing your work.
+      </p>
+      <p>
+        Once you open VS Code, go to the extensions marketplace and install the <strong>Live Server</strong> extension. This little tool automatically refreshes your browser every single time you hit save on your code. Finally, create a brand-new folder on your desktop and name it <strong>"my-first-website"</strong>. That's it — stop overcomplicating it. This is all you need to start building.
+      </p>
+
+      <h2>Start With HTML — The Skeleton</h2>
+      <p>
+        Inside your new folder, create a file named exactly <strong>index.html</strong>. This file is the foundation of your project — the digital blueprint where your code lives. Every website you'll ever build starts with this exact file.
+      </p>
+      <p>
+        The first thing you need inside it is the HTML boilerplate — a standard structure that tells the browser how to read your page. Copy this exactly:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">index.html — HTML Boilerplate</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-boilerplate"><span class="comment">&lt;!-- This is the standard HTML boilerplate. Every webpage starts with this. --&gt;</span>
+<span class="tag">&lt;!DOCTYPE</span> <span class="attr">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;title&gt;</span>My First Website<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+  <span class="tag">&lt;h1&gt;</span>Hello, World!<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span>This is my very first webpage.<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+      </div>
+
+      <p>
+        Now click the <strong>"Go Live"</strong> button at the bottom of VS Code to launch your page using Live Server. Seeing your own code render live in a browser for the very first time is an unforgettable moment. I'm sure you can feel it too.
+      </p>
+
+      <h2>Add CSS — Make it Look Good</h2>
+      <p>
+        Now that you have your skeleton, it's time to dress it up. Create a brand-new file in the same folder named <strong>style.css</strong>. But first, you need to connect it to your HTML file. Here's how you do that — add this line inside the <code>&lt;head&gt;</code> section of your index.html:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">index.html — Link your CSS file</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-css-link"><span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span> <span class="tag">/&gt;</span></code></pre>
+      </div>
+
+      <p>
+        Once connected, you can start changing the background color, picking a cleaner font, and playing around with text colors. Center your content, make things pop — this is where the fun starts. There is nothing more satisfying than watching your plain text instantly transform into something that actually looks like a website the second you hit save.
+      </p>
+      <p>
+        And here's the truth — CSS alone is enough to make a complete, beautiful, professional-looking website. Everything you see on the internet that looks polished and clean? That's CSS at work. You don't need anything else to make your site look great. JavaScript comes later — and it has a completely different job.
+      </p>
+
+      <h2>Add JavaScript — Make it Interactive</h2>
+      <p>
+        CSS makes your site look good. JavaScript makes it do things. Create a new file named <strong>script.js</strong> in the same folder. To connect it to your HTML, add this line at the very bottom of your <code>&lt;body&gt;</code> tag — not in the head, always at the bottom:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">index.html — Link your JavaScript file</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-js-link"><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span><span class="tag">&gt;&lt;/script&gt;</span></code></pre>
+      </div>
+
+      <p>
+        Now add a simple button in your HTML and write this in your script.js file:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — Your first JavaScript</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-js-alert"><span class="comment">// This runs when the button is clicked</span>
+<span class="keyword">function</span> <span class="function">sayHello</span>() {
+  <span class="function">alert</span>(<span class="string">"Hello! My first website is alive!"</span>);
+}</code></pre>
+      </div>
+
+      <p>
+        And in your HTML, add this button inside the body:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">index.html — Add a button</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-button"><span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="val">"sayHello()"</span><span class="tag">&gt;</span>Click Me!<span class="tag">&lt;/button&gt;</span></code></pre>
+      </div>
+
+      <div class="code-note">
+        <strong>Note:</strong> This alert example is just to show you how JavaScript connects to your page and reacts to user actions. Don't worry if you don't fully understand the code yet — you're not supposed to at this stage. JavaScript has its own learning curve and its own articles here on Codenosis. What matters right now is that you can see how the three files — HTML, CSS, and JS — work together. You'll learn exactly what each line means as you go deeper.
+      </div>
+
+      <p>
+        Clicking that button and seeing your page react is an amazing feeling — because it means your website is officially alive. Congratulations — your first ever website is live. I know the feeling already. Welcome to a new life, Mr. Developer.
+      </p>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Stop overthinking, stop watching endless tutorials, and just open VS Code right now. Create your index.html, paste the boilerplate, and commit to making a basic webpage live by the time you go to sleep tonight. This tiny, imperfect action is the exact moment your journey shifts from dreaming about coding to actually becoming a developer.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="how-to-start-web-development.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
+            <p>How to Start Learning Web Development From Zero — Honest Guide</p>
+          </div>
+        </a>
+
+        <a href="html-css-js-explained.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-layer-group"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>HTML, CSS and JavaScript — What Are They and Which Comes First?</p>
+          </div>
+        </a>
+
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <span class="category-badge badge-roadmap">Roadmap</span>
+            <p>The Web Development Roadmap Nobody Shows Beginners</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
