@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 Python Projects That Actually Get You Hired | Yogesh</title>
+  <meta name="description" content="Skip the tutorial hell. These 5 Python projects are what recruiters and clients actually want to see." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/article.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAV (same as your main site) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Sarthak<span>.</span>dev</a>
+      <a href="../index.html" class="nav-back"><i class="fas fa-arrow-left"></i> All Articles</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="article-hero">
+    <div class="article-container">
+
+      <div class="article-meta">
+        <span class="category-badge">Python</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 12 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 15, 2026</span>
+      </div>
+
+      <h1 class="article-title">5 Python Projects That Actually Get You Hired</h1>
+
+      <p class="article-subtitle">
+        Skip the tutorial hell. These aren't toy calculator apps — these are the
+        projects that make recruiters and clients say "okay, this person knows
+        what they're doing."
+      </p>
+
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <div class="author-name">Yogesh</div>
+          <div class="author-tag">Python · Freelancing · Portfolio Building</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ARTICLE BODY ===== -->
+  <section class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        Everybody's portfolio has a number guessing game and a calculator. Nobody's
+        portfolio has a web scraper that tracks Amazon prices or a CLI tool that
+        solves a real problem. The difference between getting ignored and getting
+        hired is showing that you can <strong>build things that actually matter.</strong>
+      </p>
+
+      <!-- PROJECT 1 -->
+      <h2><i class="fas fa-spider"></i> &nbsp;1. Web Scraper + Price Tracker</h2>
+
+      <p>
+        This project screams "I can automate real tasks." You scrape a product page
+        (like Flipkart or Amazon), store price history in a database, and send an
+        email alert when the price drops. Clients on Fiverr pay ₹3,000–₹15,000
+        for exactly this kind of tool.
+      </p>
+
+      <p><strong>What you'll build:</strong></p>
+      <ul>
+        <li>Scrape product name, price &amp; availability from any e-commerce page</li>
+        <li>Save price history to <strong>SQLite</strong> with timestamps</li>
+        <li>Compare today's price with yesterday's stored price</li>
+        <li>Auto-send a <strong>Gmail alert</strong> when price drops below your target</li>
+        <li>Schedule it to run every 6 hours automatically using <strong>schedule</strong></li>
+      </ul>
+
+      <p><strong>Libraries used:</strong> <code>requests</code>, <code>BeautifulSoup4</code>, <code>sqlite3</code>, <code>smtplib</code>, <code>schedule</code></p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p>
+          <strong>Why it gets you hired:</strong> Automation + databases + email in one project.
+          Every small business owner wants this. Add a simple CLI interface and it's
+          a legitimate Fiverr gig you can sell tomorrow.
+        </p>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <h2><i class="fas fa-chart-bar"></i> &nbsp;2. Personal Finance Dashboard</h2>
+
+      <p>
+        Data analysis is the #1 skill companies hire Python devs for. This project
+        shows you can take raw messy data — like a bank CSV export — and turn it
+        into something visual and useful. Add Streamlit and you have a web app
+        with zero backend knowledge needed.
+      </p>
+
+      <p><strong>What you'll build:</strong></p>
+      <ul>
+        <li>Upload any bank statement CSV and <strong>auto-detect columns</strong></li>
+        <li>Categorize expenses (food, transport, shopping) with keyword matching</li>
+        <li>Monthly spending <strong>trend chart</strong> using Matplotlib</li>
+        <li>Live <strong>Streamlit web dashboard</strong> with date range filters</li>
+        <li>Summary metrics: total spent, biggest category, avg monthly burn</li>
+      </ul>
+
+      <p><strong>Libraries used:</strong> <code>pandas</code>, <code>matplotlib</code>, <code>streamlit</code>, <code>numpy</code></p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p>
+          <strong>Why it gets you hired:</strong> "Data analysis with Python" appears in
+          thousands of job descriptions. This single project hits Pandas, visualisation,
+          and web app deployment — exactly what a data analyst role needs on day one.
+        </p>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <h2><i class="fas fa-folder-open"></i> &nbsp;3. CLI Bulk File Organizer</h2>
+
+      <p>
+        Simple idea, powerful result. Point it at any folder and it automatically
+        sorts every file into subfolders by type — Images, PDFs, Videos, Code, etc.
+        Package it as a proper CLI tool with flags and it's GitHub-ready. Many
+        freelance clients pay real money for exactly this kind of automation script.
+      </p>
+
+      <p><strong>What you'll build:</strong></p>
+      <ul>
+        <li>Scan any folder and detect all file types automatically</li>
+        <li>Auto-create subfolders: <strong>Images, PDFs, Videos, Music, Code, Others</strong></li>
+        <li><code>--dry-run</code> flag to preview changes without moving anything</li>
+        <li><code>--undo</code> flag to revert the last sort operation</li>
+        <li>Colored terminal output with a summary of files moved</li>
+      </ul>
+
+      <p><strong>Libraries used:</strong> <code>pathlib</code>, <code>argparse</code>, <code>shutil</code>, <code>os</code>, <code>json</code></p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p>
+          <strong>Why it gets you hired:</strong> Shows you understand file systems, CLI design,
+          and can write clean reusable utility tools. Put this on GitHub with a good README
+          and it will get stars — which itself becomes a credibility signal.
+        </p>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <h2><i class="fas fa-newspaper"></i> &nbsp;4. News Aggregator + Sentiment Analyzer</h2>
+
+      <p>
+        This one combines API integration + NLP + a basic web app in a single project.
+        You fetch today's headlines using NewsAPI, run sentiment analysis on each one,
+        and display the results with color-coded badges in a Flask page. Exactly the
+        kind of project that makes someone think — "they actually understand ML concepts."
+      </p>
+
+      <p><strong>What you'll build:</strong></p>
+      <ul>
+        <li>Fetch top headlines by keyword using <strong>NewsAPI</strong> (free tier)</li>
+        <li>Score each headline as Positive / Negative / Neutral using <strong>VADER</strong></li>
+        <li>Display results: title, source, score badge, published time</li>
+        <li>Simple <strong>Flask</strong> route serving a Jinja2 HTML template</li>
+        <li>Search bar to filter by keyword or topic on the fly</li>
+      </ul>
+
+      <p><strong>Libraries used:</strong> <code>requests</code>, <code>flask</code>, <code>nltk</code>, <code>vaderSentiment</code>, <code>jinja2</code></p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p>
+          <strong>Why it gets you hired:</strong> API + NLP + web framework in one project.
+          This sits at the intersection of backend development and data science — two of
+          the most hired Python roles in India and globally.
+        </p>
+      </div>
+
+      <!-- PROJECT 5 -->
+      <h2><i class="fab fa-telegram"></i> &nbsp;5. Telegram Bot for a Real Use Case</h2>
+
+      <p>
+        Build a Telegram bot that actually does something useful — not just echoing
+        your message back. Make a weather bot, a currency converter, a daily news
+        brief, or a study reminder. Deploy it on Railway or Render for free and it
+        runs 24/7. This is the project that gets clients to DM you directly.
+      </p>
+
+      <p><strong>What you'll build:</strong></p>
+      <ul>
+        <li><code>/weather &lt;city&gt;</code> — live weather from OpenWeatherMap API</li>
+        <li><code>/news</code> — top 5 headlines of the day sent to your Telegram</li>
+        <li><code>/remind 30 "Submit assignment"</code> — delayed reminder system</li>
+        <li>Deploy to <strong>Railway / Render</strong> free tier — bot stays online 24/7</li>
+        <li>Error handling so bot never crashes silently in production</li>
+      </ul>
+
+      <p><strong>Libraries used:</strong> <code>python-telegram-bot</code>, <code>requests</code>, <code>asyncio</code>, <code>threading</code></p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p>
+          <strong>Why it gets you hired:</strong> A live, deployed, working bot is the most
+          impressive thing you can show a non-technical client. You can literally say
+          "text this number and see what it does." That closes deals.
+        </p>
+      </div>
+
+      <!-- BONUS TIPS -->
+      <h2><i class="fas fa-star"></i> &nbsp;Bonus: Make Your Portfolio Actually Stand Out</h2>
+
+      <p>Building the project is only half the work. Here's what separates people who get hired from people who just have code sitting on their laptop:</p>
+
+      <ul>
+        <li><strong>Write a clean GitHub README</strong> — include a GIF demo, setup steps, and what problem it solves. This is your first impression.</li>
+        <li><strong>Record a 2-minute Loom demo</strong> — clients trust what they can see. Link it in your README and Fiverr profile.</li>
+        <li><strong>Deploy everything live</strong> — Railway, Render, and Vercel are all free for hobby projects. A live link beats screenshots every time.</li>
+        <li><strong>Write a short blog about it</strong> — post on Dev.to or Hashnode about what you built and what you learned. It brings traffic and builds expertise fast.</li>
+      </ul>
+
+      <p class="article-cta-text">
+        Don't plan to build all 5 at once. Pick one, finish it, put it on GitHub,
+        then move to the next. <strong>Momentum beats perfection every time.</strong>
+        Start with Project #1 today — it's the most in-demand on Fiverr right now.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ===== RELATED ARTICLES ===== -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+
+        <a href="learn-ai-from-zero.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-robot"></i></div>
+          <div>
+            <strong style="color: var(--text-primary); font-size: 0.9rem;">Learn AI From Zero</strong>
+            <p>No math degree required. Understand how AI actually works, step by step.</p>
+          </div>
+        </a>
+
+        <a href="freelancing-from-india.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-briefcase"></i></div>
+          <div>
+            <strong style="color: var(--text-primary); font-size: 0.9rem;">Freelancing From India</strong>
+            <p>Fiverr, Upwork, or LinkedIn? The honest guide to your first paid project.</p>
+          </div>
+        </a>
+
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <strong style="color: var(--text-primary); font-size: 0.9rem;">Web Dev Roadmap</strong>
+            <p>A real step-by-step path that actually makes sense for beginners.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
