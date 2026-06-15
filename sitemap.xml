@@ -46,4 +46,14 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://codenosis.in/articles/python-projects-for-beginners.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/earn-money-online.html</loc>
+    <priority>0.8</priority>
+  </url>
+  
 </urlset>
