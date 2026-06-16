@@ -60,4 +60,9 @@
     <loc>https://codenosis.in/articles/build-first-website.html</loc>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/git-vs-github.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>

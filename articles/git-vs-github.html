@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Everyone confuses Git and GitHub — they are two completely different things. Here's the simplest, most honest explanation you'll find anywhere.">
+  <title>Git vs GitHub: Stop Confusing These Two Completely Different Things — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <style>
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      font-family: 'Courier New', monospace;
+    }
+    .code-block code { color: #cdd6f4; }
+    .cmd { color: #89b4fa; }
+    .flag { color: #fab387; }
+    .string { color: #a6e3a1; }
+    .comment { color: #6c7086; font-style: italic; }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-fundamentals">Fundamentals</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 7 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 16, 2026</span>
+      </div>
+      <h1 class="article-title">Git vs GitHub: Stop Confusing These <br> Two Completely Different Things</h1>
+      <p class="article-subtitle">Everyone uses them together. Almost nobody can explain the difference. Here's the clearest breakdown you'll find anywhere.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        For months after I started coding, I genuinely thought Git and GitHub were the same thing. Every time someone said "push your code to GitHub" — I just nodded like I understood. I had no idea what was actually happening. Nobody explained it. If someone asked you right now — what's the difference between Git and GitHub — could you answer confidently? Most developers who've been coding for months still can't. That ends today.
+      </p>
+
+      <p>At the start of this journey, I kept seeing both words everywhere — Git, GitHub, GitHub Desktop, git push, git clone — and I assumed they were all the same thing. I used them interchangeably for weeks. Nobody corrected me.</p>
+
+      <p>Then one day a senior developer asked me to "push the code to GitHub using Git" — and I just stared at the screen. That was the moment I realized I had been using both tools without actually understanding either one. I don't want that to happen to you. This article will fix that.</p>
+
+      <h2>What is Git?</h2>
+      <p>
+        When you first hear about Git, it sounds like some intimidating, overly complex tool. But in reality, Git is just a version control system that lives entirely on your laptop — no internet connection needed.
+      </p>
+      <p>
+        It tracks every change, edit, and deletion you make to your code over time. Think of it as a time machine for your projects — if you accidentally break your entire app at 2 AM, Git lets you roll back to a point when everything worked perfectly. This tool was created in 2005 by Linus Torvalds — the same person who built Linux — and it runs entirely through your terminal.
+      </p>
+      <p>
+        Without Git, one misplaced comma or accidental deletion can permanently destroy weeks of work. With it, you have the freedom to experiment, break things, and learn — without the fear of ruining everything you've built.
+      </p>
+
+      <h2>What is GitHub?</h2>
+      <p>
+        A lot of beginners mix up Git and GitHub — but they are two totally different things. While Git lives on your laptop, GitHub is a website that lives on the internet.
+      </p>
+      <p>
+        The easiest way to understand it — think of GitHub as Google Drive, but built specifically for developers. It's where you upload and store your Git repositories so they're safely backed up online. It lets you share code with the world, collaborate with other developers, and showcase your work to employers.
+      </p>
+      <p>
+        Your GitHub profile is your living developer portfolio — tech employers check your GitHub before they think about hiring you. One more thing worth remembering — GitHub did not create Git. Microsoft owns GitHub today, while Git remains a free, independent tool. Git is the engine. GitHub is the showroom.
+      </p>
+
+      <h2>The Exact Relationship Between Them</h2>
+      <p>
+        Git works on your laptop, tracking every code change locally. GitHub lives online, waiting to receive those changes as a secure cloud backup. You use Git commands in your terminal to "push" your local code up to GitHub.
+      </p>
+      <p>
+        You can absolutely use Git without GitHub — but almost every developer uses both together. Here's the simplest way to remember it:
+      </p>
+      <p>
+        <strong>Git is your private diary</strong> where you log your progress. <strong>GitHub is the safe</strong> where you store that diary so it never gets lost.
+      </p>
+
+      <div class="article-image">
+        <img src="../images/Git-vs-GitHub.webp" alt="Git vs GitHub comparison - difference between Git and GitHub explained visually">
+      </div>
+
+      <h2>The 3 Git Commands Every Beginner Must Know</h2>
+      <p>
+        When you open the terminal for the first time, it feels like staring at a wall of complicated commands. Here's the truth — you only need three commands to start, and they'll cover 80% of your daily workflow.
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">Terminal — The 3 Essential Git Commands</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code><span class="comment"># Step 1 — Stage your changes</span>
+<span class="cmd">git add</span> .
+
+<span class="comment"># Step 2 — Save a snapshot with a message</span>
+<span class="cmd">git commit</span> <span class="flag">-m</span> <span class="string">"your message here"</span>
+
+<span class="comment"># Step 3 — Upload to GitHub</span>
+<span class="cmd">git push</span></code></pre>
+      </div>
+
+      <ul>
+        <li><strong>git add .</strong> — tells Git to track all your recent changes in the current folder</li>
+        <li><strong>git commit -m "message"</strong> — takes a permanent snapshot of your code with a short description of what you did</li>
+        <li><strong>git push</strong> — uploads that snapshot from your laptop to your GitHub repository online</li>
+      </ul>
+
+      <p>
+        Don't worry about branching, merging, or rebasing yet. Everything else can wait until you're working on bigger projects. Lock these three down until they feel like muscle memory.
+      </p>
+
+      <h2>Why GitHub is Non-Negotiable for Your Career</h2>
+      <p>
+        You can have the most polished resume in the world — but if your GitHub profile is empty, most tech employers will look right past you. Almost every modern software job application asks for your GitHub link, using it as a direct window into how you write code, organize files, and solve problems.
+      </p>
+      <p>
+        Contributing to open-source projects on GitHub counts as real work experience. Freelance clients on Fiverr and Upwork check your repositories before trusting you with paid projects. When an interviewer sees a steady grid of green commit dots on your profile, it instantly shows your discipline and consistency. That matters more than a certificate.
+      </p>
+      <p>
+        Start right now — push every project, every practice file, every tiny bug fix to GitHub. Consistency is what gets you hired. Believe me.
+      </p>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Open your terminal right now and type <strong>git --version</strong> to check if Git is installed. If it throws an error — head to git-scm.com and download it today. Then go to github.com, create a free account, write a basic index.html file, run your first commit, and push it live. Don't wait until you feel ready. Your GitHub journey starts today — not tomorrow.</p>
+      </div>
+
+      <p class="article-cta-text">Drop a comment below — what was the moment you finally understood the difference between Git and GitHub? Let's talk about it.</p>
+
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="how-to-start-web-development.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
+            <p>How to Start Learning Web Development From Zero — Honest Guide</p>
+          </div>
+        </a>
+
+        <a href="build-first-website.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-laptop-code"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
+            <p>How to Build Your First Website From Scratch</p>
+          </div>
+        </a>
+
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <span class="category-badge badge-roadmap">Roadmap</span>
+            <p>The Web Development Roadmap Nobody Shows Beginners</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html">
+                View Articles <i class="fas fa-arrow-right"></i>
+            </a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
