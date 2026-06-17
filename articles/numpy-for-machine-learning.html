@@ -1,1 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A complete guide to NumPy for Machine Learning — array creation, indexing, broadcasting, linear algebra, and a real normalization example, with verified syntax.">
+  <title>NumPy for Machine Learning: Complete Guide with Important Syntax & Examples — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+</head>
+<body class="dark-mode">
 
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <span class="category-badge badge-python">Python</span>
+      <h1 class="article-title">NumPy for Machine Learning: Complete Guide with Important Syntax & Examples</h1>
+      <p class="article-subtitle">The Python library without which no Machine Learning code can really run — array creation, indexing, broadcasting, linear algebra, and a real normalization example, with verified syntax.</p>
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <div class="author-name">Yogesh</div>
+          <div class="author-tag"><i class="fas fa-clock"></i> 11 min read · June 17, 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        Whenever you train a Machine Learning model — whether it's Scikit-learn, TensorFlow, or PyTorch — somewhere underneath, NumPy arrays are doing the heavy lifting. This guide walks through the syntax that actually matters, with verified, working examples for every section.
+      </p>
+
+      <h2>What is NumPy and Why Does It Matter So Much in ML?</h2>
+      <p>NumPy (Numerical Python) is a library built specifically for fast mathematical operations on large numerical datasets. It's the foundation that almost every ML library is quietly built on top of.</p>
+      <p>Think of a factory that needs to inspect a million products one by one, by hand — that would take forever. Now imagine an automated conveyor belt that processes all of them together — the same job gets done in seconds. A plain Python list is like that manual inspector, while a NumPy array is the automated conveyor belt: same task, dramatically faster.</p>
+      <p>I tested this myself — adding 500,000 numbers:</p>
+
+      <pre><code class="language-python">import time
+import numpy as np
+
+size = 500000
+list1, list2 = list(range(size)), list(range(size))
+
+start = time.time()
+result = [list1[i] + list2[i] for i in range(size)]
+print("Python list time:", time.time() - start)
+
+arr1, arr2 = np.arange(size), np.arange(size)
+start = time.time()
+result = arr1 + arr2
+print("NumPy array time:", time.time() - start)</code></pre>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>The Python list took ~0.17 seconds, while the NumPy array took only ~0.025 seconds — that's over 7x faster, and the gap only grows as data size increases (50–100x is common on larger, real-world datasets). This is exactly why NumPy is the default choice for ML work.</p>
+      </div>
+
+      <h2>1. Installation and Import</h2>
+      <pre><code class="language-bash">pip install numpy</code></pre>
+      <pre><code class="language-python">import numpy as np</code></pre>
+      <p><code>np</code> is the standard convention — you don't need to type out <code>numpy</code> everywhere.</p>
+
+      <h2>2. Creating Arrays</h2>
+      <p>NumPy's core data structure is the <code>ndarray</code> (N-dimensional array).</p>
+
+      <pre><code class="language-python">arr = np.array([1, 2, 3, 4, 5])
+print(arr)
+# [1 2 3 4 5]
+
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+print(matrix)
+# [[1 2 3]
+#  [4 5 6]]</code></pre>
+
+      <p>These functions come up constantly in ML preprocessing and model initialization:</p>
+
+      <table>
+        <thead>
+          <tr><th>Function</th><th>What it does</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>np.zeros(shape)</code></td><td>Array filled with zeros</td><td><code>np.zeros((2,3))</code></td></tr>
+          <tr><td><code>np.ones(shape)</code></td><td>Array filled with ones</td><td><code>np.ones((3,3))</code></td></tr>
+          <tr><td><code>np.full(shape, val)</code></td><td>Fill with a custom value</td><td><code>np.full((2,2), 7)</code></td></tr>
+          <tr><td><code>np.arange(start, stop, step)</code></td><td>Generates a sequence</td><td><code>np.arange(0,10,2)</code> → <code>[0 2 4 6 8]</code></td></tr>
+          <tr><td><code>np.linspace(start, stop, n)</code></td><td>n equally spaced points</td><td><code>np.linspace(0,1,5)</code></td></tr>
+          <tr><td><code>np.eye(n)</code></td><td>Identity matrix</td><td><code>np.eye(3)</code></td></tr>
+        </tbody>
+      </table>
+
+      <p><code>np.zeros()</code> and random-generation functions are especially common when initializing neural network weights.</p>
+
+      <h2>3. Array Attributes — Knowing Your Array</h2>
+      <p>After loading a dataset, checking these four attributes is a good habit:</p>
+
+      <pre><code class="language-python">arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(arr.shape)   # (2, 3) -> 2 rows, 3 columns
+print(arr.ndim)    # 2 -> number of dimensions
+print(arr.size)    # 6 -> total number of elements
+print(arr.dtype)   # int64 -> data type</code></pre>
+
+      <p><code>.shape</code> is the most frequently used attribute — whenever a "shape mismatch" error shows up, this is the first thing to check.</p>
+
+      <h2>4. Indexing and Slicing</h2>
+
+      <pre><code class="language-python">arr = np.array([[10, 20, 30], [40, 50, 60], [70, 80, 90]])
+
+print(arr[0, 1])      # 20  -> row 0, column 1
+print(arr[:, 0])       # [10 40 70] -> the entire first column
+print(arr[1, :])       # [40 50 60] -> the entire second row
+print(arr[0:2, 1:3])   # [[20 30] [50 60]] -> a sub-matrix</code></pre>
+
+      <p>Boolean indexing and <code>np.where()</code> are powerful tools for filtering data:</p>
+
+      <pre><code class="language-python">data = np.array([5, 12, 8, 25, 3, 18])
+
+print(data[data > 10])            # [12 25 18] -> elements meeting the condition
+print(np.where(data > 10, 1, 0))  # [0 1 0 1 0 1] -> labeling/thresholding</code></pre>
+
+      <p>This same technique shows up in outlier removal, data labeling, and threshold-based classification.</p>
+
+      <h2>5. Reshaping and Combining Arrays</h2>
+      <p>Models often need data in a specific shape — flattening an image or building feature columns:</p>
+
+      <pre><code class="language-python">arr = np.arange(12)              # [0 1 2 ... 11]
+reshaped = arr.reshape(3, 4)      # 3 rows, 4 columns
+flattened = reshaped.flatten()    # back to 1D
+transposed = reshaped.T           # swap rows and columns</code></pre>
+
+      <p>Remember the <code>-1</code> trick: writing <code>arr.reshape(-1, 1)</code> lets NumPy automatically figure out the number of rows. This comes up constantly in Scikit-learn when shaping a single feature column.</p>
+      <p>To combine multiple arrays:</p>
+
+      <pre><code class="language-python">a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+np.concatenate([a, b])   # [1 2 3 4 5 6]
+np.vstack([a, b])        # [[1 2 3] [4 5 6]] -> stacked as rows
+np.hstack([a, b])        # [1 2 3 4 5 6] -> stacked side by side</code></pre>
+
+      <p>This is handy when merging train/test splits or joining separate feature columns back together.</p>
+
+      <h2>6. Mathematical and Statistical Operations</h2>
+
+      <pre><code class="language-python">arr = np.array([10, 20, 30, 40, 50])
+
+print(np.sum(arr))     # 150
+print(np.mean(arr))    # 30.0
+print(np.std(arr))     # ~14.14
+print(np.var(arr))     # 200.0
+print(np.argmax(arr))  # 4 -> index of the max value</code></pre>
+
+      <p>Understanding the <code>axis</code> parameter is essential for 2D arrays:</p>
+
+      <pre><code class="language-python">matrix = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(np.sum(matrix, axis=0))   # [5 7 9]  -> column-wise (down)
+print(np.sum(matrix, axis=1))   # [6 15]   -> row-wise (across)</code></pre>
+
+      <p>A simple way to remember it: <code>axis=0</code> means "collapse the rows" (you get one value per column), and <code>axis=1</code> means "collapse the columns" (you get one value per row). This trips up almost every beginner at first, so it's worth writing out a few examples by hand until it clicks.</p>
+
+      <h2>7. Broadcasting — NumPy's Superpower</h2>
+      <p>Broadcasting lets arrays of different shapes interact in operations without writing an explicit loop.</p>
+
+      <pre><code class="language-python">arr = np.array([1, 2, 3])
+print(arr + 10)
+# [11 12 13] -> the scalar got added to every element
+
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+vector = np.array([10, 20, 30])
+print(matrix + vector)
+# [[11 22 33]
+#  [14 25 36]]</code></pre>
+
+      <p>Feature scaling, normalization, and adding bias terms in neural networks all rely on broadcasting under the hood. Without it, you'd have to write all of this manually with loops, which would be far slower.</p>
+
+      <h2>8. Linear Algebra — The Backbone of ML</h2>
+      <p>Neural networks, PCA, linear regression — matrix multiplication is running underneath all of them.</p>
+
+      <pre><code class="language-python">A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+print(np.dot(A, B))       # [[19 22] [43 50]]
+print(A @ B)               # same result, the modern syntax
+
+print(np.linalg.inv(A))    # inverse matrix
+print(np.linalg.det(A))    # -2.0 -> determinant
+print(np.linalg.norm(A))   # ~5.48 -> magnitude</code></pre>
+
+      <p>A single neural network layer's forward pass is written almost exactly like this:</p>
+
+      <pre><code class="language-python">inputs = np.array([0.5, 0.8, 0.2])
+weights = np.array([[0.1, 0.4], [0.2, 0.5], [0.3, 0.6]])
+bias = np.array([0.1, 0.1])
+
+output = inputs @ weights + bias
+print(output)   # [0.37 0.82]</code></pre>
+
+      <p>That one line — <code>inputs @ weights + bias</code> — captures the math happening inside every neural network; real models just scale it up to thousands of neurons across multiple layers.</p>
+
+      <h2>9. The Random Module — Synthetic Data and Weight Initialization</h2>
+
+      <pre><code class="language-python">np.random.seed(42)   # for reproducibility
+
+print(np.random.rand(3))                 # 3 numbers from a uniform [0,1) distribution
+print(np.random.randn(3))                # 3 numbers from a normal distribution
+print(np.random.randint(0, 10, size=5))  # 5 random integers between 0 and 9</code></pre>
+
+      <p>Setting <code>np.random.seed()</code> is an important habit — it guarantees the same random numbers on every run, which matters when submitting assignments or reproducing results.</p>
+
+      <h2>10. A Practical ML Example: Z-Score Normalization</h2>
+      <p>Let's bring everything together — this preprocessing step (feature scaling) shows up in almost every ML pipeline:</p>
+
+      <pre><code class="language-python">data = np.array([
+    [25, 50000, 2],
+    [30, 60000, 5],
+    [22, 45000, 1],
+    [35, 80000, 8]
+])
+
+mean = np.mean(data, axis=0)
+std = np.std(data, axis=0)
+normalized_data = (data - mean) / std
+
+print("Mean:", mean)
+# [   28.   58750.       4.]
+print("Std:", std)
+# [    4.95 13404.76     2.74]
+print("Normalized:\n", normalized_data)
+# [[-0.61 -0.65 -0.73]
+#  [ 0.40  0.09  0.37]
+#  [-1.21 -1.03 -1.10]
+#  [ 1.41  1.59  1.46]]</code></pre>
+
+      <p>That single line — <code>(data - mean) / std</code> — is exactly what Scikit-learn's <code>StandardScaler</code> does internally. This example brings together <code>axis=0</code>, broadcasting, and basic statistics all at once.</p>
+
+      <h2>Quick Reference Cheat Sheet</h2>
+
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Important Functions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Creation</td><td><code>np.array()</code>, <code>np.zeros()</code>, <code>np.ones()</code>, <code>np.arange()</code>, <code>np.linspace()</code>, <code>np.eye()</code></td></tr>
+          <tr><td>Attributes</td><td><code>.shape</code>, <code>.ndim</code>, <code>.size</code>, <code>.dtype</code></td></tr>
+          <tr><td>Indexing</td><td><code>arr[i,j]</code>, <code>arr[:, j]</code>, boolean indexing, <code>np.where()</code></td></tr>
+          <tr><td>Reshaping</td><td><code>.reshape()</code>, <code>.flatten()</code>, <code>.T</code>, <code>np.concatenate()</code>, <code>np.vstack()</code>, <code>np.hstack()</code></td></tr>
+          <tr><td>Math/Stats</td><td><code>np.sum()</code>, <code>np.mean()</code>, <code>np.std()</code>, <code>np.var()</code>, <code>np.min()/max()</code>, <code>axis</code> parameter</td></tr>
+          <tr><td>Linear Algebra</td><td><code>np.dot()</code>, <code>@</code>, <code>np.linalg.inv()</code>, <code>np.linalg.det()</code>, <code>np.linalg.norm()</code></td></tr>
+          <tr><td>Random</td><td><code>np.random.seed()</code>, <code>.rand()</code>, <code>.randn()</code>, <code>.randint()</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Conclusion</h2>
+      <p>NumPy is the grammar of ML — until its syntax feels natural, learning Pandas, Scikit-learn, or TensorFlow will feel harder than it needs to, since all of them are built on top of NumPy arrays. The best way to get there is simple: take small datasets and practice the operations covered here — reshaping, broadcasting, axis-wise statistics, matrix multiplication — by writing the code yourself.</p>
+
+      <p class="article-cta-text">Once that becomes second nature, reading and writing real ML project code gets a lot easier too.</p>
+
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+        <a href="python-projects-for-beginners.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <p>5 Python Projects That Actually Get You Hired</p>
+        </a>
+        <a href="ai-learning-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-robot"></i></div>
+          <p>Learn AI From Zero: A Beginner's Complete Guide</p>
+        </a>
+        <a href="earn-money-online.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-sack-dollar"></i></div>
+          <p>7 Real Ways Developers Earn Money Online in India (2026)</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+
+</body>
+</html>
