@@ -247,9 +247,9 @@
           </button>
         </div>
         <pre><code id="code-js-alert"><span class="comment">// This runs when the button is clicked</span>
-<span class="keyword">function</span> <span class="function">sayHello</span>() {
-  <span class="function">alert</span>(<span class="string">"Hello! My first website is alive!"</span>);
-}</code></pre>
+        <span class="keyword">function</span> <span class="function">sayHello</span>() {
+        <span class="function">alert</span>(<span class="string">"Hello! My first website is alive!"</span>);
+        }</code></pre>
       </div>
 
       <p>
@@ -282,6 +282,22 @@
     </div>
   </article>
 
+  <!-- Disqus Comments -->
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
   <!-- Related Articles -->
   <section class="related">
     <div class="article-container">
@@ -311,10 +327,11 @@
             <p>The Web Development Roadmap Nobody Shows Beginners</p>
           </div>
         </a>
-
+        
       </div>
     </div>
   </section>
+  
 
   <!-- Footer -->
   <footer class="footer">
@@ -378,6 +395,8 @@
       });
     }
   </script>
+
+
 
 </body>
 </html>

@@ -225,3 +225,10 @@
   height: auto;
   display: block;
 }
+
+#disqus_thread {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
