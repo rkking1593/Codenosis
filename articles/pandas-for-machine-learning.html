@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A complete guide to Pandas for Machine Learning — DataFrames, missing values, GroupBy, merging, feature engineering, and encoding, with verified, working examples.">
+  <title>Pandas for Machine Learning: Essential Features You Need to Know (With Examples) — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <style>
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      font-family: 'Courier New', monospace;
+    }
+
+    .code-block code {
+      color: #cdd6f4;
+    }
+
+    .tag { color: #89b4fa; }
+    .attr { color: #fab387; }
+    .val { color: #a6e3a1; }
+    .comment { color: #6c7086; font-style: italic; }
+    .keyword { color: #cba6f7; }
+    .string { color: #a6e3a1; }
+    .function { color: #89dceb; }
+
+    .code-note {
+      background: rgba(99, 102, 241, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-python">Python</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 9 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 18, 2026</span>
+      </div>
+      <h1 class="article-title">Pandas for Machine Learning: Essential Features You Need to Know (With Examples)</h1>
+      <p class="article-subtitle">The Python library that turns messy, real-world data into something a machine learning model can actually learn from — DataFrames, missing values, GroupBy, merging, feature engineering, and encoding, with verified, working examples.</p>
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <p class="author-name">Yogesh</p>
+          <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        Before any machine learning model can learn from data, that data has to be loaded, cleaned, explored, and reshaped into a usable form — and that's exactly the job pandas was built for. This guide walks through the pandas features that matter most for ML work, with a single running dataset and verified, working code for every section.
+      </p>
+
+      <h2>What is Pandas and Why Does It Matter So Much in ML?</h2>
+      <p>Pandas is a Python library built specifically for working with structured, tabular data — the rows-and-columns format that almost every real-world dataset comes in. It's built on top of NumPy, and it sits right at the start of nearly every machine learning pipeline.</p>
+      <p>Think of a plain Python list or dictionary as a box of loose paper records — technically all the information is there, but finding, filtering, or fixing anything means digging through it by hand. A pandas DataFrame is the same data filed into a proper spreadsheet, with labeled rows and columns, instant search, and one-line tools for cleaning and reshaping. Same data, dramatically less manual work.</p>
+      <p>Let's create the dataset we'll use throughout this guide:</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">setup.py — Creating the Example Dataset</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-1"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+data = {
+    <span class="string">'StudentID'</span>: [<span class="attr">1</span>, <span class="attr">2</span>, <span class="attr">3</span>, <span class="attr">4</span>, <span class="attr">5</span>, <span class="attr">6</span>],
+    <span class="string">'Name'</span>: [<span class="string">'Aarav'</span>, <span class="string">'Priya'</span>, <span class="string">'Rohan'</span>, <span class="string">'Sneha'</span>, <span class="string">'Karan'</span>, <span class="string">'Isha'</span>],
+    <span class="string">'Age'</span>: [<span class="attr">21</span>, <span class="attr">22</span>, np.<span class="attr">nan</span>, <span class="attr">23</span>, <span class="attr">21</span>, <span class="attr">24</span>],
+    <span class="string">'City'</span>: [<span class="string">'Delhi'</span>, <span class="string">'Mumbai'</span>, <span class="string">'Delhi'</span>, np.<span class="attr">nan</span>, <span class="string">'Bangalore'</span>, <span class="string">'Mumbai'</span>],
+    <span class="string">'Score'</span>: [<span class="attr">85</span>, <span class="attr">92</span>, <span class="attr">78</span>, <span class="attr">88</span>, np.<span class="attr">nan</span>, <span class="attr">95</span>],
+    <span class="string">'Passed'</span>: [<span class="attr">1</span>, <span class="attr">1</span>, <span class="attr">0</span>, <span class="attr">1</span>, <span class="attr">1</span>, <span class="attr">1</span>]
+}
+
+df = pd.<span class="function">DataFrame</span>(data)
+<span class="function">print</span>(df)</code></pre>
+      </div>
+
+      <p>This gives us a small dataset with numeric values, categorical values, and a few missing entries — exactly the kind of slightly messy real-world data you'll run into before training any ML model. Now let's go through the features that help us work with it.</p>
+
+      <h2>1. DataFrames and Series: The Core Data Structures</h2>
+      <p>Everything in pandas is built around two structures: the <code>Series</code>, a single labeled column of data, and the <code>DataFrame</code>, a full table made up of multiple Series. Together they let you store and manipulate data the way a spreadsheet would, but with the speed and programmability of Python.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">structures.py — Series vs DataFrame</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-2"><span class="comment"># A single column is a Series</span>
+ages = df[<span class="string">'Age'</span>]
+<span class="function">print</span>(<span class="function">type</span>(ages))      <span class="comment"># Series</span>
+
+<span class="comment"># The full table is a DataFrame</span>
+<span class="function">print</span>(<span class="function">type</span>(df))        <span class="comment"># DataFrame</span></code></pre>
+      </div>
+
+      <p>Almost every ML workflow starts by loading data into a DataFrame, since libraries like Scikit-learn are built to work directly with this format.</p>
+
+      <h2>2. Reading Data from Multiple Sources</h2>
+      <p>Real datasets rarely arrive as neatly typed-out dictionaries. They usually live in CSV files, Excel sheets, JSON files, or databases. Pandas makes loading any of these formats simple, often in a single line.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">load_data.py — Reading Different File Formats</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-3">df_csv = pd.<span class="function">read_csv</span>(<span class="string">'students.csv'</span>)
+df_excel = pd.<span class="function">read_excel</span>(<span class="string">'students.xlsx'</span>)
+df_json = pd.<span class="function">read_json</span>(<span class="string">'students.json'</span>)</code></pre>
+      </div>
+
+      <p>Being able to pull data from almost any source this easily is one of the reasons pandas is the first tool reached for in any ML project, no matter how the raw data shows up.</p>
+
+      <h2>3. Data Inspection and Exploration</h2>
+      <p>Before cleaning or modeling anything, you need to understand what you're actually working with — how many rows and columns you have, what data types each column holds, and whether anything looks off. Pandas has a handful of methods built specifically for this.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">inspect.py — Exploring a DataFrame</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-4"><span class="function">print</span>(df.<span class="function">head</span>())        <span class="comment"># first 5 rows</span>
+<span class="function">print</span>(df.<span class="attr">shape</span>)         <span class="comment"># (rows, columns)</span>
+<span class="function">print</span>(df.<span class="function">info</span>())        <span class="comment"># data types and non-null counts</span>
+<span class="function">print</span>(df.<span class="function">describe</span>())    <span class="comment"># statistical summary of numeric columns</span></code></pre>
+      </div>
+
+      <p><code>describe()</code> is especially useful for ML: it instantly shows the mean, standard deviation, and range of your numeric features, which helps you spot outliers or scaling issues before they reach your model.</p>
+
+      <h2>4. Handling Missing Values</h2>
+      <p>Missing data is one of the most common problems in real-world datasets, and most machine learning algorithms can't handle <code>NaN</code> values directly. Pandas gives you full control over finding and fixing them.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">missing_values.py — Finding and Filling Missing Data</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-5"><span class="comment"># Check for missing values in each column</span>
+<span class="function">print</span>(df.<span class="function">isnull</span>().<span class="function">sum</span>())
+
+<span class="comment"># Fill missing numeric values with the column mean</span>
+df[<span class="string">'Age'</span>] = df[<span class="string">'Age'</span>].<span class="function">fillna</span>(df[<span class="string">'Age'</span>].<span class="function">mean</span>())
+df[<span class="string">'Score'</span>] = df[<span class="string">'Score'</span>].<span class="function">fillna</span>(df[<span class="string">'Score'</span>].<span class="function">mean</span>())
+
+<span class="comment"># Fill missing categorical values with the most frequent value</span>
+df[<span class="string">'City'</span>] = df[<span class="string">'City'</span>].<span class="function">fillna</span>(df[<span class="string">'City'</span>].<span class="function">mode</span>()[<span class="attr">0</span>])
+
+<span class="comment"># Alternatively, you could drop rows with missing values instead:</span>
+<span class="comment"># df = df.dropna()</span></code></pre>
+      </div>
+
+      <p>How you handle missing values — filling them with a statistic versus removing them entirely — can directly affect your model's accuracy, so it's worth giving this step real thought rather than treating it as a formality.</p>
+
+      <h2>5. Selecting and Filtering Data</h2>
+      <p>Once your data is clean, you'll often need to pull out specific rows, columns, or subsets that meet certain conditions — for example, separating your input features from your target variable, or filtering out rows that don't meet a quality threshold.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">selection.py — Selecting, Slicing, and Filtering</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-6"><span class="comment"># Select specific columns</span>
+features = df[[<span class="string">'Age'</span>, <span class="string">'City'</span>, <span class="string">'Score'</span>]]
+target = df[<span class="string">'Passed'</span>]
+
+<span class="comment"># Label-based selection</span>
+<span class="function">print</span>(df.<span class="attr">loc</span>[<span class="attr">0</span>:<span class="attr">2</span>, [<span class="string">'Name'</span>, <span class="string">'Score'</span>]])
+
+<span class="comment"># Position-based selection</span>
+<span class="function">print</span>(df.<span class="attr">iloc</span>[<span class="attr">0</span>:<span class="attr">2</span>, <span class="attr">1</span>:<span class="attr">3</span>])
+
+<span class="comment"># Boolean filtering</span>
+high_scorers = df[df[<span class="string">'Score'</span>] > <span class="attr">85</span>]
+<span class="function">print</span>(high_scorers)</code></pre>
+      </div>
+
+      <p>This kind of slicing is exactly how you'll separate your features (<code>X</code>) from your target label (<code>y</code>) before passing data into a model.</p>
+
+      <h2>6. GroupBy and Aggregation</h2>
+      <p><code>groupby()</code> lets you split your data into groups based on a category, run a calculation on each group, and combine the results — invaluable for spotting patterns before you ever start modeling.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">groupby.py — Grouping and Aggregating Data</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-7">city_avg_score = df.<span class="function">groupby</span>(<span class="string">'City'</span>)[<span class="string">'Score'</span>].<span class="function">mean</span>()
+<span class="function">print</span>(city_avg_score)
+
+summary = df.<span class="function">groupby</span>(<span class="string">'City'</span>).<span class="function">agg</span>({
+    <span class="string">'Score'</span>: <span class="string">'mean'</span>,
+    <span class="string">'Age'</span>: <span class="string">'mean'</span>,
+    <span class="string">'Passed'</span>: <span class="string">'sum'</span>
+})
+<span class="function">print</span>(summary)</code></pre>
+      </div>
+
+      <p>Grouped summaries like this often reveal patterns — say, one city's students consistently scoring higher — that can directly inform your feature engineering decisions later on.</p>
+
+      <h2>7. Merging, Joining, and Concatenating DataFrames</h2>
+      <p>ML datasets are often split across multiple files or tables — student scores in one file, attendance records in another, for instance. Pandas gives you several ways to bring them back together.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">merge.py — Combining Two DataFrames</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-8">attendance = pd.<span class="function">DataFrame</span>({
+    <span class="string">'StudentID'</span>: [<span class="attr">1</span>, <span class="attr">2</span>, <span class="attr">3</span>, <span class="attr">4</span>, <span class="attr">5</span>, <span class="attr">6</span>],
+    <span class="string">'AttendancePercent'</span>: [<span class="attr">92</span>, <span class="attr">88</span>, <span class="attr">75</span>, <span class="attr">95</span>, <span class="attr">80</span>, <span class="attr">99</span>]
+})
+
+merged_df = pd.<span class="function">merge</span>(df, attendance, on=<span class="string">'StudentID'</span>)
+<span class="function">print</span>(merged_df)</code></pre>
+      </div>
+
+      <p><code>merge()</code> works much like a SQL join, while <code>concat()</code> is handy for stacking datasets that share the same structure — for example, combining training data collected across different months.</p>
+
+      <h2>8. Applying Functions for Feature Engineering</h2>
+      <p>Feature engineering — creating new, more useful columns out of existing ones — is often what separates an average model from a genuinely good one. Pandas' <code>apply()</code> and <code>map()</code> methods let you transform data using your own custom logic.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">feature_engineering.py — Custom Columns with apply()</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-9"><span class="comment"># Create a new feature using a custom function</span>
+<span class="keyword">def</span> <span class="function">score_category</span>(score):
+    <span class="keyword">if</span> score >= <span class="attr">90</span>:
+        <span class="keyword">return</span> <span class="string">'Excellent'</span>
+    <span class="keyword">elif</span> score >= <span class="attr">80</span>:
+        <span class="keyword">return</span> <span class="string">'Good'</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">'Average'</span>
+
+merged_df[<span class="string">'ScoreCategory'</span>] = merged_df[<span class="string">'Score'</span>].<span class="function">apply</span>(score_category)
+
+<span class="comment"># A quick one-line transformation using a lambda</span>
+merged_df[<span class="string">'ScorePerAttendance'</span>] = merged_df.<span class="function">apply</span>(
+    <span class="keyword">lambda</span> row: row[<span class="string">'Score'</span>] / row[<span class="string">'AttendancePercent'</span>], axis=<span class="attr">1</span>
+)
+
+<span class="function">print</span>(merged_df[[<span class="string">'Name'</span>, <span class="string">'Score'</span>, <span class="string">'ScoreCategory'</span>, <span class="string">'ScorePerAttendance'</span>]])</code></pre>
+      </div>
+
+      <p>This is exactly how raw columns get turned into the kind of meaningful features that actually move the needle on model performance.</p>
+
+      <h2>9. Encoding Categorical Data</h2>
+      <p>Machine learning models work with numbers, not text, so categorical columns like <code>City</code> need to be converted into a numeric form before training. Pandas makes this straightforward with one-hot encoding.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">encoding.py — One-Hot Encoding with get_dummies()</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-10">encoded_df = pd.<span class="function">get_dummies</span>(merged_df, columns=[<span class="string">'City'</span>], drop_first=<span class="keyword">True</span>)
+<span class="function">print</span>(encoded_df.<span class="function">head</span>())</code></pre>
+      </div>
+
+      <p><code>get_dummies()</code> creates a separate binary column for each category — a technique called one-hot encoding — and it's one of the most common preprocessing steps before feeding data into almost any model.</p>
+
+      <div class="code-note">
+        <p>Heads up: depending on your pandas version, the new encoded columns may show up as <code>True</code>/<code>False</code> booleans (newer versions) or <code>1</code>/<code>0</code> integers (older versions). Either way, they behave identically once they reach a model — Scikit-learn treats both as numeric.</p>
+      </div>
+
+      <h2>10. Sorting and Removing Duplicates</h2>
+      <p>Sorting helps you quickly spot your top or bottom performers, while catching duplicate rows stops your model from accidentally learning from repeated, biased samples.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">sort_dedup.py — Sorting and Removing Duplicates</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-11"><span class="comment"># Sort by score, highest first</span>
+<span class="function">print</span>(merged_df.<span class="function">sort_values</span>(by=<span class="string">'Score'</span>, ascending=<span class="keyword">False</span>))
+
+<span class="comment"># Check for and remove duplicate rows</span>
+<span class="function">print</span>(merged_df.<span class="function">duplicated</span>().<span class="function">sum</span>())
+merged_df = merged_df.<span class="function">drop_duplicates</span>()</code></pre>
+      </div>
+
+      <p>These two checks are quick, but skipping them can quietly distort your model's training process without you ever noticing.</p>
+
+      <h2>Bringing It All Together for ML</h2>
+      <p>Once your DataFrame is clean, encoded, and feature-engineered, you're just one step away from training a model. Pandas hands off cleanly into Scikit-learn like this:</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">train_test_split.py — Handing Off to Scikit-learn</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-12"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split
+
+X = encoded_df.<span class="function">drop</span>([<span class="string">'StudentID'</span>, <span class="string">'Name'</span>, <span class="string">'Passed'</span>, <span class="string">'ScoreCategory'</span>], axis=<span class="attr">1</span>)
+y = encoded_df[<span class="string">'Passed'</span>]
+
+X_train, X_test, y_train, y_test = <span class="function">train_test_split</span>(
+    X, y, test_size=<span class="attr">0.2</span>, random_state=<span class="attr">42</span>
+)
+
+<span class="function">print</span>(X_train.<span class="attr">shape</span>, X_test.<span class="attr">shape</span>)</code></pre>
+      </div>
+
+      <p>This is the moment everything pandas did — loading, cleaning, exploring, transforming — finally pays off: a clean <code>X</code> and <code>y</code>, ready for any machine learning algorithm.</p>
+
+      <h2>Try It Yourself</h2>
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>The best way to make these features stick is to run through them on a real dataset. Pick any small dataset (Kaggle is a great place to find one) and try to: load it with the right <code>read_*</code> function, check for and handle missing values, create at least one new feature with <code>apply()</code>, one-hot encode any categorical columns with <code>get_dummies()</code>, and split it into training and test sets with <code>train_test_split()</code>. If you can do all five on a dataset you've never seen before, pandas has officially become a tool you know rather than one you're still looking up.</p>
+      </div>
+
+      <h2>Quick Reference Cheat Sheet</h2>
+
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Important Functions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Structures</td><td><code>pd.Series()</code>, <code>pd.DataFrame()</code></td></tr>
+          <tr><td>Reading Data</td><td><code>pd.read_csv()</code>, <code>pd.read_excel()</code>, <code>pd.read_json()</code></td></tr>
+          <tr><td>Inspection</td><td><code>.head()</code>, <code>.shape</code>, <code>.info()</code>, <code>.describe()</code></td></tr>
+          <tr><td>Missing Values</td><td><code>.isnull()</code>, <code>.fillna()</code>, <code>.dropna()</code>, <code>.mode()</code></td></tr>
+          <tr><td>Selection</td><td><code>.loc[]</code>, <code>.iloc[]</code>, boolean filtering</td></tr>
+          <tr><td>GroupBy</td><td><code>.groupby()</code>, <code>.agg()</code>, <code>.mean()</code>, <code>.sum()</code></td></tr>
+          <tr><td>Combining</td><td><code>pd.merge()</code>, <code>pd.concat()</code>, <code>.join()</code></td></tr>
+          <tr><td>Feature Engineering</td><td><code>.apply()</code>, <code>.map()</code>, lambda functions</td></tr>
+          <tr><td>Encoding</td><td><code>pd.get_dummies()</code></td></tr>
+          <tr><td>Sorting & Cleaning</td><td><code>.sort_values()</code>, <code>.duplicated()</code>, <code>.drop_duplicates()</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Conclusion</h2>
+      <p>Pandas isn't a machine learning library itself, but it's the foundation almost every ML project is built on. From reading raw files to engineering the final features that go into a model, the ten features covered here — DataFrames, file I/O, inspection tools, missing value handling, selection, GroupBy, merging, apply functions, encoding, and sorting — cover the vast majority of what you'll actually use in day-to-day ML work.</p>
+
+      <p class="article-cta-text">Get comfortable with these, and reading real ML project code will stop feeling like decoding a foreign language.</p>
+
+    </div>
+  </article>
+
+  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
+
+  <!-- Disqus Comments -->
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+
+        <a href="python-projects-for-beginners.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-python">Python</span>
+            <p>5 Python Projects That Actually Get You Hired</p>
+          </div>
+        </a>
+
+        <a href="ai-learning-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-robot"></i></div>
+          <div>
+            <span class="category-badge badge-ai-ml">AI & ML</span>
+            <p>Learn AI From Zero: A Beginner's Complete Guide</p>
+          </div>
+        </a>
+
+        <a href="earn-money-online.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-sack-dollar"></i></div>
+          <div>
+            <span class="category-badge badge-freelancing">Freelancing</span>
+            <p>7 Real Ways Developers Earn Money Online in India (2026)</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">
+                View All Articles <i class="fas fa-arrow-right"></i>
+            </a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
