@@ -232,3 +232,11 @@
   padding: 1.5rem;
   border: 1px solid var(--border);
 }
+
+.comment-prompt {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 2rem 0 1.5rem;
+  padding: 0 1rem;
+}
