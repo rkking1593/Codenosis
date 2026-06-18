@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Still using var without knowing why? Here's the honest breakdown of var, let, and const — what they actually do, why it matters, and which one to use by default.">
+  <title>Var, Let, and Const: Stop Using the Wrong One — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <style>
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      font-family: 'Courier New', monospace;
+    }
+    .code-block code { color: #cdd6f4; }
+    .keyword { color: #cba6f7; }
+    .string { color: #a6e3a1; }
+    .comment { color: #6c7086; font-style: italic; }
+    .function { color: #89dceb; }
+
+    .article-note {
+      background: rgba(99, 102, 241, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .article-note strong { color: var(--accent); }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-fundamentals">Fundamentals</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 7 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 18, 2026</span>
+      </div>
+      <h1 class="article-title">Var, Let, and Const: Stop Using the Wrong One</h1>
+      <p class="article-subtitle">Still defaulting to var without knowing why? Here's the honest breakdown of what each one actually does — and why it matters more than you think.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <div class="article-note">
+        <strong>Note:</strong> Read this only if you're either learning JavaScript right now or already know a little about it. If you haven't touched JS yet, bookmark this for later — it'll make a lot more sense once you have.
+      </div>
+
+      <p class="article-intro">
+        I wrote var for the first two months of my JavaScript journey. Every tutorial used it. Every YouTube video used it. Nobody told me it was basically outdated and could silently break my code in ways I'd spend hours debugging. If you're still defaulting to var without knowing why — this article is for you.
+      </p>
+
+      <p>The frustrating part is that var works. Your code won't crash. Your browser won't yell at you. The bugs it creates are silent — the kind that show up at the worst possible moment and take forever to trace back to the source. That's exactly what makes it dangerous for beginners.</p>
+
+      <h2>What is var — And Why It's Problematic</h2>
+      <p>
+        Back in 1995, var was the original, old-school way to declare variables in JavaScript. While it worked fine for simple scripts in the early days of the web, it has a massive architectural defect: var is function-scoped rather than block-scoped.
+      </p>
+      <p>
+        To put that in plain English, "block scope" just means that whatever you create inside curly braces <code>{}</code> — like an if statement or a loop — is supposed to stay locked inside those braces. But var completely ignores this rule; it casually leaks right out of your loops and if statements, accidentally messing with the rest of your code.
+      </p>
+
+      <div class="article-note">
+        <strong>Note:</strong> No worries if you don't know loops or if statements yet — just know that whatever is supposed to stay inside curly braces in JS, doesn't stay inside when var is used.
+      </div>
+
+      <p>
+        To make things even weirder, var does something called "hoisting." JavaScript quietly lifts the variable declaration to the very top of your file behind the scenes. This means you can actually use a var variable before you even create it in your code — and instead of crashing with a helpful error message, your code keeps running and just gives you a confusing undefined.
+      </p>
+      <p>
+        Silent bugs are the worst kind because your code doesn't crash to warn you — it just silently breaks your website. Because var is full of these hidden traps, using it today is just asking for a headache.
+      </p>
+
+      <h2>What is let — And When to Use It</h2>
+      <p>
+        To save everyone from the problems of var, JavaScript introduced <strong>let</strong> in 2015 as part of the ES6 update. It was created specifically to fix those old, broken behaviors and bring sanity back to coding.
+      </p>
+      <p>
+        The biggest strength of let is that it's strictly block-scoped. If you create a let variable inside curly braces — like a loop or an if statement — it stays locked exactly where you put it and won't leak out to mess with other parts of your file.
+      </p>
+      <p>
+        It also fixes the weird hoisting issue. If you try to use a let variable before declaring it, JavaScript won't give you a silent undefined — instead, it immediately throws a proper error and stops running. Proper error messages are your best friend because they point out mistakes instantly instead of letting them hide.
+      </p>
+      <p>
+        Use let whenever you know the value of a variable is going to change down the line — things like a counter in a loop, a player's score in a game, or a toggle state that flips between true and false.
+      </p>
+
+      <h2>What is const — And Why It Should Be Your Default</h2>
+      <p>
+        Introduced alongside let in the ES6 update, const is short for "constant." Just like let, const is strictly block-scoped — it stays locked safely inside the curly braces where you created it.
+      </p>
+      <p>
+        The big difference — once you assign a value to a const variable, you cannot reassign it later in your code. This creates a common misunderstanding for beginners: it does <strong>not</strong> mean the underlying value is completely frozen. If you store an object or an array inside a const, you can still modify the data inside it — like adding an item to a list or changing a property. What you cannot do is overwrite the variable by pointing it at a completely new value. Assigning a new value and modifying an existing one are two completely different things.
+      </p>
+      <p>
+        Make const your default choice whenever you create a new variable. Only switch to let when you're certain the value needs to change later. This one habit alone makes your code cleaner, more predictable, and far easier to debug.
+      </p>
+
+      <h2>The Simple Rule You Need to Remember</h2>
+      <p>You don't need to overcomplicate this. Lock this three-step rule into your brain and you'll be fine:</p>
+      <ul>
+        <li><strong>Default to const</strong> — use this always, right out of the gate</li>
+        <li><strong>Use let</strong> — only when you're certain the value needs to change later</li>
+        <li><strong>Use var</strong> — never, unless you're maintaining old code written a decade ago</li>
+      </ul>
+      <p>
+        This isn't a random opinion — it's the modern JavaScript standard every professional developer follows today. Most modern code editors and team tools will actually throw a warning if you type var into your file.
+      </p>
+
+      <h2>A Quick Visual Comparison</h2>
+      <p>Let's look at exactly how these three behave in real code, so you can see the difference with your own eyes.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">var vs let vs const — Side by Side</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code><span class="comment">// 1. The 'var' behavior (The Leak)</span>
+<span class="keyword">if</span> (<span class="keyword">true</span>) {
+  <span class="keyword">var</span> greeting = <span class="string">"Hey there!"</span>;
+}
+<span class="function">console.log</span>(greeting); <span class="comment">// "Hey there!" — it leaked out!</span>
+
+<span class="comment">// 2. The 'let' behavior (The Safe Lock)</span>
+<span class="keyword">if</span> (<span class="keyword">true</span>) {
+  <span class="keyword">let</span> secret = <span class="string">"Keep it safe"</span>;
+}
+<span class="function">console.log</span>(secret); <span class="comment">// Error: secret is not defined — locked inside!</span>
+
+<span class="comment">// 3. The 'const' behavior (The Constant Guard)</span>
+<span class="keyword">const</span> score = <span class="string">100</span>;
+score = <span class="string">200</span>; <span class="comment">// Error: Assignment to constant variable</span></code></pre>
+      </div>
+
+      <p>Seeing it side-by-side makes it click instantly. var escapes the block and runs loose, let stays locked safely inside its braces, and const stays locked while firmly protecting its value from being changed.</p>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Open any JavaScript file you've written recently. Search for the word var. Replace every single one with either const or let — const if the value doesn't change, let if it does. Run your code. If something breaks, you just found a real bug that var was hiding from you. Fix it. That's how you actually learn this.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="git-vs-github.html" class="related-card">
+          <div class="related-icon"><i class="fab fa-github"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>Git vs GitHub: Stop Confusing These Two Completely Different Things</p>
+          </div>
+        </a>
+
+        <a href="html-css-js-explained.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-layer-group"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>HTML, CSS and JavaScript — What Are They and Which Comes First?</p>
+          </div>
+        </a>
+
+        <a href="build-first-website.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
+            <p>How to Build Your First Website From Scratch</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Comment Prompt -->
+  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
+
+  <!-- Disqus Comments -->
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/var-let-const.html";
+      this.page.identifier = "var-let-const";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

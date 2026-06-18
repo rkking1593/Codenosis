@@ -70,5 +70,11 @@
     <loc>https://codenosis.in/articles/numpy-for-machine-learning.html</loc>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/var-let-const.html</loc>
+    <priority>0.8</priority>
+  </url>
+
   
 </urlset>
