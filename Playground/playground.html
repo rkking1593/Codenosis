@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Write HTML, CSS, and JavaScript and see your results instantly. The free, beginner-friendly code playground built into Codenosis — no setup, no signup.">
+  <title>Code Playground — Write, Run, See It Live — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <link rel="stylesheet" href="playground.css" />
+</head>
+<body class="dark-mode pg-body">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="playground.html" class="active-link">Playground</a></li>
+        <li><a href="../index.html#about">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Playground Header -->
+  <header class="pg-header">
+    <div class="pg-header-left">
+      <i class="fas fa-code pg-logo-icon"></i>
+      <div>
+        <h1>Playground</h1>
+        <p>Write code. See it live. No setup needed.</p>
+      </div>
+    </div>
+    <div class="pg-header-right">
+      <button class="pg-btn pg-btn-ghost" id="resetBtn">
+        <i class="fas fa-rotate-left"></i> <span class="pg-btn-label">Reset</span>
+      </button>
+      <button class="pg-btn pg-btn-ghost" id="shareBtn">
+        <i class="fas fa-link"></i> <span class="pg-btn-label">Copy Link</span>
+      </button>
+      <button class="pg-btn pg-btn-primary" id="runBtn">
+        <i class="fas fa-play"></i> <span class="pg-btn-label">Run</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Playground -->
+  <main class="pg-main">
+
+    <!-- Editors Column -->
+    <section class="pg-editors">
+
+      <div class="pg-editor-pane" data-pane="html">
+        <div class="pg-editor-tab">
+          <span class="pg-tab-dot pg-dot-html"></span>
+          <span>HTML</span>
+        </div>
+        <textarea id="htmlInput" class="pg-textarea" spellcheck="false" placeholder="<!-- Write your HTML here -->"></textarea>
+      </div>
+
+      <div class="pg-editor-pane" data-pane="css">
+        <div class="pg-editor-tab">
+          <span class="pg-tab-dot pg-dot-css"></span>
+          <span>CSS</span>
+        </div>
+        <textarea id="cssInput" class="pg-textarea" spellcheck="false" placeholder="/* Write your CSS here */"></textarea>
+      </div>
+
+      <div class="pg-editor-pane" data-pane="js">
+        <div class="pg-editor-tab">
+          <span class="pg-tab-dot pg-dot-js"></span>
+          <span>JS</span>
+        </div>
+        <textarea id="jsInput" class="pg-textarea" spellcheck="false" placeholder="// Write your JavaScript here"></textarea>
+      </div>
+
+    </section>
+
+    <!-- Resizer -->
+    <div class="pg-resizer" id="pgResizer"></div>
+
+    <!-- Preview Column -->
+    <section class="pg-preview-col">
+      <div class="pg-preview-tab">
+        <span><i class="fas fa-eye"></i> Preview</span>
+        <button class="pg-icon-btn" id="consoleToggle" title="Toggle console">
+          <i class="fas fa-terminal"></i>
+        </button>
+      </div>
+      <iframe id="previewFrame" class="pg-iframe" title="Live preview" sandbox="allow-scripts allow-modals"></iframe>
+      <div class="pg-console" id="pgConsole">
+        <div class="pg-console-header">
+          <span>Console</span>
+          <button class="pg-icon-btn" id="clearConsole" title="Clear console"><i class="fas fa-ban"></i></button>
+        </div>
+        <div class="pg-console-body" id="consoleBody"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Pane Switcher -->
+  <div class="pg-mobile-switch" id="pgMobileSwitch">
+    <button class="pg-switch-btn active" data-target="html">HTML</button>
+    <button class="pg-switch-btn" data-target="css">CSS</button>
+    <button class="pg-switch-btn" data-target="js">JS</button>
+    <button class="pg-switch-btn" data-target="preview">Preview</button>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="playground.js"></script>
+
+</body>
+</html>
