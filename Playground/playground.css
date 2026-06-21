@@ -2,7 +2,7 @@
 .pg-body {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   padding-top: 76px;
 }
@@ -123,6 +123,8 @@
   flex-direction: column;
   border-bottom: 1px solid var(--border);
   min-height: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .pg-editor-pane:last-child {
