@@ -1180,3 +1180,52 @@ body.light-mode .navbar.scrolled {
     gap: 0.5rem;
   }
 }
+
+.pg-promo{
+  padding: 2rem 0;
+}
+
+.pg-promo-inner{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.pg-promo-icon{
+  font-size: 1.6rem;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.15);
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pg-promo-text{
+  flex: 1;
+}
+
+.pg-promo-text h3{
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+}
+
+.pg-promo-text p{
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 768px){
+  .pg-promo-inner{
+    flex-direction: column;
+    text-align: center;
+  }
+}
