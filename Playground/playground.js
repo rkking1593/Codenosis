@@ -248,6 +248,16 @@ document.addEventListener('mouseup', () => {
   }
 });
 
+
+// ===== COLLAPSIBLE PANES (desktop) =====
+document.querySelectorAll('.pg-collapse-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.collapse;
+    const pane = document.querySelector(`.pg-editor-pane[data-pane="${target}"]`);
+    pane.classList.toggle('pg-collapsed');
+  });
+});
+
 // ===== MOBILE PANE SWITCHER =====
 const switchBtns = document.querySelectorAll('.pg-switch-btn');
 const htmlPane = document.querySelector('[data-pane="html"]');
