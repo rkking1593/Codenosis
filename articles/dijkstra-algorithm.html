@@ -1,222 +1,241 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dijkstra's Algorithm Explained with Example | Codenosis</title>
-  <meta name="description" content="Learn Dijkstra's shortest path algorithm with step-by-step example, graph visualization, and Python code. Perfect for BCA, DSA, and competitive programming." />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/articles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Title | Codenosis</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Article CSS -->
+    <link rel="stylesheet" href="../css/articles.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <meta name="description"
+          content="Write article description here">
 </head>
 <body>
 
-  <nav class="navbar">
+<!-- NAVBAR -->
+<nav class="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="nav-logo">Codenosis</a>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../articles.html">Articles</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
-    </div>
-  </nav>
+        <a href="../index.html" class="nav-logo">Codenosis</a>
 
-  <header class="article-hero">
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+        </ul>
+
+        <button class="nav-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="article-hero">
     <div class="article-container">
-      <h1 class="article-title">Dijkstra's Algorithm — Shortest Path, Explained Simply</h1>
-      <p class="article-subtitle">
-        From weighted graphs to GPS navigation — understand how Dijkstra finds the cheapest path with a step-by-step walkthrough, full graph example, and clean Python code.
-      </p>
-      <div class="article-author">
-        <div class="author-avatar">Y</div>
-        <div>
-          <div class="author-name">Yogesh</div>
-          <div class="author-tag">June 22, 2025 &nbsp;·&nbsp; 10 min read</div>
+
+        <h1 class="article-title">
+            Your Article Title Here
+        </h1>
+
+        <p class="article-subtitle">
+            Write a short article summary here.
+        </p>
+
+        <div class="article-author">
+            <div class="author-avatar">Y</div>
+
+            <div>
+                <div class="author-name">Yogesh</div>
+                <div class="author-tag">
+                    June 22, 2026 · 8 min read
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
 
-  <main class="article-body">
+    </div>
+</header>
+
+<!-- ARTICLE -->
+<main class="article-body">
     <div class="article-container">
 
-      <p class="article-intro">
-        Imagine you're Google Maps. A user drops a pin from Delhi to Mumbai and hits "Get Directions." Behind the scenes, one of the most elegant algorithms in computer science quietly runs — evaluating hundreds of roads, intersections, and traffic weights — to hand back the fastest route in milliseconds.
-      </p>
-      <p>
-        That algorithm? <strong>Dijkstra's Shortest Path Algorithm</strong>, published by Dutch computer scientist Edsger W. Dijkstra in 1959. It's a staple of every DSA course, every competitive programming contest, and every real-world routing system. Today we're going to break it down from scratch — no jargon overload, just clean logic and a working example.
-      </p>
+        <p class="article-intro">
+            This is the introduction section of the article.
+            It grabs attention and tells readers what they
+            will learn.
+        </p>
 
-      <h2>What is Dijkstra's Algorithm?</h2>
-      <p>
-        Dijkstra's algorithm finds the <strong>shortest (minimum-weight) path</strong> from a single source node to all other nodes in a weighted graph. The key constraint: <em>all edge weights must be non-negative</em>. It does not work correctly with negative weights (use Bellman-Ford for those).
-      </p>
+        <h2>What Is It?</h2>
 
-      <div class="article-challenge">
-        <i>💡</i>
-        <p><strong>Core Idea:</strong> Always expand the unvisited node with the smallest known distance from the source. Update its neighbors if a shorter path is found through it.</p>
-      </div>
+        <p>
+            Write your article content here.
+            Use paragraphs, examples, and explanations.
+        </p>
 
-      <h2>Where is it Used?</h2>
-      <ul>
-        <li><strong>🗺️ GPS & Maps</strong> — Google Maps, Apple Maps, OpenStreetMap all use Dijkstra variants</li>
-        <li><strong>🌐 Network Routing</strong> — OSPF protocol (internet routers) uses Dijkstra to find shortest data paths</li>
-        <li><strong>✈️ Flight Booking</strong> — Cheapest flight route finding between airports</li>
-        <li><strong>🎮 Game AI</strong> — Pathfinding for NPCs in games like Age of Empires</li>
-        <li><strong>📦 Logistics</strong> — Delivery route optimization</li>
-      </ul>
+        <div class="article-challenge">
+            <i class="fas fa-lightbulb"></i>
+            <p>
+                <strong>Quick Tip:</strong>
+                Highlight important information using this box.
+            </p>
+        </div>
 
-      <h2>The Graph We'll Use</h2>
-      <p>
-        Let's define a weighted undirected graph with 6 nodes: <strong>A, B, C, D, E, F</strong>. We'll find the shortest path from <strong>node A</strong> to every other node.
-      </p>
+        <h2>Example Image</h2>
 
-      <div class="article-image">
-        <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" class="graph-svg" aria-label="Weighted graph with nodes A through F" style="background:#1e1e2e; width: 100%; height: auto;">
-          <line x1="120" y1="200" x2="280" y2="100" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="120" y1="200" x2="280" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="100" x2="280" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="100" x2="440" y2="100" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="300" x2="440" y2="100" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="300" x2="440" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="440" y1="100" x2="440" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="440" y1="100" x2="600" y2="200" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="440" y1="300" x2="600" y2="200" stroke="#6c63ff" stroke-width="2.5"/>
+        <div class="article-image">
+            <img src="../images/example.webp"
+                 alt="Example Image">
+        </div>
 
-          <text x="190" y="138" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">4</text>
-          <text x="188" y="265" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">2</text>
-          <text x="265" y="205" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">1</text>
-          <text x="358" y="88" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">5</text>
-          <text x="370" y="215" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">8</text>
-          <text x="358" y="318" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">10</text>
-          <text x="453" y="205" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">2</text>
-          <text x="527" y="138" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">6</text>
-          <text x="527" y="268" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">3</text>
+        <h2>Code Example</h2>
 
-          <circle cx="120" cy="200" r="28" fill="#6c63ff" stroke="#fff" stroke-width="2"/>
-          <text x="120" y="206" fill="#fff" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">A</text>
-          <circle cx="280" cy="100" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="280" y="106" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">B</text>
-          <circle cx="280" cy="300" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="280" y="306" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">C</text>
-          <circle cx="440" cy="100" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="440" y="106" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">D</text>
-          <circle cx="440" cy="300" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="440" y="306" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">E</text>
-          <circle cx="600" cy="200" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="600" y="206" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">F</text>
-          <text x="120" y="245" fill="#a78bfa" font-size="11" font-family="monospace" text-anchor="middle">source</text>
-        </svg>
-      </div>
+        <pre><code class="language-python">
+def greet(name):
+    return f"Hello {name}"
 
-      <h2>The Algorithm — Pseudocode</h2>
-      <pre><code class="language-plaintext">function Dijkstra(graph, source):
-    dist[source] = 0
-    dist[all other nodes] = ∞
-    priority_queue = [(0, source)]
-    visited = {}
+print(greet("Codenosis"))
+        </code></pre>
 
-    while priority_queue is not empty:
-        (current_dist, u) = pop minimum from priority_queue
+        <h2>Benefits</h2>
 
-        if u in visited → skip
-        mark u as visited
+        <ul>
+            <li><strong>Easy to Learn</strong> — Beginner friendly.</li>
+            <li><strong>Practical</strong> — Real-world use cases.</li>
+            <li><strong>Fast</strong> — Saves development time.</li>
+        </ul>
 
-        for each neighbor v of u with edge weight w:
-            new_dist = current_dist + w
-            if new_dist < dist[v]:
-                dist[v] = new_dist
-                push (new_dist, v) into priority_queue
+        <div class="article-challenge">
+            <i class="fas fa-star"></i>
+            <p>
+                <strong>Challenge:</strong>
+                Try building a small project using the concepts
+                learned in this article.
+            </p>
+        </div>
 
-    return dist</code></pre>
+        <div class="article-cta-text">
+            Enjoyed this article? Explore more tutorials,
+            projects, and guides on Codenosis.
+        </div>
 
-      <div class="article-challenge">
-        <i>🔍</i>
-        <p><strong>Key Insight:</strong> Notice how A→B via C costs 3 (2+1), not 4 (direct). Dijkstra catches this because it always relaxes edges through the currently cheapest known node.</p>
-      </div>
+        <div class="comment-prompt">
+            What are your thoughts? Leave a comment below.
+        </div>
 
-      <h2>Quick Summary</h2>
-      <ul>
-        <li>Dijkstra finds the shortest path from a <strong>single source</strong> to all nodes</li>
-        <li>Uses a <strong>min-heap priority queue</strong> for efficiency</li>
-        <li>Requires <strong>non-negative edge weights</strong></li>
-        <li>Time complexity: <strong>O((V+E) log V)</strong> with a binary heap</li>
-      </ul>
-
-      <div class="article-cta-text">
-        <p>Found this helpful? Share it with your study group and bookmark <a href="../index.html">Codenosis</a> for more DSA breakdowns, Python tutorials, and real-world coding guides.</p>
-      </div>
-
-      <div class="comment-prompt">What are your thoughts? Drop a comment below!</div>
-      <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
 
     </div>
-  </main>
+</main>
 
-  <section class="related">
+<!-- RELATED ARTICLES -->
+<section class="related">
     <div class="article-container">
-      <h3>Related Articles</h3>
-      <div class="related-grid">
-        <a href="bfs-dfs-explained.html" class="related-card">
-          <div class="related-icon">⛙</div>
-          <div>
-            <strong style="color: var(--text-primary); font-size: 1rem;">BFS vs DFS — Which Traversal to Use?</strong>
-            <p>Breadth-first vs depth-first — understand the difference with visual examples.</p>
-          </div>
-        </a>
-        <a href="pandas-complete-guide.html" class="related-card">
-          <div class="related-icon">🐼</div>
-          <div>
-            <strong style="color: var(--text-primary); font-size: 1rem;">Pandas Complete Guide for Beginners</strong>
-            <p>Master DataFrames, groupby, merging, and data cleaning with real datasets.</p>
-          </div>
-        </a>
-        <a href="numpy-for-beginners.html" class="related-card">
-          <div class="related-icon">🔢</div>
-          <div>
-            <strong style="color: var(--text-primary); font-size: 1rem;">NumPy Explained from Scratch</strong>
-            <p>Arrays, broadcasting, vectorized ops — NumPy made simple for ML beginners.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <footer class="site-footer">
+        <h3>Related Articles</h3>
+
+        <div class="related-grid">
+
+            <a href="#" class="related-card">
+                <div class="related-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+
+                <div>
+                    <strong>Python for Beginners</strong>
+                    <p>
+                        Learn Python fundamentals step by step.
+                    </p>
+                </div>
+            </a>
+
+            <a href="#" class="related-card">
+                <div class="related-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+
+                <div>
+                    <strong>SQL Complete Guide</strong>
+                    <p>
+                        Learn queries, joins, and databases.
+                    </p>
+                </div>
+            </a>
+
+            <a href="#" class="related-card">
+                <div class="related-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+
+                <div>
+                    <strong>Machine Learning Basics</strong>
+                    <p>
+                        Start your ML journey from scratch.
+                    </p>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
     <div class="footer-container">
-      <div class="footer-brand">
-        <span class="footer-logo">Codenosis</span>
-        <p>Learn. Code. Build.</p>
-      </div>
-      <div class="footer-links">
-        <a href="../about.html">About</a>
-        <a href="../contact.html">Contact</a>
-        <a href="../privacy.html">Privacy Policy</a>
-      </div>
-      <div class="footer-credits">
-        <p>Built by Sarthak &amp; Yogesh · &copy; 2025 Codenosis</p>
-      </div>
-    </div>
-  </footer>
 
-  <script>hljs.highlightAll();</script>
-  <script>
-    // Mobile nav toggle
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
-    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
-  </script>
+        <div class="footer-brand">
+            <span class="footer-logo">Codenosis</span>
+            <p>Learn. Code. Build.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+            <a href="../privacy.html">Privacy Policy</a>
+        </div>
+
+        <div class="footer-credits">
+            <p>
+                © 2026 Codenosis. All Rights Reserved.
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+<!-- CODE HIGHLIGHT -->
+<script>
+    hljs.highlightAll();
+</script>
+
+<!-- MOBILE MENU -->
+<script>
+const toggle = document.querySelector('.nav-toggle');
+const links = document.querySelector('.nav-links');
+
+if(toggle){
+    toggle.addEventListener('click', () => {
+        links.classList.toggle('open');
+    });
+}
+</script>
 
 </body>
 </html>
+```
