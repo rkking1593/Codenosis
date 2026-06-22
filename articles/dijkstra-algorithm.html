@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dijkstra's Algorithm Explained with Example | Codenosis</title>
+  <meta name="description" content="Learn Dijkstra's shortest path algorithm with step-by-step example, graph visualization, and Python code. Perfect for BCA, DSA, and competitive programming." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/articles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Codenosis</a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- ===== ARTICLE HERO ===== -->
+  <header class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-meta">
+        <span class="article-tag">Algorithms</span>
+        <span class="article-tag">DSA</span>
+        <span class="article-tag">Graph Theory</span>
+      </div>
+      <h1 class="article-title">Dijkstra's Algorithm — Shortest Path, Explained Simply</h1>
+      <p class="article-subtitle">
+        From weighted graphs to GPS navigation — understand how Dijkstra finds the cheapest path with a step-by-step walkthrough, full graph example, and clean Python code.
+      </p>
+      <div class="article-author-row">
+        <div class="author-avatar">Y</div>
+        <div class="author-info">
+          <span class="author-name">Yogesh</span>
+          <span class="article-date">June 22, 2025 &nbsp;·&nbsp; 10 min read</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== ARTICLE BODY ===== -->
+  <main class="article-body">
+    <div class="article-container">
+
+      <!-- Intro -->
+      <p>
+        Imagine you're Google Maps. A user drops a pin from Delhi to Mumbai and hits "Get Directions." Behind the scenes, one of the most elegant algorithms in computer science quietly runs — evaluating hundreds of roads, intersections, and traffic weights — to hand back the fastest route in milliseconds.
+      </p>
+      <p>
+        That algorithm? <strong>Dijkstra's Shortest Path Algorithm</strong>, published by Dutch computer scientist Edsger W. Dijkstra in 1959. It's a staple of every DSA course, every competitive programming contest, and every real-world routing system. Today we're going to break it down from scratch — no jargon overload, just clean logic and a working example.
+      </p>
+
+      <!-- What is it -->
+      <h2>What is Dijkstra's Algorithm?</h2>
+      <p>
+        Dijkstra's algorithm finds the <strong>shortest (minimum-weight) path</strong> from a single source node to all other nodes in a weighted graph. The key constraint: <em>all edge weights must be non-negative</em>. It does not work correctly with negative weights (use Bellman-Ford for those).
+      </p>
+
+      <div class="article-challenge">
+        <strong>Core Idea:</strong> Always expand the unvisited node with the smallest known distance from the source. Update its neighbors if a shorter path is found through it.
+      </div>
+
+      <!-- Real-world use cases -->
+      <h2>Where is it Used?</h2>
+      <ul class="article-list">
+        <li>🗺️ <strong>GPS & Maps</strong> — Google Maps, Apple Maps, OpenStreetMap all use Dijkstra variants</li>
+        <li>🌐 <strong>Network Routing</strong> — OSPF protocol (internet routers) uses Dijkstra to find shortest data paths</li>
+        <li>✈️ <strong>Flight Booking</strong> — Cheapest flight route finding between airports</li>
+        <li>🎮 <strong>Game AI</strong> — Pathfinding for NPCs in games like Age of Empires</li>
+        <li>📦 <strong>Logistics</strong> — Delivery route optimization</li>
+      </ul>
+
+      <!-- The Graph Example -->
+      <h2>The Graph We'll Use</h2>
+      <p>
+        Let's define a weighted undirected graph with 6 nodes: <strong>A, B, C, D, E, F</strong>. We'll find the shortest path from <strong>node A</strong> to every other node.
+      </p>
+
+      <!-- SVG Graph Visualization -->
+      <div class="graph-wrapper">
+        <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" class="graph-svg" aria-label="Weighted graph with nodes A through F">
+
+          <!-- Edge lines -->
+          <!-- A-B: 4 -->
+          <line x1="120" y1="200" x2="280" y2="100" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- A-C: 2 -->
+          <line x1="120" y1="200" x2="280" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- B-C: 1 -->
+          <line x1="280" y1="100" x2="280" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- B-D: 5 -->
+          <line x1="280" y1="100" x2="440" y2="100" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- C-D: 8 -->
+          <line x1="280" y1="300" x2="440" y2="100" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- C-E: 10 -->
+          <line x1="280" y1="300" x2="440" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- D-E: 2 -->
+          <line x1="440" y1="100" x2="440" y2="300" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- D-F: 6 -->
+          <line x1="440" y1="100" x2="600" y2="200" stroke="#6c63ff" stroke-width="2.5"/>
+          <!-- E-F: 3 -->
+          <line x1="440" y1="300" x2="600" y2="200" stroke="#6c63ff" stroke-width="2.5"/>
+
+          <!-- Edge weight labels -->
+          <text x="190" y="138" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">4</text>
+          <text x="188" y="265" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">2</text>
+          <text x="265" y="205" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">1</text>
+          <text x="358" y="88" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">5</text>
+          <text x="370" y="215" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">8</text>
+          <text x="358" y="318" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">10</text>
+          <text x="453" y="205" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">2</text>
+          <text x="527" y="138" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">6</text>
+          <text x="527" y="268" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">3</text>
+
+          <!-- Node circles -->
+          <!-- A (source) -->
+          <circle cx="120" cy="200" r="28" fill="#6c63ff" stroke="#fff" stroke-width="2"/>
+          <text x="120" y="206" fill="#fff" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">A</text>
+          <!-- B -->
+          <circle cx="280" cy="100" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
+          <text x="280" y="106" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">B</text>
+          <!-- C -->
+          <circle cx="280" cy="300" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
+          <text x="280" y="306" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">C</text>
+          <!-- D -->
+          <circle cx="440" cy="100" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
+          <text x="440" y="106" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">D</text>
+          <!-- E -->
+          <circle cx="440" cy="300" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
+          <text x="440" y="306" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">E</text>
+          <!-- F -->
+          <circle cx="600" cy="200" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
+          <text x="600" y="206" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">F</text>
+
+          <!-- Source label -->
+          <text x="120" y="245" fill="#a78bfa" font-size="11" font-family="monospace" text-anchor="middle">source</text>
+        </svg>
+        <p class="graph-caption">Fig 1. Weighted undirected graph — Source node: A</p>
+      </div>
+
+      <!-- Edge list table -->
+      <h3>Edge List</h3>
+      <div class="table-wrapper">
+        <table class="article-table">
+          <thead>
+            <tr><th>Edge</th><th>Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A — B</td><td>4</td></tr>
+            <tr><td>A — C</td><td>2</td></tr>
+            <tr><td>B — C</td><td>1</td></tr>
+            <tr><td>B — D</td><td>5</td></tr>
+            <tr><td>C — D</td><td>8</td></tr>
+            <tr><td>C — E</td><td>10</td></tr>
+            <tr><td>D — E</td><td>2</td></tr>
+            <tr><td>D — F</td><td>6</td></tr>
+            <tr><td>E — F</td><td>3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Step-by-step -->
+      <h2>Step-by-Step Walkthrough</h2>
+      <p>
+        We initialize all distances to <code>∞</code> (infinity) except the source node A which is <code>0</code>. We use a <strong>priority queue (min-heap)</strong> to always pick the node with the smallest tentative distance.
+      </p>
+
+      <!-- Step table -->
+      <div class="table-wrapper">
+        <table class="article-table steps-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Current Node</th>
+              <th>Visited</th>
+              <th>dist[A]</th>
+              <th>dist[B]</th>
+              <th>dist[C]</th>
+              <th>dist[D]</th>
+              <th>dist[E]</th>
+              <th>dist[F]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Init</td><td>—</td><td>{ }</td>
+              <td class="highlight-src">0</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td>
+            </tr>
+            <tr>
+              <td>1</td><td><strong>A</strong></td><td>{A}</td>
+              <td class="highlight-src">0</td><td>4</td><td>2</td><td>∞</td><td>∞</td><td>∞</td>
+            </tr>
+            <tr>
+              <td>2</td><td><strong>C</strong></td><td>{A, C}</td>
+              <td class="highlight-src">0</td><td>3</td><td>2</td><td>10</td><td>12</td><td>∞</td>
+            </tr>
+            <tr>
+              <td>3</td><td><strong>B</strong></td><td>{A, C, B}</td>
+              <td class="highlight-src">0</td><td>3</td><td>2</td><td>8</td><td>12</td><td>∞</td>
+            </tr>
+            <tr>
+              <td>4</td><td><strong>D</strong></td><td>{A, C, B, D}</td>
+              <td class="highlight-src">0</td><td>3</td><td>2</td><td>8</td><td>10</td><td>14</td>
+            </tr>
+            <tr>
+              <td>5</td><td><strong>E</strong></td><td>{A, C, B, D, E}</td>
+              <td class="highlight-src">0</td><td>3</td><td>2</td><td>8</td><td>10</td><td>13</td>
+            </tr>
+            <tr>
+              <td>6</td><td><strong>F</strong></td><td>{A, C, B, D, E, F}</td>
+              <td class="highlight-src">0</td><td>3</td><td>2</td><td>8</td><td>10</td><td>13</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Final Shortest Distances from A</h3>
+      <ul class="article-list results-list">
+        <li><span class="node-badge">A → A</span> &nbsp; <strong>0</strong></li>
+        <li><span class="node-badge">A → B</span> &nbsp; <strong>3</strong> &nbsp; <em>(A→C→B)</em></li>
+        <li><span class="node-badge">A → C</span> &nbsp; <strong>2</strong> &nbsp; <em>(A→C)</em></li>
+        <li><span class="node-badge">A → D</span> &nbsp; <strong>8</strong> &nbsp; <em>(A→C→B→D)</em></li>
+        <li><span class="node-badge">A → E</span> &nbsp; <strong>10</strong> &nbsp; <em>(A→C→B→D→E)</em></li>
+        <li><span class="node-badge">A → F</span> &nbsp; <strong>13</strong> &nbsp; <em>(A→C→B→D→E→F)</em></li>
+      </ul>
+
+      <div class="article-challenge">
+        <strong>Key Insight:</strong> Notice how A→B via C costs 3 (2+1), not 4 (direct). Dijkstra catches this because it always relaxes edges through the currently cheapest known node.
+      </div>
+
+      <!-- Algorithm Steps -->
+      <h2>The Algorithm — Pseudocode</h2>
+      <pre><code class="language-plaintext">function Dijkstra(graph, source):
+    dist[source] = 0
+    dist[all other nodes] = ∞
+    priority_queue = [(0, source)]
+    visited = {}
+
+    while priority_queue is not empty:
+        (current_dist, u) = pop minimum from priority_queue
+
+        if u in visited → skip
+        mark u as visited
+
+        for each neighbor v of u with edge weight w:
+            new_dist = current_dist + w
+            if new_dist < dist[v]:
+                dist[v] = new_dist
+                push (new_dist, v) into priority_queue
+
+    return dist</code></pre>
+
+      <!-- Python Code -->
+      <h2>Python Implementation</h2>
+      <pre><code class="language-python">import heapq
+
+def dijkstra(graph, source):
+    # dist[node] = shortest known distance from source
+    dist = {node: float('inf') for node in graph}
+    dist[source] = 0
+
+    # Min-heap: (distance, node)
+    pq = [(0, source)]
+    visited = set()
+
+    while pq:
+        current_dist, u = heapq.heappop(pq)
+
+        if u in visited:
+            continue
+        visited.add(u)
+
+        for neighbor, weight in graph[u]:
+            new_dist = current_dist + weight
+            if new_dist < dist[neighbor]:
+                dist[neighbor] = new_dist
+                heapq.heappush(pq, (new_dist, neighbor))
+
+    return dist
+
+
+# ---- Graph Definition ----
+graph = {
+    'A': [('B', 4), ('C', 2)],
+    'B': [('A', 4), ('C', 1), ('D', 5)],
+    'C': [('A', 2), ('B', 1), ('D', 8), ('E', 10)],
+    'D': [('B', 5), ('C', 8), ('E', 2), ('F', 6)],
+    'E': [('C', 10), ('D', 2), ('F', 3)],
+    'F': [('D', 6), ('E', 3)],
+}
+
+result = dijkstra(graph, 'A')
+
+print("Shortest distances from A:")
+for node, distance in sorted(result.items()):
+    print(f"  A → {node} : {distance}")</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-plaintext">Shortest distances from A:
+  A → A : 0
+  A → B : 3
+  A → C : 2
+  A → D : 8
+  A → E : 10
+  A → F : 13</code></pre>
+
+      <!-- Time Complexity -->
+      <h2>Time & Space Complexity</h2>
+      <div class="table-wrapper">
+        <table class="article-table">
+          <thead>
+            <tr><th>Implementation</th><th>Time Complexity</th><th>Space</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Simple array (linear scan)</td><td>O(V²)</td><td>O(V)</td></tr>
+            <tr><td>Binary min-heap (heapq)</td><td>O((V + E) log V)</td><td>O(V + E)</td></tr>
+            <tr><td>Fibonacci heap</td><td>O(E + V log V)</td><td>O(V + E)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        For most practical use cases (sparse graphs), the <strong>binary heap version — O((V+E) log V)</strong> — is the standard choice. It's what Python's <code>heapq</code> gives you.
+      </p>
+
+      <!-- Limitations -->
+      <h2>Limitations of Dijkstra</h2>
+      <ul class="article-list">
+        <li>❌ <strong>Negative edges</strong> — Dijkstra breaks. Use Bellman-Ford instead.</li>
+        <li>❌ <strong>Negative cycles</strong> — Undefined behavior. Use Floyd-Warshall.</li>
+        <li>✅ <strong>Works for</strong> — Non-negative weighted graphs, both directed and undirected.</li>
+      </ul>
+
+      <!-- Comparison -->
+      <h2>Dijkstra vs Other Shortest Path Algorithms</h2>
+      <div class="table-wrapper">
+        <table class="article-table">
+          <thead>
+            <tr><th>Algorithm</th><th>Negative Weights?</th><th>Single Source?</th><th>Best For</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dijkstra</td><td>No</td><td>Yes</td><td>Sparse graphs, GPS routing</td></tr>
+            <tr><td>Bellman-Ford</td><td>Yes</td><td>Yes</td><td>Graphs with negative weights</td></tr>
+            <tr><td>Floyd-Warshall</td><td>Yes</td><td>No (All pairs)</td><td>Dense graphs, all-pairs shortest path</td></tr>
+            <tr><td>A*</td><td>No</td><td>Yes (target)</td><td>Game pathfinding with heuristic</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Summary -->
+      <h2>Quick Summary</h2>
+      <ul class="article-list">
+        <li>Dijkstra finds the shortest path from a <strong>single source</strong> to all nodes</li>
+        <li>Uses a <strong>min-heap priority queue</strong> for efficiency</li>
+        <li>Requires <strong>non-negative edge weights</strong></li>
+        <li>Time complexity: <strong>O((V+E) log V)</strong> with a binary heap</li>
+        <li>Used in GPS, networking (OSPF), game AI, and logistics</li>
+      </ul>
+
+      <!-- CTA -->
+      <div class="article-cta-text">
+        <p>Found this helpful? Share it with your study group and bookmark <a href="../index.html">Codenosis</a> for more DSA breakdowns, Python tutorials, and real-world coding guides.</p>
+      </div>
+
+      <!-- Tags -->
+      <div class="article-tags-footer">
+        <span class="article-tag">Dijkstra</span>
+        <span class="article-tag">Graph Algorithm</span>
+        <span class="article-tag">DSA</span>
+        <span class="article-tag">Python</span>
+        <span class="article-tag">BCA</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== RELATED ARTICLES ===== -->
+  <section class="related-section">
+    <div class="article-container">
+      <h2 class="related-heading">Related Articles</h2>
+      <div class="related-grid">
+        <a href="bfs-dfs-explained.html" class="related-card">
+          <div class="related-card-tag">Graph</div>
+          <h3>BFS vs DFS — Which Traversal to Use?</h3>
+          <p>Breadth-first vs depth-first — understand the difference with visual examples.</p>
+        </a>
+        <a href="pandas-complete-guide.html" class="related-card">
+          <div class="related-card-tag">Python</div>
+          <h3>Pandas Complete Guide for Beginners</h3>
+          <p>Master DataFrames, groupby, merging, and data cleaning with real datasets.</p>
+        </a>
+        <a href="numpy-for-beginners.html" class="related-card">
+          <div class="related-card-tag">Python</div>
+          <h3>NumPy Explained from Scratch</h3>
+          <p>Arrays, broadcasting, vectorized ops — NumPy made simple for ML beginners.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">Codenosis</span>
+        <p>Learn. Code. Build.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="../privacy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-credits">
+        <p>Built by Sarthak &amp; Yogesh · &copy; 2025 Codenosis</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>hljs.highlightAll();</script>
+  <script>
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+
+</body>
+</html>
