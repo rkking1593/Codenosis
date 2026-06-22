@@ -3,68 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Compiled vs Interpreted Languages – Codenosis</title>
   <meta name="description" content="What actually happens when your code runs? A deep dive into compiled vs interpreted languages — explained clearly with examples." />
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/article.css" />
+  <title>Compiled vs Interpreted Languages — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
 
-  <style>
-    /* ── Article-scoped overrides only ── */
-    .tag-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 3px;
-      margin-bottom: 1rem;
-    }
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
 
+  <style>
+    /* ── Article-only styles not in article.css ── */
     .pipeline-visual {
       display: flex;
       align-items: center;
-      gap: 0;
       flex-wrap: wrap;
-      margin: 2rem 0;
-      font-size: 0.85rem;
+      gap: 0.4rem;
+      margin: 1.8rem 0;
     }
     .pipeline-step {
-      background: var(--card-bg, #f5f7fa);
-      border: 1px solid var(--border, #e0e4ea);
-      padding: 0.6rem 1.1rem;
-      border-radius: 6px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
       font-weight: 600;
-      color: var(--text-primary, #1a1a2e);
-      white-space: nowrap;
+      color: var(--text-primary);
     }
     .pipeline-arrow {
-      font-size: 1.2rem;
-      padding: 0 0.5rem;
       color: var(--accent);
       font-weight: 700;
+      font-size: 1.1rem;
     }
-
     .comparison-table {
       width: 100%;
       border-collapse: collapse;
       margin: 2rem 0;
-      font-size: 0.93rem;
+      font-size: 0.92rem;
     }
     .comparison-table th {
       background: var(--accent);
@@ -75,30 +61,17 @@
     }
     .comparison-table td {
       padding: 0.65rem 1rem;
-      border-bottom: 1px solid var(--border, #e0e4ea);
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
       vertical-align: top;
-      color: var(--text-primary, #1a1a2e);
     }
     .comparison-table tr:nth-child(even) td {
-      background: var(--card-bg, #f5f7fa);
+      background: var(--bg-secondary);
     }
-    .comparison-table th:first-child,
     .comparison-table td:first-child {
       font-weight: 600;
       color: var(--accent);
     }
-
-    .callout {
-      border-left: 4px solid var(--accent);
-      background: var(--card-bg, #f0f4ff);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin: 1.75rem 0;
-      font-size: 0.95rem;
-      line-height: 1.65;
-    }
-    .callout strong { color: var(--accent); }
-
     .lang-pills {
       display: flex;
       flex-wrap: wrap;
@@ -106,121 +79,120 @@
       margin: 1rem 0 1.5rem;
     }
     .lang-pill {
-      padding: 0.35rem 0.9rem;
+      padding: 0.3rem 0.85rem;
       border-radius: 20px;
       font-size: 0.82rem;
       font-weight: 600;
       border: 1.5px solid currentColor;
     }
-    .pill-compiled { color: #2563eb; }
-    .pill-interpreted { color: #16a34a; }
-    .pill-hybrid { color: #9333ea; }
-
+    .pill-compiled   { color: #6366f1; }
+    .pill-interpreted{ color: #10b981; }
+    .pill-hybrid     { color: #f59e0b; }
     .hybrid-box {
-      background: linear-gradient(135deg, #ede9fe 0%, #dbeafe 100%);
-      border: 1.5px solid #a78bfa;
-      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.04));
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 12px;
       padding: 1.25rem 1.5rem;
       margin: 1.75rem 0;
     }
     .hybrid-box h4 {
-      color: #6d28d9;
+      color: var(--accent);
       margin-top: 0;
+      font-size: 1rem;
     }
-
-    .myth-card {
+    .hybrid-box p {
+      margin-bottom: 0.8rem;
+    }
+    .myth-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
       margin: 1.5rem 0;
     }
-    .myth-card > div {
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
+    .myth-box {
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
       font-size: 0.9rem;
+      line-height: 1.6;
     }
-    .myth { background: #fee2e2; border: 1px solid #fca5a5; }
-    .reality { background: #dcfce7; border: 1px solid #86efac; }
-    .myth strong { color: #b91c1c; }
-    .reality strong { color: #15803d; }
-
+    .myth-box.myth     { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.25); }
+    .myth-box.reality  { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); }
+    .myth-box strong   { display: block; margin-bottom: 0.35rem; }
+    .myth-box.myth strong    { color: #ef4444; }
+    .myth-box.reality strong { color: #10b981; }
     @media (max-width: 600px) {
-      .myth-card { grid-template-columns: 1fr; }
-      .pipeline-visual { gap: 0.35rem; }
+      .myth-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
+<body class="dark-mode">
 
-  <!-- ── NAVBAR ── -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="nav-logo">Codenosis</a>
-      <ul class="nav-links">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../articles.html">Articles</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
       </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <!-- ── HERO ── -->
+  <!-- HERO -->
   <section class="article-hero">
-    <div class="article-hero-content">
-      <span class="tag-badge">Programming Fundamentals</span>
-      <h1>Compiled vs Interpreted Languages</h1>
+    <div class="article-container">
+      <h1 class="article-title">Compiled vs Interpreted Languages — What Happens When Your Code Runs</h1>
       <p class="article-subtitle">
-        What actually happens when your code runs? From source file to machine — explained clearly.
+        You write code. You press run. But what actually happens in between? From source file to machine instruction — explained clearly.
       </p>
-      <div class="article-meta">
-        <div class="author-info">
-          <div class="author-avatar">Y</div>
-          <div>
-            <span class="author-name">Yogesh</span>
-            <span class="article-date">June 22, 2025 · 8 min read</span>
-          </div>
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <span class="author-name">Yogesh</span>
+          <span class="author-tag">June 22, 2026 · 8 min read</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── BODY ── -->
-  <article class="article-body">
-    <p>
-      You write code. You press run. Something happens. But <em>what exactly</em> happens between
-      those two moments? If you've ever wondered why Python feels different from C, or why your
-      Java app needs a JVM — this article answers that question from the ground up.
-    </p>
+  <!-- BODY -->
+  <div class="article-body">
+    <div class="article-container">
 
-    <h2>First: What Does a Computer Actually Understand?</h2>
-    <p>
-      Your CPU understands exactly one thing: <strong>machine code</strong> — binary instructions
-      like <code>10110000 01100001</code>. Nothing else. Not Python, not JavaScript, not C++.
-      Every language you write in must, at some point, become machine code before your hardware
-      can execute it. The question is <em>when</em> and <em>how</em> that translation happens.
-      That's the whole difference between compiled and interpreted languages.
-    </p>
+      <p class="article-intro">
+        Every programming language you write in must eventually become machine code before your CPU can run it. The question is <em>when</em> and <em>how</em> that translation happens — and that single difference changes everything about how a language feels, performs, and gets deployed.
+      </p>
 
-    <h2>Compiled Languages: Translate First, Run Later</h2>
-    <p>
-      A <strong>compiler</strong> is a program that reads your entire source code and translates
-      it into machine code <em>before</em> you run it. The output is an executable file
-      (like a <code>.exe</code> on Windows) — a standalone binary that the OS can run directly.
-    </p>
+      <h2>What Does a Computer Actually Understand?</h2>
+      <p>
+        Your CPU understands exactly one thing: <strong>machine code</strong> — raw binary instructions like <code>10110000 01100001</code>. Not Python. Not JavaScript. Not C++. Every language you write must, at some point, become machine code. The compiled vs interpreted distinction is just about <em>when</em> that translation happens.
+      </p>
 
-    <div class="pipeline-visual">
-      <div class="pipeline-step">📄 Source Code (.c / .cpp)</div>
-      <div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">🔧 Compiler</div>
-      <div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">⚙️ Machine Code (.exe / binary)</div>
-      <div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">🖥️ CPU runs it directly</div>
-    </div>
+      <h2>Compiled Languages — Translate First, Run Later</h2>
+      <p>
+        A <strong>compiler</strong> reads your entire source code and translates it into machine code <em>before</em> you run it. The output is a standalone executable — a binary the OS can run directly, no translator needed at runtime.
+      </p>
 
-    <p>Here's a classic C example:</p>
-    <pre><code class="language-c">// hello.c
+      <div class="pipeline-visual">
+        <div class="pipeline-step">Source Code (.c / .cpp)</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">Compiler</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">Machine Code (.exe / binary)</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">CPU runs it directly</div>
+      </div>
+
+      <pre><code class="language-c">// hello.c
 #include &lt;stdio.h&gt;
 
 int main() {
@@ -228,319 +200,261 @@ int main() {
     return 0;
 }
 
-// Compile it:  gcc hello.c -o hello
-// Run it:      ./hello</code></pre>
+// Compile:  gcc hello.c -o hello
+// Run:      ./hello</code></pre>
 
-    <p>
-      When you run <code>gcc hello.c -o hello</code>, the compiler reads your entire file,
-      checks for errors, optimizes the logic, and produces a binary called <code>hello</code>.
-      That binary runs at full CPU speed — no translator sitting in between.
-    </p>
+      <p>
+        When you run <code>gcc hello.c -o hello</code>, the compiler reads your whole file, checks for errors, optimizes the logic, and produces a binary. That binary runs at full CPU speed — nothing sitting in between translating at runtime.
+      </p>
 
-    <div class="callout">
-      <strong>What the compiler does behind the scenes:</strong><br />
-      Lexing → Parsing → Semantic Analysis → Optimization → Code Generation. It's doing serious
-      work upfront so runtime is as fast as possible.
-    </div>
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>
+          <strong>What the compiler does behind the scenes:</strong> Lexing → Parsing → Semantic Analysis → Optimization → Code Generation. All that work happens once upfront so every future run is as fast as possible.
+        </p>
+      </div>
 
-    <h3>Languages that are compiled</h3>
-    <div class="lang-pills">
-      <span class="lang-pill pill-compiled">C</span>
-      <span class="lang-pill pill-compiled">C++</span>
-      <span class="lang-pill pill-compiled">Go</span>
-      <span class="lang-pill pill-compiled">Rust</span>
-      <span class="lang-pill pill-compiled">Fortran</span>
-    </div>
+      <h2>Languages That Are Compiled</h2>
+      <div class="lang-pills">
+        <span class="lang-pill pill-compiled">C</span>
+        <span class="lang-pill pill-compiled">C++</span>
+        <span class="lang-pill pill-compiled">Go</span>
+        <span class="lang-pill pill-compiled">Rust</span>
+        <span class="lang-pill pill-compiled">Fortran</span>
+      </div>
 
-    <h3>Pros and Cons of Compilation</h3>
-    <p>
-      <strong>Fast execution:</strong> The CPU runs pre-translated machine code — nothing to
-      interpret at runtime. Games, OS kernels, and system tools are compiled for this reason.
-      <strong>Compile-time errors:</strong> Mistakes are caught before the program ever runs.
-      <strong>Portability cost:</strong> A compiled binary is tied to one OS and CPU architecture.
-      Code compiled for Windows x64 won't run on Linux ARM without recompiling.
-    </p>
+      <ul>
+        <li><strong>Fast execution</strong> — CPU runs pre-translated machine code directly. This is why OS kernels and game engines are written in C/C++.</li>
+        <li><strong>Errors caught early</strong> — compiler finds mistakes before the program ever runs.</li>
+        <li><strong>Platform-specific output</strong> — a Windows x64 binary won't run on Linux ARM without recompiling.</li>
+      </ul>
 
-    <h2>Interpreted Languages: Translate as You Go</h2>
-    <p>
-      An <strong>interpreter</strong> reads your source code line by line (or statement by
-      statement) and executes it <em>on the fly</em>, without producing a standalone binary first.
-    </p>
+      <h2>Interpreted Languages — Translate as You Go</h2>
+      <p>
+        An <strong>interpreter</strong> reads your source code line by line and executes it on the fly — no separate compilation step, no binary output. The interpreter itself is the runtime.
+      </p>
 
-    <div class="pipeline-visual">
-      <div class="pipeline-step">📄 Source Code (.py / .js)</div>
-      <div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">🔄 Interpreter (reads line by line)</div>
-      <div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">🖥️ Executed immediately</div>
-    </div>
+      <div class="pipeline-visual">
+        <div class="pipeline-step">Source Code (.py / .js)</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">Interpreter (line by line)</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">Executed immediately</div>
+      </div>
 
-    <p>Python is the textbook example:</p>
-    <pre><code class="language-python"># hello.py
+      <pre><code class="language-python"># hello.py
 print("Hello, World!")
 
 # Run it:  python hello.py</code></pre>
 
-    <p>
-      When you run <code>python hello.py</code>, the Python interpreter reads your file,
-      processes each line, and executes it. There's no separate compile step. This is why Python
-      scripts don't produce a <code>.exe</code> — the interpreter <em>is</em> the runtime.
-    </p>
-
-    <div class="callout">
-      <strong>Runtime errors show up differently:</strong><br />
-      With an interpreter, a bug on line 50 won't be caught until execution actually reaches
-      line 50 — even if line 1 runs perfectly. Compiled languages catch many of these before
-      you ever run the program.
-    </div>
-
-    <h3>Languages that are interpreted</h3>
-    <div class="lang-pills">
-      <span class="lang-pill pill-interpreted">Python</span>
-      <span class="lang-pill pill-interpreted">Ruby</span>
-      <span class="lang-pill pill-interpreted">PHP</span>
-      <span class="lang-pill pill-interpreted">JavaScript (traditionally)</span>
-      <span class="lang-pill pill-interpreted">Bash</span>
-    </div>
-
-    <h3>Pros and Cons of Interpretation</h3>
-    <p>
-      <strong>Fast development:</strong> Write a line, run it, see the result. The feedback loop
-      is tight. <strong>Portability:</strong> The same Python file runs on Windows, Linux, and
-      macOS — as long as Python is installed. <strong>Slower execution:</strong> The interpreter
-      adds overhead at runtime. Translation happens every time the program runs.
-    </p>
-
-    <h2>The Modern Reality: It's Not Black and White</h2>
-    <p>
-      In practice, most modern languages live somewhere in the middle. The line between "compiled"
-      and "interpreted" has blurred significantly. Here are the three real-world models:
-    </p>
-
-    <div class="hybrid-box">
-      <h4>🔁 The Bytecode Model (Java, Python, C#)</h4>
       <p>
-        Source code is compiled to an intermediate format called <strong>bytecode</strong> — not
-        machine code, but a compact, platform-neutral representation. At runtime, a
-        <strong>Virtual Machine</strong> (JVM, CPython, CLR) executes the bytecode.
+        When you run <code>python hello.py</code>, Python reads your file, processes each statement, and executes it. There's no <code>.exe</code> produced — because the interpreter handles everything at runtime.
       </p>
 
-      <div class="pipeline-visual">
-        <div class="pipeline-step">Source Code</div>
-        <div class="pipeline-arrow">→</div>
-        <div class="pipeline-step">Bytecode (.pyc / .class)</div>
-        <div class="pipeline-arrow">→</div>
-        <div class="pipeline-step">Virtual Machine</div>
-        <div class="pipeline-arrow">→</div>
-        <div class="pipeline-step">CPU</div>
+      <div class="article-challenge">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p>
+          <strong>Runtime errors show up differently:</strong> A bug on line 50 won't be caught until execution actually reaches line 50 — even if lines 1–49 ran fine. Compiled languages catch many of these before you even run the program.
+        </p>
       </div>
 
+      <h2>Languages That Are Interpreted</h2>
+      <div class="lang-pills">
+        <span class="lang-pill pill-interpreted">Python</span>
+        <span class="lang-pill pill-interpreted">Ruby</span>
+        <span class="lang-pill pill-interpreted">PHP</span>
+        <span class="lang-pill pill-interpreted">Bash</span>
+        <span class="lang-pill pill-interpreted">JavaScript (traditionally)</span>
+      </div>
+
+      <ul>
+        <li><strong>Fast development</strong> — write a line, run it, see the result instantly.</li>
+        <li><strong>Truly portable</strong> — the same Python file runs on Windows, Linux, and macOS as long as Python is installed.</li>
+        <li><strong>Slower execution</strong> — the interpreter adds overhead at runtime. Translation happens every single time the program runs.</li>
+      </ul>
+
+      <h2>The Modern Reality — It's Not Black and White</h2>
       <p>
-        This is why Java is "write once, run anywhere." The same <code>.class</code> file runs on
-        any machine that has a JVM. CPython (the standard Python) also compiles to
-        <code>.pyc</code> bytecode internally — you just rarely see it.
+        Most modern languages live somewhere in the middle. The compiled/interpreted line has blurred significantly. Here are the two big hybrid models:
       </p>
-    </div>
 
-    <div class="hybrid-box">
-      <h4>⚡ JIT Compilation (JavaScript V8, Java HotSpot, PyPy)</h4>
+      <div class="hybrid-box">
+        <h4>The Bytecode Model — Java, Python, C#</h4>
+        <p>
+          Source code is compiled to an intermediate format called <strong>bytecode</strong> — not raw machine code, but a compact platform-neutral representation. At runtime, a <strong>Virtual Machine</strong> (JVM for Java, CPython for Python, CLR for C#) executes the bytecode.
+        </p>
+        <div class="pipeline-visual">
+          <div class="pipeline-step">Source Code</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Bytecode (.pyc / .class)</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Virtual Machine</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">CPU</div>
+        </div>
+        <p>
+          This is why Java is "write once, run anywhere." The same <code>.class</code> file runs on any machine with a JVM installed — no recompiling for each platform.
+        </p>
+      </div>
+
+      <div class="hybrid-box">
+        <h4>JIT Compilation — JavaScript V8, Java HotSpot, PyPy</h4>
+        <p>
+          <strong>Just-In-Time compilation</strong> is how modern runtimes get near-compiled performance from interpreted code. The runtime watches which parts of your code run most frequently ("hot paths") and compiles <em>those specific parts</em> to native machine code on the fly.
+        </p>
+        <p>
+          This is why modern JavaScript in Chrome's V8 engine is shockingly fast — V8 JITs your hot loops into machine code at runtime. It's why Node.js can handle serious backend workloads.
+        </p>
+      </div>
+
+      <h2>Side-by-Side Comparison</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Compiled</th>
+            <th>Interpreted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Translation time</td><td>Before runtime (build step)</td><td>At runtime (line by line)</td></tr>
+          <tr><td>Execution speed</td><td>Fast (direct machine code)</td><td>Slower (interpreter overhead)</td></tr>
+          <tr><td>Error detection</td><td>At compile time</td><td>At runtime (when that line runs)</td></tr>
+          <tr><td>Portability</td><td>OS/arch-specific binary</td><td>Cross-platform with interpreter</td></tr>
+          <tr><td>Dev speed</td><td>Slower (compile → run cycle)</td><td>Faster (run immediately)</td></tr>
+          <tr><td>Output file</td><td>Standalone executable</td><td>No separate output</td></tr>
+          <tr><td>Examples</td><td>C, C++, Go, Rust</td><td>Python, Ruby, PHP, Bash</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Common Myths, Busted</h2>
+
+      <div class="myth-grid">
+        <div class="myth-box myth">
+          <strong>Myth: Python is slow because it's interpreted.</strong>
+          CPython is slower for CPU-bound tasks — but NumPy and SciPy call compiled C code under the hood, and PyPy JITs Python to near-C speeds.
+        </div>
+        <div class="myth-box reality">
+          <strong>Reality: It depends on what you're doing.</strong>
+          For data science and ML, Python's ecosystem beats everything. Slow language, fast libraries.
+        </div>
+      </div>
+
+      <div class="myth-grid">
+        <div class="myth-box myth">
+          <strong>Myth: JavaScript is slow because it's interpreted.</strong>
+          This was true in 2005. V8's JIT compiler makes modern JS extremely fast — often benchmarking close to Go for I/O workloads.
+        </div>
+        <div class="myth-box reality">
+          <strong>Reality: Modern JS is JIT-compiled.</strong>
+          Node.js handles millions of requests per second. "Interpreted = slow" hasn't been accurate for over a decade.
+        </div>
+      </div>
+
+      <h2>Which Should You Use?</h2>
       <p>
-        <strong>Just-In-Time compilation</strong> is the trick modern runtimes use to get
-        near-compiled performance from interpreted code. The runtime monitors which parts of your
-        code run most frequently ("hot paths") and compiles <em>those specific parts</em> to
-        native machine code on the fly.
-      </p>
-      <p>
-        This is why modern JavaScript (running in Chrome's V8 engine) is shockingly fast —
-        V8 JITs your hot loops into machine code at runtime. It's also why Node.js can handle
-        real backend workloads.
-      </p>
-    </div>
-
-    <h2>Side-by-Side Comparison</h2>
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Compiled</th>
-          <th>Interpreted</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Translation time</td>
-          <td>Before runtime (build step)</td>
-          <td>At runtime (line by line)</td>
-        </tr>
-        <tr>
-          <td>Execution speed</td>
-          <td>Fast (direct machine code)</td>
-          <td>Slower (interpreter overhead)</td>
-        </tr>
-        <tr>
-          <td>Error detection</td>
-          <td>At compile time (before running)</td>
-          <td>At runtime (when that line runs)</td>
-        </tr>
-        <tr>
-          <td>Portability</td>
-          <td>OS/arch-specific binary</td>
-          <td>Cross-platform (with interpreter)</td>
-        </tr>
-        <tr>
-          <td>Dev speed</td>
-          <td>Slower (compile → run cycle)</td>
-          <td>Faster (run immediately)</td>
-        </tr>
-        <tr>
-          <td>Output</td>
-          <td>Standalone executable</td>
-          <td>No separate output file</td>
-        </tr>
-        <tr>
-          <td>Examples</td>
-          <td>C, C++, Go, Rust</td>
-          <td>Python, Ruby, PHP, Bash</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>Common Myths, Busted</h2>
-
-    <div class="myth-card">
-      <div class="myth">
-        <strong>❌ Myth:</strong><br />
-        "Python is slow because it's interpreted."
-      </div>
-      <div class="reality">
-        <strong>✅ Reality:</strong><br />
-        CPython is slower for CPU-bound tasks, but libraries like NumPy call compiled C code.
-        PyPy JITs Python to near-C speeds.
-      </div>
-    </div>
-
-    <div class="myth-card">
-      <div class="myth">
-        <strong>❌ Myth:</strong><br />
-        "JavaScript is interpreted, so it's slow."
-      </div>
-      <div class="reality">
-        <strong>✅ Reality:</strong><br />
-        V8's JIT compiler makes modern JS extremely fast. Benchmarks often put it close to Go
-        for I/O-heavy workloads.
-      </div>
-    </div>
-
-    <div class="myth-card">
-      <div class="myth">
-        <strong>❌ Myth:</strong><br />
-        "Compiled languages are always better."
-      </div>
-      <div class="reality">
-        <strong>✅ Reality:</strong><br />
-        Python dominates ML/data science. PHP powers most of the web. The right tool depends
-        on the problem, not just execution speed.
-      </div>
-    </div>
-
-    <h2>Which Should You Use?</h2>
-    <p>
-      <strong>Use compiled languages</strong> (C, Go, Rust) when raw performance matters —
-      operating systems, game engines, embedded systems, high-frequency trading, or CLI tools
-      where startup time counts.
-    </p>
-    <p>
-      <strong>Use interpreted/bytecode languages</strong> (Python, JavaScript, Java) for web
-      development, data science, scripting, prototyping, or any domain where developer
-      productivity and ecosystem matter more than squeezing out every millisecond.
-    </p>
-    <p>
-      Most professional developers work in both worlds — Python for data pipelines,
-      Go for the API server, JavaScript for the frontend.
-    </p>
-
-    <h2>The One-Line Summary</h2>
-    <div class="callout">
-      <strong>Compiled:</strong> translate everything upfront, run fast. &nbsp;|&nbsp;
-      <strong>Interpreted:</strong> translate as you go, iterate fast. &nbsp;|&nbsp;
-      <strong>Modern reality:</strong> most languages do a bit of both.
-    </div>
-
-    <p>
-      Understanding this distinction isn't just trivia — it shapes how you debug errors,
-      how you deploy software, and why certain languages dominate certain domains. Now when
-      someone says "Python is slow," you'll know exactly what they mean, and exactly where
-      they're wrong.
-    </p>
-
-    <!-- ── CHALLENGE ── -->
-    <div class="article-challenge">
-      <h3>🧠 Quick Check</h3>
-      <p>
-        Java compiles to bytecode that runs on the JVM. Is Java compiled or interpreted?
-        The answer: <strong>both</strong> — and now you know exactly why.
+        <strong>Compiled (C, Go, Rust)</strong> — when raw performance matters: OS kernels, game engines, embedded systems, CLI tools where startup time counts.
       </p>
       <p>
-        Try this: write the same logic in Python and C, time both with large loops, and
-        observe the difference. Then try PyPy and see how close it gets.
+        <strong>Interpreted/bytecode (Python, JavaScript, Java)</strong> — web development, data science, scripting, prototyping, or any domain where developer productivity and ecosystem outweigh squeezing out milliseconds.
       </p>
+      <p>
+        Most working developers use both — Python for data pipelines, Go for the API server, JavaScript for the frontend.
+      </p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p>
+          <strong>Quick Check:</strong> Java compiles to bytecode that runs on the JVM. Is Java compiled or interpreted? The answer: both — and now you know exactly why. Try writing the same loop in Python and C, time both, then try PyPy and watch the gap close.
+        </p>
+      </div>
+
+      <p class="article-cta-text">
+        Enjoyed this? Next up: <strong>How Memory Management Works in Python vs C</strong> — the hidden layer that explains even more of what happens when your code runs.
+      </p>
+
     </div>
+  </div>
 
-    <!-- ── CTA ── -->
-    <p class="article-cta-text">
-      Enjoyed this? Next up: <strong>How Memory Management Works in Python vs C</strong> —
-      the hidden layer that explains even more of what happens when your code runs.
-    </p>
-
-  </article>
-
-  <!-- ── RELATED ── -->
-  <section class="related-articles">
-    <div class="container">
-      <h2>Related Articles</h2>
+  <!-- RELATED -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
       <div class="related-grid">
-        <a href="python-pandas.html" class="related-card">
-          <div class="related-card-content">
-            <span class="related-tag">Python</span>
-            <h3>Pandas: The Complete Beginner's Guide</h3>
-            <p>DataFrames, filtering, groupby — everything you need to start working with data.</p>
+
+        <a href="pandas-for-machine-learning.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-table"></i></div>
+          <div>
+            <p><strong>Pandas for Machine Learning: Complete Beginner Guide</strong></p>
+            <p>Clean, analyze, and prepare datasets with the most essential Python ML library.</p>
           </div>
         </a>
-        <a href="python-numpy.html" class="related-card">
-          <div class="related-card-content">
-            <span class="related-tag">Python</span>
-            <h3>NumPy Explained: Arrays, Math & More</h3>
-            <p>The foundation under every data science and ML library in Python.</p>
+
+        <a href="numpy-for-machine-learning.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-table-cells"></i></div>
+          <div>
+            <p><strong>NumPy for Machine Learning: Complete Guide</strong></p>
+            <p>Every array operation, indexing trick, and broadcasting rule you need for ML.</p>
           </div>
         </a>
-        <a href="how-internet-works.html" class="related-card">
-          <div class="related-card-content">
-            <span class="related-tag">CS Fundamentals</span>
-            <h3>How the Internet Actually Works</h3>
-            <p>From typing a URL to seeing a webpage — every step explained.</p>
+
+        <a href="frontend-backend-fullstack.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-sitemap"></i></div>
+          <div>
+            <p><strong>Frontend vs Backend vs Full Stack</strong></p>
+            <p>Everyone throws these terms around. Here's what they actually mean.</p>
           </div>
         </a>
+
       </div>
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <span class="footer-logo">Codenosis</span>
-        <p>Making development concepts clear, one article at a time.</p>
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="../privacy.html">Privacy Policy</a>
-        <a href="../about.html">About</a>
-        <a href="../contact.html">Contact</a>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
       </div>
-      <p class="footer-credits">
-        Built by Sarthak &amp; Yogesh · © 2025 Codenosis
-      </p>
     </div>
   </footer>
+
+  <script src="../script.js"></script>
 
 </body>
 </html>
