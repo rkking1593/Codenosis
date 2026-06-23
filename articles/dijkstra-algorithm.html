@@ -47,6 +47,58 @@
                     border-radius: 8px; padding: .65rem 1rem; font-size: .9rem; }
     .node-pill { background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700;
                  padding: .2rem .7rem; border-radius: 999px; font-family: monospace; flex-shrink: 0; }
+
+    /* Copy-button code block styling (matches pandas article) */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .copy-btn.copied {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body class="dark-mode">
@@ -230,7 +282,14 @@
       </div>
 
       <h2>The Algorithm — Pseudocode</h2>
-      <pre><code class="language-plaintext">function Dijkstra(graph, source):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">pseudocode.txt — Dijkstra's Algorithm</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-plaintext">function Dijkstra(graph, source):
     dist[source] = 0
     dist[all other nodes] = ∞
     priority_queue = [(0, source)]
@@ -249,9 +308,17 @@
                 push (new_dist, v) into priority_queue
 
     return dist</code></pre>
+      </div>
 
       <h2>Python Implementation</h2>
-      <pre><code class="language-python">import heapq
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">dijkstra.py — Full Implementation</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-python">import heapq
 
 def dijkstra(graph, source):
     dist = {node: float('inf') for node in graph}
@@ -291,15 +358,24 @@ result = dijkstra(graph, 'A')
 print("Shortest distances from A:")
 for node, distance in sorted(result.items()):
     print(f"  A → {node} : {distance}")</code></pre>
+      </div>
 
       <h3>Output</h3>
-      <pre><code class="language-plaintext">Shortest distances from A:
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">Output</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-3" class="language-plaintext">Shortest distances from A:
   A → A : 0
   A → B : 3
   A → C : 2
   A → D : 8
   A → E : 10
   A → F : 13</code></pre>
+      </div>
 
       <h2>Time & Space Complexity</h2>
       <div class="tbl-wrap">
@@ -456,6 +532,20 @@ for node, distance in sorted(result.items()):
   </footer>
 
   <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

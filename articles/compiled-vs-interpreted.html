@@ -118,6 +118,58 @@
     @media (max-width: 600px) {
       .myth-grid { grid-template-columns: 1fr; }
     }
+
+    /* Copy-button code block styling (matches pandas article) */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .copy-btn.copied {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body class="dark-mode">
@@ -192,7 +244,14 @@
         <div class="pipeline-step">CPU runs it directly</div>
       </div>
 
-      <pre><code class="language-c">// hello.c
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">hello.c</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-1" class="language-c">// hello.c
 #include &lt;stdio.h&gt;
 
 int main() {
@@ -202,6 +261,7 @@ int main() {
 
 // Compile:  gcc hello.c -o hello
 // Run:      ./hello</code></pre>
+      </div>
 
       <p>
         When you run <code>gcc hello.c -o hello</code>, the compiler reads your whole file, checks for errors, optimizes the logic, and produces a binary. That binary runs at full CPU speed — nothing sitting in between translating at runtime.
@@ -242,10 +302,18 @@ int main() {
         <div class="pipeline-step">Executed immediately</div>
       </div>
 
-      <pre><code class="language-python"># hello.py
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">hello.py</span>
+          <button class="copy-btn" onclick="copyCode(this)">
+            <i class="fas fa-copy"></i> Copy
+          </button>
+        </div>
+        <pre><code id="code-2" class="language-python"># hello.py
 print("Hello, World!")
 
 # Run it:  python hello.py</code></pre>
+      </div>
 
       <p>
         When you run <code>python hello.py</code>, Python reads your file, processes each statement, and executes it. There's no <code>.exe</code> produced — because the interpreter handles everything at runtime.
@@ -475,6 +543,20 @@ print("Hello, World!")
   </footer>
 
   <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>
