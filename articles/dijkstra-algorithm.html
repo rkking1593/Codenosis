@@ -7,21 +7,70 @@
   <meta name="description" content="Learn Dijkstra's shortest path algorithm with step-by-step example, graph visualization, and Python code. Perfect for BCA, DSA, and competitive programming." />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/articles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-24SHHE3YCP');
   </script>
+
+  <style>
+    /* ── extras not in articles.css ── */
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1.2rem;
+    }
+    .tag-badge {
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      background: rgba(99,102,241,.15);
+      color: var(--accent);
+      border: 1px solid rgba(99,102,241,.3);
+    }
+    /* graph */
+    .graph-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1rem 1rem;
+      margin: 2rem 0;
+      overflow-x: auto;
+    }
+    .graph-box svg { width: 100%; max-width: 680px; height: auto; display: block; margin: 0 auto; }
+    .graph-caption { text-align: center; font-size: .8rem; color: var(--text-secondary); margin-top: .75rem; }
+    /* tables */
+    .tbl-wrap { overflow-x: auto; margin: 1rem 0 1.8rem; border-radius: 10px; border: 1px solid var(--border); }
+    .art-table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    .art-table thead { background: var(--bg-secondary); }
+    .art-table th { padding: .75rem 1rem; text-align: left; font-size: .75rem; font-weight: 700;
+                    text-transform: uppercase; letter-spacing: .5px; color: var(--accent); white-space: nowrap; }
+    .art-table td { padding: .65rem 1rem; border-top: 1px solid var(--border);
+                    color: var(--text-secondary); white-space: nowrap; }
+    .art-table tbody tr:hover td { background: rgba(99,102,241,.05); }
+    .src-cell { color: #4ade80 !important; font-weight: 700; }
+    /* result badges */
+    .path-list { list-style: none; margin: 1rem 0 1.5rem; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+    .path-list li { display: flex; align-items: center; gap: .75rem;
+                    background: var(--bg-card); border: 1px solid var(--border);
+                    border-radius: 8px; padding: .65rem 1rem; font-size: .9rem; }
+    .node-pill { background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700;
+                 padding: .2rem .7rem; border-radius: 999px; font-family: monospace; flex-shrink: 0; }
+    /* footer tags */
+    .tag-row { display: flex; flex-wrap: wrap; gap: .5rem;
+               border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 1rem; }
+  </style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR (from style.css) ===== -->
+  <!-- NAVBAR (from style.css) -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">Codenosis</a>
@@ -31,18 +80,28 @@
         <li><a href="../about.html">About</a></li>
         <li><a href="../contact.html">Contact</a></li>
       </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </nav>
 
   <!-- ===== ARTICLE HERO ===== -->
-  <!-- Uses: .article-hero, .article-container, .article-title, .article-subtitle, .article-author, .author-avatar, .author-name, .author-tag -->
   <header class="article-hero">
     <div class="article-container">
+
+      <div class="article-tags">
+        <span class="tag-badge">Algorithms</span>
+        <span class="tag-badge">DSA</span>
+        <span class="tag-badge">Graph Theory</span>
+      </div>
+
       <h1 class="article-title">Dijkstra's Algorithm — Shortest Path, Explained Simply</h1>
+
       <p class="article-subtitle">
         From weighted graphs to GPS navigation — understand how Dijkstra finds the cheapest path with a step-by-step walkthrough, full graph example, and clean Python code.
       </p>
+
       <div class="article-author">
         <div class="author-avatar">Y</div>
         <div>
@@ -50,27 +109,27 @@
           <div class="author-tag">June 22, 2025 &nbsp;·&nbsp; 10 min read</div>
         </div>
       </div>
+
     </div>
   </header>
 
   <!-- ===== ARTICLE BODY ===== -->
-  <!-- Uses: .article-body, .article-container, .article-intro, .article-challenge, .article-cta-text, .article-image -->
   <main class="article-body">
     <div class="article-container">
 
-      <!-- Intro pull-quote -->
+      <!-- INTRO -->
       <p class="article-intro">
-        Imagine you're Google Maps. A user drops a pin from Delhi to Mumbai and hits "Get Directions." Behind the scenes, one of the most elegant algorithms in computer science quietly runs — evaluating hundreds of roads, intersections, and traffic weights — to hand back the fastest route in milliseconds. That algorithm is <strong>Dijkstra's Shortest Path Algorithm</strong>.
+        Imagine you're Google Maps. A user drops a pin from Delhi to Mumbai and hits "Get Directions." Behind the scenes, one of the most elegant algorithms in computer science quietly runs — evaluating hundreds of roads, intersections, and traffic weights — to hand back the fastest route in milliseconds.
       </p>
 
       <p>
-        Published by Dutch computer scientist Edsger W. Dijkstra in 1959, it's a staple of every DSA course, every competitive programming contest, and every real-world routing system. Today we'll break it down from scratch — no jargon overload, just clean logic and a working example.
+        That algorithm is <strong>Dijkstra's Shortest Path Algorithm</strong>, published by Dutch computer scientist Edsger W. Dijkstra in 1959. It's a staple of every DSA course, every competitive programming contest, and every real-world routing system. Today we break it down from scratch — no jargon overload, just clean logic and a working example.
       </p>
 
-      <!-- What is it -->
+      <!-- WHAT IS IT -->
       <h2>What is Dijkstra's Algorithm?</h2>
       <p>
-        Dijkstra's algorithm finds the <strong>shortest (minimum-weight) path</strong> from a single source node to all other nodes in a weighted graph. The key constraint: <em>all edge weights must be non-negative</em>. It does not work correctly with negative weights (use Bellman-Ford for those).
+        Dijkstra's algorithm finds the <strong>shortest (minimum-weight) path</strong> from a single source node to all other nodes in a weighted graph. The key constraint: <em>all edge weights must be non-negative</em>. It does not work correctly with negative weights — use Bellman-Ford for those cases.
       </p>
 
       <div class="article-challenge">
@@ -78,159 +137,130 @@
         <p><strong>Core Idea:</strong> Always expand the unvisited node with the smallest known distance from the source. Update its neighbors if a shorter path is found through it.</p>
       </div>
 
-      <!-- Real-world use cases -->
+      <!-- USE CASES -->
       <h2>Where is it Used?</h2>
       <ul>
-        <li>🗺️ <strong>GPS & Maps</strong> — Google Maps, Apple Maps, and OpenStreetMap all use Dijkstra variants.</li>
-        <li>🌐 <strong>Network Routing</strong> — OSPF protocol (internet routers) uses Dijkstra to find shortest data paths.</li>
-        <li>✈️ <strong>Flight Booking</strong> — Cheapest flight route finding between airports.</li>
-        <li>🎮 <strong>Game AI</strong> — Pathfinding for NPCs in games like Age of Empires.</li>
-        <li>📦 <strong>Logistics</strong> — Delivery route optimization.</li>
+        <li>🗺️ <strong>GPS & Maps</strong> — Google Maps, Apple Maps, and OpenStreetMap all rely on Dijkstra variants</li>
+        <li>🌐 <strong>Network Routing</strong> — The OSPF protocol used by internet routers runs Dijkstra to find shortest data paths</li>
+        <li>✈️ <strong>Flight Booking</strong> — Cheapest flight route search between airports</li>
+        <li>🎮 <strong>Game AI</strong> — NPC pathfinding in games like Age of Empires</li>
+        <li>📦 <strong>Logistics</strong> — Delivery route optimisation</li>
       </ul>
 
-      <!-- The Graph Example -->
+      <!-- GRAPH EXAMPLE -->
       <h2>The Graph We'll Use</h2>
       <p>
-        Let's define a weighted undirected graph with 6 nodes: <strong>A, B, C, D, E, F</strong>. We'll find the shortest path from <strong>node A</strong> to every other node.
+        Let's define a weighted undirected graph with 6 nodes: <strong>A, B, C, D, E, F</strong>.
+        We'll find the shortest path from <strong>node A</strong> to every other node.
       </p>
 
-      <!-- SVG Graph — inline, no extra wrapper class needed -->
-      <div class="article-image">
-        <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:#0f0f1a;" aria-label="Weighted graph with nodes A through F">
+      <div class="graph-box">
+        <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" aria-label="Weighted undirected graph with nodes A through F">
+          <!-- edges -->
+          <line x1="110" y1="190" x2="265" y2="95"  stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="110" y1="190" x2="265" y2="285" stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="265" y1="95"  x2="265" y2="285" stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="265" y1="95"  x2="420" y2="95"  stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="265" y1="285" x2="420" y2="95"  stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="265" y1="285" x2="420" y2="285" stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="420" y1="95"  x2="420" y2="285" stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="420" y1="95"  x2="570" y2="190" stroke="#6366f1" stroke-width="2.5"/>
+          <line x1="420" y1="285" x2="570" y2="190" stroke="#6366f1" stroke-width="2.5"/>
+          <!-- weight labels -->
+          <text x="178" y="130" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">4</text>
+          <text x="178" y="253" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">2</text>
+          <text x="252" y="195" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">1</text>
+          <text x="340" y="82"  fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">5</text>
+          <text x="355" y="205" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">8</text>
+          <text x="340" y="302" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">10</text>
+          <text x="433" y="195" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">2</text>
+          <text x="502" y="130" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">6</text>
+          <text x="502" y="253" fill="#cbd5e1" font-size="13" font-family="monospace" text-anchor="middle">3</text>
+          <!-- nodes -->
+          <circle cx="110" cy="190" r="26" fill="#6366f1" stroke="#fff" stroke-width="2"/>
+          <text x="110" y="196" fill="#fff" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">A</text>
+          <text x="110" y="228" fill="#a5b4fc" font-size="10" font-family="monospace" text-anchor="middle">source</text>
 
-          <!-- Edges -->
-          <line x1="120" y1="210" x2="280" y2="110" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="120" y1="210" x2="280" y2="310" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="110" x2="280" y2="310" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="110" x2="440" y2="110" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="310" x2="440" y2="110" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="280" y1="310" x2="440" y2="310" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="440" y1="110" x2="440" y2="310" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="440" y1="110" x2="600" y2="210" stroke="#6c63ff" stroke-width="2.5"/>
-          <line x1="440" y1="310" x2="600" y2="210" stroke="#6c63ff" stroke-width="2.5"/>
+          <circle cx="265" cy="95"  r="26" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+          <text x="265" y="101" fill="#c7d2fe" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">B</text>
 
-          <!-- Edge weight labels -->
-          <text x="192" y="148" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">4</text>
-          <text x="190" y="275" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">2</text>
-          <text x="267" y="215" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">1</text>
-          <text x="358" y="98" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">5</text>
-          <text x="372" y="225" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">8</text>
-          <text x="358" y="328" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">10</text>
-          <text x="453" y="215" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">2</text>
-          <text x="528" y="148" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">6</text>
-          <text x="528" y="278" fill="#e2e8f0" font-size="13" font-family="monospace" text-anchor="middle">3</text>
+          <circle cx="265" cy="285" r="26" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+          <text x="265" y="291" fill="#c7d2fe" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">C</text>
 
-          <!-- Nodes -->
-          <circle cx="120" cy="210" r="28" fill="#6c63ff" stroke="#fff" stroke-width="2"/>
-          <text x="120" y="216" fill="#fff" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">A</text>
-          <text x="120" y="255" fill="#a78bfa" font-size="11" font-family="monospace" text-anchor="middle">source</text>
+          <circle cx="420" cy="95"  r="26" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+          <text x="420" y="101" fill="#c7d2fe" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">D</text>
 
-          <circle cx="280" cy="110" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="280" y="116" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">B</text>
+          <circle cx="420" cy="285" r="26" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+          <text x="420" y="291" fill="#c7d2fe" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">E</text>
 
-          <circle cx="280" cy="310" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="280" y="316" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">C</text>
-
-          <circle cx="440" cy="110" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="440" y="116" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">D</text>
-
-          <circle cx="440" cy="310" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="440" y="316" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">E</text>
-
-          <circle cx="600" cy="210" r="28" fill="#1e1e2e" stroke="#6c63ff" stroke-width="2"/>
-          <text x="600" y="216" fill="#c9c9f1" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">F</text>
+          <circle cx="570" cy="190" r="26" fill="#1e1b4b" stroke="#6366f1" stroke-width="2"/>
+          <text x="570" y="196" fill="#c7d2fe" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">F</text>
         </svg>
+        <p class="graph-caption">Fig 1. Weighted undirected graph — Source node: A</p>
       </div>
 
-      <h2>Edge List</h2>
-      <ul>
-        <li><strong>A — B :</strong> weight 4</li>
-        <li><strong>A — C :</strong> weight 2</li>
-        <li><strong>B — C :</strong> weight 1</li>
-        <li><strong>B — D :</strong> weight 5</li>
-        <li><strong>C — D :</strong> weight 8</li>
-        <li><strong>C — E :</strong> weight 10</li>
-        <li><strong>D — E :</strong> weight 2</li>
-        <li><strong>D — F :</strong> weight 6</li>
-        <li><strong>E — F :</strong> weight 3</li>
-      </ul>
-
-      <!-- Step-by-step -->
-      <h2>Step-by-Step Walkthrough</h2>
-      <p>
-        We initialize all distances to <code>∞</code> except the source node A which is <code>0</code>. A <strong>priority queue (min-heap)</strong> always gives us the node with the smallest tentative distance next.
-      </p>
-
-      <div class="article-image" style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;font-family:monospace;">
-          <thead>
-            <tr style="background:#1a1a2e;">
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Step</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Node</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">dist[A]</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">dist[B]</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">dist[C]</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">dist[D]</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">dist[E]</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">dist[F]</th>
-            </tr>
-          </thead>
+      <h3>Edge List</h3>
+      <div class="tbl-wrap">
+        <table class="art-table">
+          <thead><tr><th>Edge</th><th>Weight</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid #2a2a4a;">
-              <td style="padding:10px 14px;color:#e2e8f0;">Init</td><td style="padding:10px 14px;color:#e2e8f0;">—</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#94a3b8;">∞</td><td style="padding:10px 14px;color:#94a3b8;">∞</td><td style="padding:10px 14px;color:#94a3b8;">∞</td><td style="padding:10px 14px;color:#94a3b8;">∞</td><td style="padding:10px 14px;color:#94a3b8;">∞</td>
-            </tr>
-            <tr style="background:#17172e;border-bottom:1px solid #2a2a4a;">
-              <td style="padding:10px 14px;color:#e2e8f0;">1</td><td style="padding:10px 14px;color:#fff;font-weight:700;">A</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#e2e8f0;">4</td><td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#94a3b8;">∞</td><td style="padding:10px 14px;color:#94a3b8;">∞</td><td style="padding:10px 14px;color:#94a3b8;">∞</td>
-            </tr>
-            <tr style="border-bottom:1px solid #2a2a4a;">
-              <td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#fff;font-weight:700;">C</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#22d3ee;">3</td><td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#e2e8f0;">10</td><td style="padding:10px 14px;color:#e2e8f0;">12</td><td style="padding:10px 14px;color:#94a3b8;">∞</td>
-            </tr>
-            <tr style="background:#17172e;border-bottom:1px solid #2a2a4a;">
-              <td style="padding:10px 14px;color:#e2e8f0;">3</td><td style="padding:10px 14px;color:#fff;font-weight:700;">B</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#e2e8f0;">3</td><td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#22d3ee;">8</td><td style="padding:10px 14px;color:#e2e8f0;">12</td><td style="padding:10px 14px;color:#94a3b8;">∞</td>
-            </tr>
-            <tr style="border-bottom:1px solid #2a2a4a;">
-              <td style="padding:10px 14px;color:#e2e8f0;">4</td><td style="padding:10px 14px;color:#fff;font-weight:700;">D</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#e2e8f0;">3</td><td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#e2e8f0;">8</td><td style="padding:10px 14px;color:#22d3ee;">10</td><td style="padding:10px 14px;color:#e2e8f0;">14</td>
-            </tr>
-            <tr style="background:#17172e;border-bottom:1px solid #2a2a4a;">
-              <td style="padding:10px 14px;color:#e2e8f0;">5</td><td style="padding:10px 14px;color:#fff;font-weight:700;">E</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#e2e8f0;">3</td><td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#e2e8f0;">8</td><td style="padding:10px 14px;color:#e2e8f0;">10</td><td style="padding:10px 14px;color:#22d3ee;">13</td>
-            </tr>
-            <tr>
-              <td style="padding:10px 14px;color:#e2e8f0;">6</td><td style="padding:10px 14px;color:#fff;font-weight:700;">F</td>
-              <td style="padding:10px 14px;color:#4ade80;font-weight:700;">0</td>
-              <td style="padding:10px 14px;color:#e2e8f0;">3</td><td style="padding:10px 14px;color:#e2e8f0;">2</td><td style="padding:10px 14px;color:#e2e8f0;">8</td><td style="padding:10px 14px;color:#e2e8f0;">10</td><td style="padding:10px 14px;color:#e2e8f0;">13</td>
-            </tr>
+            <tr><td>A — B</td><td>4</td></tr>
+            <tr><td>A — C</td><td>2</td></tr>
+            <tr><td>B — C</td><td>1</td></tr>
+            <tr><td>B — D</td><td>5</td></tr>
+            <tr><td>C — D</td><td>8</td></tr>
+            <tr><td>C — E</td><td>10</td></tr>
+            <tr><td>D — E</td><td>2</td></tr>
+            <tr><td>D — F</td><td>6</td></tr>
+            <tr><td>E — F</td><td>3</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h2>Final Shortest Distances from A</h2>
-      <ul>
-        <li><strong>A → A :</strong> 0</li>
-        <li><strong>A → B :</strong> 3 &nbsp;<em>(A → C → B)</em></li>
-        <li><strong>A → C :</strong> 2 &nbsp;<em>(A → C)</em></li>
-        <li><strong>A → D :</strong> 8 &nbsp;<em>(A → C → B → D)</em></li>
-        <li><strong>A → E :</strong> 10 &nbsp;<em>(A → C → B → D → E)</em></li>
-        <li><strong>A → F :</strong> 13 &nbsp;<em>(A → C → B → D → E → F)</em></li>
+      <!-- STEP BY STEP -->
+      <h2>Step-by-Step Walkthrough</h2>
+      <p>
+        We initialise all distances to <code>∞</code> except source A which starts at <code>0</code>.
+        A <strong>min-heap priority queue</strong> always picks the node with the smallest tentative distance next.
+      </p>
+
+      <div class="tbl-wrap">
+        <table class="art-table">
+          <thead>
+            <tr>
+              <th>Step</th><th>Current</th><th>Visited</th>
+              <th>dist[A]</th><th>dist[B]</th><th>dist[C]</th>
+              <th>dist[D]</th><th>dist[E]</th><th>dist[F]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Init</td><td>—</td><td>{ }</td>        <td class="src-cell">0</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td></tr>
+            <tr><td>1</td><td><strong>A</strong></td><td>{A}</td>       <td class="src-cell">0</td><td>4</td><td>2</td><td>∞</td><td>∞</td><td>∞</td></tr>
+            <tr><td>2</td><td><strong>C</strong></td><td>{A,C}</td>     <td class="src-cell">0</td><td>3</td><td>2</td><td>10</td><td>12</td><td>∞</td></tr>
+            <tr><td>3</td><td><strong>B</strong></td><td>{A,C,B}</td>   <td class="src-cell">0</td><td>3</td><td>2</td><td>8</td><td>12</td><td>∞</td></tr>
+            <tr><td>4</td><td><strong>D</strong></td><td>{A,C,B,D}</td> <td class="src-cell">0</td><td>3</td><td>2</td><td>8</td><td>10</td><td>14</td></tr>
+            <tr><td>5</td><td><strong>E</strong></td><td>{A,C,B,D,E}</td><td class="src-cell">0</td><td>3</td><td>2</td><td>8</td><td>10</td><td>13</td></tr>
+            <tr><td>6</td><td><strong>F</strong></td><td>{A,C,B,D,E,F}</td><td class="src-cell">0</td><td>3</td><td>2</td><td>8</td><td>10</td><td>13</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Final Shortest Distances from A</h3>
+      <ul class="path-list">
+        <li><span class="node-pill">A → A</span> <strong>0</strong></li>
+        <li><span class="node-pill">A → B</span> <strong>3</strong> &nbsp;<em style="color:var(--text-secondary)">(A → C → B)</em></li>
+        <li><span class="node-pill">A → C</span> <strong>2</strong> &nbsp;<em style="color:var(--text-secondary)">(A → C)</em></li>
+        <li><span class="node-pill">A → D</span> <strong>8</strong> &nbsp;<em style="color:var(--text-secondary)">(A → C → B → D)</em></li>
+        <li><span class="node-pill">A → E</span> <strong>10</strong> &nbsp;<em style="color:var(--text-secondary)">(A → C → B → D → E)</em></li>
+        <li><span class="node-pill">A → F</span> <strong>13</strong> &nbsp;<em style="color:var(--text-secondary)">(A → C → B → D → E → F)</em></li>
       </ul>
 
       <div class="article-challenge">
-        <i class="fas fa-star"></i>
-        <p><strong>Key Insight:</strong> A→B via C costs only 3 (2+1), not 4 (direct edge). Dijkstra catches this because it always relaxes edges through the currently cheapest known node first.</p>
+        <i class="fas fa-bolt"></i>
+        <p><strong>Key Insight:</strong> A→B via C costs 3 (2+1), not 4 (direct). Dijkstra catches this because it always relaxes edges through the currently cheapest known node.</p>
       </div>
 
-      <!-- Pseudocode -->
+      <!-- PSEUDOCODE -->
       <h2>The Algorithm — Pseudocode</h2>
       <pre><code class="language-plaintext">function Dijkstra(graph, source):
     dist[source] = 0
@@ -252,7 +282,7 @@
 
     return dist</code></pre>
 
-      <!-- Python Code -->
+      <!-- PYTHON CODE -->
       <h2>Python Implementation</h2>
       <pre><code class="language-python">import heapq
 
@@ -260,7 +290,7 @@ def dijkstra(graph, source):
     dist = {node: float('inf') for node in graph}
     dist[source] = 0
 
-    pq = [(0, source)]  # (distance, node)
+    pq = [(0, source)]   # (distance, node)
     visited = set()
 
     while pq:
@@ -279,7 +309,7 @@ def dijkstra(graph, source):
     return dist
 
 
-# ---- Graph Definition ----
+# ── Graph Definition ──────────────────────────────────
 graph = {
     'A': [('B', 4), ('C', 2)],
     'B': [('A', 4), ('C', 1), ('D', 5)],
@@ -295,7 +325,7 @@ print("Shortest distances from A:")
 for node, distance in sorted(result.items()):
     print(f"  A → {node} : {distance}")</code></pre>
 
-      <h2>Output</h2>
+      <h3>Output</h3>
       <pre><code class="language-plaintext">Shortest distances from A:
   A → A : 0
   A → B : 3
@@ -304,106 +334,98 @@ for node, distance in sorted(result.items()):
   A → E : 10
   A → F : 13</code></pre>
 
-      <!-- Time Complexity -->
+      <!-- COMPLEXITY -->
       <h2>Time & Space Complexity</h2>
-      <div class="article-image" style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;font-family:monospace;">
-          <thead>
-            <tr style="background:#1a1a2e;">
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Implementation</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Time</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Space</th>
-            </tr>
-          </thead>
+      <div class="tbl-wrap">
+        <table class="art-table">
+          <thead><tr><th>Implementation</th><th>Time</th><th>Space</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid #2a2a4a;"><td style="padding:10px 14px;color:#e2e8f0;">Simple array (linear scan)</td><td style="padding:10px 14px;color:#e2e8f0;">O(V²)</td><td style="padding:10px 14px;color:#e2e8f0;">O(V)</td></tr>
-            <tr style="background:#17172e;border-bottom:1px solid #2a2a4a;"><td style="padding:10px 14px;color:#e2e8f0;">Binary min-heap (heapq)</td><td style="padding:10px 14px;color:#4ade80;font-weight:700;">O((V+E) log V)</td><td style="padding:10px 14px;color:#e2e8f0;">O(V+E)</td></tr>
-            <tr><td style="padding:10px 14px;color:#e2e8f0;">Fibonacci heap</td><td style="padding:10px 14px;color:#e2e8f0;">O(E + V log V)</td><td style="padding:10px 14px;color:#e2e8f0;">O(V+E)</td></tr>
+            <tr><td>Simple array (linear scan)</td><td>O(V²)</td><td>O(V)</td></tr>
+            <tr><td>Binary min-heap (heapq)</td><td>O((V + E) log V)</td><td>O(V + E)</td></tr>
+            <tr><td>Fibonacci heap</td><td>O(E + V log V)</td><td>O(V + E)</td></tr>
           </tbody>
         </table>
       </div>
-      <p>For most practical use cases (sparse graphs), the binary heap version — <strong>O((V+E) log V)</strong> — is the standard choice. It's what Python's <code>heapq</code> gives you.</p>
+      <p>
+        For most real-world use cases the <strong>binary heap version — O((V+E) log V)</strong> — is the standard choice. It's exactly what Python's <code>heapq</code> gives you.
+      </p>
 
-      <!-- Limitations -->
+      <!-- LIMITATIONS -->
       <h2>Limitations of Dijkstra</h2>
       <ul>
-        <li>❌ <strong>Negative edges</strong> — Dijkstra breaks. Use Bellman-Ford instead.</li>
-        <li>❌ <strong>Negative cycles</strong> — Undefined behavior. Use Floyd-Warshall.</li>
-        <li>✅ <strong>Works for</strong> — Non-negative weighted graphs, both directed and undirected.</li>
+        <li>❌ <strong>Negative edges</strong> — algorithm breaks. Use Bellman-Ford instead.</li>
+        <li>❌ <strong>Negative cycles</strong> — undefined behaviour. Use Floyd-Warshall.</li>
+        <li>✅ <strong>Works perfectly for</strong> — non-negative weighted graphs, directed and undirected.</li>
       </ul>
 
-      <!-- Comparison -->
-      <h2>Dijkstra vs Other Algorithms</h2>
-      <div class="article-image" style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+      <!-- COMPARISON -->
+      <h2>Dijkstra vs Other Shortest Path Algorithms</h2>
+      <div class="tbl-wrap">
+        <table class="art-table">
           <thead>
-            <tr style="background:#1a1a2e;">
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Algorithm</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Negative Weights?</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Single Source?</th>
-              <th style="padding:10px 14px;text-align:left;color:#a78bfa;border-bottom:1px solid #2a2a4a;">Best For</th>
-            </tr>
+            <tr><th>Algorithm</th><th>Negative Weights?</th><th>Single Source?</th><th>Best For</th></tr>
           </thead>
           <tbody>
-            <tr style="border-bottom:1px solid #2a2a4a;"><td style="padding:10px 14px;color:#e2e8f0;">Dijkstra</td><td style="padding:10px 14px;color:#f87171;">No</td><td style="padding:10px 14px;color:#4ade80;">Yes</td><td style="padding:10px 14px;color:#e2e8f0;">Sparse graphs, GPS routing</td></tr>
-            <tr style="background:#17172e;border-bottom:1px solid #2a2a4a;"><td style="padding:10px 14px;color:#e2e8f0;">Bellman-Ford</td><td style="padding:10px 14px;color:#4ade80;">Yes</td><td style="padding:10px 14px;color:#4ade80;">Yes</td><td style="padding:10px 14px;color:#e2e8f0;">Negative weights</td></tr>
-            <tr style="border-bottom:1px solid #2a2a4a;"><td style="padding:10px 14px;color:#e2e8f0;">Floyd-Warshall</td><td style="padding:10px 14px;color:#4ade80;">Yes</td><td style="padding:10px 14px;color:#f87171;">No (all pairs)</td><td style="padding:10px 14px;color:#e2e8f0;">Dense graphs, all-pairs</td></tr>
-            <tr style="background:#17172e;"><td style="padding:10px 14px;color:#e2e8f0;">A*</td><td style="padding:10px 14px;color:#f87171;">No</td><td style="padding:10px 14px;color:#4ade80;">Yes (target)</td><td style="padding:10px 14px;color:#e2e8f0;">Game pathfinding</td></tr>
+            <tr><td>Dijkstra</td><td>No</td><td>Yes</td><td>Sparse graphs, GPS routing</td></tr>
+            <tr><td>Bellman-Ford</td><td>Yes</td><td>Yes</td><td>Graphs with negative weights</td></tr>
+            <tr><td>Floyd-Warshall</td><td>Yes</td><td>No (all pairs)</td><td>Dense graphs, all-pairs shortest path</td></tr>
+            <tr><td>A*</td><td>No</td><td>Yes (single target)</td><td>Game pathfinding with heuristic</td></tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Summary -->
+      <!-- SUMMARY -->
       <h2>Quick Summary</h2>
       <ul>
-        <li>Dijkstra finds the shortest path from a <strong>single source</strong> to all nodes.</li>
-        <li>Uses a <strong>min-heap priority queue</strong> for O((V+E) log V) efficiency.</li>
-        <li>Requires <strong>non-negative edge weights</strong> — no exceptions.</li>
-        <li>Used in GPS navigation, OSPF networking, game AI, and logistics.</li>
+        <li>Finds shortest path from a <strong>single source</strong> to all nodes</li>
+        <li>Uses a <strong>min-heap priority queue</strong> for efficiency</li>
+        <li>Requires <strong>non-negative edge weights</strong></li>
+        <li>Time complexity: <strong>O((V+E) log V)</strong> with a binary heap</li>
+        <li>Used in GPS, network routing (OSPF), game AI, and logistics</li>
       </ul>
 
       <!-- CTA -->
       <p class="article-cta-text">
-        Found this helpful? Share it with your study group and bookmark <a href="../index.html">Codenosis</a> for more DSA breakdowns, Python tutorials, and real-world coding guides — new articles every week.
+        Found this helpful? Share it with your study group and bookmark
+        <a href="../index.html">Codenosis</a> for more DSA breakdowns, Python tutorials, and real-world coding guides.
       </p>
+
+      <!-- FOOTER TAGS -->
+      <div class="tag-row">
+        <span class="tag-badge">Dijkstra</span>
+        <span class="tag-badge">Graph Algorithm</span>
+        <span class="tag-badge">DSA</span>
+        <span class="tag-badge">Python</span>
+        <span class="tag-badge">BCA</span>
+      </div>
 
     </div>
   </main>
 
   <!-- ===== RELATED ARTICLES ===== -->
-  <!-- Uses: .related, .related h3, .related-grid, .related-card, .related-icon, .related-card p -->
   <section class="related">
     <div class="article-container">
       <h3>Related Articles</h3>
       <div class="related-grid">
 
-        <a href="bfs-dfs-explained.html" class="related-card">
-          <div class="related-icon">
-            <i class="fas fa-sitemap"></i>
-          </div>
+        <a href="compiled-vs-interpreted.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-microchip"></i></div>
           <div>
-            <p><strong>BFS vs DFS — Which Traversal to Use?</strong></p>
-            <p>Breadth-first vs depth-first — understand the difference with visual examples.</p>
+            <p>Compiled vs Interpreted Languages — What Happens When Your Code Runs</p>
           </div>
         </a>
 
         <a href="pandas-complete-guide.html" class="related-card">
-          <div class="related-icon">
-            <i class="fas fa-table"></i>
-          </div>
+          <div class="related-icon"><i class="fas fa-table"></i></div>
           <div>
-            <p><strong>Pandas Complete Guide for Beginners</strong></p>
-            <p>Master DataFrames, groupby, merging, and data cleaning with real datasets.</p>
+            <p>Pandas Complete Guide for Beginners</p>
           </div>
         </a>
 
         <a href="numpy-for-beginners.html" class="related-card">
-          <div class="related-icon">
-            <i class="fas fa-calculator"></i>
-          </div>
+          <div class="related-icon"><i class="fas fa-calculator"></i></div>
           <div>
-            <p><strong>NumPy Explained from Scratch</strong></p>
-            <p>Arrays, broadcasting, and vectorized ops — NumPy made simple for ML beginners.</p>
+            <p>NumPy Explained from Scratch</p>
           </div>
         </a>
 
@@ -411,29 +433,11 @@ for node, distance in sorted(result.items()):
     </div>
   </section>
 
-  <!-- ===== FOOTER (from style.css) ===== -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <span class="footer-logo">Codenosis</span>
-        <p>Learn. Code. Build.</p>
-      </div>
-      <div class="footer-links">
-        <a href="../about.html">About</a>
-        <a href="../contact.html">Contact</a>
-        <a href="../privacy.html">Privacy Policy</a>
-      </div>
-      <div class="footer-credits">
-        <p>Built by Sarthak &amp; Yogesh · &copy; 2025 Codenosis</p>
-      </div>
-    </div>
-  </footer>
-
   <script>hljs.highlightAll();</script>
   <script>
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
-    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+    const btn = document.getElementById('hamburger');
+    const nav = document.querySelector('.nav-links');
+    if (btn) btn.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
 
 </body>
