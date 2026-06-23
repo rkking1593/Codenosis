@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Getting 'Cannot read properties of null' in JavaScript? Here's exactly what it means, why it happens, and three different ways to fix it for good.">
+  <title>How to Fix "Cannot Read Properties of Null" in JavaScript — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <style>
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      font-family: 'Courier New', monospace;
+    }
+    .code-block code { color: #cdd6f4; }
+    .keyword { color: #cba6f7; }
+    .string { color: #a6e3a1; }
+    .comment { color: #6c7086; font-style: italic; }
+    .function { color: #89dceb; }
+    .tag { color: #89b4fa; }
+    .attr { color: #fab387; }
+    .val { color: #a6e3a1; }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-fundamentals">Fundamentals</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 6 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 23, 2026</span>
+      </div>
+      <h1 class="article-title">How to Fix "Cannot Read Properties of Null" in JavaScript</h1>
+      <p class="article-subtitle">This error has stopped more beginners in their tracks than almost any other — and the fix is usually one line away.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        You open the console. Red text. "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')". Your button doesn't work. Your code looks fine. You stare at it for twenty minutes. This error has stopped more beginners — including me — in their tracks than almost any other, and the fix is usually one line away.
+      </p>
+
+      <h2>What This Error Actually Means</h2>
+      <p>
+        When JavaScript says it "cannot read properties of null," it means your code tried to access a property, a class, or an event listener on an HTML element that doesn't actually exist on the page. In programming, "null" specifically means absolute nothingness.
+      </p>
+      <p>
+        Your code asked the browser to grab a specific HTML element, the browser came back empty-handed and returned null, and then your code tried to do something with that nothingness. This is just JavaScript's blunt way of saying: "I looked everywhere for that element you mentioned, but it wasn't there."
+      </p>
+      <p>
+        The best part about this error is that it always points you directly to the exact line number and the specific property where it failed. Instead of panicking, look at that line number — it is the ultimate clue telling you exactly where to start.
+      </p>
+
+      <h2>The #1 Cause — Script Running Before HTML Loads</h2>
+      <p>
+        This one mistake is responsible for probably 80% of this exact error, and it trips up almost every single beginner.
+      </p>
+      <p>
+        Think of the browser as a person reading a book — it reads your HTML file from top to bottom, line by line. If you put your <code>&lt;script&gt;</code> tag inside the <code>&lt;head&gt;</code>, the browser runs your JavaScript before it even reads the <code>&lt;body&gt;</code> where your actual content lives. Your JavaScript looks for your button, but that element hasn't been created yet. So JavaScript hands you null and throws that red error.
+      </p>
+      <p>The fix — move your script tag to the very bottom of your HTML, right before the closing <code>&lt;/body&gt;</code> tag:</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">index.html — Correct script placement</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code><span class="comment">&lt;!-- ❌ Wrong — script in head runs before HTML exists --&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="comment">&lt;!-- ✅ Correct — script at bottom runs after HTML is fully loaded --&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="comment">&lt;!-- all your HTML here --&gt;</span>
+  <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+
+<span class="comment">&lt;!-- ✅ Alternative — add defer if script must stay in head --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span> <span class="attr">defer</span><span class="tag">&gt;&lt;/script&gt;</span></code></pre>
+      </div>
+
+      <h2>The #2 Cause — Misspelled IDs or Classes</h2>
+      <p>
+        Another super common trap is a simple typo between your HTML and your JavaScript. A single wrong letter will completely break the connection between your files. JavaScript is also incredibly strict about capital letters — <code>submitBtn</code> and <code>submitbtn</code> might as well be from two different planets.
+      </p>
+      <p>
+        When JavaScript can't find the exact match, it hands you null and your code crashes. The fix — right-click your page in the browser, hit Inspect, and copy the exact ID or class name directly from the real HTML element.
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — ID mismatch example</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code><span class="comment">// ❌ Wrong — typo in ID name (capital B vs lowercase b)</span>
+<span class="keyword">const</span> btn = document.<span class="function">getElementById</span>(<span class="string">'submitBtn'</span>);
+<span class="comment">// HTML has id="submitbtn" — JavaScript gets null</span>
+
+<span class="comment">// ✅ Correct — exact match, copied from DevTools</span>
+<span class="keyword">const</span> btn = document.<span class="function">getElementById</span>(<span class="string">'submitbtn'</span>);</code></pre>
+      </div>
+
+      <h2>The #3 Cause — Element Doesn't Exist Yet</h2>
+      <p>
+        This one is sneaky, but it happens all the time in real projects. Sometimes the HTML element you're looking for isn't on the page when it first loads — it gets created later, like after a fetch request finishes, after a user clicks a button, or after a timer runs out.
+      </p>
+      <p>
+        If your JavaScript runs immediately and searches for that element the second the page loads, it comes back empty. The fix — make sure your JavaScript only tries to access that element after the function that creates it has fully finished. Or look into event delegation — attaching the listener to a parent element that already exists.
+      </p>
+
+      <h2>The Safe Way to Prevent This Forever</h2>
+      <p>
+        Instead of constantly fighting this error, build one simple habit — always check if JavaScript actually found the element before trying to use it.
+      </p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — Safe vs unsafe</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code><span class="comment">// ❌ Unsafe — will crash if button is missing</span>
+<span class="keyword">const</span> submitBtn = document.<span class="function">querySelector</span>(<span class="string">'#submit-btn'</span>);
+submitBtn.<span class="function">addEventListener</span>(<span class="string">'click'</span>, doSomething);
+
+<span class="comment">// ✅ Safe — if-check protects your code</span>
+<span class="keyword">const</span> submitBtn = document.<span class="function">querySelector</span>(<span class="string">'#submit-btn'</span>);
+<span class="keyword">if</span> (submitBtn) {
+  submitBtn.<span class="function">addEventListener</span>(<span class="string">'click'</span>, doSomething);
+}
+
+<span class="comment">// ✨ Modern shortcut — optional chaining</span>
+<span class="keyword">const</span> submitBtn = document.<span class="function">querySelector</span>(<span class="string">'#submit-btn'</span>);
+submitBtn?.<span class="function">addEventListener</span>(<span class="string">'click'</span>, doSomething);</code></pre>
+      </div>
+
+      <p>
+        That tiny <code>?.</code> is called optional chaining. It quietly asks "is this element real?" — if yes, it adds the listener; if no, it moves on completely unharmed. Using this will save you hours of stressful debugging.
+      </p>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Open any project where you've seen this error before. Find the exact line it pointed to. Check three things in order — is your script tag at the bottom of the body, does the ID or class match exactly, and does the element exist at the moment your code runs. Fix it using what you just learned, and you'll never lose twenty minutes to this error again.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- Comment Prompt + Disqus -->
+  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/cannot-read-properties-of-null.html";
+      this.page.identifier = "cannot-read-properties-of-null";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="var-let-const.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>Var, Let, and Const: Stop Using the Wrong One</p>
+          </div>
+        </a>
+
+        <a href="build-first-website.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-laptop-code"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
+            <p>How to Build Your First Website From Scratch</p>
+          </div>
+        </a>
+
+        <a href="git-vs-github.html" class="related-card">
+          <div class="related-icon"><i class="fab fa-github"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>Git vs GitHub: Stop Confusing These Two Completely Different Things</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">View All Articles <i class="fas fa-arrow-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+            <li><a href="../playground/playground.html">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
