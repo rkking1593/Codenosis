@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,9 +21,7 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
-
   <style>
-    /* ── Article-only styles not in article.css ── */
     .pipeline-visual {
       display: flex;
       align-items: center;
@@ -85,9 +82,9 @@
       font-weight: 600;
       border: 1.5px solid currentColor;
     }
-    .pill-compiled   { color: #6366f1; }
-    .pill-interpreted{ color: #10b981; }
-    .pill-hybrid     { color: #f59e0b; }
+    .pill-compiled    { color: #6366f1; }
+    .pill-interpreted { color: #10b981; }
+    .pill-hybrid      { color: #f59e0b; }
     .hybrid-box {
       background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.04));
       border: 1px solid rgba(99,102,241,0.3);
@@ -100,9 +97,7 @@
       margin-top: 0;
       font-size: 1rem;
     }
-    .hybrid-box p {
-      margin-bottom: 0.8rem;
-    }
+    .hybrid-box p { margin-bottom: 0.8rem; }
     .myth-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -115,9 +110,9 @@
       font-size: 0.9rem;
       line-height: 1.6;
     }
-    .myth-box.myth     { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.25); }
-    .myth-box.reality  { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); }
-    .myth-box strong   { display: block; margin-bottom: 0.35rem; }
+    .myth-box.myth    { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.25); }
+    .myth-box.reality { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); }
+    .myth-box strong  { display: block; margin-bottom: 0.35rem; }
     .myth-box.myth strong    { color: #ef4444; }
     .myth-box.reality strong { color: #10b981; }
     @media (max-width: 600px) {
@@ -150,6 +145,11 @@
   <!-- HERO -->
   <section class="article-hero">
     <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-fundamentals">Fundamentals</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 8 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 22, 2026</span>
+      </div>
       <h1 class="article-title">Compiled vs Interpreted Languages — What Happens When Your Code Runs</h1>
       <p class="article-subtitle">
         You write code. You press run. But what actually happens in between? From source file to machine instruction — explained clearly.
@@ -157,16 +157,15 @@
       <div class="article-author">
         <div class="author-avatar">Y</div>
         <div>
-          <span class="author-name">Yogesh</span>
-            <span class="author-tag">Software Developer & Co-Founder of Codenosis</span>
-          <span class="author-tag">June 22, 2026 · 8 min read</span>
+          <p class="author-name">Yogesh</p>
+          <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- BODY -->
-  <div class="article-body">
+  <article class="article-body">
     <div class="article-container">
 
       <p class="article-intro">
@@ -329,7 +328,6 @@ print("Hello, World!")
       </table>
 
       <h2>Common Myths, Busted</h2>
-
       <div class="myth-grid">
         <div class="myth-box myth">
           <strong>Myth: Python is slow because it's interpreted.</strong>
@@ -375,41 +373,58 @@ print("Hello, World!")
       </p>
 
     </div>
-  </div>
+  </article>
 
   <!-- RELATED -->
   <section class="related">
     <div class="article-container">
-      <h3>Related Articles</h3>
+      <h3>Continue Reading</h3>
       <div class="related-grid">
 
         <a href="pandas-for-machine-learning.html" class="related-card">
           <div class="related-icon"><i class="fas fa-table"></i></div>
           <div>
-            <p><strong>Pandas for Machine Learning: Complete Beginner Guide</strong></p>
-            <p>Clean, analyze, and prepare datasets with the most essential Python ML library.</p>
+            <span class="category-badge badge-python">Python</span>
+            <p>Pandas for Machine Learning: Essential Features You Need to Know</p>
           </div>
         </a>
 
         <a href="numpy-for-machine-learning.html" class="related-card">
           <div class="related-icon"><i class="fas fa-table-cells"></i></div>
           <div>
-            <p><strong>NumPy for Machine Learning: Complete Guide</strong></p>
-            <p>Every array operation, indexing trick, and broadcasting rule you need for ML.</p>
+            <span class="category-badge badge-python">Python</span>
+            <p>NumPy for Machine Learning: Complete Guide with Syntax & Examples</p>
           </div>
         </a>
 
         <a href="frontend-backend-fullstack.html" class="related-card">
           <div class="related-icon"><i class="fas fa-sitemap"></i></div>
           <div>
-            <p><strong>Frontend vs Backend vs Full Stack</strong></p>
-            <p>Everyone throws these terms around. Here's what they actually mean.</p>
+            <span class="category-badge badge-fullstack">Full Stack</span>
+            <p>Frontend vs Backend vs Full Stack — What's the Difference?</p>
           </div>
         </a>
 
       </div>
     </div>
   </section>
+
+  <!-- COMMENT PROMPT + DISQUS -->
+  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/compiled-vs-interpreted.html";
+      this.page.identifier = "compiled-vs-interpreted";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -423,7 +438,7 @@ print("Hello, World!")
             <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
             <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/codenosisofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
           </div>
         </div>
@@ -436,6 +451,7 @@ print("Hello, World!")
             <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
             <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
             <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">View All Articles <i class="fas fa-arrow-right"></i></a></li>
           </ul>
         </div>
         <div class="footer-links">
