@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kruskal's Algorithm Explained — With Graph Example | Codenosis</title>
+  <meta name="description" content="A clear, beginner-friendly explanation of Kruskal's Algorithm for finding the Minimum Spanning Tree — with a step-by-step graph walkthrough and Python code." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Kruskal's Algorithm Explained — With Graph Example" />
+  <meta property="og:description" content="A clear, beginner-friendly explanation of Kruskal's Algorithm for finding the Minimum Spanning Tree — with a step-by-step graph walkthrough and Python code." />
+  <meta property="og:site_name" content="Codenosis" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/article.css" />
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="https://codenosis.in/" class="nav-logo">Codenosis</a>
+      <ul class="nav-links">
+        <li><a href="https://codenosis.in/">Home</a></li>
+        <li><a href="https://codenosis.in/#articles">Articles</a></li>
+        <li><a href="https://codenosis.in/#about">About</a></li>
+        <li><a href="https://codenosis.in/#newsletter">Newsletter</a></li>
+        <li><a href="https://codenosis.in/playground/playground">Playground</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="article-tag">DSA</span>
+        <span class="article-read-time">12 min read</span>
+        <span class="article-date">June 23, 2026</span>
+      </div>
+      <h1 class="article-title">Kruskal's Algorithm — Finding the Minimum Spanning Tree</h1>
+      <p class="article-subtitle">A clear, beginner-friendly walkthrough of Kruskal's algorithm — with a real graph example, step-by-step edge selection, and clean Python code.</p>
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div class="author-info">
+          <span class="author-name">Yogesh</span>
+          <span class="author-role">Software Developer &amp; Co-Founder of Codenosis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BODY ===================== -->
+  <main class="article-container">
+    <article class="article-body">
+
+      <p>
+        If you've ever wondered how Google Maps finds the most efficient route to connect multiple places, or how internet routers decide the cheapest network path — you've already touched on the problem Kruskal's Algorithm solves. It's one of the most elegant greedy algorithms in computer science, and once you understand it, graph problems start feeling a lot less intimidating.
+      </p>
+
+      <p>
+        Let's break it down — simply, visually, and completely.
+      </p>
+
+      <!-- ===== SECTION 1 ===== -->
+      <h2>What Problem Does It Solve?</h2>
+
+      <p>
+        Imagine you're a city planner. You have 5 cities and a list of possible roads between them, each road with a construction cost. Your goal: connect all 5 cities using the <strong>minimum total cost</strong>, without creating any loops (because loops waste money — you don't need two paths between the same two cities).
+      </p>
+      <p>
+        What you're trying to build is called a <strong>Minimum Spanning Tree (MST)</strong>.
+      </p>
+
+      <div class="article-callout">
+        <strong>Quick Definition:</strong> A <em>Spanning Tree</em> of a graph connects all vertices with exactly <em>n−1</em> edges and no cycles. A <em>Minimum Spanning Tree</em> does the same — but with the lowest possible total edge weight.
+      </div>
+
+      <p>
+        Kruskal's Algorithm is one of the most popular ways to find this MST. It was published by Joseph Kruskal in 1956 and is a classic example of a <strong>greedy algorithm</strong> — it makes the locally optimal choice at each step, and this guarantees a globally optimal result.
+      </p>
+
+      <!-- ===== SECTION 2 ===== -->
+      <h2>The Core Idea in One Line</h2>
+
+      <blockquote class="article-quote">
+        Sort all edges by weight. Keep picking the smallest one — unless it creates a cycle.
+      </blockquote>
+
+      <p>That's Kruskal's in its purest form. Now let's see exactly how it works.</p>
+
+      <!-- ===== SECTION 3 ===== -->
+      <h2>The Algorithm — Step by Step</h2>
+
+      <ol class="article-list">
+        <li><strong>Sort</strong> all edges of the graph in non-decreasing order of weight.</li>
+        <li><strong>Initialize</strong> a disjoint set (Union-Find) — each vertex starts as its own component.</li>
+        <li><strong>Iterate</strong> through sorted edges. For each edge:
+          <ul>
+            <li>If the two vertices belong to <em>different</em> components → add the edge to the MST and merge the components.</li>
+            <li>If they belong to the <em>same</em> component → skip (adding it would create a cycle).</li>
+          </ul>
+        </li>
+        <li><strong>Stop</strong> when the MST has exactly <em>V−1</em> edges (where V = number of vertices).</li>
+      </ol>
+
+      <!-- ===== SECTION 4 — GRAPH VISUAL ===== -->
+      <h2>Graph Example — Let's Walk Through It</h2>
+
+      <p>
+        Let's take a graph with <strong>5 vertices</strong> (A, B, C, D, E) and <strong>7 edges</strong>. Here's the original weighted graph:
+      </p>
+
+      <!-- Original Graph SVG -->
+      <div class="article-svg-wrap">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Weighted undirected graph with 5 nodes and 7 edges">
+
+          <!-- Edge lines -->
+          <!-- A-B: 2 -->
+          <line x1="100" y1="80" x2="260" y2="80" stroke="#4ade80" stroke-width="2.5" />
+          <!-- A-D: 6 -->
+          <line x1="100" y1="80" x2="100" y2="240" stroke="#4ade80" stroke-width="2.5" />
+          <!-- B-C: 3 -->
+          <line x1="260" y1="80" x2="420" y2="80" stroke="#4ade80" stroke-width="2.5" />
+          <!-- B-D: 8 -->
+          <line x1="260" y1="80" x2="100" y2="240" stroke="#4ade80" stroke-width="2.5" />
+          <!-- B-E: 5 -->
+          <line x1="260" y1="80" x2="260" y2="240" stroke="#4ade80" stroke-width="2.5" />
+          <!-- C-E: 7 -->
+          <line x1="420" y1="80" x2="260" y2="240" stroke="#4ade80" stroke-width="2.5" />
+          <!-- D-E: 9 -->
+          <line x1="100" y1="240" x2="260" y2="240" stroke="#4ade80" stroke-width="2.5" />
+
+          <!-- Edge weight labels -->
+          <text x="176" y="68" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">2</text>
+          <text x="82" y="168" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">6</text>
+          <text x="344" y="68" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">3</text>
+          <text x="168" y="170" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">8</text>
+          <text x="274" y="168" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">5</text>
+          <text x="352" y="178" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">7</text>
+          <text x="180" y="258" fill="#a1a1aa" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">9</text>
+
+          <!-- Nodes -->
+          <circle cx="100" cy="80" r="22" fill="#18181b" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="100" y="86" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">A</text>
+
+          <circle cx="260" cy="80" r="22" fill="#18181b" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="260" y="86" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">B</text>
+
+          <circle cx="420" cy="80" r="22" fill="#18181b" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="420" y="86" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">C</text>
+
+          <circle cx="100" cy="240" r="22" fill="#18181b" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="100" y="246" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">D</text>
+
+          <circle cx="260" cy="240" r="22" fill="#18181b" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="260" y="246" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">E</text>
+
+          <!-- Legend -->
+          <text x="20" y="300" fill="#71717a" font-size="12" font-family="Space Grotesk, sans-serif">Original Graph — 5 vertices, 7 edges</text>
+        </svg>
+      </div>
+
+      <p>The 7 edges with their weights:</p>
+
+      <div class="article-table-wrap">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Edge</th>
+              <th>Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>A – B</td><td>2</td></tr>
+            <tr><td>B – C</td><td>3</td></tr>
+            <tr><td>B – E</td><td>5</td></tr>
+            <tr><td>A – D</td><td>6</td></tr>
+            <tr><td>C – E</td><td>7</td></tr>
+            <tr><td>B – D</td><td>8</td></tr>
+            <tr><td>D – E</td><td>9</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>After sorting by weight: <code>A–B(2) → B–C(3) → B–E(5) → A–D(6) → C–E(7) → B–D(8) → D–E(9)</code></p>
+
+      <!-- ===== STEP-BY-STEP WALKTHROUGH ===== -->
+      <h2>Step-by-Step Walkthrough</h2>
+
+      <!-- Step 1 -->
+      <h3>Step 1 — Pick A–B (weight 2)</h3>
+      <p>A and B are in different components. Add it. No cycle formed.</p>
+      <p><em>MST edges so far:</em> <code>A–B</code> | Total weight: 2</p>
+
+      <div class="article-svg-wrap">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- faded edges -->
+          <line x1="100" y1="80" x2="100" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="260" y1="80" x2="420" y2="80" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="260" y1="80" x2="100" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="260" y1="80" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="420" y1="80" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="100" y1="240" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- MST edge -->
+          <line x1="100" y1="80" x2="260" y2="80" stroke="#22c55e" stroke-width="3.5"/>
+          <text x="176" y="68" fill="#22c55e" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">2 ✓</text>
+          <!-- Nodes -->
+          <circle cx="100" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="100" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">A</text>
+          <circle cx="260" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="260" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">B</text>
+          <circle cx="420" cy="80" r="22" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+          <text x="420" y="86" text-anchor="middle" fill="#71717a" font-size="16" font-family="Space Grotesk, sans-serif">C</text>
+          <circle cx="100" cy="240" r="22" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+          <text x="100" y="246" text-anchor="middle" fill="#71717a" font-size="16" font-family="Space Grotesk, sans-serif">D</text>
+          <circle cx="260" cy="240" r="22" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+          <text x="260" y="246" text-anchor="middle" fill="#71717a" font-size="16" font-family="Space Grotesk, sans-serif">E</text>
+          <text x="20" y="300" fill="#71717a" font-size="12" font-family="Space Grotesk, sans-serif">Step 1: A–B added (weight 2)</text>
+        </svg>
+      </div>
+
+      <!-- Step 2 -->
+      <h3>Step 2 — Pick B–C (weight 3)</h3>
+      <p>B and C are in different components. Add it. No cycle.</p>
+      <p><em>MST edges so far:</em> <code>A–B, B–C</code> | Total weight: 5</p>
+
+      <div class="article-svg-wrap">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+          <line x1="100" y1="80" x2="100" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="260" y1="80" x2="100" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="260" y1="80" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="420" y1="80" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="100" y1="240" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- MST edges -->
+          <line x1="100" y1="80" x2="260" y2="80" stroke="#22c55e" stroke-width="3.5"/>
+          <line x1="260" y1="80" x2="420" y2="80" stroke="#22c55e" stroke-width="3.5"/>
+          <text x="176" y="68" fill="#22c55e" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">2 ✓</text>
+          <text x="344" y="68" fill="#22c55e" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">3 ✓</text>
+          <!-- Nodes -->
+          <circle cx="100" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="100" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">A</text>
+          <circle cx="260" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="260" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">B</text>
+          <circle cx="420" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="420" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">C</text>
+          <circle cx="100" cy="240" r="22" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+          <text x="100" y="246" text-anchor="middle" fill="#71717a" font-size="16" font-family="Space Grotesk, sans-serif">D</text>
+          <circle cx="260" cy="240" r="22" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+          <text x="260" y="246" text-anchor="middle" fill="#71717a" font-size="16" font-family="Space Grotesk, sans-serif">E</text>
+          <text x="20" y="300" fill="#71717a" font-size="12" font-family="Space Grotesk, sans-serif">Step 2: B–C added (weight 3)</text>
+        </svg>
+      </div>
+
+      <!-- Step 3 -->
+      <h3>Step 3 — Pick B–E (weight 5)</h3>
+      <p>B and E are in different components. Add it.</p>
+      <p><em>MST edges so far:</em> <code>A–B, B–C, B–E</code> | Total weight: 10</p>
+
+      <div class="article-svg-wrap">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+          <line x1="100" y1="80" x2="100" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="260" y1="80" x2="100" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="420" y1="80" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <line x1="100" y1="240" x2="260" y2="240" stroke="#3f3f46" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- MST edges -->
+          <line x1="100" y1="80" x2="260" y2="80" stroke="#22c55e" stroke-width="3.5"/>
+          <line x1="260" y1="80" x2="420" y2="80" stroke="#22c55e" stroke-width="3.5"/>
+          <line x1="260" y1="80" x2="260" y2="240" stroke="#22c55e" stroke-width="3.5"/>
+          <text x="176" y="68" fill="#22c55e" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">2 ✓</text>
+          <text x="344" y="68" fill="#22c55e" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">3 ✓</text>
+          <text x="278" y="168" fill="#22c55e" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">5 ✓</text>
+          <!-- Nodes -->
+          <circle cx="100" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="100" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">A</text>
+          <circle cx="260" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="260" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">B</text>
+          <circle cx="420" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="420" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">C</text>
+          <circle cx="100" cy="240" r="22" fill="#18181b" stroke="#52525b" stroke-width="2"/>
+          <text x="100" y="246" text-anchor="middle" fill="#71717a" font-size="16" font-family="Space Grotesk, sans-serif">D</text>
+          <circle cx="260" cy="240" r="22" fill="#14532d" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="260" y="246" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="600" font-family="Space Grotesk, sans-serif">E</text>
+          <text x="20" y="300" fill="#71717a" font-size="12" font-family="Space Grotesk, sans-serif">Step 3: B–E added (weight 5)</text>
+        </svg>
+      </div>
+
+      <!-- Step 4 -->
+      <h3>Step 4 — Pick A–D (weight 6)</h3>
+      <p>A and D are in different components. Add it.</p>
+      <p><em>MST edges so far:</em> <code>A–B, B–C, B–E, A–D</code> | Total weight: 16</p>
+      <p>We now have <strong>4 edges</strong> for 5 vertices — that's exactly V−1 = 4. The MST is complete!</p>
+
+      <!-- Final MST SVG -->
+      <div class="article-svg-wrap">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- MST edges only -->
+          <line x1="100" y1="80" x2="260" y2="80" stroke="#22c55e" stroke-width="4"/>
+          <line x1="260" y1="80" x2="420" y2="80" stroke="#22c55e" stroke-width="4"/>
+          <line x1="260" y1="80" x2="260" y2="240" stroke="#22c55e" stroke-width="4"/>
+          <line x1="100" y1="80" x2="100" y2="240" stroke="#22c55e" stroke-width="4"/>
+          <!-- Weight labels -->
+          <text x="176" y="68" fill="#bbf7d0" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">2</text>
+          <text x="344" y="68" fill="#bbf7d0" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">3</text>
+          <text x="278" y="168" fill="#bbf7d0" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">5</text>
+          <text x="82" y="168" fill="#bbf7d0" font-size="13" text-anchor="middle" font-family="Space Grotesk, sans-serif">6</text>
+          <!-- Nodes -->
+          <circle cx="100" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="3"/>
+          <text x="100" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="700" font-family="Space Grotesk, sans-serif">A</text>
+          <circle cx="260" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="3"/>
+          <text x="260" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="700" font-family="Space Grotesk, sans-serif">B</text>
+          <circle cx="420" cy="80" r="22" fill="#14532d" stroke="#22c55e" stroke-width="3"/>
+          <text x="420" y="86" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="700" font-family="Space Grotesk, sans-serif">C</text>
+          <circle cx="100" cy="240" r="22" fill="#14532d" stroke="#22c55e" stroke-width="3"/>
+          <text x="100" y="246" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="700" font-family="Space Grotesk, sans-serif">D</text>
+          <circle cx="260" cy="240" r="22" fill="#14532d" stroke="#22c55e" stroke-width="3"/>
+          <text x="260" y="246" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="700" font-family="Space Grotesk, sans-serif">E</text>
+          <!-- Label -->
+          <text x="20" y="295" fill="#22c55e" font-size="12" font-weight="600" font-family="Space Grotesk, sans-serif">✓ Final MST — Total Weight: 16</text>
+          <text x="20" y="312" fill="#71717a" font-size="11" font-family="Space Grotesk, sans-serif">Edges: A–B(2), B–C(3), B–E(5), A–D(6)</text>
+        </svg>
+      </div>
+
+      <div class="article-callout">
+        <strong>Edges C–E(7), B–D(8), D–E(9) were skipped.</strong> Adding any of them would form a cycle with edges already in the MST.
+      </div>
+
+      <!-- ===== SECTION 5 — UNION FIND ===== -->
+      <h2>The Secret Weapon: Union-Find</h2>
+
+      <p>
+        The key operation in Kruskal's is cycle detection — knowing whether two vertices are already connected. This is handled efficiently by a data structure called <strong>Union-Find</strong> (also called Disjoint Set Union or DSU).
+      </p>
+
+      <p>It has two core operations:</p>
+      <ul class="article-list">
+        <li><strong>Find(x)</strong> — returns the "root" or representative of x's component.</li>
+        <li><strong>Union(x, y)</strong> — merges the components of x and y.</li>
+      </ul>
+
+      <p>
+        If <code>Find(u) == Find(v)</code> for an edge <code>u–v</code>, they're already in the same component — adding this edge would form a cycle. So we skip it.
+      </p>
+
+      <!-- ===== SECTION 6 — PSEUDOCODE ===== -->
+      <h2>Pseudocode</h2>
+
+      <pre><code class="language-plaintext">KRUSKAL(Graph G):
+  MST = empty set
+  Sort all edges E by weight (ascending)
+
+  For each vertex v in G:
+    MAKE-SET(v)   // each vertex is its own component
+
+  For each edge (u, v, weight) in sorted E:
+    if FIND(u) ≠ FIND(v):
+      add (u, v) to MST
+      UNION(u, v)
+    if |MST| == V - 1:
+      break
+
+  return MST</code></pre>
+
+      <!-- ===== SECTION 7 — PYTHON CODE ===== -->
+      <h2>Python Implementation</h2>
+
+      <pre><code class="language-python">class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.edges = []  # (weight, u, v)
+
+    def add_edge(self, u, v, weight):
+        self.edges.append((weight, u, v))
+
+    def find(self, parent, x):
+        if parent[x] != x:
+            parent[x] = self.find(parent, parent[x])  # path compression
+        return parent[x]
+
+    def union(self, parent, rank, x, y):
+        root_x = self.find(parent, x)
+        root_y = self.find(parent, y)
+
+        if rank[root_x] < rank[root_y]:
+            parent[root_x] = root_y
+        elif rank[root_x] > rank[root_y]:
+            parent[root_y] = root_x
+        else:
+            parent[root_y] = root_x
+            rank[root_x] += 1
+
+    def kruskal_mst(self):
+        self.edges.sort()  # sort by weight
+        parent = list(range(self.V))
+        rank = [0] * self.V
+
+        mst = []
+        total_weight = 0
+
+        for weight, u, v in self.edges:
+            if self.find(parent, u) != self.find(parent, v):
+                self.union(parent, rank, u, v)
+                mst.append((u, v, weight))
+                total_weight += weight
+
+            if len(mst) == self.V - 1:
+                break
+
+        return mst, total_weight
+
+
+# ─── Example Usage ────────────────────────────────────────────
+# Vertices: 0=A, 1=B, 2=C, 3=D, 4=E
+g = Graph(5)
+g.add_edge(0, 1, 2)  # A–B
+g.add_edge(1, 2, 3)  # B–C
+g.add_edge(1, 4, 5)  # B–E
+g.add_edge(0, 3, 6)  # A–D
+g.add_edge(2, 4, 7)  # C–E
+g.add_edge(1, 3, 8)  # B–D
+g.add_edge(3, 4, 9)  # D–E
+
+mst, cost = g.kruskal_mst()
+labels = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E'}
+
+print("MST Edges:")
+for u, v, w in mst:
+    print(f"  {labels[u]} — {labels[v]}  (weight {w})")
+print(f"\nTotal MST Weight: {cost}")</code></pre>
+
+      <p><strong>Output:</strong></p>
+      <pre><code class="language-plaintext">MST Edges:
+  A — B  (weight 2)
+  B — C  (weight 3)
+  B — E  (weight 5)
+  A — D  (weight 6)
+
+Total MST Weight: 16</code></pre>
+
+      <!-- ===== SECTION 8 — COMPLEXITY ===== -->
+      <h2>Time &amp; Space Complexity</h2>
+
+      <div class="article-table-wrap">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Operation</th>
+              <th>Complexity</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sorting edges</td>
+              <td>O(E log E)</td>
+              <td>Standard comparison sort over E edges</td>
+            </tr>
+            <tr>
+              <td>Union-Find operations</td>
+              <td>O(E α(V))</td>
+              <td>Almost O(1) per operation with path compression &amp; union by rank</td>
+            </tr>
+            <tr>
+              <td><strong>Overall Time</strong></td>
+              <td><strong>O(E log E)</strong></td>
+              <td>Sorting dominates</td>
+            </tr>
+            <tr>
+              <td>Space</td>
+              <td>O(V + E)</td>
+              <td>Parent/rank arrays + edge list</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <em>α(V)</em> is the inverse Ackermann function — it grows so slowly that it's effectively constant for any real-world graph size. So Union-Find is essentially O(1) per operation in practice.
+      </p>
+
+      <!-- ===== SECTION 9 — KRUSKAL VS PRIM ===== -->
+      <h2>Kruskal's vs Prim's — Which Should You Use?</h2>
+
+      <div class="article-table-wrap">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Kruskal's</th>
+              <th>Prim's</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Approach</strong></td>
+              <td>Edge-based (global)</td>
+              <td>Vertex-based (grows from one node)</td>
+            </tr>
+            <tr>
+              <td><strong>Best for</strong></td>
+              <td>Sparse graphs (few edges)</td>
+              <td>Dense graphs (many edges)</td>
+            </tr>
+            <tr>
+              <td><strong>Key data structure</strong></td>
+              <td>Union-Find (DSU)</td>
+              <td>Priority Queue (min-heap)</td>
+            </tr>
+            <tr>
+              <td><strong>Works on</strong></td>
+              <td>Disconnected graphs (finds MSF)</td>
+              <td>Connected graphs only</td>
+            </tr>
+            <tr>
+              <td><strong>Time complexity</strong></td>
+              <td>O(E log E)</td>
+              <td>O(E log V)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Both produce a valid MST for connected graphs. Kruskal's is often the simpler one to implement and reason about — which is why it's the more popular choice in interviews and competitive programming.
+      </p>
+
+      <!-- ===== SECTION 10 — REAL WORLD ===== -->
+      <h2>Where Is This Used in Real Life?</h2>
+
+      <ul class="article-list">
+        <li><strong>Network design</strong> — laying cables, fiber, or pipelines to connect cities or buildings at minimum cost.</li>
+        <li><strong>Cluster analysis</strong> — building MSTs is a step in single-linkage clustering for grouping data points.</li>
+        <li><strong>Approximation algorithms</strong> — the MST is used as a subroutine in the 2-approximation for the Travelling Salesman Problem.</li>
+        <li><strong>Image segmentation</strong> — in computer vision, MSTs help identify boundaries between regions.</li>
+        <li><strong>Electrical circuit design</strong> — minimizing the wire length to connect components on a PCB.</li>
+      </ul>
+
+      <!-- ===== RECAP ===== -->
+      <h2>Quick Recap</h2>
+
+      <ul class="article-list">
+        <li>Kruskal's finds the <strong>Minimum Spanning Tree</strong> of a weighted, undirected graph.</li>
+        <li>It's a <strong>greedy algorithm</strong> — always picks the cheapest edge that doesn't create a cycle.</li>
+        <li>Cycle detection uses <strong>Union-Find</strong> (path compression + union by rank).</li>
+        <li>Time complexity is <strong>O(E log E)</strong>, dominated by edge sorting.</li>
+        <li>Best suited for <strong>sparse graphs</strong>. For dense graphs, consider Prim's.</li>
+        <li>Result: V−1 edges that connect all vertices with minimum total weight.</li>
+      </ul>
+
+      <p>
+        Kruskal's is one of those algorithms that feels almost too simple to be correct — sort, iterate, skip cycles. But that elegance is exactly what makes greedy algorithms so satisfying. Once you understand the Union-Find underneath, the whole thing clicks into place.
+      </p>
+
+      <!-- ===== COMMENT SECTION ===== -->
+      <h1 class="article-comments-heading">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</h1>
+      <div id="disqus_thread"></div>
+      <script>
+        var disqus_config = function () {
+          this.page.url = "https://codenosis.in/articles/kruskal-algorithm";
+          this.page.identifier = "kruskal-algorithm";
+        };
+        (function() {
+          var d = document, s = d.createElement('script');
+          s.src = 'https://codenosis.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+
+    <!-- ===== RELATED ARTICLES ===== -->
+    <section class="related-section">
+      <h3 class="related-heading">Continue Reading</h3>
+      <div class="related-grid">
+        <a href="https://codenosis.in/articles/dijkstra-algorithm" class="related-card">
+          <span class="related-tag">DSA</span>
+          <span class="related-title">Dijkstra's Algorithm — Shortest Path Explained</span>
+        </a>
+        <a href="https://codenosis.in/articles/how-to-start-web-development" class="related-card">
+          <span class="related-tag">Beginner's Guide</span>
+          <span class="related-title">How to Start Learning Web Development From Zero — Honest Guide</span>
+        </a>
+        <a href="https://codenosis.in/articles/ai-learning-roadmap" class="related-card">
+          <span class="related-tag">AI &amp; ML</span>
+          <span class="related-title">The Honest AI Learning Roadmap Nobody Talks About</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="https://codenosis.in/" class="footer-logo">Codenosis</a>
+        <p class="footer-tagline">Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+        <div class="footer-socials">
+          <a href="https://github.com/rkking1593" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/sarthak-upadhyay-s09" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://x.com/codenosis" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61590735604811" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.instagram.com/codenosisofficial" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Articles</h4>
+        <ul>
+          <li><a href="https://codenosis.in/articles/how-to-start-web-development">How to Start Web Dev</a></li>
+          <li><a href="https://codenosis.in/articles/html-css-js-explained">HTML, CSS &amp; JS Explained</a></li>
+          <li><a href="https://codenosis.in/articles/web-dev-roadmap">Web Dev Roadmap</a></li>
+          <li><a href="https://codenosis.in/articles/how-long-to-become-developer">How Long Does it Take</a></li>
+          <li><a href="https://codenosis.in/articles/web-dev-mistakes">Mistakes I Made</a></li>
+          <li><a href="https://codenosis.in/articles/frontend-backend-fullstack">Frontend vs Backend</a></li>
+          <li><a href="https://codenosis.in/articles">View All Articles</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://codenosis.in/">Home</a></li>
+          <li><a href="https://codenosis.in/#articles">Articles</a></li>
+          <li><a href="https://codenosis.in/#about">About</a></li>
+          <li><a href="https://codenosis.in/#newsletter">Newsletter</a></li>
+          <li><a href="https://codenosis.in/playground/playground">Playground</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Codenosis. Made with ♥ by Sarthak &amp; Yogesh</p>
+      <p class="footer-sub">Built to help beginners — share it with someone who needs it.</p>
+    </div>
+  </footer>
+
+  <!-- Highlight.js Init -->
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>
