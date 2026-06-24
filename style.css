@@ -407,7 +407,7 @@ body.light-mode .navbar.scrolled {
   color: #ef4444 !important;
 }
 
-.badge-python {
+.badge-DSA {
   background: rgba(234, 179, 8, 0.15) !important;
   color: #eab308 !important;
 }
@@ -415,6 +415,11 @@ body.light-mode .navbar.scrolled {
 .badge-freelancing {
   background: rgba(99, 102, 241, 0.15) !important;
   color: #6366f1 !important;
+}
+
+.badge-programmingLanguages{
+  background: rgb(234, 179, 8, 0.15) !important;
+  color: #07da1c;
 }
 
 .meta-info {
