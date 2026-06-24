@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Complexity & Space Complexity Explained | Codenosis</title>
+  <meta name="description" content="Learn Time Complexity and Space Complexity with Big O notation, real examples in Python, and visual comparisons. A must-know for every programmer." />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+
+  <style>
+    /* Complexity Table */
+    .complexity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .complexity-table thead {
+      background: rgba(99, 102, 241, 0.15);
+    }
+    .complexity-table th {
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      color: var(--text-primary);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .complexity-table td {
+      padding: 0.85rem 1.2rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .complexity-table tr:last-child td {
+      border-bottom: none;
+    }
+    .complexity-table tr:hover td {
+      background: rgba(99, 102, 241, 0.05);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    .badge-green  { background: rgba(34,197,94,0.15);  color: #22c55e; }
+    .badge-yellow { background: rgba(234,179,8,0.15);  color: #eab308; }
+    .badge-orange { background: rgba(249,115,22,0.15); color: #f97316; }
+    .badge-red    { background: rgba(239,68,68,0.15);  color: #ef4444; }
+
+    /* Visual complexity bar chart */
+    .complexity-bars {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 80px;
+      align-items: center;
+      gap: 1rem;
+    }
+    .bar-label {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+    .bar-track {
+      background: var(--bg-secondary);
+      border-radius: 99px;
+      height: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+    }
+    .bar-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* note callout */
+    .article-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(234, 179, 8, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.3);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+    }
+    .article-note i {
+      color: #eab308;
+      font-size: 1.1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .article-note p {
+      margin: 0;
+      color: var(--text-primary) !important;
+      font-size: 0.95rem;
+    }
+
+    /* tip callout */
+    .article-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+    }
+    .article-tip i {
+      color: #22c55e;
+      font-size: 1.1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .article-tip p {
+      margin: 0;
+      color: var(--text-primary) !important;
+      font-size: 0.95rem;
+    }
+
+    /* comparison grid */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .compare-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+    }
+    .compare-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .compare-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary) !important;
+      line-height: 1.7;
+      margin: 0 !important;
+    }
+    .compare-card.time { border-top: 3px solid var(--accent); }
+    .compare-card.space { border-top: 3px solid #22c55e; }
+    @media (max-width: 600px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 80px 1fr 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV (inherited from style.css) ===== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <i class="fa-solid fa-code"></i> Codenosis
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../articles.html">Articles</a>
+        <a href="../about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== ARTICLE HERO ===== -->
+  <section class="article-hero">
+    <div class="article-container">
+      <span class="tag">Algorithms &amp; DSA</span>
+      <h1 class="article-title">Time Complexity &amp; Space Complexity — Explained with Examples</h1>
+      <p class="article-subtitle">
+        Every programmer writes code that works. But a great programmer writes code that's <em>efficient</em>.
+        Learn how to measure and reason about your algorithm's performance using Big O notation.
+      </p>
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <div class="author-name">Yogesh Upadhyay</div>
+          <div class="author-tag">Co-founder, Codenosis &nbsp;·&nbsp; June 2025 &nbsp;·&nbsp; <i class="fa-regular fa-clock"></i> 10 min read</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARTICLE BODY ===== -->
+  <main class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        Imagine two delivery apps. Both show you the nearest restaurant — but one takes 2 seconds, the other takes 20. They both "work," but only one is usable at scale. This is what complexity analysis is all about: not just <em>does it work</em>, but <em>how well does it scale</em>?
+      </p>
+
+      <!-- ===================== SECTION 1 ===================== -->
+      <h2>What is Time Complexity?</h2>
+      <p>
+        Time complexity describes <strong>how the number of operations your algorithm performs grows</strong> as the input size (n) increases. It is <strong>not</strong> measuring actual clock time — it's measuring the <em>growth rate</em> of work done.
+      </p>
+      <p>
+        We express time complexity using <strong>Big O notation</strong> — a mathematical way to describe the upper bound (worst-case scenario) of an algorithm's performance.
+      </p>
+
+      <div class="article-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <p><strong>Why worst-case?</strong> Because we need guarantees. If your app is slow for even a few users, that's a problem. Big O tells you how bad things can get.</p>
+      </div>
+
+      <!-- ===================== SECTION 2 ===================== -->
+      <h2>Common Time Complexities with Examples</h2>
+      <p>Here are the most important complexities, from fastest to slowest, with Python examples for each.</p>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">1. O(1) — Constant Time</h3>
+      <p>The algorithm always does the same number of operations, no matter how large the input is.</p>
+      <pre><code class="language-python"># Access an element by index — always one operation
+def get_first(arr):
+    return arr[0]   # O(1)
+
+# Dictionary lookup — hash-based, always O(1)
+def get_value(d, key):
+    return d[key]   # O(1)
+</code></pre>
+      <p>No matter if the list has 10 items or 10 million items, accessing <code>arr[0]</code> always takes one step. That's O(1).</p>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">2. O(log n) — Logarithmic Time</h3>
+      <p>The algorithm halves the problem with each step. Classic example: <strong>Binary Search</strong>.</p>
+      <pre><code class="language-python">def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid          # Found!
+        elif arr[mid] < target:
+            low = mid + 1       # Search right half
+        else:
+            high = mid - 1      # Search left half
+    return -1                   # Not found
+
+# For n = 1,000,000 elements → only ~20 comparisons needed!
+</code></pre>
+      <p>If you have 1 million elements, binary search needs only about 20 steps (log₂ 1,000,000 ≈ 20). Compare that to linear search needing up to 1 million steps.</p>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">3. O(n) — Linear Time</h3>
+      <p>The algorithm visits every element once. If input doubles, work doubles.</p>
+      <pre><code class="language-python">def find_max(arr):
+    max_val = arr[0]
+    for num in arr:         # Visits every element → O(n)
+        if num > max_val:
+            max_val = num
+    return max_val
+
+def linear_search(arr, target):
+    for i, val in enumerate(arr):  # Worst case: check everything
+        if val == target:
+            return i
+    return -1
+</code></pre>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">4. O(n log n) — Linearithmic Time</h3>
+      <p>This is the complexity of most efficient sorting algorithms like Merge Sort and Quick Sort.</p>
+      <pre><code class="language-python">def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left  = merge_sort(arr[:mid])   # Divide — log n levels
+    right = merge_sort(arr[mid:])
+
+    return merge(left, right)       # Merge — O(n) work per level
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i]); i += 1
+        else:
+            result.append(right[j]); j += 1
+    return result + left[i:] + right[j:]
+
+# Python's built-in sorted() uses Timsort → also O(n log n)
+</code></pre>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">5. O(n²) — Quadratic Time</h3>
+      <p>A loop inside a loop. If input doubles, work quadruples. Classic example: Bubble Sort.</p>
+      <pre><code class="language-python">def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):            # Outer loop: n times
+        for j in range(n - i - 1):  # Inner loop: ~n times
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+# For n = 1000 → ~1,000,000 comparisons
+# For n = 10000 → ~100,000,000 comparisons (100x more work for 10x input!)
+</code></pre>
+
+      <div class="article-challenge">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Avoid O(n²) for large datasets. An array of 10,000 elements with an O(n²) algorithm does <strong>100 million operations</strong> — what O(n log n) does in roughly 130,000.</p>
+      </div>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">6. O(2ⁿ) — Exponential Time</h3>
+      <p>Each step doubles the work. Usually seen in recursive brute-force solutions like the naive Fibonacci.</p>
+      <pre><code class="language-python"># BAD: Exponential — recalculates same values repeatedly
+def fib_bad(n):
+    if n <= 1:
+        return n
+    return fib_bad(n - 1) + fib_bad(n - 2)   # O(2ⁿ)
+
+# GOOD: Memoized version — O(n) time, O(n) space
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib_good(n):
+    if n <= 1:
+        return n
+    return fib_good(n - 1) + fib_good(n - 2)  # O(n)
+</code></pre>
+
+      <!-- Visual Growth Chart -->
+      <h2>Growth Rate Comparison (Visual)</h2>
+      <p>For n = 100 elements, here's how many operations each complexity requires:</p>
+
+      <div class="complexity-bars">
+        <div class="bar-row">
+          <div class="bar-label">O(1)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0.5%; background:#22c55e;"></div></div>
+          <div class="bar-desc">1 op</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">O(log n)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:2%; background:#86efac;"></div></div>
+          <div class="bar-desc">~7 ops</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">O(n)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:10%; background:#eab308;"></div></div>
+          <div class="bar-desc">100 ops</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">O(n log n)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:18%; background:#f97316;"></div></div>
+          <div class="bar-desc">~664 ops</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">O(n²)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%; background:#ef4444;"></div></div>
+          <div class="bar-desc">10,000 ops</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">O(2ⁿ)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background:#7f1d1d;"></div></div>
+          <div class="bar-desc">10³⁰ ops 🔥</div>
+        </div>
+      </div>
+
+      <!-- Big O Table -->
+      <h2>Big O Cheat Sheet</h2>
+      <table class="complexity-table">
+        <thead>
+          <tr>
+            <th>Notation</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>O(1)</code></td>
+            <td>Constant</td>
+            <td>Array index access, dict lookup</td>
+            <td><span class="badge badge-green">Excellent</span></td>
+          </tr>
+          <tr>
+            <td><code>O(log n)</code></td>
+            <td>Logarithmic</td>
+            <td>Binary search, BST operations</td>
+            <td><span class="badge badge-green">Great</span></td>
+          </tr>
+          <tr>
+            <td><code>O(n)</code></td>
+            <td>Linear</td>
+            <td>Linear search, single loop</td>
+            <td><span class="badge badge-yellow">Fair</span></td>
+          </tr>
+          <tr>
+            <td><code>O(n log n)</code></td>
+            <td>Linearithmic</td>
+            <td>Merge sort, quicksort, heapsort</td>
+            <td><span class="badge badge-yellow">Acceptable</span></td>
+          </tr>
+          <tr>
+            <td><code>O(n²)</code></td>
+            <td>Quadratic</td>
+            <td>Bubble sort, nested loops</td>
+            <td><span class="badge badge-orange">Bad</span></td>
+          </tr>
+          <tr>
+            <td><code>O(2ⁿ)</code></td>
+            <td>Exponential</td>
+            <td>Naive recursion, subset generation</td>
+            <td><span class="badge badge-red">Terrible</span></td>
+          </tr>
+          <tr>
+            <td><code>O(n!)</code></td>
+            <td>Factorial</td>
+            <td>Permutation brute-force</td>
+            <td><span class="badge badge-red">Avoid</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ===================== SECTION 3 ===================== -->
+      <h2>What is Space Complexity?</h2>
+      <p>
+        Space complexity measures <strong>how much extra memory</strong> your algorithm uses relative to the input size. This includes variables, call stacks (for recursion), and any additional data structures you create.
+      </p>
+      <p>
+        It does <em>not</em> usually count the input itself — only the <strong>auxiliary space</strong> (extra memory on top of the input).
+      </p>
+
+      <div class="compare-grid">
+        <div class="compare-card time">
+          <h4><i class="fa-solid fa-clock" style="color:var(--accent)"></i> Time Complexity</h4>
+          <p>Measures how many <strong>operations</strong> grow with input size n. Focused on CPU cycles and computation speed.</p>
+        </div>
+        <div class="compare-card space">
+          <h4><i class="fa-solid fa-memory" style="color:#22c55e"></i> Space Complexity</h4>
+          <p>Measures how much <strong>extra memory</strong> is consumed as n grows. Focused on RAM usage and memory efficiency.</p>
+        </div>
+      </div>
+
+      <!-- ===================== SECTION 4 ===================== -->
+      <h2>Space Complexity Examples</h2>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">O(1) Space — Constant</h3>
+      <p>Uses a fixed number of variables regardless of input size.</p>
+      <pre><code class="language-python">def sum_array(arr):
+    total = 0           # Only 1 extra variable
+    for num in arr:
+        total += num
+    return total
+# Space: O(1) — 'total' doesn't grow with input
+</code></pre>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">O(n) Space — Linear</h3>
+      <p>Extra memory grows proportionally with input.</p>
+      <pre><code class="language-python">def duplicate_array(arr):
+    result = []            # New list grows with input
+    for num in arr:
+        result.append(num)
+    return result
+# Space: O(n) — result list has same size as input
+
+def store_squares(n):
+    return [i ** 2 for i in range(n)]   # O(n) space
+</code></pre>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">O(n) Space — Recursive Call Stack</h3>
+      <p>Each recursive call adds a frame to the call stack. Deep recursion = more memory.</p>
+      <pre><code class="language-python">def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)   # n frames on call stack
+
+# factorial(5) → 5 → 4 → 3 → 2 → 1 → 0 (6 frames)
+# Space: O(n) due to call stack depth
+</code></pre>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">O(n²) Space — Quadratic</h3>
+      <p>Creating a 2D matrix of size n×n uses quadratic space.</p>
+      <pre><code class="language-python">def create_matrix(n):
+    # n rows, each with n columns
+    matrix = [[0] * n for _ in range(n)]
+    return matrix
+# Space: O(n²) — n*n total cells
+</code></pre>
+
+      <!-- ===================== SECTION 5 ===================== -->
+      <h2>The Classic Trade-off: Time vs Space</h2>
+      <p>
+        In real-world development, you often have to choose between using <em>more memory to go faster</em> or <em>saving memory at the cost of speed</em>. This is called the <strong>time-space trade-off</strong>.
+      </p>
+
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--text-primary); margin: 1.8rem 0 0.6rem;">Example: Fibonacci — Brute Force vs Memoization</h3>
+      <pre><code class="language-python"># Approach 1: Brute Force
+# Time: O(2ⁿ)  |  Space: O(n) call stack
+def fib_brute(n):
+    if n <= 1: return n
+    return fib_brute(n-1) + fib_brute(n-2)
+
+
+# Approach 2: Memoization (trade space for time)
+# Time: O(n)   |  Space: O(n) for memo dict
+memo = {}
+def fib_memo(n):
+    if n in memo: return memo[n]
+    if n <= 1: return n
+    memo[n] = fib_memo(n-1) + fib_memo(n-2)
+    return memo[n]
+
+
+# Approach 3: Bottom-up DP (optimal both ways)
+# Time: O(n)   |  Space: O(1)
+def fib_dp(n):
+    if n <= 1: return n
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b
+</code></pre>
+
+      <div class="article-tip">
+        <i class="fa-solid fa-lightbulb"></i>
+        <p>The bottom-up DP approach is the winner — O(n) time and O(1) space. Always try to find the approach that avoids unnecessary memory use without sacrificing speed.</p>
+      </div>
+
+      <!-- ===================== SECTION 6 ===================== -->
+      <h2>How to Analyze an Algorithm Step-by-Step</h2>
+      <p>Use these rules to calculate Big O on any code:</p>
+      <ul>
+        <li><strong>Drop constants:</strong> O(2n) → O(n). Constants don't affect growth rate.</li>
+        <li><strong>Drop lower-order terms:</strong> O(n² + n) → O(n²). The dominant term wins.</li>
+        <li><strong>Sequential steps add:</strong> O(n) + O(n²) = O(n²)</li>
+        <li><strong>Nested loops multiply:</strong> A loop of n inside a loop of n = O(n²)</li>
+        <li><strong>Halving per step = log:</strong> If you halve the input each step, it's O(log n)</li>
+        <li><strong>Recursion:</strong> Count the depth × work per level (use Recursion Tree or Master Theorem)</li>
+      </ul>
+
+      <pre><code class="language-python">def example(arr):
+    # Step 1: O(n)
+    for x in arr:
+        print(x)
+
+    # Step 2: O(n²) — nested loop
+    for i in arr:
+        for j in arr:
+            print(i, j)
+
+# Total: O(n) + O(n²) → drop lower term → O(n²)
+</code></pre>
+
+      <!-- ===================== SUMMARY ===================== -->
+      <h2>Quick Summary</h2>
+      <table class="complexity-table">
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>What it measures</th>
+            <th>Unit</th>
+            <th>Goal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Time Complexity</td>
+            <td>Operations as n grows</td>
+            <td>Operations / Steps</td>
+            <td>As small as possible</td>
+          </tr>
+          <tr>
+            <td>Space Complexity</td>
+            <td>Extra memory as n grows</td>
+            <td>Memory (bytes)</td>
+            <td>As small as possible</td>
+          </tr>
+          <tr>
+            <td>Big O Notation</td>
+            <td>Worst-case upper bound</td>
+            <td>O(…)</td>
+            <td>Understand the worst scenario</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="article-challenge">
+        <i class="fa-solid fa-code"></i>
+        <p>
+          <strong>Practice challenge:</strong> Given this code — <code>for i in range(n): for j in range(i, n): print(i, j)</code> — what is the time complexity? Think carefully before scrolling. (Answer: O(n²), since the total iterations ≈ n(n+1)/2 which simplifies to O(n²).)
+        </p>
+      </div>
+
+      <p class="article-cta-text">
+        Understanding Big O is foundational to writing scalable software, cracking DSA interview questions, and making smart engineering decisions. Practice by analyzing every function you write — ask yourself: what's the time complexity? What's the space complexity? That habit alone will make you a better developer.
+      </p>
+
+    </div>
+  </main>
+
+  <!-- ===== RELATED ARTICLES ===== -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+        <a href="kruskal-algorithm.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-diagram-project"></i></div>
+          <div>
+            <p>Kruskal's Algorithm — Minimum Spanning Tree Explained</p>
+          </div>
+        </a>
+        <a href="dijkstra-algorithm.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-route"></i></div>
+          <div>
+            <p>Dijkstra's Algorithm — Shortest Path with Examples</p>
+          </div>
+        </a>
+        <a href="numpy-guide.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-table-cells"></i></div>
+          <div>
+            <p>NumPy for Beginners — Arrays, Operations &amp; More</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMENTS ===== -->
+  <section class="article-body" style="padding-top: 2rem;">
+    <div class="article-container">
+      <p class="comment-prompt">Have a doubt or a better approach? Drop it below 👇</p>
+      <div id="disqus_thread"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2025 Codenosis. Built with ❤️ by <strong>Sarthak</strong> &amp; <strong>Yogesh</strong>.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="../script.js"></script>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = 'time-and-space-complexity';
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+</body>
+</html>
