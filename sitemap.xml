@@ -105,5 +105,15 @@
     <loc>https://codenosis.in/articles/cannot-read-properties-of-null.html</loc>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/dynamic-programming.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/time-and-space-complexity.html</loc>
+    <priority>0.8</priority>
+  </url>
   
 </urlset>
