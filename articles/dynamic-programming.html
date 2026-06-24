@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Programming Explained — Algorithms, Patterns & Examples | Codenosis</title>
+  <meta name="description" content="Master Dynamic Programming from scratch. Learn memoization, tabulation, and classic DP algorithms like Knapsack, LCS, and Coin Change with step-by-step Python examples." />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+
+  <style>
+    /* ── DP Table ── */
+    .dp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .dp-table thead { background: rgba(99,102,241,0.15); }
+    .dp-table th {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      color: var(--text-primary);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .dp-table td {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+    .dp-table td:last-child { border-right: none; }
+    .dp-table tr:last-child td { border-bottom: none; }
+    .dp-table td.hl {
+      background: rgba(99,102,241,0.2);
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .dp-table td.hl-green {
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+      font-weight: 700;
+    }
+
+    /* ── Callouts ── */
+    .article-note {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: rgba(234,179,8,0.08);
+      border: 1px solid rgba(234,179,8,0.3);
+      border-radius: 12px; padding: 1.2rem 1.5rem; margin: 2rem 0;
+    }
+    .article-note i { color: #eab308; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .article-note p { margin: 0; color: var(--text-primary) !important; font-size: 0.95rem; }
+
+    .article-tip {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 12px; padding: 1.2rem 1.5rem; margin: 2rem 0;
+    }
+    .article-tip i { color: #22c55e; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .article-tip p { margin: 0; color: var(--text-primary) !important; font-size: 0.95rem; }
+
+    /* ── Two-approach compare ── */
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0;
+    }
+    .compare-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem;
+    }
+    .compare-card h4 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .compare-card p { font-size: 0.88rem; color: var(--text-secondary) !important; line-height: 1.7; margin: 0 !important; }
+    .compare-card.top { border-top: 3px solid var(--accent); }
+    .compare-card.top-g { border-top: 3px solid #22c55e; }
+
+    /* ── Step flow ── */
+    .steps-flow {
+      display: flex; flex-direction: column; gap: 0; margin: 2rem 0;
+    }
+    .step-item {
+      display: flex; gap: 1.2rem; align-items: flex-start; position: relative;
+      padding-bottom: 1.6rem;
+    }
+    .step-item:last-child { padding-bottom: 0; }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(99,102,241,0.15); border: 2px solid var(--accent);
+      color: var(--accent); font-weight: 700; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-connector {
+      position: absolute; left: 17px; top: 36px;
+      width: 2px; height: calc(100% - 36px);
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .step-item:last-child .step-connector { display: none; }
+    .step-body { padding-top: 6px; }
+    .step-body strong { color: var(--text-primary); display: block; margin-bottom: 0.3rem; }
+    .step-body p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; margin: 0; }
+
+    /* ── Pattern cards ── */
+    .pattern-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0;
+    }
+    .pattern-card {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem 1.4rem;
+      transition: border-color 0.3s ease;
+    }
+    .pattern-card:hover { border-color: var(--accent); }
+    .pattern-card h4 {
+      font-size: 0.9rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .pattern-card h4 i { color: var(--accent); }
+    .pattern-card p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+
+    /* ── h3 override inside article-body ── */
+    .article-body h3 {
+      font-size: 1.15rem; font-weight: 700; color: var(--text-primary);
+      margin: 2rem 0 0.7rem;
+    }
+
+    @media (max-width: 600px) {
+      .compare-grid, .pattern-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <i class="fa-solid fa-code"></i> Codenosis
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../articles.html">Articles</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="article-hero">
+    <div class="article-container">
+      <span class="category-badge badge-DSA">DSA</span>
+      <h1 class="article-title">Dynamic Programming — Concepts, Algorithms &amp; Examples</h1>
+      <p class="article-subtitle">
+        Dynamic Programming turns hard exponential problems into fast polynomial ones. Once you understand the core idea — store what you've already solved — you'll recognise DP opportunities everywhere.
+      </p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Sarthak</div>
+          <div class="author-tag">Co-founder, Codenosis &nbsp;·&nbsp; June 2025 &nbsp;·&nbsp; <i class="fa-regular fa-clock"></i> 15 min read</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <main class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        You're standing at the bottom of a staircase. You can take 1 or 2 steps at a time. How many ways can you reach the top? If you try to brute-force this, you end up computing the same sub-problems hundreds of times. Dynamic Programming says: <em>solve each sub-problem once, remember the answer, and reuse it.</em> That single idea is worth a thousand interviews.
+      </p>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 1 — What is DP
+      ════════════════════════════════════════ -->
+      <h2>What is Dynamic Programming?</h2>
+      <p>
+        Dynamic Programming (DP) is an algorithmic technique for solving problems by breaking them into <strong>overlapping sub-problems</strong>, solving each sub-problem <strong>only once</strong>, and <strong>storing the result</strong> so it can be reused. It is most applicable when a problem has two properties:
+      </p>
+      <ul>
+        <li><strong>Optimal Substructure:</strong> The optimal solution of the problem can be built from optimal solutions of its sub-problems.</li>
+        <li><strong>Overlapping Sub-problems:</strong> The same sub-problems are solved multiple times during a naive recursive approach.</li>
+      </ul>
+
+      <div class="article-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>DP is <em>not</em> about a specific data structure or algorithm — it's a <strong>problem-solving paradigm</strong>. The two implementations (memoization and tabulation) are different ways of applying the same idea.</p>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 2 — Two approaches
+      ════════════════════════════════════════ -->
+      <h2>Two Ways to Implement DP</h2>
+
+      <div class="compare-grid">
+        <div class="compare-card top">
+          <h4><i class="fa-solid fa-arrow-down-up-across-line" style="color:var(--accent)"></i> Top-Down (Memoization)</h4>
+          <p>Start from the original problem and recurse down. Cache each result so you never solve the same sub-problem twice. Natural to write — just add a cache to your recursion.</p>
+        </div>
+        <div class="compare-card top-g">
+          <h4><i class="fa-solid fa-table-cells" style="color:#22c55e"></i> Bottom-Up (Tabulation)</h4>
+          <p>Start from the smallest sub-problems and build up to the answer iteratively. Uses a table (usually an array). No recursion, no stack overflow risk, often faster in practice.</p>
+        </div>
+      </div>
+
+      <p>Both approaches give the same answer. Choose memoization when the recursion is natural and not all sub-problems are needed. Choose tabulation when you want a clean iterative solution with O(1) space optimization potential.</p>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 3 — Fibonacci warm-up
+      ════════════════════════════════════════ -->
+      <h2>Warm-Up: Fibonacci Numbers</h2>
+      <p>The classic entry point into DP. The naive recursion is O(2ⁿ). DP drops it to O(n).</p>
+
+      <h3>Naive Recursion — O(2ⁿ)</h3>
+      <pre><code class="language-python">def fib(n):
+    if n <= 1:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+# fib(6) recomputes fib(2) five times, fib(3) three times…
+# For n = 40: ~2 billion calls!
+</code></pre>
+
+      <h3>Top-Down DP (Memoization) — O(n) time, O(n) space</h3>
+      <pre><code class="language-python">from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib_memo(n):
+    if n <= 1:
+        return n
+    return fib_memo(n - 1) + fib_memo(n - 2)
+
+# Each value computed exactly once, stored in cache.
+# fib_memo(40) → instant.
+</code></pre>
+
+      <h3>Bottom-Up DP (Tabulation) — O(n) time, O(n) space</h3>
+      <pre><code class="language-python">def fib_tab(n):
+    if n <= 1:
+        return n
+    dp = [0] * (n + 1)
+    dp[0], dp[1] = 0, 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[n]
+
+# dp table for n = 6:
+# Index: 0  1  2  3  4  5  6
+# Value: 0  1  1  2  3  5  8
+</code></pre>
+
+      <h3>Space-Optimised — O(n) time, O(1) space</h3>
+      <pre><code class="language-python">def fib_opt(n):
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b
+
+# Only two variables needed — no full table required.
+</code></pre>
+
+      <div class="article-tip">
+        <i class="fa-solid fa-lightbulb"></i>
+        <p>Always ask: <em>do I need the entire table, or just the last few values?</em> Many DP problems can be space-optimised from O(n) or O(n²) down to O(1) or O(n) once you notice only a sliding window of the table is ever accessed.</p>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 4 — Climbing stairs
+      ════════════════════════════════════════ -->
+      <h2>Problem 1: Climbing Stairs</h2>
+      <p>
+        You can climb 1 or 2 steps at a time. Given <code>n</code> stairs, how many distinct ways can you reach the top?
+      </p>
+      <p><strong>Recurrence:</strong> <code>ways(n) = ways(n-1) + ways(n-2)</code> — identical structure to Fibonacci.</p>
+
+      <pre><code class="language-python">def climb_stairs(n):
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
+
+# climb_stairs(5) → 8
+# Step counts: 1 1 2 3 5 8  (same as fib shifted by 1)
+</code></pre>
+
+      <table class="dp-table">
+        <thead>
+          <tr><th>n (stairs)</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ways(n)</td>
+            <td>1</td><td>2</td><td>3</td><td>5</td><td class="hl">8</td><td class="hl">13</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 5 — Coin Change
+      ════════════════════════════════════════ -->
+      <h2>Problem 2: Coin Change (Minimum Coins)</h2>
+      <p>
+        Given coin denominations and a target amount, find the <strong>minimum number of coins</strong> needed to make that amount. If it's impossible, return <code>-1</code>.
+      </p>
+      <p>
+        <strong>Example:</strong> coins = [1, 3, 4], amount = 6 → answer is 2 (3 + 3).
+      </p>
+      <p><strong>Recurrence:</strong> <code>dp[i] = min(dp[i - c] + 1)</code> for each coin <code>c</code> where <code>c ≤ i</code>.</p>
+
+      <pre><code class="language-python">def coin_change(coins, amount):
+    # dp[i] = min coins to make amount i
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0   # base case: 0 coins to make amount 0
+
+    for i in range(1, amount + 1):
+        for coin in coins:
+            if coin <= i:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+
+    return dp[amount] if dp[amount] != float('inf') else -1
+
+
+# Example:
+print(coin_change([1, 3, 4], 6))   # → 2  (3+3)
+print(coin_change([2], 3))          # → -1 (impossible)
+print(coin_change([1, 5, 6, 9], 11)) # → 2  (5+6)
+</code></pre>
+
+      <p><strong>DP table walkthrough</strong> for coins = [1, 3, 4], amount = 6:</p>
+      <table class="dp-table">
+        <thead>
+          <tr>
+            <th>Amount</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dp[i]</td>
+            <td class="hl-green">0</td>
+            <td>1</td><td>2</td><td class="hl">1</td><td class="hl">1</td><td>2</td>
+            <td class="hl-green">2</td>
+          </tr>
+          <tr>
+            <td>How</td>
+            <td>base</td>
+            <td>1</td><td>1+1</td><td>3</td><td>4</td><td>4+1</td><td>3+3</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 6 — 0/1 Knapsack
+      ════════════════════════════════════════ -->
+      <h2>Problem 3: 0/1 Knapsack</h2>
+      <p>
+        Given <code>n</code> items, each with a <strong>weight</strong> and <strong>value</strong>, and a bag with capacity <code>W</code> — find the maximum value you can carry. Each item can be taken <strong>at most once</strong>.
+      </p>
+      <p><strong>Recurrence:</strong></p>
+      <ul>
+        <li>If item weight &gt; remaining capacity: <code>dp[i][w] = dp[i-1][w]</code> (skip item)</li>
+        <li>Else: <code>dp[i][w] = max(dp[i-1][w], dp[i-1][w - wt[i]] + val[i])</code> (skip or take)</li>
+      </ul>
+
+      <pre><code class="language-python">def knapsack(weights, values, capacity):
+    n = len(weights)
+    # dp[i][w] = max value using first i items with capacity w
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        for w in range(capacity + 1):
+            # Option 1: skip item i
+            dp[i][w] = dp[i - 1][w]
+            # Option 2: take item i (if it fits)
+            if weights[i - 1] <= w:
+                take = dp[i - 1][w - weights[i - 1]] + values[i - 1]
+                dp[i][w] = max(dp[i][w], take)
+
+    return dp[n][capacity]
+
+
+# Items: (weight, value)
+weights = [1, 3, 4, 5]
+values  = [1, 4, 5, 7]
+capacity = 7
+
+print(knapsack(weights, values, capacity))  # → 9  (items with w=3,4)
+</code></pre>
+
+      <p><strong>DP table</strong> (capacity = 7, 4 items):</p>
+      <table class="dp-table">
+        <thead>
+          <tr>
+            <th>Item \ Cap</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>0 (none)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1 (w=1,v=1)</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>2 (w=3,v=4)</td><td>0</td><td>1</td><td>1</td><td>4</td><td>5</td><td>5</td><td>5</td><td>5</td></tr>
+          <tr><td>3 (w=4,v=5)</td><td>0</td><td>1</td><td>1</td><td>4</td><td>5</td><td>6</td><td>6</td><td class="hl">9</td></tr>
+          <tr><td>4 (w=5,v=7)</td><td>0</td><td>1</td><td>1</td><td>4</td><td>5</td><td>7</td><td>8</td><td class="hl-green">9</td></tr>
+        </tbody>
+      </table>
+
+      <div class="article-challenge">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>The naive brute-force for Knapsack checks all 2ⁿ subsets — that's 1 billion for n=30. DP solves it in O(n × W) time and O(n × W) space, which for n=30, W=1000 is just 30,000 operations.</p>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 7 — LCS
+      ════════════════════════════════════════ -->
+      <h2>Problem 4: Longest Common Subsequence (LCS)</h2>
+      <p>
+        Given two strings, find the length of their <strong>longest common subsequence</strong> — characters that appear in the same relative order in both strings (not necessarily contiguous).
+      </p>
+      <p><strong>Example:</strong> s1 = "ABCBDAB", s2 = "BDCAB" → LCS = "BCAB" (length 4).</p>
+      <p><strong>Recurrence:</strong></p>
+      <ul>
+        <li>If <code>s1[i] == s2[j]</code>: <code>dp[i][j] = dp[i-1][j-1] + 1</code></li>
+        <li>Else: <code>dp[i][j] = max(dp[i-1][j], dp[i][j-1])</code></li>
+      </ul>
+
+      <pre><code class="language-python">def lcs(s1, s2):
+    m, n = len(s1), len(s2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1   # Characters match
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])  # Take best
+
+    return dp[m][n]
+
+
+print(lcs("ABCBDAB", "BDCAB"))   # → 4
+print(lcs("AGGTAB", "GXTXAYB"))  # → 4  (GTAB)
+print(lcs("abcde", "ace"))        # → 3  (ace)
+</code></pre>
+
+      <p><strong>DP table</strong> for s1 = "ABCD", s2 = "ACBD":</p>
+      <table class="dp-table">
+        <thead>
+          <tr><th></th><th>""</th><th>A</th><th>C</th><th>B</th><th>D</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>""</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>A</td><td>0</td><td class="hl">1</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>B</td><td>0</td><td>1</td><td>1</td><td class="hl">2</td><td>2</td></tr>
+          <tr><td>C</td><td>0</td><td>1</td><td class="hl">2</td><td>2</td><td>2</td></tr>
+          <tr><td>D</td><td>0</td><td>1</td><td>2</td><td>2</td><td class="hl-green">3</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 8 — Longest Increasing Subsequence
+      ════════════════════════════════════════ -->
+      <h2>Problem 5: Longest Increasing Subsequence (LIS)</h2>
+      <p>
+        Find the length of the longest subsequence of an array such that all elements are in <strong>strictly increasing</strong> order.
+      </p>
+      <p><strong>Example:</strong> [10, 9, 2, 5, 3, 7, 101, 18] → LIS = [2, 3, 7, 18] → length 4.</p>
+
+      <h3>O(n²) DP Approach</h3>
+      <pre><code class="language-python">def lis(arr):
+    n = len(arr)
+    # dp[i] = length of LIS ending at index i
+    dp = [1] * n
+
+    for i in range(1, n):
+        for j in range(i):
+            if arr[j] < arr[i]:           # arr[i] can extend the subsequence
+                dp[i] = max(dp[i], dp[j] + 1)
+
+    return max(dp)
+
+
+print(lis([10, 9, 2, 5, 3, 7, 101, 18]))  # → 4
+print(lis([0, 1, 0, 3, 2, 3]))             # → 4
+print(lis([7, 7, 7, 7]))                   # → 1
+</code></pre>
+
+      <p><strong>dp[] array trace</strong> for [10, 9, 2, 5, 3, 7, 101, 18]:</p>
+      <table class="dp-table">
+        <thead>
+          <tr>
+            <th>Index</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>arr[i]</td>
+            <td>10</td><td>9</td><td>2</td><td>5</td><td>3</td><td>7</td><td>101</td><td>18</td>
+          </tr>
+          <tr>
+            <td>dp[i]</td>
+            <td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td class="hl">4</td><td class="hl-green">4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 9 — Matrix Chain Multiplication
+      ════════════════════════════════════════ -->
+      <h2>Problem 6: Matrix Chain Multiplication</h2>
+      <p>
+        Given a chain of matrices, find the most efficient <strong>order of multiplication</strong> to minimise the total number of scalar multiplications. Matrix multiplication is associative — the order of parenthesisation changes the cost, not the result.
+      </p>
+      <p><strong>Recurrence:</strong> <code>dp[i][j] = min over all k of (dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j])</code></p>
+
+      <pre><code class="language-python">def matrix_chain(p):
+    """
+    p = dimensions array: matrix i has dims p[i-1] x p[i]
+    e.g. p = [40, 20, 30, 10, 30] means:
+         A(40x20), B(20x30), C(30x10), D(10x30)
+    """
+    n = len(p) - 1  # number of matrices
+    # dp[i][j] = min cost to multiply matrices i..j (1-indexed)
+    dp = [[0] * (n + 1) for _ in range(n + 1)]
+
+    # l = chain length (from 2 to n)
+    for length in range(2, n + 1):
+        for i in range(1, n - length + 2):
+            j = i + length - 1
+            dp[i][j] = float('inf')
+            for k in range(i, j):
+                cost = dp[i][k] + dp[k+1][j] + p[i-1] * p[k] * p[j]
+                dp[i][j] = min(dp[i][j], cost)
+
+    return dp[1][n]
+
+
+p = [40, 20, 30, 10, 30]
+print(matrix_chain(p))  # → 26000
+</code></pre>
+
+      <div class="article-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>Brute force tries all possible parenthesisations — that's a Catalan number, which grows exponentially. DP solves it in <strong>O(n³)</strong> time and <strong>O(n²)</strong> space by filling in the diagonal of a 2D table.</p>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 10 — How to approach DP
+      ════════════════════════════════════════ -->
+      <h2>How to Approach Any DP Problem</h2>
+      <p>When you see a problem in an interview or contest, run through these steps:</p>
+
+      <div class="steps-flow">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <strong>Identify the problem type</strong>
+            <p>Does it ask for a maximum/minimum value, count of ways, or true/false feasibility? These are classic DP signals.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <strong>Define the state</strong>
+            <p>What does dp[i] or dp[i][j] represent? The definition of your state is the core of your solution. Be precise.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <strong>Write the recurrence</strong>
+            <p>Express dp[i] in terms of smaller sub-problems. Think about what choices or transitions are available at each step.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <strong>Identify base cases</strong>
+            <p>What are the smallest sub-problems with known answers? These seed the rest of the table.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <strong>Choose top-down or bottom-up</strong>
+            <p>Memoization is easier to write first. Convert to tabulation if you need better space or want to avoid recursion depth limits.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">6</div>
+          <div class="step-connector"></div>
+          <div class="step-body">
+            <strong>Optimise space if needed</strong>
+            <p>Check whether you only access the previous row/column/element. If so, reduce the table to a 1D array or a few variables.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 11 — DP patterns
+      ════════════════════════════════════════ -->
+      <h2>Common DP Patterns to Recognise</h2>
+
+      <div class="pattern-grid">
+        <div class="pattern-card">
+          <h4><i class="fa-solid fa-list-ol"></i> Linear DP</h4>
+          <p>State depends on previous elements in a 1D array. Examples: Fibonacci, Climbing Stairs, LIS, Max Subarray Sum.</p>
+        </div>
+        <div class="pattern-card">
+          <h4><i class="fa-solid fa-table"></i> 2D DP / Grid DP</h4>
+          <p>State indexed by two variables — usually item + capacity, or two string positions. Examples: Knapsack, LCS, Edit Distance.</p>
+        </div>
+        <div class="pattern-card">
+          <h4><i class="fa-solid fa-rotate"></i> Interval DP</h4>
+          <p>Fill a table diagonally over all sub-intervals. Examples: Matrix Chain Multiplication, Burst Balloons, Palindrome Partitioning.</p>
+        </div>
+        <div class="pattern-card">
+          <h4><i class="fa-solid fa-tree"></i> Tree DP</h4>
+          <p>DP on a tree structure, often computing values bottom-up from leaves. Examples: Max Path Sum, House Robber III.</p>
+        </div>
+        <div class="pattern-card">
+          <h4><i class="fa-solid fa-microchip"></i> Bitmask DP</h4>
+          <p>State includes a bitmask to track which items/nodes are visited. Examples: Travelling Salesman Problem, Assignment Problem.</p>
+        </div>
+        <div class="pattern-card">
+          <h4><i class="fa-solid fa-dice"></i> Probability / Count DP</h4>
+          <p>Count the number of ways or compute probabilities. Examples: Coin Change (ways), Unique Paths, Egg Drop Problem.</p>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           SECTION 12 — Complexity summary
+      ════════════════════════════════════════ -->
+      <h2>Complexity Summary</h2>
+      <table class="dp-table">
+        <thead>
+          <tr>
+            <th>Problem</th>
+            <th>Time</th>
+            <th>Space</th>
+            <th>Space-Optimised</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Fibonacci</td><td>O(n)</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Climbing Stairs</td><td>O(n)</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Coin Change</td><td>O(n × amount)</td><td>O(amount)</td><td>O(amount)</td></tr>
+          <tr><td>0/1 Knapsack</td><td>O(n × W)</td><td>O(n × W)</td><td>O(W)</td></tr>
+          <tr><td>LCS</td><td>O(m × n)</td><td>O(m × n)</td><td>O(min(m,n))</td></tr>
+          <tr><td>LIS</td><td>O(n²)</td><td>O(n)</td><td>O(n) (or O(n log n) with BSearch)</td></tr>
+          <tr><td>Matrix Chain</td><td>O(n³)</td><td>O(n²)</td><td>O(n²)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="article-challenge">
+        <i class="fa-solid fa-code"></i>
+        <p>
+          <strong>Practice challenge:</strong> Given <code>coins = [1, 2, 5]</code> and <code>amount = 5</code>, find the <em>total number of ways</em> to make that amount (not the minimum coins). Hint: it's a variation of Coin Change — what changes in the recurrence? (Answer: <code>dp[i] += dp[i - coin]</code> instead of <code>min</code>. For this example: 4 ways.)
+        </p>
+      </div>
+
+      <p class="article-cta-text">
+        Dynamic Programming is one of those topics that clicks suddenly — and once it does, you start seeing DP everywhere. Start with Fibonacci, then Climbing Stairs, then Coin Change. Work through Knapsack and LCS with pen and paper, filling the table manually. That muscle memory of "define state → write recurrence → fill table" is all you need to crack any DP problem, in any interview, at any company.
+      </p>
+
+    </div>
+  </main>
+
+  <!-- RELATED -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+        <a href="time-and-space-complexity.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-gauge-high"></i></div>
+          <div><p>Time &amp; Space Complexity — Big O Explained with Examples</p></div>
+        </a>
+        <a href="dijkstra-algorithm.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-route"></i></div>
+          <div><p>Dijkstra's Algorithm — Shortest Path, Explained Simply</p></div>
+        </a>
+        <a href="kruskal-algorithm.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-diagram-project"></i></div>
+          <div><p>Kruskal's Algorithm — Minimum Spanning Tree Explained</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENTS -->
+  <section class="article-body" style="padding-top: 2rem;">
+    <div class="article-container">
+      <p class="comment-prompt">Got a favourite DP trick? Drop it below 👇</p>
+      <div id="disqus_thread"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 Codenosis. Built with <i class="fa-solid fa-heart"></i> by <strong>Sarthak</strong> &amp; <strong>Yogesh</strong>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="../script.js"></script>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = 'dynamic-programming';
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+</body>
+</html>
