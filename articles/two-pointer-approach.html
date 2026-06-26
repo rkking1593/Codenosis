@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Two Pointer Approach Explained | Codenosis</title>
+  <meta name="description" content="Master the Two Pointer technique — one of DSA's most powerful patterns. Learn how it works, when to apply it, and walk through real examples step by step." />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
+
+  <style>
+    /* ── Per-article scoped styles ── */
+
+    /* Pointer visualization boxes */
+    .tp-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 2rem 0;
+      overflow-x: auto;
+    }
+
+    .tp-visual-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .tp-array {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: nowrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .tp-cell {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .tp-cell.left-ptr {
+      border-color: #6366f1;
+      background: rgba(99,102,241,0.2);
+      color: #6366f1;
+    }
+
+    .tp-cell.right-ptr {
+      border-color: #ef4444;
+      background: rgba(239,68,68,0.2);
+      color: #ef4444;
+    }
+
+    .tp-cell.match {
+      border-color: #10b981;
+      background: rgba(16,185,129,0.2);
+      color: #10b981;
+    }
+
+    .tp-labels {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: nowrap;
+      margin-bottom: 0.4rem;
+    }
+
+    .tp-label {
+      width: 48px;
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .tp-label.left-lbl  { color: #6366f1; }
+    .tp-label.right-lbl { color: #ef4444; }
+
+    .tp-legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .tp-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .tp-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .tp-dot.l { background: rgba(99,102,241,0.6); }
+    .tp-dot.r { background: rgba(239,68,68,0.6); }
+    .tp-dot.m { background: rgba(16,185,129,0.6); }
+
+    /* Step table for walkthroughs */
+    .step-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.88rem;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .step-table th {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-weight: 600;
+      padding: 0.8rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-table td {
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-table tr:last-child td { border-bottom: none; }
+
+    .step-table tr:hover td {
+      background: rgba(99,102,241,0.05);
+      color: var(--text-primary);
+    }
+
+    .step-table .res-cell {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    /* Complexity badge */
+    .complexity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .complexity-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+    }
+
+    .complexity-box .c-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .complexity-box .c-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: monospace;
+    }
+
+    .complexity-box .c-note {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 0.3rem;
+    }
+
+    /* When-to-use cards */
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .usecase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.3s ease;
+    }
+
+    .usecase-card:hover { border-color: var(--accent); }
+
+    .usecase-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(99,102,241,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .usecase-card h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .usecase-card p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+
+    /* Pitfall callout */
+    .pitfall-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(239, 68, 68, 0.07);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .pitfall-box i {
+      color: #ef4444;
+      font-size: 1.2rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .pitfall-box p {
+      margin: 0 !important;
+      color: var(--text-primary) !important;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .usecase-grid { grid-template-columns: 1fr; }
+      .complexity-grid { grid-template-columns: 1fr 1fr; }
+      .tp-cell, .tp-label { width: 38px; height: 38px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-DSA">DSA</span>
+        <span class="meta-info"><i class="fa-regular fa-clock"></i> 12 min read</span>
+        <span class="meta-info"><i class="fa-regular fa-calendar"></i> June 2025</span>
+      </div>
+
+      <h1 class="article-title">Two Pointer Approach — The Art of Shrinking Your Search Space</h1>
+
+      <p class="article-subtitle">
+        One technique. Dozens of classic interview problems. Learn how two pointers work, when to reach for them, and how to walk through real problems like a pro.
+      </p>
+
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <div class="author-name">Yogesh</div>
+          <div class="author-tag">DSA & Algorithms · Codenosis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <main class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        The Two Pointer technique is one of those rare algorithmic tools that feels like cheating once you truly understand it. Problems that look like they need nested loops — O(n²) brute force — suddenly collapse into a single O(n) pass. This article covers everything: the intuition, the patterns, step-by-step walkthroughs, and a map of when to actually use it.
+      </p>
+
+      <!-- ===== SECTION 1 ===== -->
+      <h2>What Is the Two Pointer Technique?</h2>
+      <p>
+        At its core, the two pointer approach uses <strong>two index variables</strong> (pointers) that traverse a data structure — usually an array or string — simultaneously. Instead of checking every pair of elements with two nested loops, you use the positions of these two pointers cleverly so that you only ever do one pass through the data.
+      </p>
+      <p>
+        The key insight is that in many problems, you can <strong>eliminate large chunks of the search space</strong> based on a comparison between what the pointers currently point at. This is why the approach is so powerful.
+      </p>
+
+      <div class="article-challenge">
+        <i class="fa-solid fa-lightbulb"></i>
+        <p>Think of two pointers like two fingers scanning a book — one from the left margin, one from the right. Depending on what each finger sees, you decide which one to move inward. You never need to compare every possible pair of pages.</p>
+      </div>
+
+      <!-- ===== SECTION 2 ===== -->
+      <h2>The Three Main Flavors</h2>
+      <p>Two pointer problems generally come in three setups. Understanding which flavor fits a problem is half the battle.</p>
+
+      <div class="usecase-grid">
+        <div class="usecase-card">
+          <div class="usecase-icon"><i class="fa-solid fa-left-right"></i></div>
+          <div>
+            <h4>Opposite Ends (Converging)</h4>
+            <p>Left pointer starts at index 0, right pointer starts at the last index. They move toward each other. Classic for sorted-array pair problems.</p>
+          </div>
+        </div>
+        <div class="usecase-card">
+          <div class="usecase-icon"><i class="fa-solid fa-forward"></i></div>
+          <div>
+            <h4>Same Direction (Sliding)</h4>
+            <p>Both pointers start at index 0 and move forward. The gap between them forms a window. Classic for subarray/substring problems.</p>
+          </div>
+        </div>
+        <div class="usecase-card">
+          <div class="usecase-icon"><i class="fa-solid fa-shuffle"></i></div>
+          <div>
+            <h4>Fast & Slow (Floyd's)</h4>
+            <p>One pointer moves one step at a time; the other moves two. Classic for cycle detection in linked lists.</p>
+          </div>
+        </div>
+        <div class="usecase-card">
+          <div class="usecase-icon"><i class="fa-solid fa-list-ol"></i></div>
+          <div>
+            <h4>Multi-array / Two Sequences</h4>
+            <p>One pointer per array. Used to merge or compare two sorted arrays simultaneously. Classic in merge sort and diff algorithms.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 3: EXAMPLE 1 ===== -->
+      <h2>Example 1 — Two Sum in a Sorted Array</h2>
+      <p>
+        <strong>Problem:</strong> Given a sorted array and a target number, find two elements that add up to the target. Return their indices (1-indexed).
+      </p>
+      <p>
+        <strong>Array:</strong> <code>[2, 7, 11, 15]</code> &nbsp;|&nbsp; <strong>Target:</strong> <code>9</code>
+      </p>
+
+      <!-- Visual: initial state -->
+      <div class="tp-visual">
+        <div class="tp-visual-title">Step 1 — Initial Position</div>
+        <div class="tp-labels">
+          <div class="tp-label left-lbl">L</div>
+          <div class="tp-label"></div>
+          <div class="tp-label"></div>
+          <div class="tp-label right-lbl">R</div>
+        </div>
+        <div class="tp-array">
+          <div class="tp-cell left-ptr">2</div>
+          <div class="tp-cell">7</div>
+          <div class="tp-cell">11</div>
+          <div class="tp-cell right-ptr">15</div>
+        </div>
+        <div class="tp-legend">
+          <div class="tp-legend-item"><div class="tp-dot l"></div> Left pointer</div>
+          <div class="tp-legend-item"><div class="tp-dot r"></div> Right pointer</div>
+          <div class="tp-legend-item"><div class="tp-dot m"></div> Match found</div>
+        </div>
+      </div>
+
+      <p><strong>The Logic:</strong></p>
+      <ul>
+        <li>Calculate <code>sum = arr[L] + arr[R]</code></li>
+        <li>If <code>sum == target</code> → found it ✅</li>
+        <li>If <code>sum &lt; target</code> → we need a bigger number → move <strong>L right</strong></li>
+        <li>If <code>sum &gt; target</code> → we need a smaller number → move <strong>R left</strong></li>
+      </ul>
+
+      <p>This works because the array is sorted — moving left pointer right always increases the sum; moving right pointer left always decreases it.</p>
+
+      <!-- Step walkthrough table -->
+      <table class="step-table">
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>L</th>
+            <th>R</th>
+            <th>arr[L]</th>
+            <th>arr[R]</th>
+            <th>Sum</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>0</td><td>3</td><td>2</td><td>15</td><td>17</td><td>sum &gt; 9 → move R left</td>
+          </tr>
+          <tr>
+            <td>2</td><td>0</td><td>2</td><td>2</td><td>11</td><td>13</td><td>sum &gt; 9 → move R left</td>
+          </tr>
+          <tr>
+            <td>3</td><td>0</td><td>1</td><td>2</td><td>7</td><td>9</td><td class="res-cell">✅ sum == target → return [1, 2]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Visual: final match -->
+      <div class="tp-visual">
+        <div class="tp-visual-title">Step 3 — Match Found</div>
+        <div class="tp-labels">
+          <div class="tp-label left-lbl">L</div>
+          <div class="tp-label right-lbl">R</div>
+          <div class="tp-label"></div>
+          <div class="tp-label"></div>
+        </div>
+        <div class="tp-array">
+          <div class="tp-cell match">2</div>
+          <div class="tp-cell match">7</div>
+          <div class="tp-cell">11</div>
+          <div class="tp-cell">15</div>
+        </div>
+        <div class="tp-legend">
+          <div class="tp-legend-item"><div class="tp-dot m"></div> Pair found: 2 + 7 = 9</div>
+        </div>
+      </div>
+
+      <h2>Python Code — Two Sum (Sorted)</h2>
+
+      <pre><code class="language-python">def two_sum_sorted(nums, target):
+    left = 0
+    right = len(nums) - 1
+
+    while left < right:
+        current_sum = nums[left] + nums[right]
+
+        if current_sum == target:
+            # 1-indexed result
+            return [left + 1, right + 1]
+        elif current_sum < target:
+            left += 1   # Need larger sum → move left pointer right
+        else:
+            right -= 1  # Need smaller sum → move right pointer left
+
+    return []  # No pair found
+
+
+# Example usage
+nums = [2, 7, 11, 15]
+target = 9
+print(two_sum_sorted(nums, target))  # Output: [1, 2]
+</code></pre>
+
+      <div class="complexity-grid">
+        <div class="complexity-box">
+          <div class="c-label">Time Complexity</div>
+          <div class="c-value">O(n)</div>
+          <div class="c-note">Single pass through the array</div>
+        </div>
+        <div class="complexity-box">
+          <div class="c-label">Space Complexity</div>
+          <div class="c-value">O(1)</div>
+          <div class="c-note">Only two integer variables used</div>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 4: EXAMPLE 2 ===== -->
+      <h2>Example 2 — Valid Palindrome</h2>
+      <p>
+        <strong>Problem:</strong> Given a string, check whether it reads the same forwards and backwards (ignoring non-alphanumeric characters and case).
+      </p>
+      <p>
+        <strong>Input:</strong> <code>"A man, a plan, a canal: Panama"</code> → <strong>Output:</strong> <code>True</code>
+      </p>
+      <p>
+        The two-pointer solution is elegant here. Place one pointer at the very start and one at the very end. Skip any character that isn't a letter or digit. Then compare. If all comparisons match until the pointers cross, it's a palindrome.
+      </p>
+
+      <pre><code class="language-python">def is_palindrome(s):
+    left = 0
+    right = len(s) - 1
+
+    while left < right:
+        # Skip non-alphanumeric from the left
+        while left < right and not s[left].isalnum():
+            left += 1
+
+        # Skip non-alphanumeric from the right
+        while left < right and not s[right].isalnum():
+            right -= 1
+
+        # Compare characters (case-insensitive)
+        if s[left].lower() != s[right].lower():
+            return False
+
+        left += 1
+        right -= 1
+
+    return True
+
+
+# Example usage
+print(is_palindrome("A man, a plan, a canal: Panama"))  # True
+print(is_palindrome("race a car"))                       # False
+</code></pre>
+
+      <p>
+        The brute force way would be to strip the string and compare it with its reverse — that works too, but uses O(n) extra space. Two pointers gives us O(1) space and the same O(n) time.
+      </p>
+
+      <!-- ===== SECTION 5: EXAMPLE 3 ===== -->
+      <h2>Example 3 — Remove Duplicates from Sorted Array (In-Place)</h2>
+      <p>
+        <strong>Problem:</strong> Given a sorted array, remove duplicates in-place so that each element appears only once. Return the new length. Do not allocate extra space.
+      </p>
+      <p>
+        This uses the <strong>same-direction</strong> flavor — both pointers start at 0, but one (the fast pointer) races ahead while the slow pointer marks where the next unique value should go.
+      </p>
+
+      <pre><code class="language-python">def remove_duplicates(nums):
+    if not nums:
+        return 0
+
+    slow = 0  # Points to the last confirmed unique position
+
+    for fast in range(1, len(nums)):
+        if nums[fast] != nums[slow]:
+            slow += 1
+            nums[slow] = nums[fast]  # Write unique value into place
+
+    return slow + 1  # Length of deduplicated portion
+
+
+# Example usage
+nums = [1, 1, 2, 3, 3, 3, 4, 5, 5]
+k = remove_duplicates(nums)
+print(k)            # 5
+print(nums[:k])     # [1, 2, 3, 4, 5]
+</code></pre>
+
+      <table class="step-table">
+        <thead>
+          <tr><th>fast</th><th>slow</th><th>nums[fast]</th><th>nums[slow]</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>Same → skip</td></tr>
+          <tr><td>2</td><td>0</td><td>2</td><td>1</td><td>Different → slow=1, write 2</td></tr>
+          <tr><td>3</td><td>1</td><td>3</td><td>2</td><td>Different → slow=2, write 3</td></tr>
+          <tr><td>4</td><td>2</td><td>3</td><td>3</td><td>Same → skip</td></tr>
+          <tr><td>5</td><td>2</td><td>3</td><td>3</td><td>Same → skip</td></tr>
+          <tr><td>6</td><td>2</td><td>4</td><td>3</td><td>Different → slow=3, write 4</td></tr>
+          <tr><td>7</td><td>3</td><td>5</td><td>4</td><td>Different → slow=4, write 5</td></tr>
+          <tr><td>8</td><td>4</td><td>5</td><td>5</td><td>Same → skip</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ===== SECTION 6: EXAMPLE 4 ===== -->
+      <h2>Example 4 — Container With Most Water</h2>
+      <p>
+        <strong>Problem:</strong> Given an array <code>height</code> where each element is the height of a vertical line, find two lines that together with the x-axis forms a container that holds the most water.
+      </p>
+      <p>
+        <strong>Key insight:</strong> The area = <code>min(height[L], height[R]) × (R - L)</code>. We start with the widest possible container (L=0, R=end). To potentially increase the area, we must move the pointer on the <em>shorter</em> side — because keeping the shorter side can never increase the min height, and moving it might find something taller.
+      </p>
+
+      <pre><code class="language-python">def max_water(height):
+    left = 0
+    right = len(height) - 1
+    max_area = 0
+
+    while left < right:
+        # Width is the distance between pointers
+        width = right - left
+        # Height is limited by the shorter wall
+        current_height = min(height[left], height[right])
+        area = width * current_height
+        max_area = max(max_area, area)
+
+        # Move the shorter side inward to look for a taller wall
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
+
+    return max_area
+
+
+# Example usage
+height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+print(max_water(height))  # Output: 49
+</code></pre>
+
+      <div class="article-challenge">
+        <i class="fa-solid fa-bolt"></i>
+        <p>Why move the shorter side? Because if you move the taller side, the width decreases AND the height stays limited by the same shorter side — area can only get worse. Moving the shorter side is the only chance to find a taller wall that could compensate for the reduced width.</p>
+      </div>
+
+      <!-- ===== SECTION 7: WHEN TO USE ===== -->
+      <h2>When to Apply the Two Pointer Technique</h2>
+      <p>
+        Not every problem needs two pointers — but these are the clearest signal patterns that suggest it's the right tool:
+      </p>
+
+      <ul>
+        <li><strong>The input is sorted (or can be sorted)</strong> — Sorted order is what lets you make intelligent decisions about which pointer to move.</li>
+        <li><strong>You need to find a pair or triplet satisfying a condition</strong> — Two Sum, Three Sum, pair with max product, etc.</li>
+        <li><strong>You need to check a symmetry property</strong> — Palindromes, balanced strings, matching brackets from both ends.</li>
+        <li><strong>You need to partition or filter in-place</strong> — Moving zeros to the end, removing duplicates, Dutch National Flag problem.</li>
+        <li><strong>You're optimizing a window or range</strong> — Container With Most Water, trapping rainwater, minimum window substring.</li>
+        <li><strong>You're dealing with a linked list cycle or middle</strong> — Fast/slow pointer (Floyd's algorithm) finds cycles in O(1) space.</li>
+        <li><strong>You're merging two sorted arrays or sequences</strong> — One pointer per array, advance whichever is smaller.</li>
+      </ul>
+
+      <div class="usecase-grid">
+        <div class="usecase-card">
+          <div class="usecase-icon"><i class="fa-solid fa-check"></i></div>
+          <div>
+            <h4>Good Fit</h4>
+            <p>Find if any pair sums to K in a sorted array, check palindrome, merge sorted arrays, detect linked list cycle, remove duplicates in-place.</p>
+          </div>
+        </div>
+        <div class="usecase-card">
+          <div class="usecase-icon"><i class="fa-solid fa-xmark"></i></div>
+          <div>
+            <h4>Not a Fit</h4>
+            <p>Problems needing random access or hash-based lookups, unsorted data where sorting would change the answer, tree/graph traversals where pointers don't apply.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 8: THREE SUM BONUS ===== -->
+      <h2>Bonus — 3Sum (Extending Two Pointers)</h2>
+      <p>
+        Two pointers shine even more when extended to three-element problems. For 3Sum, fix one element with a loop, then run two pointers on the rest of the array for each fixed element.
+      </p>
+
+      <pre><code class="language-python">def three_sum(nums):
+    nums.sort()
+    result = []
+
+    for i in range(len(nums) - 2):
+        # Skip duplicates for the fixed element
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+
+        left = i + 1
+        right = len(nums) - 1
+
+        while left < right:
+            total = nums[i] + nums[left] + nums[right]
+
+            if total == 0:
+                result.append([nums[i], nums[left], nums[right]])
+                # Skip duplicates for left and right
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                left += 1
+                right -= 1
+            elif total < 0:
+                left += 1
+            else:
+                right -= 1
+
+    return result
+
+
+# Example usage
+nums = [-1, 0, 1, 2, -1, -4]
+print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]
+</code></pre>
+
+      <div class="complexity-grid">
+        <div class="complexity-box">
+          <div class="c-label">Time Complexity</div>
+          <div class="c-value">O(n²)</div>
+          <div class="c-note">Outer loop × inner two-pointer pass</div>
+        </div>
+        <div class="complexity-box">
+          <div class="c-label">vs Brute Force</div>
+          <div class="c-value">O(n³)</div>
+          <div class="c-note">Three nested loops without two pointers</div>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 9: PITFALLS ===== -->
+      <h2>Common Mistakes to Avoid</h2>
+
+      <div class="pitfall-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Applying two pointers to an unsorted array and expecting it to find all pairs — it won't work unless you sort first. The logic of "move left to increase, move right to decrease" only holds in sorted order.</p>
+      </div>
+
+      <div class="pitfall-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Forgetting the loop termination condition <code>left &lt; right</code>. If both pointers reach the same index, you shouldn't be comparing an element with itself.</p>
+      </div>
+
+      <div class="pitfall-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Not skipping duplicate values in 3Sum / K-Sum problems — this will give you duplicate triplets in the result set, which is usually incorrect.</p>
+      </div>
+
+      <div class="pitfall-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Confusing two pointers with sliding window — both use two indices, but in sliding window, you expand one side and contract the other based on a constraint (like sum ≤ k), not a fixed comparison rule.</p>
+      </div>
+
+      <!-- ===== SECTION 10: QUICK REFERENCE ===== -->
+      <h2>Quick Reference — Problems to Practice</h2>
+
+      <table class="step-table">
+        <thead>
+          <tr><th>Problem</th><th>Pattern</th><th>Difficulty</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Two Sum II (sorted input)</td><td>Converging</td><td>Easy</td></tr>
+          <tr><td>Valid Palindrome</td><td>Converging</td><td>Easy</td></tr>
+          <tr><td>Remove Duplicates from Sorted Array</td><td>Same Direction</td><td>Easy</td></tr>
+          <tr><td>Move Zeros</td><td>Same Direction</td><td>Easy</td></tr>
+          <tr><td>Container With Most Water</td><td>Converging</td><td>Medium</td></tr>
+          <tr><td>3Sum</td><td>Fix + Converging</td><td>Medium</td></tr>
+          <tr><td>Trapping Rain Water</td><td>Converging</td><td>Hard</td></tr>
+          <tr><td>Linked List Cycle Detection</td><td>Fast & Slow</td><td>Easy</td></tr>
+          <tr><td>Find Middle of Linked List</td><td>Fast & Slow</td><td>Easy</td></tr>
+          <tr><td>Minimum Window Substring</td><td>Sliding Window</td><td>Hard</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Wrapping Up</h2>
+      <p>
+        The two pointer technique is not a magic trick — it's a <strong>deliberate reduction of the search space</strong>. Every time you move a pointer, you're making a guarantee: "I know for certain this region can't hold a better answer." That guarantee comes from the structure of the data (usually sorted order) and the property you're searching for.
+      </p>
+      <p>
+        Once you internalize that idea, you'll start recognizing two-pointer problems on sight. The pattern shows up constantly in interviews — two sum, palindromes, container problems, deduplication, linked list cycle — and knowing this technique cold is one of the highest-leverage things you can do for your DSA preparation.
+      </p>
+      <p>
+        Start with the easy problems in the practice table, implement each one from scratch, and trace through your pointer movements manually on paper at least once. That tactile understanding is what makes the technique click.
+      </p>
+
+      <p class="article-cta-text">
+        <i class="fa-solid fa-arrow-right"></i> &nbsp;Next up: explore the <strong>Sliding Window</strong> technique — two pointers' close cousin for subarray and substring optimization problems.
+      </p>
+
+    </div>
+  </main>
+
+  <!-- Comments -->
+  <section class="article-body" style="padding-top: 0;">
+    <div class="article-container">
+      <p class="comment-prompt"><i class="fa-regular fa-comment-dots"></i> &nbsp; Have a question or a pattern to add? Drop a comment below.</p>
+      <div id="disqus_thread"></div>
+    </div>
+  </section>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+        <a href="dijkstra-algorithm.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-route"></i></div>
+          <div>
+            <p>Dijkstra's Algorithm — Shortest Path Explained</p>
+          </div>
+        </a>
+        <a href="time-complexity.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-gauge-high"></i></div>
+          <div>
+            <p>Time & Space Complexity — Big O Demystified</p>
+          </div>
+        </a>
+        <a href="dynamic-programming.html" class="related-card">
+          <div class="related-icon"><i class="fa-solid fa-table-cells"></i></div>
+          <div>
+            <p>Dynamic Programming — Memoization & Tabulation</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Disqus -->
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = 'two-pointer-approach';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+  <!-- Highlight.js init -->
+  <script>hljs.highlightAll();</script>
+
+  <script>
+    // ── Navbar scroll ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── Hamburger ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // ── Theme toggle ──
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme  = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+      themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      themeToggle.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // ── Progress bar ──
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop    = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progressBar.style.width = ((scrollTop / scrollHeight) * 100) + '%';
+    });
+
+    // ── Back to top ──
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('show', window.scrollY > 300);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── Scroll reveal ──
+    const hiddenEls = document.querySelectorAll('.hidden');
+    const observer  = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    hiddenEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
