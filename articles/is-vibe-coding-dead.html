@@ -6,13 +6,14 @@
   <title>Is Vibe Coding Dead? The Honest Truth in 2026 | Codenosis</title>
   <meta name="description" content="Vibe coding exploded in 2025. Now its creator calls it passé. So is vibe coding actually dead — or just growing up? Here's the full, honest picture." />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Is Vibe Coding Dead? The Honest Truth in 2026" />
-  <meta property="og:description" content="Vibe coding exploded in 2025. Now its creator calls it passé. So is vibe coding actually dead — or just growing up? Here's the full, honest picture." />
-  <meta property="og:site_name" content="Codenosis" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../article.css" />
-
-  <!-- Google Analytics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,179 +21,41 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- Highlight.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
-  <!-- Site CSS -->
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/article.css" />
-
   <style>
-    /* ── per-article overrides ── */
-    .timeline {
-      position: relative;
-      padding-left: 1.8rem;
-      margin: 2rem 0 2.5rem;
-      border-left: 2px solid var(--accent);
-      display: flex;
-      flex-direction: column;
-      gap: 1.8rem;
-    }
-
-    .timeline-item {
-      position: relative;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -2.35rem;
-      top: 0.35rem;
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      border: 2px solid var(--bg-primary);
-    }
-
-    .timeline-date {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-item h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-item p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 0 !important;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.4rem 1.2rem;
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0 2rem;
-      font-size: 0.93rem;
-    }
-
-    .compare-table th {
-      background: rgba(99, 102, 241, 0.12);
-      color: var(--text-primary);
-      font-weight: 600;
-      padding: 0.8rem 1rem;
-      text-align: left;
-      border: 1px solid var(--border);
-    }
-
-    .compare-table td {
-      padding: 0.8rem 1rem;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      vertical-align: top;
-      line-height: 1.6;
-    }
-
-    .compare-table tr:hover td {
-      background: rgba(99, 102, 241, 0.04);
-    }
-
-    .verdict-box {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(99, 102, 241, 0.04));
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      border-radius: 14px;
-      padding: 2rem;
-      margin: 2.5rem 0;
-    }
-
-    .verdict-box h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-
-    .verdict-box p {
-      margin-bottom: 0 !important;
-      color: var(--text-secondary);
-      line-height: 1.9;
-    }
-
-    @media (max-width: 600px) {
-      .stat-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+    .timeline { position: relative; padding-left: 1.8rem; margin: 2rem 0 2.5rem; border-left: 2px solid var(--accent); display: flex; flex-direction: column; gap: 1.8rem; }
+    .timeline-item { position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -2.35rem; top: 0.35rem; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; border: 2px solid var(--bg-primary); }
+    .timeline-date { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 0.3rem; }
+    .timeline-item h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem; }
+    .timeline-item p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0 !important; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem 1.2rem; text-align: center; }
+    .stat-number { font-size: 1.8rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+    .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: 0.93rem; }
+    .compare-table th { background: rgba(99,102,241,0.12); color: var(--text-primary); font-weight: 600; padding: 0.8rem 1rem; text-align: left; border: 1px solid var(--border); }
+    .compare-table td { padding: 0.8rem 1rem; border: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; line-height: 1.6; }
+    .compare-table tr:hover td { background: rgba(99,102,241,0.04); }
+    .verdict-box { background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.04)); border: 1px solid rgba(99,102,241,0.35); border-radius: 14px; padding: 2rem; margin: 2.5rem 0; }
+    .verdict-box h3 { font-size: 1.15rem; font-weight: 700; color: var(--accent); margin-bottom: 0.8rem; }
+    .verdict-box p { margin-bottom: 0 !important; color: var(--text-secondary); line-height: 1.9; }
+    @media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
-<body>
+<body class="dark-mode">
 
-  <!-- ── PROGRESS BAR ── -->
-  <div class="progress-bar" id="progressBar"></div>
-
-  <!-- ── NAVBAR ── -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar">
     <div class="nav-container">
-      <a href="https://codenosis.in/" class="nav-logo">Codenosis</a>
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="https://codenosis.in/">Home</a></li>
-        <li><a href="https://codenosis.in/articles">Articles</a></li>
-        <li><a href="https://codenosis.in/#about">About</a></li>
-        <li><a href="https://codenosis.in/#newsletter">Newsletter</a></li>
-        <li><a href="https://codenosis.in/playground/playground">Playground</a></li>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
         <div class="hamburger" id="hamburger">
           <span></span><span></span><span></span>
         </div>
@@ -200,92 +63,52 @@
     </div>
   </nav>
 
-  <!-- ── ARTICLE HERO ── -->
   <section class="article-hero">
     <div class="article-container">
       <div class="article-meta">
-      <span class="category-badge badge-reality">Reality Check</span>
+        <span class="category-badge badge-reality">Reality Check</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 10 min read</span>
         <span class="meta-info"><i class="fas fa-calendar"></i> June 26, 2026</span>
       </div>
       <h1 class="article-title">Is Vibe Coding Dead? The Honest Truth in 2026</h1>
-      <p class="article-subtitle">
-        In February 2025, Andrej Karpathy posted a tweet that changed how the world thought about coding.
-        Exactly one year later, he called it obsolete. So — is vibe coding actually dead?
-        The answer is more interesting than a yes or a no.
-      </p>
+      <p class="article-subtitle">In February 2025, Andrej Karpathy posted a tweet that changed how the world thought about coding. Exactly one year later, he called it obsolete. So — is vibe coding actually dead? The answer is more interesting than a yes or a no.</p>
       <div class="article-author">
         <div class="author-avatar">Y</div>
-        <div class="author-info">
-          <span class="author-name">Yogesh</span>
-          <span class="author-tag">Software Developer &amp; Co-Founder, Codenosis</span>
+        <div>
+          <p class="author-name">Yogesh</p>
+          <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── ARTICLE BODY ── -->
-  <main class="article-container">
-    <article class="article-body">
+  <article class="article-body">
+    <div class="article-container">
 
       <p class="article-intro">
-        There was a moment in early 2025 when it felt like the rules had changed. You didn't need to
-        grind through Stack Overflow. You didn't need to memorize API docs or fight with semicolons.
-        You just… described what you wanted, and code appeared. It was called vibe coding — and for a
-        while, it felt like a superpower.
+        There was a moment in early 2025 when it felt like the rules had changed. You didn't need to grind through Stack Overflow. You didn't need to memorize API docs or fight with semicolons. You just… described what you wanted, and code appeared. It was called vibe coding — and for a while, it felt like a superpower.
       </p>
 
-      <p>
-        Then, in February 2026, the man who coined the term publicly moved on. Andrej Karpathy — former
-        Tesla AI director, OpenAI co-founder — announced that vibe coding was "passé" and introduced a
-        new term: <strong>agentic engineering</strong>. The tech world exploded. Think-pieces multiplied
-        overnight. "Vibe coding is dead" became the headline of the month.
-      </p>
+      <p>Then, in February 2026, the man who coined the term publicly moved on. Andrej Karpathy — former Tesla AI director, OpenAI co-founder — announced that vibe coding was "passé" and introduced a new term: <strong>agentic engineering</strong>. The tech world exploded. "Vibe coding is dead" became the headline of the month.</p>
 
-      <p>
-        But is it really? And if so, what killed it — and what comes next? Let's go through all of it,
-        honestly.
-      </p>
+      <p>But is it really? And if so, what killed it — and what comes next? Let's go through all of it, honestly.</p>
 
-      <!-- ── 1. WHAT WAS VIBE CODING ── -->
       <h2>What Was Vibe Coding, Really?</h2>
-
-      <p>
-        Vibe coding is a style of software development where you describe what you want in plain English —
-        and an AI writes the code. You don't fully read or understand the generated code. You just run it,
-        see if it works, and keep prompting until it does. The name comes from Karpathy's February 2025
-        tweet:
-      </p>
+      <p>Vibe coding is a style of software development where you describe what you want in plain English — and an AI writes the code. You don't fully read or understand the generated code. You just run it, see if it works, and keep prompting until it does.</p>
 
       <div class="article-challenge">
         <i class="fas fa-quote-left"></i>
-        <p>
-          "There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes,
-          embrace exponentials, and forget that the code even exists."
-          — Andrej Karpathy, February 2025
-        </p>
+        <p>"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists." — Andrej Karpathy, February 2025</p>
       </div>
 
-      <p>
-        The tools that made it possible — Cursor, Bolt.new, Replit, GitHub Copilot — had just reached a
-        quality threshold where non-developers could ship real products in weekends. A landing page, a
-        waitlist app, a simple SaaS tool. No CS degree required.
-      </p>
+      <p>The tools that made it possible — Cursor, Bolt.new, Replit, GitHub Copilot — had just reached a quality threshold where non-developers could ship real products in weekends. Merriam-Webster added the term in March 2025. Collins English Dictionary named it Word of the Year for 2025. By mid-2025, 25% of Y Combinator's Winter 2025 startups had codebases that were 95% AI-generated.</p>
 
-      <p>
-        Merriam-Webster added the term in March 2025. Collins English Dictionary named it Word of the Year
-        for 2025. By mid-2025, 25% of Y Combinator's Winter 2025 startups had codebases that were 95%
-        AI-generated. Vibe coding wasn't a niche experiment — it was a mainstream movement.
-      </p>
-
-      <!-- ── 2. TIMELINE ── -->
       <h2>The Rise and Fall — A Timeline</h2>
-
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-date">February 2025</div>
           <h4>Karpathy coins "vibe coding"</h4>
-          <p>A casual tweet launches a movement. Cursor, Bolt.new, and Replit explode in popularity. The era of "forget the code exists" begins.</p>
+          <p>A casual tweet launches a movement. Cursor, Bolt.new, and Replit explode in popularity.</p>
         </div>
         <div class="timeline-item">
           <div class="timeline-date">March 2025</div>
@@ -295,7 +118,7 @@
         <div class="timeline-item">
           <div class="timeline-date">Mid-2025</div>
           <h4>The cracks start showing</h4>
-          <p>Security researchers begin publishing data. AI-generated code has 1.7× more major issues than human-written code. Authentication bypasses and XSS vulnerabilities appear in production vibe-coded apps.</p>
+          <p>Security researchers begin publishing data. AI-generated code has 1.7× more major issues than human-written code.</p>
         </div>
         <div class="timeline-item">
           <div class="timeline-date">December 2025</div>
@@ -305,30 +128,19 @@
         <div class="timeline-item">
           <div class="timeline-date">February 2026</div>
           <h4>Vibe coding officially declared passé</h4>
-          <p>Karpathy introduces "agentic engineering" as the successor. Autonomous AI agents now plan, implement, test, and review code — with human oversight, not in spite of it.</p>
+          <p>Karpathy introduces "agentic engineering" as the successor. Autonomous AI agents now plan, implement, test, and review code — with human oversight.</p>
         </div>
         <div class="timeline-item">
           <div class="timeline-date">Mid-2026</div>
           <h4>The industry catches up</h4>
-          <p>Wall Street Journal reports professional engineers adopting agentic workflows at scale. The conversation shifts from "can AI write code?" to "how do we govern it?"</p>
+          <p>Wall Street Journal reports professional engineers adopting agentic workflows at scale.</p>
         </div>
       </div>
 
-      <!-- ── 3. WHY IT DIED ── -->
       <h2>Why Did Vibe Coding Die?</h2>
-
-      <p>
-        The honest answer: vibe coding didn't fail because the AI got worse. It failed because the
-        <em>consequences</em> of ignoring code quality became impossible to ignore.
-      </p>
+      <p>The honest answer: vibe coding didn't fail because the AI got worse. It failed because the <em>consequences</em> of ignoring code quality became impossible to ignore.</p>
 
       <h3>The Security Problem</h3>
-
-      <p>
-        This is the biggest one. Multiple independent analyses in 2025 found alarming numbers in
-        AI-generated code:
-      </p>
-
       <div class="stat-grid">
         <div class="stat-card">
           <div class="stat-number">45%</div>
@@ -344,64 +156,19 @@
         </div>
       </div>
 
-      <p>
-        In December 2025, a security researcher demonstrated a live exploit in the Orchids vibe coding
-        platform to a BBC reporter. In March 2026 alone, 35 new CVEs were directly attributed to
-        AI-generated code — up from just 6 in January. These aren't theoretical risks. They're
-        production incidents.
-      </p>
-
       <h3>The "Same Vibe" Problem</h3>
-
-      <p>
-        Here's a story that became painfully common in 2026. A developer builds a SaaS tool over a
-        weekend using Cursor. Landing page, pricing table, waitlist — it looks genuinely good. They
-        ship it. Nobody signs up. Not because the idea was bad, but because by the time they shipped,
-        there were already six nearly identical products on Product Hunt. Same gradient blob header.
-        Same "seamless, effortless automation" hero copy. Same three-tier pricing. Same vibe.
-      </p>
-
-      <p>
-        When everyone can build without effort, the value of building decreases. Vibe coding worked
-        too well — and flooded the market with soulless, interchangeable products. The internet
-        became an ocean of LACK coffee tables: functional, but forgettable.
-      </p>
+      <p>When everyone can build without effort, the value of building decreases. Vibe coding worked too well — and flooded the market with soulless, interchangeable products. The internet became an ocean of products that were functional but forgettable.</p>
 
       <h3>The Technical Debt Trap</h3>
-
-      <p>
-        Vibe-coded projects are fast to start and expensive to maintain. When you don't understand
-        the code the AI wrote, you can't debug it when it breaks. You can't add features without
-        accidentally breaking something else. You can't hand it off to another developer. The codebase
-        becomes a black box that only works until it doesn't.
-      </p>
+      <p>Vibe-coded projects are fast to start and expensive to maintain. When you don't understand the code the AI wrote, you can't debug it when it breaks, add features without breaking something else, or hand it off to another developer.</p>
 
       <div class="article-challenge">
         <i class="fas fa-triangle-exclamation"></i>
-        <p>
-          "Vibe coding your way to a production codebase is clearly risky. Most of the work we do as
-          software engineers involves evolving existing systems, where the quality and understandability
-          of the underlying code is crucial." — Simon Willison
-        </p>
+        <p>"Vibe coding your way to a production codebase is clearly risky. Most of the work we do as software engineers involves evolving existing systems, where the quality and understandability of the underlying code is crucial." — Simon Willison</p>
       </div>
 
-      <!-- ── 4. REAL EXAMPLE ── -->
-      <h2>A Real Example: What Vibe Coding Looks Like vs What It Should Look Like</h2>
-
-      <p>
-        Let's make this concrete. Say you want to build a simple user authentication system. Here's
-        how a vibe coder would approach it — and where it goes wrong.
-      </p>
-
+      <h2>A Real Example: Vibe Coding vs What It Should Look Like</h2>
       <h3>The Vibe Coding Approach</h3>
-
-      <p>You open Cursor and type:</p>
-
-      <pre><code class="language-plaintext">Build me a login system with email and password.
-Store users in a database. Make it work.</code></pre>
-
-      <p>Cursor generates something like this:</p>
-
       <pre><code class="language-python">from flask import Flask, request, jsonify
 import sqlite3
 
@@ -427,15 +194,7 @@ def login():
 if __name__ == '__main__':
     app.run(debug=True)  # ⚠️ debug=True in production</code></pre>
 
-      <p>
-        This code runs. It logs people in. A vibe coder sees it working and ships it. But it has
-        two critical flaws: a SQL injection vulnerability (an attacker can bypass authentication
-        entirely with a crafted email) and passwords stored in plain text. Your users' data is
-        completely exposed.
-      </p>
-
-      <h3>The Correct Approach (What Agentic Engineering Looks Like)</h3>
-
+      <h3>The Correct Approach</h3>
       <pre><code class="language-python">from flask import Flask, request, jsonify
 import sqlite3
 import bcrypt
@@ -466,309 +225,148 @@ def login():
     row = cursor.fetchone()
     conn.close()
 
-    # ✅ bcrypt comparison — passwords never stored in plain text
+    # ✅ bcrypt — passwords never stored in plain text
     if row and bcrypt.checkpw(password.encode(), row[0]):
         return jsonify({"status": "success"})
 
-    # ✅ Same error message for both cases — prevents user enumeration
+    # ✅ Same error for both cases — prevents user enumeration
     return jsonify({"error": "Invalid credentials"}), 401
 
 if __name__ == '__main__':
     app.run(debug=False)  # ✅ debug=False in production</code></pre>
 
-      <p>
-        The difference isn't just syntax. It's the understanding behind the code — why parameterized
-        queries matter, why bcrypt exists, why returning the same error message for "wrong email" and
-        "wrong password" prevents attackers from enumerating valid accounts. Vibe coding skips all of
-        this. Agentic engineering — with proper review — catches it.
-      </p>
-
-      <!-- ── 5. WHAT REPLACED IT ── -->
       <h2>What Replaced Vibe Coding: Agentic Engineering</h2>
-
-      <p>
-        Karpathy's replacement term is <strong>agentic engineering</strong>. The name matters less than
-        what it describes: a fundamentally different relationship between developer and AI.
-      </p>
-
       <table class="compare-table">
         <thead>
-          <tr>
-            <th></th>
-            <th>Vibe Coding (2025)</th>
-            <th>Agentic Engineering (2026)</th>
-          </tr>
+          <tr><th></th><th>Vibe Coding (2025)</th><th>Agentic Engineering (2026)</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>Your role</strong></td>
-            <td>Driver — you prompt, AI executes one task at a time</td>
-            <td>Reviewer &amp; orchestrator — you set goals, AI builds autonomously</td>
-          </tr>
-          <tr>
-            <td><strong>Code review</strong></td>
-            <td>Minimal or none — "forget the code exists"</td>
-            <td>Outcome-based — did it achieve the goal safely?</td>
-          </tr>
-          <tr>
-            <td><strong>Scope</strong></td>
-            <td>One task, one context window at a time</td>
-            <td>Multi-step projects — plan, implement, test, review in sequence</td>
-          </tr>
-          <tr>
-            <td><strong>What AI does</strong></td>
-            <td>Writes code on demand</td>
-            <td>Observes codebase, reasons about goals, acts, checks own output</td>
-          </tr>
-          <tr>
-            <td><strong>Skill required</strong></td>
-            <td>Prompting ability</td>
-            <td>Systems thinking, architecture, governance, goal decomposition</td>
-          </tr>
-          <tr>
-            <td><strong>Best for</strong></td>
-            <td>Prototypes, throwaway weekend projects</td>
-            <td>Production systems, maintainable codebases, team environments</td>
-          </tr>
+          <tr><td><strong>Your role</strong></td><td>Driver — you prompt, AI executes one task at a time</td><td>Reviewer & orchestrator — you set goals, AI builds autonomously</td></tr>
+          <tr><td><strong>Code review</strong></td><td>Minimal or none — "forget the code exists"</td><td>Outcome-based — did it achieve the goal safely?</td></tr>
+          <tr><td><strong>Scope</strong></td><td>One task, one context window at a time</td><td>Multi-step projects — plan, implement, test, review</td></tr>
+          <tr><td><strong>Skill required</strong></td><td>Prompting ability</td><td>Systems thinking, architecture, governance</td></tr>
+          <tr><td><strong>Best for</strong></td><td>Prototypes, throwaway weekend projects</td><td>Production systems, maintainable codebases</td></tr>
         </tbody>
       </table>
 
-      <p>
-        The shift is from <em>describing code</em> to <em>orchestrating agents</em>. Instead of asking
-        an AI to "write a login function," you ask an AI agent to "audit this codebase for authentication
-        vulnerabilities, generate a report, create tickets for critical issues, and open PRs with proposed
-        fixes for the top three." That's not a prompt. That's a delegation of a multi-day engineering
-        task.
-      </p>
-
-      <!-- ── 6. IS IT TRULY DEAD ── -->
       <h2>So — Is Vibe Coding Actually Dead?</h2>
-
-      <p>
-        Here's the honest answer: <strong>vibe coding as a serious development practice is dead. Vibe
-        coding as a prototyping tool is very much alive.</strong>
-      </p>
-
-      <p>
-        For throwaway projects, proof-of-concepts, personal tools, and weekend experiments — "give in
-        to the vibes" is still perfectly valid. Nobody needs a security audit for a script that counts
-        words in a file.
-      </p>
-
-      <p>
-        But for anything that touches users, stores data, handles payments, or needs to be maintained
-        by a team — vibe coding isn't just dead, it was never appropriate. The industry needed to learn
-        this lesson the hard way, and 2025 provided all the case studies required.
-      </p>
-
-      <p>
-        What actually died is the <em>narrative</em> that vibe coding could replace real engineering.
-        The idea that anyone with a napkin sketch could build production software without understanding
-        what their code does — that's the thing that's dead.
-      </p>
+      <p><strong>Vibe coding as a serious development practice is dead. Vibe coding as a prototyping tool is very much alive.</strong></p>
+      <p>For throwaway projects, proof-of-concepts, and weekend experiments — "give in to the vibes" is still perfectly valid. But for anything that touches users, stores data, handles payments, or needs to be maintained by a team — vibe coding was never appropriate.</p>
 
       <div class="verdict-box">
         <h3><i class="fas fa-gavel"></i> &nbsp; The Verdict</h3>
-        <p>
-          Vibe coding was a cultural moment that showed millions of people what AI could do with code.
-          It forced the entire industry to take AI-assisted development seriously — and that's genuinely
-          valuable. But "forget the code exists" was always a phase, not a destination. What comes next
-          is better: AI that builds software the way it should be built, from specifications, with review,
-          with tests, and with security baked in from the start. The vibes are gone. The work has begun.
-        </p>
+        <p>Vibe coding was a cultural moment that showed millions of people what AI could do with code. It forced the entire industry to take AI-assisted development seriously — and that's genuinely valuable. But "forget the code exists" was always a phase, not a destination. The vibes are gone. The work has begun.</p>
       </div>
 
-      <!-- ── 7. WHAT THIS MEANS FOR YOU ── -->
       <h2>What This Means If You're Learning to Code in 2026</h2>
-
-      <p>
-        If you're a student or someone just starting out, the vibe coding debate probably feels distant.
-        Here's what it actually means for you:
-      </p>
-
       <ul>
-        <li><strong>Learning to code is still worth it.</strong> AI can write code. It cannot yet decide
-        what to build, how to architect a system, or why one approach is safer than another. That judgment
-        still requires a human who understands code.</li>
-
-        <li><strong>AI tools are a multiplier, not a replacement.</strong> Developers who understand code
-        and use AI tools are dramatically more productive than developers who don't use AI — or than
-        non-developers who only use AI.</li>
-
-        <li><strong>Use vibe coding to learn, not to ship.</strong> Generating code and then understanding
-        what it does is a legitimate learning technique. Generating code and shipping it without understanding
-        it is how you get breached.</li>
-
-        <li><strong>The skill that matters most is review.</strong> In an agentic engineering world, the
-        most valuable thing you can do is evaluate AI output critically — spot the SQL injection, catch the
-        missing auth check, flag the logic error. That requires knowing code, not just prompting.</li>
-
-        <li><strong>Systems thinking is the new superpower.</strong> Agentic engineering rewards people who
-        can define goals, decompose problems, set guardrails, and evaluate outcomes. That's closer to
-        architecture than to syntax — and it's a skill you can develop right now.</li>
+        <li><strong>Learning to code is still worth it.</strong> AI can write code. It cannot yet decide what to build, how to architect a system, or why one approach is safer than another.</li>
+        <li><strong>AI tools are a multiplier, not a replacement.</strong> Developers who understand code and use AI tools are dramatically more productive than those who don't.</li>
+        <li><strong>Use vibe coding to learn, not to ship.</strong> Generating code and then understanding what it does is a legitimate learning technique. Generating code and shipping it without understanding it is how you get breached.</li>
+        <li><strong>The skill that matters most is review.</strong> In an agentic engineering world, the most valuable thing you can do is evaluate AI output critically.</li>
+        <li><strong>Systems thinking is the new superpower.</strong> Agentic engineering rewards people who can define goals, decompose problems, set guardrails, and evaluate outcomes.</li>
       </ul>
 
-      <!-- ── 8. CONCLUSION ── -->
       <h2>The Bottom Line</h2>
+      <p>Vibe coding was real. It was useful. It democratized building in a way that nothing before it had. The developers who thrive in 2026 won't be the ones who write the most code or prompt the fastest. They'll be the ones who understand their systems deeply enough to let AI do the heavy lifting, and who catch the mistakes that AI still reliably makes.</p>
 
-      <p>
-        Vibe coding was real. It was useful. It democratized building in a way that nothing before it had.
-        And it exposed every assumption the software industry had about what code quality actually requires.
-      </p>
+      <p class="article-cta-text">If this piece got you thinking about your own approach to AI-assisted development, share it with someone who's still fully in the vibes. They might need to hear it.</p>
 
-      <p>
-        The developers who thrive in 2026 won't be the ones who write the most code. They won't be the
-        ones who prompt the fastest, either. They'll be the ones who ship the most value — who understand
-        their systems deeply enough to let AI do the heavy lifting, and who catch the mistakes that AI
-        still reliably makes.
-      </p>
+    </div>
+  </article>
+  
+  <p class="comment-prompt">Have a take on vibe coding? Drop it below — we actually read every comment.</p>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/is-vibe-coding-dead.html";
+      this.page.identifier = "is-vibe-coding-dead";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
 
-      <p>
-        Vibe coding isn't dead. It's just revealed for what it always was: a starting point, not a
-        destination. The question was never "can AI write code?" We know it can. The question was always
-        "do you understand what it's writing?"
-      </p>
-
-      <p class="article-cta-text">
-        If this piece got you thinking about your own approach to AI-assisted development, share it with
-        someone who's still fully in the vibes. They might need to hear it.
-      </p>
-
-      <!-- ── COMMENTS ── -->
-      <p class="comment-prompt">Have a take on vibe coding? Drop it below — we actually read every comment.</p>
-      <div id="disqus_thread"></div>
-      <script>
-        var disqus_config = function () {
-          this.page.url = "https://codenosis.in/articles/is-vibe-coding-dead";
-          this.page.identifier = "is-vibe-coding-dead";
-        };
-        (function() {
-          var d = document, s = d.createElement('script');
-          s.src = 'https://codenosis.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-    </article>
-
-    <!-- ── RELATED ── -->
-    <section class="related">
-      <div class="article-container">
-        <h3>Continue Reading</h3>
-        <div class="related-grid">
-          <a href="https://codenosis.in/articles/ai-learning-roadmap" class="related-card">
-            <div class="related-icon"><i class="fas fa-robot"></i></div>
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+        <a href="ai-learning-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-robot"></i></div>
+          <div>
+            <span class="category-badge badge-ai">AI & ML</span>
             <p>The Honest AI Learning Roadmap Nobody Talks About</p>
-          </a>
-          <a href="https://codenosis.in/articles/web-dev-mistakes" class="related-card">
-            <div class="related-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          </div>
+        </a>
+        <a href="web-dev-mistakes.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div>
+            <span class="category-badge badge-personal">Personal</span>
             <p>Mistakes I Made While Learning Web Development</p>
-          </a>
-          <a href="https://codenosis.in/articles/how-to-start-web-development" class="related-card">
-            <div class="related-icon"><i class="fas fa-rocket"></i></div>
+          </div>
+        </a>
+        <a href="how-to-start-web-development.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-rocket"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
             <p>How to Start Learning Web Development From Zero — Honest Guide</p>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
 
-  <!-- ── FOOTER ── -->
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="https://codenosis.in/" class="nav-logo">Codenosis</a>
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
           <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
           <div class="footer-socials">
-            <a href="https://github.com/rkking1593" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://x.com/codenosis" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=61590735604811" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/codenosisofficial" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
           </div>
         </div>
         <div class="footer-links">
           <h4>Articles</h4>
           <ul>
-            <li><a href="https://codenosis.in/articles/how-to-start-web-development">How to Start Web Dev</a></li>
-            <li><a href="https://codenosis.in/articles/web-dev-roadmap">Web Dev Roadmap</a></li>
-            <li><a href="https://codenosis.in/articles/ai-learning-roadmap">AI Learning Roadmap</a></li>
-            <li><a href="https://codenosis.in/articles/web-dev-mistakes">Mistakes I Made</a></li>
-            <li><a href="https://codenosis.in/articles">View All Articles</a></li>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">View All Articles <i class="fas fa-arrow-right"></i></a></li>
           </ul>
         </div>
         <div class="footer-links">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="https://codenosis.in/">Home</a></li>
-            <li><a href="https://codenosis.in/articles">Articles</a></li>
-            <li><a href="https://codenosis.in/#about">About</a></li>
-            <li><a href="https://codenosis.in/#newsletter">Newsletter</a></li>
-            <li><a href="https://codenosis.in/playground/playground">Playground</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+            <li><a href="../playground/playground.html">Playground</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak &amp; Yogesh</p>
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
         <p>Built to help beginners — share it with someone who needs it.</p>
       </div>
     </div>
   </footer>
 
-  <!-- ── BACK TO TOP ── -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <!-- ── SCRIPTS ── -->
+  <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
-  <script>
-    // Navbar scroll
-    const navbar = document.getElementById('navbar');
-    const progressBar = document.getElementById('progressBar');
-    const backToTop = document.getElementById('backToTop');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-
-      const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      progressBar.style.width = scrolled + '%';
-
-      if (window.scrollY > 400) backToTop.classList.add('show');
-      else backToTop.classList.remove('show');
-    });
-
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Hamburger
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      const icon = themeToggle.querySelector('i');
-      icon.classList.toggle('fa-moon');
-      icon.classList.toggle('fa-sun');
-    });
-
-    // Scroll reveal
-    const hiddenEls = document.querySelectorAll('.hidden');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
-    }, { threshold: 0.1 });
-    hiddenEls.forEach(el => observer.observe(el));
-  </script>
 
 </body>
 </html>
