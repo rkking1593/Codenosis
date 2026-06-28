@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Makes Python So Popular? The Honest Reason | Codenosis</title>
+  <meta name="description" content="Everyone says Python is popular. But why, really? Beyond the hype — the honest, no-fluff reasons Python became the world's most used programming language." />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- Shared Stylesheets -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+
+  <style>
+    /* ===== PER-ARTICLE SCOPED STYLES ===== */
+
+    /* Reason cards — the "why" pillars */
+    .reason-card {
+      display: flex;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      margin: 1.5rem 0;
+      transition: border-color 0.3s ease;
+    }
+
+    .reason-card:hover {
+      border-color: var(--accent);
+    }
+
+    .reason-number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .reason-body h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .reason-body p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin: 0 !important;
+    }
+
+    /* Stat strip */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .stat-box .stat-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-box .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Domain use-case pills */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .domain-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .domain-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+
+    .domain-box:hover {
+      border-color: var(--accent);
+    }
+
+    .domain-box i {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .domain-box h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .domain-box p {
+      font-size: 0.78rem !important;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0 !important;
+    }
+
+    /* Code comparison: Python vs others */
+    .code-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .code-compare { grid-template-columns: 1fr; }
+    }
+
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px 6px 0 0;
+      display: inline-block;
+    }
+
+    .label-python { background: rgba(59,130,246,0.2); color: #3b82f6; }
+    .label-other  { background: rgba(239,68,68,0.2);  color: #ef4444; }
+
+    /* Myth-busting rows */
+    .myth-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .myth-tag {
+      flex-shrink: 0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+    }
+
+    .myth-tag.myth  { background: rgba(239,68,68,0.15);  color: #ef4444; }
+    .myth-tag.truth { background: rgba(16,185,129,0.15); color: #10b981; }
+
+    .myth-row-text p {
+      font-size: 0.9rem !important;
+      color: var(--text-secondary);
+      margin: 0 !important;
+      line-height: 1.7;
+    }
+
+    .myth-row-text p strong {
+      color: var(--text-primary);
+    }
+
+    /* Timeline: Python's rise */
+    .timeline {
+      position: relative;
+      padding-left: 1.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.4rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.4rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.45rem;
+      top: 0.35rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg-primary);
+    }
+
+    .timeline-year {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-item p {
+      font-size: 0.88rem !important;
+      color: var(--text-secondary);
+      margin: 0 !important;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== ARTICLE HERO ===== -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-programmingLanguages">Programming Languages</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 11 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 28, 2026</span>
+      </div>
+
+      <h1 class="article-title">What Makes Python So Popular? The Honest Reason</h1>
+
+      <p class="article-subtitle">
+        Everyone says "Python is beginner-friendly." But that's not why it actually won. The real story involves timing, a scientific community, and an accident that changed the entire tech industry.
+      </p>
+
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <div class="author-name">Yogesh</div>
+          <div class="author-tag">Co-founder, Codenosis </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARTICLE BODY ===== -->
+  <main class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        Python has been the world's most popular programming language for three consecutive years (Stack Overflow, TIOBE, IEEE Spectrum — all agree). But if you ask most people <em>why</em>, the answer you get is "it's easy to learn." That's true — but it's the least interesting reason. Here's what actually happened.
+      </p>
+
+      <!-- Stat strip -->
+      <div class="stat-strip">
+        <div class="stat-box">
+          <div class="stat-num">#1</div>
+          <div class="stat-label">TIOBE Index 2025</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">51%</div>
+          <div class="stat-label">Devs use Python (Stack Overflow 2024)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">500K+</div>
+          <div class="stat-label">Packages on PyPI</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Years old (1991)</div>
+        </div>
+      </div>
+
+      <h2>First — A Quick History</h2>
+      <p>
+        Python wasn't born to be popular. Guido van Rossum created it over Christmas break in 1989 as a hobby project — a scripting language for the Amoeba operating system that was readable and fun to use. He named it after Monty Python's Flying Circus, not the snake. Nobody predicted it would one day power Google, Instagram, and NASA.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1991</div>
+          <h4>Python 0.9.0 released</h4>
+          <p>A small scripting language with classes, functions, and exception handling. Mostly used in academic and research circles.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2000s</div>
+          <h4>Scientists start adopting it</h4>
+          <p>NumPy (2006) and SciPy arrive. Researchers in physics, biology, and finance start replacing MATLAB with Python because it's free and just as powerful.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2008</div>
+          <h4>Python 3 released — Django matures</h4>
+          <p>Web development gets serious. Google, YouTube, and Dropbox are already running Python in production.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2012–2015</div>
+          <h4>The AI explosion begins</h4>
+          <p>Deep learning arrives. Researchers already using Python for science naturally use it for neural networks. TensorFlow (2015) and PyTorch (2016) are both Python-first.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2019–Present</div>
+          <h4>Python becomes the language</h4>
+          <p>Every AI/ML course, every data science bootcamp, every university intro CS course moves to Python. The network effect becomes unstoppable.</p>
+        </div>
+      </div>
+
+      <h2>The Real Reasons Python Won</h2>
+      <p>
+        Here are the actual reasons — not the marketing ones — in order of how much they actually mattered:
+      </p>
+
+      <div class="reason-card">
+        <div class="reason-number">01</div>
+        <div class="reason-body">
+          <h3>Scientists adopted it before programmers did</h3>
+          <p>
+            This is the most underrated reason. In the early 2000s, researchers at universities and labs needed to crunch data. MATLAB was expensive. R was limited. Perl was ugly. Python was free, readable, and with NumPy — powerful enough to replace expensive scientific tools. When the AI boom happened, those same researchers were already writing Python. So every machine learning paper, every research codebase, every neural network tutorial — it was all Python. The rest of the industry had no choice but to follow.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">02</div>
+        <div class="reason-body">
+          <h3>The AI/ML ecosystem locked in early — and never looked back</h3>
+          <p>
+            TensorFlow, PyTorch, Keras, scikit-learn, pandas, NumPy, Matplotlib — these are not just popular libraries. They are the industry. And they're all Python-first. No other language has this kind of unified, mature, production-ready AI stack. Trying to do serious machine learning in Java or C++ means writing thousands of lines of code for things Python does in ten. Once this ecosystem formed, Python's position became structurally impossible to challenge.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">03</div>
+        <div class="reason-body">
+          <h3>Readability isn't just beginner-friendliness — it's a productivity multiplier</h3>
+          <p>
+            Python forces indentation. It has no semicolons, no curly braces, no type annotations (unless you want them). The result is that Python code reads almost like pseudocode. For teams, this means faster code reviews, easier onboarding, and fewer bugs introduced by syntax confusion. Startups love it because two developers can maintain what would require a Java team of five.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">04</div>
+        <div class="reason-body">
+          <h3>It does everything — not perfectly, but adequately</h3>
+          <p>
+            Python isn't the best language at anything specific. C is faster. Java scales better. JavaScript owns the browser. But Python is the only language that works decently across web development, scripting, data science, AI, automation, DevOps, game scripting, and scientific computing. That versatility makes it the default choice when you don't know exactly what you'll need — which is most of the time in a startup.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">05</div>
+        <div class="reason-body">
+          <h3>The network effect made it impossible to dethrone</h3>
+          <p>
+            More Python users → more Stack Overflow answers → more tutorials → more courses → more libraries → more job postings → more Python users. This loop has been compounding since 2015. A new language would need to be not just better — it'd need to be better enough to justify the switching cost of every library, every course, every team already embedded in Python. No language is that good.
+          </p>
+        </div>
+      </div>
+
+      <h2>Let's Look at the Code — Honestly</h2>
+      <p>
+        The readability argument becomes obvious when you compare real code doing the same thing. Here's reading a CSV file and computing an average salary:
+      </p>
+
+      <div class="code-compare">
+        <div>
+          <span class="code-block-label label-python">Python</span>
+          <pre style="margin:0;border-radius:0 8px 8px 8px;"><code class="language-python">import pandas as pd
+
+df = pd.read_csv("employees.csv")
+avg = df["salary"].mean()
+print(f"Average salary: ₹{avg:,.0f}")
+</code></pre>
+        </div>
+        <div>
+          <span class="code-block-label label-other">Java</span>
+          <pre style="margin:0;border-radius:0 8px 8px 8px;"><code class="language-java">import com.opencsv.CSVReader;
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) throws Exception {
+    CSVReader reader = new CSVReader(new FileReader("employees.csv"));
+    List&lt;String[]&gt; rows = reader.readAll();
+    double total = 0;
+    int count = 0;
+    for (int i = 1; i &lt; rows.size(); i++) {
+      total += Double.parseDouble(rows.get(i)[1]);
+      count++;
+    }
+    System.out.printf("Average salary: ₹%.0f%n", total / count);
+  }
+}
+</code></pre>
+        </div>
+      </div>
+
+      <p>
+        Same result. Python: 5 lines. Java: 16 lines — and that's with a third-party CSV library. This gap compounds enormously in data science workflows where you're writing hundreds of transformations. Python's conciseness isn't just aesthetics — it directly translates to development speed.
+      </p>
+
+      <h2>Where Python Actually Gets Used</h2>
+
+      <div class="domain-grid">
+        <div class="domain-box">
+          <i class="fas fa-brain"></i>
+          <h4>AI &amp; Machine Learning</h4>
+          <p>PyTorch, TensorFlow, scikit-learn. The undisputed leader.</p>
+        </div>
+        <div class="domain-box">
+          <i class="fas fa-chart-bar"></i>
+          <h4>Data Science</h4>
+          <p>pandas, NumPy, Matplotlib, Seaborn. Standard across every data team.</p>
+        </div>
+        <div class="domain-box">
+          <i class="fas fa-globe"></i>
+          <h4>Web Development</h4>
+          <p>Django, Flask, FastAPI. Instagram and Pinterest run on Django.</p>
+        </div>
+        <div class="domain-box">
+          <i class="fas fa-robot"></i>
+          <h4>Automation &amp; Scripting</h4>
+          <p>Selenium, PyAutoGUI, Playwright. Automate literally anything.</p>
+        </div>
+        <div class="domain-box">
+          <i class="fas fa-shield-halved"></i>
+          <h4>Cybersecurity</h4>
+          <p>Scapy, Metasploit scripting, pen-testing tools. Widely used.</p>
+        </div>
+        <div class="domain-box">
+          <i class="fas fa-server"></i>
+          <h4>DevOps &amp; Cloud</h4>
+          <p>Ansible, AWS Lambda, GCP scripts. Infrastructure automation.</p>
+        </div>
+      </div>
+
+      <h2>The Honest Downsides — Python Isn't Perfect</h2>
+      <p>
+        Anyone who tells you Python has no weaknesses is selling you something. Here's what Python genuinely struggles with:
+      </p>
+
+      <div class="article-challenge">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p><strong>Speed:</strong> Python is interpreted and dynamically typed, which makes it 10–100x slower than C or C++ for CPU-intensive tasks. This is why Python ML code actually runs on C extensions under the hood — NumPy is written in C. Python is the glue, not the engine.</p>
+      </div>
+
+      <div class="article-challenge">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p><strong>Mobile Development:</strong> Python has no serious presence in Android or iOS development. If you want to build mobile apps, you're looking at Kotlin, Swift, or Flutter/Dart — not Python.</p>
+      </div>
+
+      <div class="article-challenge">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p><strong>The GIL (Global Interpreter Lock):</strong> Python can't run true parallel threads within one process due to the GIL. For CPU-bound multi-threading, you need multiprocessing or external solutions. This is a real bottleneck in some production systems.</p>
+      </div>
+
+      <div class="article-challenge">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p><strong>Dynamic Typing:</strong> No types means no compile-time error catching. In large codebases, this creates bugs that only surface at runtime. Python 3.5+ has type hints, but they're optional — many developers skip them.</p>
+      </div>
+
+      <h2>Myths vs Reality</h2>
+
+      <div class="myth-row">
+        <span class="myth-tag myth">Myth</span>
+        <div class="myth-row-text">
+          <p><strong>"Python is only for beginners."</strong> — Instagram (1 billion users), YouTube, Dropbox, Spotify's backend, and most of Google's internal tooling run on Python. It scales further than most people realize.</p>
+        </div>
+      </div>
+
+      <div class="myth-row">
+        <span class="myth-tag myth">Myth</span>
+        <div class="myth-row-text">
+          <p><strong>"Python will die soon — Rust/Go/Julia will replace it."</strong> — Every year someone makes this prediction. The ecosystem lock-in (especially in AI/ML) makes a displacement event structurally implausible in the next decade. Julia has been "about to replace Python" since 2012.</p>
+        </div>
+      </div>
+
+      <div class="myth-row">
+        <span class="myth-tag myth">Myth</span>
+        <div class="myth-row-text">
+          <p><strong>"Python is slow, so serious companies don't use it."</strong> — Serious companies use Python for the parts where development speed matters more than execution speed, and C/C++ extensions for the parts where raw performance is critical. That's not a limitation — it's good engineering.</p>
+        </div>
+      </div>
+
+      <div class="myth-row">
+        <span class="myth-tag truth">Truth</span>
+        <div class="myth-row-text">
+          <p><strong>Python's popularity is self-reinforcing and accelerating.</strong> More AI use → more Python demand → more Python learning → more Python libraries → more AI use. There is no exit from this loop in sight.</p>
+        </div>
+      </div>
+
+      <h2>So — Should You Learn Python?</h2>
+      <p>
+        If you want to work in AI, data science, automation, web development, or really any modern tech role — yes, absolutely. Not because it's "easy," but because the ecosystem and job market make it the highest-leverage language to know in 2026.
+      </p>
+      <p>
+        If you want to build mobile apps — no. Learn Kotlin or Swift. If you want to build games — learn C++ or C#. If you want to work deeply in embedded systems — learn C. Python isn't the answer to every question, but it's the answer to more questions than any other language right now.
+      </p>
+      <p>
+        The most honest reason Python is popular? <strong>It was in the right place at the right time — and then it built a moat so wide that being "right" stopped mattering.</strong> The network effect is the real answer. Everything else is a contributing factor.
+      </p>
+
+      <pre><code class="language-python"># This is all it takes to build and evaluate an ML model in Python.
+# In any other language, this would be 200+ lines.
+
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+print(f"Accuracy: {accuracy_score(y_test, model.predict(X_test)):.2%}")
+</code></pre>
+
+      <div class="article-challenge">
+        <i class="fas fa-rocket"></i>
+        <p>
+          <strong>Start today:</strong> Install Python from python.org, open a terminal, and type <code>python</code>. You're one <code>pip install pandas</code> away from doing real data analysis. The barrier is genuinely that low.
+        </p>
+      </div>
+
+      <p class="article-cta-text">
+        Enjoyed this? Check out our comparison of Python vs Java vs C vs C++ to figure out where to start. And if you're already learning Python, our DSA series in Python is a good next step.
+      </p>
+
+      <!-- Disqus -->
+      <p class="comment-prompt">💬 What made you start learning Python? Or are you still deciding? Drop it below!</p>
+      <div id="disqus_thread"></div>
+      <script>
+        var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = "what-makes-python-popular";
+        };
+        (function() {
+          var d = document, s = d.createElement('script');
+          s.src = 'https://codenosis.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+  </main>
+
+  <!-- ===== RELATED ARTICLES ===== -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+        <a href="python-vs-java-vs-c-vs-cpp.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code-compare"></i></div>
+          <p>Python vs Java vs C vs C++ — Which Language Should You Learn First?</p>
+        </a>
+        <a href="two-pointer-approach.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-left-right"></i></div>
+          <p>Two Pointer Approach — The Art of Shrinking Your Search Space</p>
+        </a>
+        <a href="web-development-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <p>The Complete Web Development Roadmap for 2025</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Your go-to resource for practical computer science. Written by developers, for developers.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Content</h4>
+          <ul>
+            <li><a href="../articles.html">All Articles</a></li>
+            <li><a href="../articles.html?filter=DSA">DSA</a></li>
+            <li><a href="../articles.html?filter=programmingLanguages">Languages</a></li>
+            <li><a href="../articles.html?filter=roadmap">Roadmaps</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Codenosis</h4>
+          <ul>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fa-solid fa-heart"></i> for learners.</p>
+        <p>Built by Sarthak &amp; Yogesh</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', () => {
+      const el = document.getElementById('progressBar');
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      el.style.width = (scrollTop / docHeight * 100) + '%';
+    });
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Theme toggle
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const icon = toggle.querySelector('i');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') { body.classList.add('light-mode'); icon.className = 'fa-solid fa-sun'; }
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      const isLight = body.classList.contains('light-mode');
+      icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => { btt.classList.toggle('show', window.scrollY > 400); });
+    btt.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    // highlight.js
+    document.addEventListener('DOMContentLoaded', () => { hljs.highlightAll(); });
+
+    // Scroll reveal
+    const hiddenEls = document.querySelectorAll('.hidden');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    hiddenEls.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
