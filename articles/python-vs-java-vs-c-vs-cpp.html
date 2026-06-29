@@ -5,9 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Python vs Java vs C vs C++ — Which Language Should You Learn First? | Codenosis</title>
   <meta name="description" content="Confused about which programming language to learn first? A deep, honest comparison of Python, Java, C, and C++ — with pros, cons, and a clear verdict for beginners." />
- <link rel="stylesheet" href="../style.css" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../article.css" />
-  <!-- Google Analytics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -15,323 +21,69 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
-
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- highlight.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
-  <!-- Shared Stylesheets -->
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="article.css" />
-
   <style>
-    /* ===== PER-ARTICLE SCOPED STYLES ===== */
-
-    /* Language comparison cards */
-    .lang-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      margin: 2rem 0;
-      transition: border-color 0.3s ease;
-    }
-
-    .lang-card:hover {
-      border-color: var(--accent);
-    }
-
-    .lang-card-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .lang-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .lang-icon.python  { background: rgba(59,130,246,0.15);  color: #3b82f6; }
-    .lang-icon.java    { background: rgba(239,68,68,0.15);   color: #ef4444; }
-    .lang-icon.c       { background: rgba(99,102,241,0.15);  color: #6366f1; }
-    .lang-icon.cpp     { background: rgba(234,179,8,0.15);   color: #eab308; }
-
-    .lang-card-header h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.15rem;
-    }
-
-    .lang-tagline {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-    }
-
-    /* Pros / Cons two-column grid */
-    .pros-cons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 600px) {
-      .pros-cons { grid-template-columns: 1fr; }
-    }
-
-    .pros-box, .cons-box {
-      border-radius: 10px;
-      padding: 1.2rem;
-    }
-
-    .pros-box {
-      background: rgba(16,185,129,0.08);
-      border: 1px solid rgba(16,185,129,0.25);
-    }
-
-    .cons-box {
-      background: rgba(239,68,68,0.08);
-      border: 1px solid rgba(239,68,68,0.25);
-    }
-
-    .pros-box h4 {
-      color: #10b981;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .cons-box h4 {
-      color: #ef4444;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .pros-box ul, .cons-box ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .pros-box ul li, .cons-box ul li {
-      font-size: 0.88rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      padding-left: 1rem;
-      position: relative;
-    }
-
-    .pros-box ul li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #10b981;
-      font-weight: 700;
-    }
-
-    .cons-box ul li::before {
-      content: '✗';
-      position: absolute;
-      left: 0;
-      color: #ef4444;
-      font-weight: 700;
-    }
-
-    /* Stat badges inside lang card */
-    .lang-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin: 1rem 0;
-    }
-
-    .lang-stat {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .lang-stat i {
-      color: var(--accent);
-      font-size: 0.72rem;
-    }
-
-    /* Verdict card */
-    .verdict-card {
-      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.05));
-      border: 1px solid rgba(99,102,241,0.4);
-      border-radius: 16px;
-      padding: 2rem;
-      margin: 2.5rem 0;
-    }
-
-    .verdict-card h3 {
-      color: var(--accent);
-      font-size: 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .verdict-card p {
-      color: var(--text-primary) !important;
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-bottom: 0.8rem;
-    }
-
-    /* Comparison table */
-    .compare-table-wrap {
-      overflow-x: auto;
-      margin: 2rem 0;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-
-    .compare-table th {
-      background: var(--bg-card);
-      color: var(--text-primary);
-      font-weight: 700;
-      padding: 1rem 1.2rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .compare-table td {
-      padding: 0.9rem 1.2rem;
-      color: var(--text-secondary);
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-
-    .compare-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .compare-table tr:nth-child(even) td {
-      background: rgba(99,102,241,0.03);
-    }
-
-    .dot-green  { color: #10b981; font-weight: 700; }
+    .lang-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin: 2rem 0; transition: border-color 0.3s ease; }
+    .lang-card:hover { border-color: var(--accent); }
+    .lang-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+    .lang-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; flex-shrink: 0; }
+    .lang-icon.python { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .lang-icon.java { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .lang-icon.c { background: rgba(99,102,241,0.15); color: #6366f1; }
+    .lang-icon.cpp { background: rgba(234,179,8,0.15); color: #eab308; }
+    .lang-card-header h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.15rem; }
+    .lang-tagline { font-size: 0.82rem; color: var(--text-secondary); }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1rem; }
+    @media (max-width: 600px) { .pros-cons { grid-template-columns: 1fr; } }
+    .pros-box, .cons-box { border-radius: 10px; padding: 1.2rem; }
+    .pros-box { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); }
+    .cons-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); }
+    .pros-box h4 { color: #10b981; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem; }
+    .cons-box h4 { color: #ef4444; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem; }
+    .pros-box ul, .cons-box ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .pros-box ul li, .cons-box ul li { font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary); padding-left: 1rem; position: relative; }
+    .pros-box ul li::before { content: '✓'; position: absolute; left: 0; color: #10b981; font-weight: 700; }
+    .cons-box ul li::before { content: '✗'; position: absolute; left: 0; color: #ef4444; font-weight: 700; }
+    .lang-stats { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+    .lang-stat { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 50px; padding: 0.3rem 0.8rem; font-size: 0.78rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.35rem; }
+    .lang-stat i { color: var(--accent); font-size: 0.72rem; }
+    .verdict-card { background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.05)); border: 1px solid rgba(99,102,241,0.4); border-radius: 16px; padding: 2rem; margin: 2.5rem 0; }
+    .verdict-card h3 { color: var(--accent); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .verdict-card p { color: var(--text-primary) !important; font-size: 1rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .compare-table-wrap { overflow-x: auto; margin: 2rem 0; border-radius: 12px; border: 1px solid var(--border); }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .compare-table th { background: var(--bg-card); color: var(--text-primary); font-weight: 700; padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .compare-table td { padding: 0.9rem 1.2rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:nth-child(even) td { background: rgba(99,102,241,0.03); }
+    .dot-green { color: #10b981; font-weight: 700; }
     .dot-yellow { color: #eab308; font-weight: 700; }
-    .dot-red    { color: #ef4444; font-weight: 700; }
-
-    /* Path recommendation boxes */
-    .path-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-
-    @media (max-width: 600px) {
-      .path-grid { grid-template-columns: 1fr; }
-    }
-
-    .path-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.2rem;
-    }
-
-    .path-box h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .path-box p {
-      font-size: 0.85rem !important;
-      color: var(--text-secondary);
-      margin: 0 !important;
-      line-height: 1.7;
-    }
-
-    .path-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.2rem 0.6rem;
-      border-radius: 50px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
+    .dot-red { color: #ef4444; font-weight: 700; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    @media (max-width: 600px) { .path-grid { grid-template-columns: 1fr; } }
+    .path-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; }
+    .path-box h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .path-box p { font-size: 0.85rem !important; color: var(--text-secondary); margin: 0 !important; line-height: 1.7; }
+    .path-badge { font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.8px; }
     .path-badge.python { background: rgba(59,130,246,0.15); color: #3b82f6; }
-    .path-badge.java   { background: rgba(239,68,68,0.15);  color: #ef4444; }
-    .path-badge.c      { background: rgba(99,102,241,0.15); color: #6366f1; }
-    .path-badge.cpp    { background: rgba(234,179,8,0.15);  color: #eab308; }
+    .path-badge.java { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .path-badge.c { background: rgba(99,102,241,0.15); color: #6366f1; }
+    .path-badge.cpp { background: rgba(234,179,8,0.15); color: #eab308; }
   </style>
 </head>
+<body class="dark-mode">
 
-<body>
-
-  <!-- Progress Bar -->
-  <div class="progress-bar" id="progressBar"></div>
-
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">Code<span>nosis</span></a>
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="articles.html">Articles</a></li>
-        <li><a href="index.html#about">About</a></li>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
         <div class="hamburger" id="hamburger">
           <span></span><span></span><span></span>
         </div>
@@ -339,50 +91,35 @@
     </div>
   </nav>
 
-  <!-- ===== ARTICLE HERO ===== -->
   <section class="article-hero">
     <div class="article-container">
       <div class="article-meta">
         <span class="category-badge badge-programmingLanguages">Programming Languages</span>
-        <span class="meta-info"><i class="fa-regular fa-clock"></i> 14 min read</span>
-        <span class="meta-info"><i class="fa-regular fa-calendar"></i> June 2025</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 14 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 28, 2026</span>
       </div>
-
       <h1 class="article-title">Python vs Java vs C vs C++ — Which Language Should You Learn First?</h1>
-
-      <p class="article-subtitle">
-        Every beginner faces this question. Four languages, four different philosophies — and everyone online has a different opinion. Here's the clear, no-nonsense breakdown so you can pick the right one for your goals.
-      </p>
-
+      <p class="article-subtitle">Every beginner faces this question. Four languages, four different philosophies — and everyone online has a different opinion. Here's the clear, no-nonsense breakdown so you can pick the right one for your goals.</p>
       <div class="article-author">
         <div class="author-avatar">Y</div>
         <div>
-          <div class="author-name">Yogesh</div>
-          <div class="author-tag">Co-founder, Codenosis </div>
+          <p class="author-name">Yogesh</p>
+          <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== ARTICLE BODY ===== -->
-  <main class="article-body">
+  <article class="article-body">
     <div class="article-container">
 
-      <p class="article-intro">
-        "Which language should I learn first?" is the most Googled question in programming. And ironically, it's also the one that wastes the most time — because people debate it instead of just starting. This article gives you a direct, honest comparison of Python, Java, C, and C++, covering real pros and cons, use cases, and a clear verdict based on your goals.
-      </p>
+      <p class="article-intro">"Which language should I learn first?" is the most Googled question in programming. And ironically, it's also the one that wastes the most time — because people debate it instead of just starting. This article gives you a direct, honest comparison of Python, Java, C, and C++, covering real pros and cons, use cases, and a clear verdict based on your goals.</p>
 
       <h2>Why These Four Languages?</h2>
-      <p>
-        Python, Java, C, and C++ collectively dominate computer science education worldwide. Most BCA, B.Tech, and CS degree programs introduce you to at least two of these in the first year. They also represent four distinct paradigms — scripting, enterprise OOP, low-level systems programming, and performance-critical development. Understanding the difference between them is understanding the difference between different types of programming jobs.
-      </p>
-      <p>
-        None of them are "wrong" to learn first. But some are far more beginner-friendly than others, and your goal determines which one gives you the best return on effort.
-      </p>
+      <p>Python, Java, C, and C++ collectively dominate computer science education worldwide. Most BCA, B.Tech, and CS degree programs introduce you to at least two of these in the first year. They also represent four distinct paradigms — scripting, enterprise OOP, low-level systems programming, and performance-critical development. Understanding the difference between them is understanding the difference between different types of programming jobs.</p>
+      <p>None of them are "wrong" to learn first. But some are far more beginner-friendly than others, and your goal determines which one gives you the best return on effort.</p>
 
-      <!-- ===== PYTHON ===== -->
       <h2>1. Python — The Beginner's Best Friend</h2>
-
       <div class="lang-card">
         <div class="lang-card-header">
           <div class="lang-icon python"><i class="fa-brands fa-python"></i></div>
@@ -391,14 +128,12 @@
             <span class="lang-tagline">Created 1991 · Guido van Rossum · Interpreted, dynamically typed</span>
           </div>
         </div>
-
         <div class="lang-stats">
           <span class="lang-stat"><i class="fa-solid fa-star"></i> #1 Most Popular (TIOBE 2025)</span>
           <span class="lang-stat"><i class="fa-solid fa-briefcase"></i> AI, Data Science, Web, Automation</span>
           <span class="lang-stat"><i class="fa-solid fa-graduation-cap"></i> Learning Curve: Very Easy</span>
           <span class="lang-stat"><i class="fa-solid fa-bolt"></i> Speed: Slow (interpreted)</span>
         </div>
-
         <div class="pros-cons">
           <div class="pros-box">
             <h4><i class="fa-solid fa-thumbs-up"></i> Pros</h4>
@@ -426,9 +161,7 @@
         </div>
       </div>
 
-      <p>
-        Python's biggest superpower is its <strong>readability</strong>. A "Hello, World!" in Python is literally one line: <code>print("Hello, World!")</code>. There's no main function, no semicolons, no type declarations. You focus on logic, not syntax ceremony. This means beginners spend more time actually thinking like programmers.
-      </p>
+      <p>Python's biggest superpower is its <strong>readability</strong>. A "Hello, World!" in Python is literally one line: <code>print("Hello, World!")</code>. There's no main function, no semicolons, no type declarations. You focus on logic, not syntax ceremony.</p>
 
       <pre><code class="language-python"># Python: Simple, clean, readable
 def greet(name):
@@ -436,17 +169,14 @@ def greet(name):
 
 students = ["Rahul", "Priya", "Amit"]
 for student in students:
-    print(greet(student))
-</code></pre>
+    print(greet(student))</code></pre>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
         <p><strong>Best for:</strong> AI/ML enthusiasts, data science aspirants, web developers, automation lovers, and absolute beginners. If you want to get employed in the fastest-growing tech fields — choose Python first.</p>
       </div>
 
-      <!-- ===== JAVA ===== -->
       <h2>2. Java — The Enterprise Workhorse</h2>
-
       <div class="lang-card">
         <div class="lang-card-header">
           <div class="lang-icon java"><i class="fa-brands fa-java"></i></div>
@@ -455,14 +185,12 @@ for student in students:
             <span class="lang-tagline">Created 1995 · James Gosling (Sun Microsystems) · Compiled to bytecode, JVM</span>
           </div>
         </div>
-
         <div class="lang-stats">
           <span class="lang-stat"><i class="fa-solid fa-star"></i> #4 Most Popular (TIOBE 2025)</span>
           <span class="lang-stat"><i class="fa-solid fa-briefcase"></i> Enterprise, Android, Backend</span>
           <span class="lang-stat"><i class="fa-solid fa-graduation-cap"></i> Learning Curve: Medium</span>
           <span class="lang-stat"><i class="fa-solid fa-bolt"></i> Speed: Fast (JVM optimized)</span>
         </div>
-
         <div class="pros-cons">
           <div class="pros-box">
             <h4><i class="fa-solid fa-thumbs-up"></i> Pros</h4>
@@ -490,10 +218,6 @@ for student in students:
         </div>
       </div>
 
-      <p>
-        Java forces you to think in classes, objects, and structure from day one. That's both its strength and its initial pain point. When you write Java, you're writing enterprise-grade code patterns even for small programs. The Hello World program itself requires understanding classes:
-      </p>
-
       <pre><code class="language-java">// Java: Structured, verbose, but powerful
 public class Main {
     public static void main(String[] args) {
@@ -502,17 +226,14 @@ public class Main {
             System.out.println("Hello, " + student + "!");
         }
     }
-}
-</code></pre>
+}</code></pre>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
         <p><strong>Best for:</strong> Android developers, students targeting enterprise/banking sector jobs, anyone whose BCA/B.Tech curriculum is Java-based, and those who want to deeply understand OOP before anything else.</p>
       </div>
 
-      <!-- ===== C ===== -->
       <h2>3. C — The Language That Built Computing</h2>
-
       <div class="lang-card">
         <div class="lang-card-header">
           <div class="lang-icon c"><strong>C</strong></div>
@@ -521,14 +242,12 @@ public class Main {
             <span class="lang-tagline">Created 1972 · Dennis Ritchie · Compiled, procedural, low-level</span>
           </div>
         </div>
-
         <div class="lang-stats">
           <span class="lang-stat"><i class="fa-solid fa-star"></i> #2 Most Popular (TIOBE 2025)</span>
           <span class="lang-stat"><i class="fa-solid fa-briefcase"></i> OS, Embedded Systems, Firmware</span>
           <span class="lang-stat"><i class="fa-solid fa-graduation-cap"></i> Learning Curve: Hard</span>
           <span class="lang-stat"><i class="fa-solid fa-bolt"></i> Speed: Extremely Fast</span>
         </div>
-
         <div class="pros-cons">
           <div class="pros-box">
             <h4><i class="fa-solid fa-thumbs-up"></i> Pros</h4>
@@ -556,13 +275,8 @@ public class Main {
         </div>
       </div>
 
-      <p>
-        C doesn't hold your hand. You manage memory yourself, deal with pointers directly, and if something goes wrong — the error messages are cryptic. But this difficulty is also what makes C the most educational language in terms of understanding <em>how computers actually work</em>. Operating systems, compilers, databases — they're built in C.
-      </p>
-
       <pre><code class="language-c">/* C: Low-level, precise, powerful */
 #include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
 
 void greet(char *name) {
     printf("Hello, %s!\n", name);
@@ -575,17 +289,14 @@ int main() {
         greet(students[i]);
     }
     return 0;
-}
-</code></pre>
+}</code></pre>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
         <p><strong>Best for:</strong> Students targeting OS, embedded systems, or competitive programming. Most BCA programs introduce C in semester 1 — if that's your case, lean into it. It'll make every other language feel easier afterwards.</p>
       </div>
 
-      <!-- ===== C++ ===== -->
       <h2>4. C++ — The Power and the Complexity</h2>
-
       <div class="lang-card">
         <div class="lang-card-header">
           <div class="lang-icon cpp"><strong>C++</strong></div>
@@ -594,14 +305,12 @@ int main() {
             <span class="lang-tagline">Created 1983 · Bjarne Stroustrup · Compiled, multi-paradigm</span>
           </div>
         </div>
-
         <div class="lang-stats">
           <span class="lang-stat"><i class="fa-solid fa-star"></i> #3 Most Popular (TIOBE 2025)</span>
           <span class="lang-stat"><i class="fa-solid fa-briefcase"></i> Game Dev, Systems, Finance, DSA</span>
           <span class="lang-stat"><i class="fa-solid fa-graduation-cap"></i> Learning Curve: Very Hard</span>
           <span class="lang-stat"><i class="fa-solid fa-bolt"></i> Speed: Extremely Fast</span>
         </div>
-
         <div class="pros-cons">
           <div class="pros-box">
             <h4><i class="fa-solid fa-thumbs-up"></i> Pros</h4>
@@ -629,10 +338,6 @@ int main() {
         </div>
       </div>
 
-      <p>
-        C++ is what happens when you take C and add classes, templates, operator overloading, and a standard template library. It's incredibly powerful — game engines, browsers, and financial systems all use it — but it's also a language where a missing ampersand (&amp;) can cause hours of debugging. For competitive programmers, it's the go-to choice because the STL (Standard Template Library) gives you sorted sets, priority queues, and hash maps out of the box.
-      </p>
-
       <pre><code class="language-cpp">// C++: Power + OOP together
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
@@ -649,113 +354,39 @@ int main() {
         greet(student);
     }
     return 0;
-}
-</code></pre>
+}</code></pre>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
         <p><strong>Best for:</strong> Competitive programmers (Codeforces, LeetCode), game developers, and students who already know C and want to level up. Not recommended as a first language unless you're specifically targeting CP or game dev.</p>
       </div>
 
-      <!-- ===== COMPARISON TABLE ===== -->
       <h2>Side-by-Side Comparison</h2>
-
       <div class="compare-table-wrap">
         <table class="compare-table">
           <thead>
-            <tr>
-              <th>Factor</th>
-              <th>Python</th>
-              <th>Java</th>
-              <th>C</th>
-              <th>C++</th>
-            </tr>
+            <tr><th>Factor</th><th>Python</th><th>Java</th><th>C</th><th>C++</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td><strong>Beginner Friendliness</strong></td>
-              <td class="dot-green">★★★★★</td>
-              <td class="dot-yellow">★★★☆☆</td>
-              <td class="dot-red">★★☆☆☆</td>
-              <td class="dot-red">★☆☆☆☆</td>
-            </tr>
-            <tr>
-              <td><strong>Execution Speed</strong></td>
-              <td class="dot-red">Slow</td>
-              <td class="dot-yellow">Medium</td>
-              <td class="dot-green">Very Fast</td>
-              <td class="dot-green">Very Fast</td>
-            </tr>
-            <tr>
-              <td><strong>Job Market (India)</strong></td>
-              <td class="dot-green">Excellent</td>
-              <td class="dot-green">Excellent</td>
-              <td class="dot-yellow">Moderate</td>
-              <td class="dot-yellow">Moderate</td>
-            </tr>
-            <tr>
-              <td><strong>OOP Support</strong></td>
-              <td class="dot-green">Yes</td>
-              <td class="dot-green">Yes (core)</td>
-              <td class="dot-red">No</td>
-              <td class="dot-green">Yes</td>
-            </tr>
-            <tr>
-              <td><strong>Memory Management</strong></td>
-              <td class="dot-green">Automatic (GC)</td>
-              <td class="dot-green">Automatic (GC)</td>
-              <td class="dot-red">Manual</td>
-              <td class="dot-yellow">Semi-manual</td>
-            </tr>
-            <tr>
-              <td><strong>AI / ML Use</strong></td>
-              <td class="dot-green">Dominant</td>
-              <td class="dot-red">Minimal</td>
-              <td class="dot-red">None</td>
-              <td class="dot-yellow">Some (libs)</td>
-            </tr>
-            <tr>
-              <td><strong>Game Development</strong></td>
-              <td class="dot-yellow">Limited</td>
-              <td class="dot-yellow">Limited</td>
-              <td class="dot-yellow">Yes (low-level)</td>
-              <td class="dot-green">Industry Standard</td>
-            </tr>
-            <tr>
-              <td><strong>Competitive Programming</strong></td>
-              <td class="dot-yellow">Used but slower</td>
-              <td class="dot-yellow">Possible</td>
-              <td class="dot-green">Common</td>
-              <td class="dot-green">Dominant</td>
-            </tr>
-            <tr>
-              <td><strong>Android Development</strong></td>
-              <td class="dot-red">No</td>
-              <td class="dot-green">Yes (legacy)</td>
-              <td class="dot-red">No</td>
-              <td class="dot-red">No</td>
-            </tr>
-            <tr>
-              <td><strong>Syntax Complexity</strong></td>
-              <td class="dot-green">Very Simple</td>
-              <td class="dot-yellow">Verbose</td>
-              <td class="dot-red">Complex</td>
-              <td class="dot-red">Very Complex</td>
-            </tr>
+            <tr><td><strong>Beginner Friendliness</strong></td><td class="dot-green">★★★★★</td><td class="dot-yellow">★★★☆☆</td><td class="dot-red">★★☆☆☆</td><td class="dot-red">★☆☆☆☆</td></tr>
+            <tr><td><strong>Execution Speed</strong></td><td class="dot-red">Slow</td><td class="dot-yellow">Medium</td><td class="dot-green">Very Fast</td><td class="dot-green">Very Fast</td></tr>
+            <tr><td><strong>Job Market (India)</strong></td><td class="dot-green">Excellent</td><td class="dot-green">Excellent</td><td class="dot-yellow">Moderate</td><td class="dot-yellow">Moderate</td></tr>
+            <tr><td><strong>OOP Support</strong></td><td class="dot-green">Yes</td><td class="dot-green">Yes (core)</td><td class="dot-red">No</td><td class="dot-green">Yes</td></tr>
+            <tr><td><strong>Memory Management</strong></td><td class="dot-green">Automatic (GC)</td><td class="dot-green">Automatic (GC)</td><td class="dot-red">Manual</td><td class="dot-yellow">Semi-manual</td></tr>
+            <tr><td><strong>AI / ML Use</strong></td><td class="dot-green">Dominant</td><td class="dot-red">Minimal</td><td class="dot-red">None</td><td class="dot-yellow">Some (libs)</td></tr>
+            <tr><td><strong>Game Development</strong></td><td class="dot-yellow">Limited</td><td class="dot-yellow">Limited</td><td class="dot-yellow">Yes (low-level)</td><td class="dot-green">Industry Standard</td></tr>
+            <tr><td><strong>Competitive Programming</strong></td><td class="dot-yellow">Used but slower</td><td class="dot-yellow">Possible</td><td class="dot-green">Common</td><td class="dot-green">Dominant</td></tr>
+            <tr><td><strong>Android Development</strong></td><td class="dot-red">No</td><td class="dot-green">Yes (legacy)</td><td class="dot-red">No</td><td class="dot-red">No</td></tr>
+            <tr><td><strong>Syntax Complexity</strong></td><td class="dot-green">Very Simple</td><td class="dot-yellow">Verbose</td><td class="dot-red">Complex</td><td class="dot-red">Very Complex</td></tr>
           </tbody>
         </table>
       </div>
 
-      <!-- ===== WHICH ONE FOR WHOM ===== -->
       <h2>Which One Should YOU Learn First?</h2>
-      <p>
-        The honest answer: <strong>it depends on your goal</strong>. Here's a goal-based recommendation:
-      </p>
-
       <div class="path-grid">
         <div class="path-box">
           <h4><span class="path-badge python">Python</span> For you if…</h4>
-          <p>You want to get into AI, ML, Data Science, or web development. You're a complete beginner and want quick results. You want high employability in 2025 with minimal friction.</p>
+          <p>You want to get into AI, ML, Data Science, or web development. You're a complete beginner and want quick results. You want high employability in 2026 with minimal friction.</p>
         </div>
         <div class="path-box">
           <h4><span class="path-badge java">Java</span> For you if…</h4>
@@ -771,176 +402,119 @@ int main() {
         </div>
       </div>
 
-      <!-- ===== VERDICT ===== -->
       <div class="verdict-card">
         <h3><i class="fa-solid fa-trophy"></i> The Verdict</h3>
-        <p>
-          <strong>For most beginners in 2025 — learn Python first.</strong> It has the lowest barrier to entry, the most demand in the job market, and covers the widest range of use cases from web to AI. You'll start building real things within weeks instead of months.
-        </p>
-        <p>
-          <strong>But if your BCA/B.Tech college teaches C or Java in semester 1 — start with that.</strong> Don't fight your curriculum. C will teach you discipline. Java will teach you structure. Once you've cleared your first year, Python will take you only 2-3 weeks to pick up.
-        </p>
-        <p>
-          <strong>C++ is not a first language</strong> — it's a power-up you unlock after knowing at least one of the others. Learn it when you specifically need it (CP or game dev).
-        </p>
+        <p><strong>For most beginners in 2026 — learn Python first.</strong> It has the lowest barrier to entry, the most demand in the job market, and covers the widest range of use cases from web to AI. You'll start building real things within weeks instead of months.</p>
+        <p><strong>But if your BCA/B.Tech college teaches C or Java in semester 1 — start with that.</strong> Don't fight your curriculum. C will teach you discipline. Java will teach you structure. Once you've cleared your first year, Python will take you only 2–3 weeks to pick up.</p>
+        <p><strong>C++ is not a first language</strong> — it's a power-up you unlock after knowing at least one of the others. Learn it when you specifically need it (CP or game dev).</p>
       </div>
 
       <h2>A Note on the "Best Language" Debate</h2>
-      <p>
-        Every language exists for a reason. Python didn't kill C — Linux is still written in C. Java didn't die when Python grew — Spring Boot still powers half the banking apps in India. The best language is always the one that solves your current problem in your current context.
-      </p>
-      <p>
-        Professional developers know multiple languages. The goal isn't to pick the right language and be loyal to it forever — it's to learn how to think like a programmer. Once you truly understand one language deeply, picking up the next one takes weeks, not months.
-      </p>
-      <p>
-        So stop debating, and start coding. Pick one, build something, break it, fix it, and repeat. That's how every real developer actually learned.
-      </p>
+      <p>Every language exists for a reason. Python didn't kill C — Linux is still written in C. Java didn't die when Python grew — Spring Boot still powers half the banking apps in India. The best language is always the one that solves your current problem in your current context.</p>
+      <p>Professional developers know multiple languages. The goal isn't to pick the right language and be loyal to it forever — it's to learn how to think like a programmer. Once you truly understand one language deeply, picking up the next one takes weeks, not months.</p>
+      <p>So stop debating, and start coding. Pick one, build something, break it, fix it, and repeat. That's how every real developer actually learned.</p>
 
       <div class="article-challenge">
         <i class="fa-solid fa-rocket"></i>
-        <p>
-          <strong>Challenge for you:</strong> Write a program in whichever language you choose that takes your name as input and prints a personalised greeting. Sounds simple — but do it today, not tomorrow. The first line of code you write is always the hardest one.
-        </p>
+        <p><strong>Challenge for you:</strong> Write a program in whichever language you choose that takes your name as input and prints a personalised greeting. Sounds simple — but do it today, not tomorrow. The first line of code you write is always the hardest one.</p>
       </div>
 
-      <p class="article-cta-text">
-        Found this useful? Share it with a friend who's stuck on the same question. And if you want to go deeper into any of these languages, check out our DSA and Python series on Codenosis.
-      </p>
-
-      <!-- Disqus -->
-      <p class="comment-prompt">💬 Have a question or a different opinion? Drop it in the comments below!</p>
-      <div id="disqus_thread"></div>
-      <script>
-        var disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = "python-vs-java-vs-c-vs-cpp";
-        };
-        (function() {
-          var d = document, s = d.createElement('script');
-          s.src = 'https://codenosis.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <p class="article-cta-text">Found this useful? Share it with a friend who's stuck on the same question. And if you want to go deeper into any of these languages, check out our DSA and Python series on Codenosis.</p>
 
     </div>
-  </main>
+  </article>
 
-  <!-- ===== RELATED ARTICLES ===== -->
   <section class="related">
     <div class="article-container">
-      <h3>Related Articles</h3>
+      <h3>Continue Reading</h3>
       <div class="related-grid">
+        <a href="python-popularity.html" class="related-card">
+          <div class="related-icon"><i class="fa-brands fa-python"></i></div>
+          <div>
+            <span class="category-badge badge-programmingLanguages">Programming Languages</span>
+            <p>What Makes Python So Popular? The Honest Reason</p>
+          </div>
+        </a>
         <a href="two-pointer-approach.html" class="related-card">
-          <div class="related-icon"><i class="fa-solid fa-code"></i></div>
-          <p>Two Pointer Approach — Solve Array Problems Faster</p>
+          <div class="related-icon"><i class="fas fa-left-right"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">DSA</span>
+            <p>Two Pointer Approach — The Art of Shrinking Your Search Space</p>
+          </div>
         </a>
-        <a href="time-complexity.html" class="related-card">
-          <div class="related-icon"><i class="fa-solid fa-clock"></i></div>
-          <p>Understanding Time Complexity from Scratch</p>
-        </a>
-        <a href="web-development-roadmap.html" class="related-card">
-          <div class="related-icon"><i class="fa-solid fa-map"></i></div>
-          <p>The Complete Web Development Roadmap for 2025</p>
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <span class="category-badge badge-roadmap">Roadmap</span>
+            <p>The Web Development Roadmap Nobody Shows Beginners</p>
+          </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== */-->
+  <p class="comment-prompt">Have a question or a different opinion? Drop it below — we read and reply to every single one.</p>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/python-vs-java-vs-c.html";
+      this.page.identifier = "python-vs-java-vs-c";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="index.html" class="nav-logo">Code<span>nosis</span></a>
-          <p>Your go-to resource for practical computer science. Written by developers, for developers.</p>
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
           <div class="footer-socials">
-            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
           </div>
         </div>
         <div class="footer-links">
-          <h4>Content</h4>
+          <h4>Articles</h4>
           <ul>
-            <li><a href="articles.html">All Articles</a></li>
-            <li><a href="articles.html?filter=DSA">DSA</a></li>
-            <li><a href="articles.html?filter=programmingLanguages">Languages</a></li>
-            <li><a href="articles.html?filter=roadmap">Roadmaps</a></li>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">View All Articles <i class="fas fa-arrow-right"></i></a></li>
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Codenosis</h4>
+          <h4>Quick Links</h4>
           <ul>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#newsletter">Newsletter</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+            <li><a href="../playground/playground.html">Playground</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Codenosis. Made with <i class="fa-solid fa-heart"></i> for learners.</p>
-        <p>Built by Sarthak &amp; Yogesh</p>
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Back to Top -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-
-  <script>
-    // Progress bar
-    window.addEventListener('scroll', () => {
-      const el = document.getElementById('progressBar');
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      el.style.width = (scrollTop / docHeight * 100) + '%';
-    });
-
-    // Navbar scroll
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Hamburger
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    // Theme toggle
-    const toggle = document.getElementById('themeToggle');
-    const body = document.body;
-    const icon = toggle.querySelector('i');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') { body.classList.add('light-mode'); icon.className = 'fa-solid fa-sun'; }
-    toggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      const isLight = body.classList.contains('light-mode');
-      icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-
-    // Back to top
-    const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => { btt.classList.toggle('show', window.scrollY > 400); });
-    btt.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-    // highlight.js
-    document.addEventListener('DOMContentLoaded', () => { hljs.highlightAll(); });
-
-    // Scroll reveal
-    const hiddenEls = document.querySelectorAll('.hidden');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    hiddenEls.forEach(el => observer.observe(el));
-  </script>
+  <script src="../script.js"></script>
+  <script>hljs.highlightAll();</script>
 
 </body>
 </html>
