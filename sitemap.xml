@@ -125,6 +125,16 @@
     <loc>https://codenosis.in/articles/is-vibe-coding-dead.html</loc>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/python-popularity.html</loc>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://codenosis.in/articles/python-vs-java-vs-c.html</loc>
+    <priority>0.8</priority>
+  </url>
   
   
 </urlset>
