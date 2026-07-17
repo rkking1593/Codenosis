@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Getting 'undefined is not a function' in JavaScript? Here's exactly what it means, why it happens, and how to fix it permanently with a 5-step debugging checklist." />
+  <title>How to Fix "Undefined is Not a Function" in JavaScript — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <style>
+    .code-block { background: #1e1e2e; border: 1px solid var(--border); border-radius: 12px; margin: 1.5rem 0; overflow: hidden; }
+    .code-block-header { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1.2rem; background: #13131f; border-bottom: 1px solid var(--border); }
+    .code-block-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); font-family: monospace; }
+    .copy-btn { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 0.4rem; transition: all 0.3s ease; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre { margin: 0; padding: 1.5rem; overflow-x: auto; font-size: 0.88rem; line-height: 1.7; font-family: 'Courier New', monospace; }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-fundamentals">Fundamentals</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 7 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> June 28, 2026</span>
+      </div>
+      <h1 class="article-title">How to Fix "Undefined is Not a Function" in JavaScript</h1>
+      <p class="article-subtitle">This error is JavaScript's most confusing lie — because the function exists. The problem is something else entirely. Here's exactly what's happening and how to fix it.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        You call a function. Nothing happens. You open the console — "TypeError: undefined is not a function." You stare at the code. The function is right there. You defined it yourself. You've called it a hundred times before. And yet — undefined is not a function. This error has wasted more developer hours than almost any other, and the fix is almost always hiding in plain sight.
+      </p>
+
+      <h2>What This Error Actually Means</h2>
+      <p>
+        When JavaScript throws this at you, it means your code tried to run something as a function — but when the browser actually looked at that spot, it found nothing. JavaScript fully expected a usable chunk of code it could run, found a blank space instead, and crashed.
+      </p>
+      <p>Depending on your browser or setup, you'll usually see one of these three forms:</p>
+      <ul>
+        <li><code>TypeError: undefined is not a function</code></li>
+        <li><code>TypeError: X is not a function</code> (where X is your variable name)</li>
+        <li><code>TypeError: Cannot read properties of undefined (reading 'call')</code></li>
+      </ul>
+      <p>All three mean the same thing — you're trying to call something that isn't a function. The real question is: why did that variable become undefined in the first place?</p>
+
+      <div class="article-challenge">
+        <i class="fas fa-lightbulb"></i>
+        <p><strong>Key thing to remember:</strong> The line number in the console is always the exact spot where the crash happened. Start your investigation there — not anywhere else in the file.</p>
+      </div>
+
+      <h2>The #1 Cause — Typo in the Function Name</h2>
+      <p>
+        JavaScript is case-sensitive. To the browser, <code>myfunction</code> and <code>myFunction</code> are completely different names — they might as well be from two different planets. If you define <code>calculateTotal</code> but call <code>calculatetotal</code>, JavaScript searches for the lowercase version, finds nothing, hands you <code>undefined</code>, and then tries to run that nothingness as a function. Crash.
+      </p>
+      <ul>
+        <li>This mistake is the hardest to spot because your brain autocorrects what your eyes read — you'll look at it ten times and see nothing wrong</li>
+        <li>Open DevTools Console, type the exact function name, and hit Enter — if it returns <code>undefined</code>, your spelling doesn't match your definition</li>
+        <li>Use VS Code autocomplete — let the editor type function names for you, never retype them manually</li>
+        <li>Copy-paste function names instead of retyping them whenever possible</li>
+      </ul>
+
+      <h2>The #2 Cause — Calling a Method That Doesn't Exist on That Type</h2>
+      <p>
+        Every data type in JavaScript has its own set of built-in tools (called methods). When you call a method that doesn't exist on a specific type, JavaScript looks it up, finds nothing, and tries to call that nothing as a function — same crash, different cause.
+      </p>
+      <ul>
+        <li>Calling <code>.toUpperCase()</code> on a number — numbers don't have that method</li>
+        <li>Calling <code>.map()</code> on <code>undefined</code> — <code>undefined</code> isn't an array, it has no methods at all</li>
+        <li>Calling <code>.trim()</code> on <code>null</code> — null has nothing</li>
+        <li>The fix — drop a <code>console.log</code> right above the crash line and check what type the variable actually is at that moment</li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — type check before calling</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ❌ Unsafe — crashes if myVar is not a string
+myVar.toUpperCase();
+
+// ✅ Safe — check the type first
+if (typeof myVar === 'string') {
+  myVar.toUpperCase();
+}</code></pre>
+      </div>
+
+      <h2>The #3 Cause — Accidentally Overwriting a Built-in</h2>
+      <p>
+        This is a sneaky mistake that even experienced developers make. The moment you name your variable after a built-in JavaScript feature, you quietly wipe out the original tool and replace it with your own data.
+      </p>
+      <ul>
+        <li><code>const map = "some string"</code> — the built-in array <code>.map()</code> is now gone in that scope, replaced by a string</li>
+        <li><code>const filter = []</code> — the built-in <code>.filter()</code> no longer works</li>
+        <li><code>const fetch = null</code> — you just broke every single API call on your page</li>
+        <li>The fix — if you're unsure about a name, type it in DevTools console first. If it already returns something, pick a different name</li>
+      </ul>
+
+      <h2>The #4 Cause — Wrong <code>this</code> Context in Callbacks</h2>
+      <p>
+        This one hits developers who are past the beginner stage and start working with objects and callbacks. When you pass a regular function inside another function as a callback, the meaning of <code>this</code> changes behind the scenes. If your function depends on <code>this.someMethod()</code>, and <code>this</code> is no longer pointing to your object — <code>this.someMethod</code> becomes undefined and calling it crashes everything.
+      </p>
+      <ul>
+        <li>Use arrow functions <code>() =&gt; {}</code> for callbacks — arrow functions don't create their own <code>this</code>, they inherit it from the surrounding code</li>
+        <li>If you must use a regular function, lock down the context manually with <code>.bind(this)</code></li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — this context fix</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ❌ Regular function — 'this' changes context
+setTimeout(function() {
+  this.doSomething(); // 'this' is now window, not your object
+}, 1000);
+
+// ✅ Arrow function — 'this' stays the same
+setTimeout(() => {
+  this.doSomething(); // 'this' is still your object
+}, 1000);</code></pre>
+      </div>
+
+      <h2>The Safe Debugging Checklist</h2>
+      <p>The next time you see this error, don't panic or start randomly changing your code. Run through these five steps in order — they will find the cause every single time:</p>
+      <ul>
+        <li><strong>Check the exact name</strong> — is your function spelled and capitalized identically to how it was defined?</li>
+        <li><strong>Log the variable</strong> — throw a <code>console.log()</code> right above the crash line and see exactly what that variable contains at that moment</li>
+        <li><strong>Check the type</strong> — use <code>typeof</code> to verify if it's actually a function, or if it accidentally became a string, number, or undefined</li>
+        <li><strong>Look for overwrites</strong> — scan your code for any place where you might have reused a built-in JavaScript name as a variable</li>
+        <li><strong>Verify the context</strong> — if this is happening inside a callback, check whether <code>this</code> is still pointing to what you expect</li>
+      </ul>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Open any project where you've seen this error. Find the exact line the console pointed to. Before changing a single thing — <code>console.log</code> whatever you're trying to call and read what it actually is. Not what you named it. Not what you think it should be. What it actually is at that exact moment. Do that once, and you will never spend more than two minutes on this error again.</p>
+      </div>
+
+    </div>
+  </article>
+  
+  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/undefined-is-not-a-function.html";
+      this.page.identifier = "undefined-is-not-a-function";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+        <a href="cannot-read-properties-of-null.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-bug"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>How to Fix "Cannot Read Properties of Null" in JavaScript</p>
+          </div>
+        </a>
+        <a href="var-let-const.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>Var, Let, and Const: Stop Using the Wrong One</p>
+          </div>
+        </a>
+        <a href="build-first-website.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-laptop-code"></i></div>
+          <div>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
+            <p>How to Build Your First Website From Scratch</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">View All Articles <i class="fas fa-arrow-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+            <li><a href="../playground/playground.html">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

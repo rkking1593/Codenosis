@@ -135,6 +135,11 @@
     <loc>https://codenosis.in/articles/python-vs-java-vs-c.html</loc>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://codenosis.in/articles/undefined-is-not-a-function.html</loc>
+    <priority>0.8</priority>
+  </url>
   
   
 </urlset>
