@@ -21,7 +21,57 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+     crossorigin="anonymous"></script>
   <style>
+    /* Code-block & Copy Button Styling */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
     .timeline { position: relative; padding-left: 1.8rem; margin: 2rem 0 2.5rem; border-left: 2px solid var(--accent); display: flex; flex-direction: column; gap: 1.8rem; }
     .timeline-item { position: relative; }
     .timeline-item::before { content: ''; position: absolute; left: -2.35rem; top: 0.35rem; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; border: 2px solid var(--bg-primary); }
@@ -41,8 +91,6 @@
     .verdict-box p { margin-bottom: 0 !important; color: var(--text-secondary); line-height: 1.9; }
     @media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
-     crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
 
@@ -171,7 +219,12 @@
 
       <h2>A Real Example: Vibe Coding vs What It Should Look Like</h2>
       <h3>The Vibe Coding Approach</h3>
-      <pre><code class="language-python">from flask import Flask, request, jsonify
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Vibe Coding Approach (Vulnerable)</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">from flask import Flask, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -195,9 +248,15 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True)  # ⚠️ debug=True in production</code></pre>
+      </div>
 
       <h3>The Correct Approach</h3>
-      <pre><code class="language-python">from flask import Flask, request, jsonify
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Correct Secure Approach</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">from flask import Flask, request, jsonify
 import sqlite3
 import bcrypt
 import re
@@ -236,6 +295,7 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=False)  # ✅ debug=False in production</code></pre>
+      </div>
 
       <h2>What Replaced Vibe Coding: Agentic Engineering</h2>
       <table class="compare-table">
@@ -321,7 +381,6 @@ if __name__ == '__main__':
     </div>
   </section>
 
-
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
@@ -369,6 +428,20 @@ if __name__ == '__main__':
 
   <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

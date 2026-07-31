@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic Programming Explained — Algorithms, Patterns & Examples | Codenosis</title>
+  <title>Dynamic Programming Explained — Algorithms, Patterns &amp; Examples | Codenosis</title>
   <meta name="description" content="Master Dynamic Programming from scratch. Learn memoization, tabulation, and classic DP algorithms like Knapsack, LCS, and Coin Change with step-by-step Python examples." />
   <link rel="icon" type="image/png" href="../favicon.png" />
   <link rel="stylesheet" href="../style.css" />
@@ -20,7 +20,57 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+     crossorigin="anonymous"></script>
   <style>
+    /* Code-block & Copy Button Styling */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
     .dp-table {
       width: 100%;
       border-collapse: collapse;
@@ -89,12 +139,9 @@
     .article-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin: 2rem 0 0.7rem; }
     @media (max-width: 600px) { .compare-grid, .pattern-grid { grid-template-columns: 1fr; } }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
-     crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
 
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
@@ -114,7 +161,6 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="article-hero">
     <div class="article-container">
       <div class="article-meta">
@@ -134,7 +180,6 @@
     </div>
   </section>
 
-  <!-- Body -->
   <article class="article-body">
     <div class="article-container">
 
@@ -171,16 +216,27 @@
       <p>The classic entry point into DP. The naive recursion is O(2ⁿ). DP drops it to O(n).</p>
 
       <h3>Naive Recursion — O(2ⁿ)</h3>
-      <pre><code class="language-python">def fib(n):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Naive Fibonacci</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def fib(n):
     if n <= 1:
         return n
     return fib(n - 1) + fib(n - 2)
 
 # fib(6) recomputes fib(2) five times, fib(3) three times…
 # For n = 40: ~2 billion calls!</code></pre>
+      </div>
 
       <h3>Top-Down DP (Memoization) — O(n) time, O(n) space</h3>
-      <pre><code class="language-python">from functools import lru_cache
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Memoized Fibonacci</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def fib_memo(n):
@@ -190,9 +246,15 @@ def fib_memo(n):
 
 # Each value computed exactly once, stored in cache.
 # fib_memo(40) → instant.</code></pre>
+      </div>
 
       <h3>Bottom-Up DP (Tabulation) — O(n) time, O(n) space</h3>
-      <pre><code class="language-python">def fib_tab(n):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Tabulated Fibonacci</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def fib_tab(n):
     if n <= 1:
         return n
     dp = [0] * (n + 1)
@@ -204,9 +266,15 @@ def fib_memo(n):
 # dp table for n = 6:
 # Index: 0  1  2  3  4  5  6
 # Value: 0  1  1  2  3  5  8</code></pre>
+      </div>
 
       <h3>Space-Optimised — O(n) time, O(1) space</h3>
-      <pre><code class="language-python">def fib_opt(n):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Space-Optimised Fibonacci</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def fib_opt(n):
     if n <= 1:
         return n
     a, b = 0, 1
@@ -215,6 +283,7 @@ def fib_memo(n):
     return b
 
 # Only two variables needed — no full table required.</code></pre>
+      </div>
 
       <div class="article-tip">
         <i class="fa-solid fa-lightbulb"></i>
@@ -225,7 +294,12 @@ def fib_memo(n):
       <p>You can climb 1 or 2 steps at a time. Given <code>n</code> stairs, how many distinct ways can you reach the top?</p>
       <p><strong>Recurrence:</strong> <code>ways(n) = ways(n-1) + ways(n-2)</code> — identical structure to Fibonacci.</p>
 
-      <pre><code class="language-python">def climb_stairs(n):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Climbing Stairs Solution</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def climb_stairs(n):
     if n <= 2:
         return n
     a, b = 1, 2
@@ -234,6 +308,7 @@ def fib_memo(n):
     return b
 
 # climb_stairs(5) → 8</code></pre>
+      </div>
 
       <table class="dp-table">
         <thead><tr><th>n (stairs)</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
@@ -247,7 +322,12 @@ def fib_memo(n):
       <p><strong>Example:</strong> coins = [1, 3, 4], amount = 6 → answer is 2 (3 + 3).</p>
       <p><strong>Recurrence:</strong> <code>dp[i] = min(dp[i - c] + 1)</code> for each coin <code>c</code> where <code>c ≤ i</code>.</p>
 
-      <pre><code class="language-python">def coin_change(coins, amount):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Coin Change Algorithm</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def coin_change(coins, amount):
     dp = [float('inf')] * (amount + 1)
     dp[0] = 0
 
@@ -261,6 +341,7 @@ def fib_memo(n):
 print(coin_change([1, 3, 4], 6))    # → 2  (3+3)
 print(coin_change([2], 3))           # → -1 (impossible)
 print(coin_change([1, 5, 6, 9], 11)) # → 2  (5+6)</code></pre>
+      </div>
 
       <table class="dp-table">
         <thead><tr><th>Amount</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
@@ -278,7 +359,12 @@ print(coin_change([1, 5, 6, 9], 11)) # → 2  (5+6)</code></pre>
         <li>Else: <code>dp[i][w] = max(dp[i-1][w], dp[i-1][w - wt[i]] + val[i])</code></li>
       </ul>
 
-      <pre><code class="language-python">def knapsack(weights, values, capacity):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — 0/1 Knapsack DP</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def knapsack(weights, values, capacity):
     n = len(weights)
     dp = [[0] * (capacity + 1) for _ in range(n + 1)]
 
@@ -295,6 +381,7 @@ weights = [1, 3, 4, 5]
 values  = [1, 4, 5, 7]
 capacity = 7
 print(knapsack(weights, values, capacity))  # → 9</code></pre>
+      </div>
 
       <table class="dp-table">
         <thead><tr><th>Item \ Cap</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
@@ -321,7 +408,12 @@ print(knapsack(weights, values, capacity))  # → 9</code></pre>
         <li>Else: <code>dp[i][j] = max(dp[i-1][j], dp[i][j-1])</code></li>
       </ul>
 
-      <pre><code class="language-python">def lcs(s1, s2):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Longest Common Subsequence</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def lcs(s1, s2):
     m, n = len(s1), len(s2)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
 
@@ -337,6 +429,7 @@ print(knapsack(weights, values, capacity))  # → 9</code></pre>
 print(lcs("ABCBDAB", "BDCAB"))   # → 4
 print(lcs("AGGTAB", "GXTXAYB"))  # → 4
 print(lcs("abcde", "ace"))        # → 3</code></pre>
+      </div>
 
       <table class="dp-table">
         <thead><tr><th></th><th>""</th><th>A</th><th>C</th><th>B</th><th>D</th></tr></thead>
@@ -353,7 +446,12 @@ print(lcs("abcde", "ace"))        # → 3</code></pre>
       <p>Find the length of the longest subsequence of an array such that all elements are in <strong>strictly increasing</strong> order.</p>
       <p><strong>Example:</strong> [10, 9, 2, 5, 3, 7, 101, 18] → LIS = [2, 3, 7, 18] → length 4.</p>
 
-      <pre><code class="language-python">def lis(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Longest Increasing Subsequence</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def lis(arr):
     n = len(arr)
     dp = [1] * n
 
@@ -367,6 +465,7 @@ print(lcs("abcde", "ace"))        # → 3</code></pre>
 print(lis([10, 9, 2, 5, 3, 7, 101, 18]))  # → 4
 print(lis([0, 1, 0, 3, 2, 3]))             # → 4
 print(lis([7, 7, 7, 7]))                   # → 1</code></pre>
+      </div>
 
       <table class="dp-table">
         <thead><tr><th>Index</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
@@ -380,7 +479,12 @@ print(lis([7, 7, 7, 7]))                   # → 1</code></pre>
       <p>Given a chain of matrices, find the most efficient <strong>order of multiplication</strong> to minimise the total number of scalar multiplications.</p>
       <p><strong>Recurrence:</strong> <code>dp[i][j] = min over all k of (dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j])</code></p>
 
-      <pre><code class="language-python">def matrix_chain(p):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Matrix Chain Multiplication</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def matrix_chain(p):
     n = len(p) - 1
     dp = [[0] * (n + 1) for _ in range(n + 1)]
 
@@ -396,6 +500,7 @@ print(lis([7, 7, 7, 7]))                   # → 1</code></pre>
 
 p = [40, 20, 30, 10, 30]
 print(matrix_chain(p))  # → 26000</code></pre>
+      </div>
 
       <div class="article-note">
         <i class="fa-solid fa-circle-info"></i>
@@ -506,7 +611,6 @@ print(matrix_chain(p))  # → 26000</code></pre>
     </div>
   </article>
   
-  <!-- Comment Prompt + Disqus -->
   <p class="comment-prompt">Got a favourite DP trick or a question? Drop it below — we read and reply to every single one.</p>
   <div id="disqus_thread"></div>
   <script>
@@ -522,7 +626,6 @@ print(matrix_chain(p))  # → 26000</code></pre>
     })();
   </script>
 
-  <!-- Related -->
   <section class="related">
     <div class="article-container">
       <h3>Continue Reading</h3>
@@ -552,8 +655,6 @@ print(matrix_chain(p))  # → 26000</code></pre>
     </div>
   </section>
 
-
-  <!-- Footer -->
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
@@ -601,6 +702,20 @@ print(matrix_chain(p))  # → 26000</code></pre>
 
   <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

@@ -21,7 +21,58 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+     crossorigin="anonymous"></script>
   <style>
+    /* Code-block & Copy Button Styling */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
     .reason-card { display: flex; gap: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; margin: 1.5rem 0; transition: border-color 0.3s ease; }
     .reason-card:hover { border-color: var(--accent); }
     .reason-number { flex-shrink: 0; width: 48px; height: 48px; background: rgba(99,102,241,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: var(--accent); }
@@ -41,7 +92,6 @@
     .domain-box p { font-size: 0.78rem !important; color: var(--text-secondary); line-height: 1.5; margin: 0 !important; }
     .code-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
     @media (max-width: 600px) { .code-compare { grid-template-columns: 1fr; } }
-    .code-block-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 0.4rem 0.8rem; border-radius: 6px 6px 0 0; display: inline-block; }
     .label-python { background: rgba(59,130,246,0.2); color: #3b82f6; }
     .label-other { background: rgba(239,68,68,0.2); color: #ef4444; }
     .myth-row { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin: 1rem 0; }
@@ -58,8 +108,6 @@
     .timeline-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem; }
     .timeline-item p { font-size: 0.88rem !important; color: var(--text-secondary); margin: 0 !important; line-height: 1.6; }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
-     crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
 
@@ -191,27 +239,34 @@
       <p>The readability argument becomes obvious when you compare real code doing the same thing. Here's reading a CSV file and computing an average salary:</p>
 
       <div class="code-compare">
-        <div>
-          <span class="code-block-label label-python">Python</span>
-          <pre style="margin:0;border-radius:0 8px 8px 8px;"><code class="language-python">import pandas as pd
+        <div class="code-block" style="margin:0;">
+          <div class="code-block-header">
+            <span class="code-block-label label-python">Python</span>
+            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="language-python">import pandas as pd
 
 df = pd.read_csv("employees.csv")
 avg = df["salary"].mean()
 print(f"Average salary: ₹{avg:,.0f}")</code></pre>
         </div>
-        <div>
-          <span class="code-block-label label-other">Java</span>
-          <pre style="margin:0;border-radius:0 8px 8px 8px;"><code class="language-java">import com.opencsv.CSVReader;
+
+        <div class="code-block" style="margin:0;">
+          <div class="code-block-header">
+            <span class="code-block-label label-other">Java</span>
+            <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="language-java">import com.opencsv.CSVReader;
 import java.io.*;
 import java.util.*;
 
 public class Main {
   public static void main(String[] args) throws Exception {
     CSVReader reader = new CSVReader(new FileReader("employees.csv"));
-    List&lt;String[]&gt; rows = reader.readAll();
+    List<String[]> rows = reader.readAll();
     double total = 0;
     int count = 0;
-    for (int i = 1; i &lt; rows.size(); i++) {
+    for (int i = 1; i < rows.size(); i++) {
       total += Double.parseDouble(rows.get(i)[1]);
       count++;
     }
@@ -274,7 +329,12 @@ public class Main {
       <p>If you want to build mobile apps — no. Learn Kotlin or Swift. If you want to build games — learn C++ or C#. If you want to work deeply in embedded systems — learn C. Python isn't the answer to every question, but it's the answer to more questions than any other language right now.</p>
       <p>The most honest reason Python is popular? <strong>It was in the right place at the right time — and then it built a moat so wide that being "right" stopped mattering.</strong> The network effect is the real answer. Everything else is a contributing factor.</p>
 
-      <pre><code class="language-python"># This is all it takes to build and evaluate an ML model in Python.
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label label-python">python — ML Model Evaluation</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python"># This is all it takes to build and evaluate an ML model in Python.
 # In any other language, this would be 200+ lines.
 
 from sklearn.datasets import load_iris
@@ -289,6 +349,7 @@ model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
 print(f"Accuracy: {accuracy_score(y_test, model.predict(X_test)):.2%}")</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fas fa-rocket"></i>
@@ -344,7 +405,6 @@ print(f"Accuracy: {accuracy_score(y_test, model.predict(X_test)):.2%}")</code></
     </div>
   </section>
 
-
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
@@ -392,6 +452,20 @@ print(f"Accuracy: {accuracy_score(y_test, model.predict(X_test)):.2%}")</code></
 
   <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

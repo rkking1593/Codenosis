@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Time Complexity & Space Complexity Explained | Codenosis</title>
+  <title>Time Complexity &amp; Space Complexity Explained | Codenosis</title>
   <meta name="description" content="Learn Time Complexity and Space Complexity with Big O notation, real examples in Python, and visual comparisons. A must-know for every programmer." />
   <link rel="icon" type="image/png" href="../favicon.png" />
   <link rel="stylesheet" href="../style.css" />
@@ -21,7 +21,57 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+     crossorigin="anonymous"></script>
   <style>
+    /* Code-block & Copy Button Styling */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
     .complexity-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.95rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
     .complexity-table thead { background: rgba(99,102,241,0.15); }
     .complexity-table th { padding: 0.9rem 1.2rem; text-align: left; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border); }
@@ -53,12 +103,9 @@
     .compare-card.space { border-top: 3px solid #22c55e; }
     @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } .bar-row { grid-template-columns: 80px 1fr 60px; } }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
-     crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
 
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
@@ -78,7 +125,6 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="article-hero">
     <div class="article-container">
       <div class="article-meta">
@@ -98,7 +144,6 @@
     </div>
   </section>
 
-  <!-- Body -->
   <article class="article-body">
     <div class="article-container">
 
@@ -119,15 +164,26 @@
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">1. O(1) — Constant Time</h3>
       <p>The algorithm always does the same number of operations, no matter how large the input is.</p>
-      <pre><code class="language-python">def get_first(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(1) Constant Time</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def get_first(arr):
     return arr[0]   # O(1)
 
 def get_value(d, key):
     return d[key]   # O(1)</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">2. O(log n) — Logarithmic Time</h3>
       <p>The algorithm halves the problem with each step. Classic example: <strong>Binary Search</strong>.</p>
-      <pre><code class="language-python">def binary_search(arr, target):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(log n) Binary Search</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def binary_search(arr, target):
     low, high = 0, len(arr) - 1
 
     while low <= high:
@@ -141,19 +197,31 @@ def get_value(d, key):
     return -1
 
 # For n = 1,000,000 elements → only ~20 comparisons needed!</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">3. O(n) — Linear Time</h3>
       <p>The algorithm visits every element once. If input doubles, work doubles.</p>
-      <pre><code class="language-python">def find_max(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(n) Linear Search</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def find_max(arr):
     max_val = arr[0]
     for num in arr:
         if num > max_val:
             max_val = num
     return max_val</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">4. O(n log n) — Linearithmic Time</h3>
       <p>This is the complexity of most efficient sorting algorithms like Merge Sort and Quick Sort.</p>
-      <pre><code class="language-python">def merge_sort(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(n log n) Merge Sort</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def merge_sort(arr):
     if len(arr) <= 1:
         return arr
 
@@ -171,16 +239,23 @@ def merge(left, right):
         else:
             result.append(right[j]); j += 1
     return result + left[i:] + right[j:]</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">5. O(n²) — Quadratic Time</h3>
       <p>A loop inside a loop. If input doubles, work quadruples. Classic example: Bubble Sort.</p>
-      <pre><code class="language-python">def bubble_sort(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(n²) Bubble Sort</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def bubble_sort(arr):
     n = len(arr)
     for i in range(n):
         for j in range(n - i - 1):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
     return arr</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fas fa-bolt"></i>
@@ -189,7 +264,12 @@ def merge(left, right):
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">6. O(2ⁿ) — Exponential Time</h3>
       <p>Each step doubles the work. Usually seen in recursive brute-force solutions.</p>
-      <pre><code class="language-python"># BAD: Exponential
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Exponential vs Memoized</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python"># BAD: Exponential
 def fib_bad(n):
     if n <= 1:
         return n
@@ -203,6 +283,7 @@ def fib_good(n):
     if n <= 1:
         return n
     return fib_good(n - 1) + fib_good(n - 2)</code></pre>
+      </div>
 
       <h2>Growth Rate Comparison (Visual)</h2>
       <p>For n = 100 elements, here's how many operations each complexity requires:</p>
@@ -271,36 +352,65 @@ def fib_good(n):
       <h2>Space Complexity Examples</h2>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">O(1) Space — Constant</h3>
-      <pre><code class="language-python">def sum_array(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(1) Space</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def sum_array(arr):
     total = 0
     for num in arr:
         total += num
     return total
 # Space: O(1)</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">O(n) Space — Linear</h3>
-      <pre><code class="language-python">def duplicate_array(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(n) Space</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def duplicate_array(arr):
     result = []
     for num in arr:
         result.append(num)
     return result
 # Space: O(n)</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">O(n) Space — Recursive Call Stack</h3>
-      <pre><code class="language-python">def factorial(n):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Call Stack Space</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def factorial(n):
     if n == 0:
         return 1
     return n * factorial(n - 1)
 # Space: O(n) due to call stack depth</code></pre>
+      </div>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">O(n²) Space — Quadratic</h3>
-      <pre><code class="language-python">def create_matrix(n):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — O(n²) Matrix Space</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def create_matrix(n):
     matrix = [[0] * n for _ in range(n)]
     return matrix
 # Space: O(n²)</code></pre>
+      </div>
 
       <h2>The Classic Trade-off: Time vs Space</h2>
-      <pre><code class="language-python"># Approach 1: Brute Force
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Time vs Space Trade-off</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python"># Approach 1: Brute Force
 # Time: O(2ⁿ)  |  Space: O(n) call stack
 def fib_brute(n):
     if n <= 1: return n
@@ -323,6 +433,7 @@ def fib_dp(n):
     for _ in range(2, n + 1):
         a, b = b, a + b
     return b</code></pre>
+      </div>
 
       <div class="article-tip">
         <i class="fa-solid fa-lightbulb"></i>
@@ -338,7 +449,12 @@ def fib_dp(n):
         <li><strong>Halving per step = log:</strong> If you halve the input each step, it's O(log n)</li>
       </ul>
 
-      <pre><code class="language-python">def example(arr):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Step-by-Step Analysis</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def example(arr):
     for x in arr:       # O(n)
         print(x)
 
@@ -347,6 +463,7 @@ def fib_dp(n):
             print(i, j)
 
 # Total: O(n) + O(n²) → O(n²)</code></pre>
+      </div>
 
       <h2>Quick Summary</h2>
       <table class="complexity-table">
@@ -407,13 +524,12 @@ def fib_dp(n):
           <div class="related-icon"><i class="fa-solid fa-table-cells"></i></div>
           <div>
             <span class="category-badge badge-python">Python</span>
-            <p>NumPy for Machine Learning: Complete Guide with Syntax & Examples</p>
+            <p>NumPy for Machine Learning: Complete Guide with Syntax &amp; Examples</p>
           </div>
         </a>
       </div>
     </div>
   </section>
-
 
   <!-- Footer -->
   <footer class="footer">
@@ -463,6 +579,20 @@ def fib_dp(n):
 
   <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

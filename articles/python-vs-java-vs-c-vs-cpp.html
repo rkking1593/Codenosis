@@ -21,7 +21,57 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+     crossorigin="anonymous"></script>
   <style>
+    /* Code-block & Copy Button Styling */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
     .lang-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin: 2rem 0; transition: border-color 0.3s ease; }
     .lang-card:hover { border-color: var(--accent); }
     .lang-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
@@ -69,8 +119,6 @@
     .path-badge.c { background: rgba(99,102,241,0.15); color: #6366f1; }
     .path-badge.cpp { background: rgba(234,179,8,0.15); color: #eab308; }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
-     crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
 
@@ -165,13 +213,19 @@
 
       <p>Python's biggest superpower is its <strong>readability</strong>. A "Hello, World!" in Python is literally one line: <code>print("Hello, World!")</code>. There's no main function, no semicolons, no type declarations. You focus on logic, not syntax ceremony.</p>
 
-      <pre><code class="language-python"># Python: Simple, clean, readable
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Simple, Clean, Readable</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python"># Python: Simple, clean, readable
 def greet(name):
     return f"Hello, {name}!"
 
 students = ["Rahul", "Priya", "Amit"]
 for student in students:
     print(greet(student))</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
@@ -220,7 +274,12 @@ for student in students:
         </div>
       </div>
 
-      <pre><code class="language-java">// Java: Structured, verbose, but powerful
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">java — Structured & Verbose</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-java">// Java: Structured, verbose, but powerful
 public class Main {
     public static void main(String[] args) {
         String[] students = {"Rahul", "Priya", "Amit"};
@@ -229,6 +288,7 @@ public class Main {
         }
     }
 }</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
@@ -277,7 +337,12 @@ public class Main {
         </div>
       </div>
 
-      <pre><code class="language-c">/* C: Low-level, precise, powerful */
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">c — Low-Level & Precise</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-c">/* C: Low-level, precise, powerful */
 #include &lt;stdio.h&gt;
 
 void greet(char *name) {
@@ -292,6 +357,7 @@ int main() {
     }
     return 0;
 }</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
@@ -340,7 +406,12 @@ int main() {
         </div>
       </div>
 
-      <pre><code class="language-cpp">// C++: Power + OOP together
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">cpp — Power & OOP</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-cpp">// C++: Power + OOP together
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;string&gt;
@@ -357,6 +428,7 @@ int main() {
     }
     return 0;
 }</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fa-solid fa-lightbulb"></i>
@@ -430,7 +502,7 @@ int main() {
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = "https://codenosis.in/articles/python-vs-java-vs-c.html";
+      this.page.url = "https://codenosis.in/articles/python-vs-java-vs-c-vs-cpp.html";
       this.page.identifier = "python-vs-java-vs-c";
     };
     (function() {
@@ -469,7 +541,6 @@ int main() {
       </div>
     </div>
   </section>
-
 
   <footer class="footer">
     <div class="section-container">
@@ -518,6 +589,20 @@ int main() {
 
   <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

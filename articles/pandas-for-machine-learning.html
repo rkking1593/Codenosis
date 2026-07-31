@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A complete guide to Pandas for Machine Learning — DataFrames, missing values, GroupBy, merging, feature engineering, and encoding, with verified, working examples.">
-  <title>Pandas for Machine Learning: Essential Features You Need to Know (With Examples) — Codenosis</title>
+  <meta name="description" content="10 essential Pandas features every Machine Learning developer uses daily — DataFrames, reading data, missing values, grouping, feature engineering, encoding, and train-test splits.">
+  <title>Pandas for Machine Learning: 10 Essential Features You Need to Know — Codenosis</title>
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../article.css" />
@@ -19,6 +19,7 @@
     gtag('config', 'G-24SHHE3YCP');
   </script>
   <style>
+    /* Code-block & Copy Button Styling */
     .code-block {
       background: #1e1e2e;
       border: 1px solid var(--border);
@@ -100,7 +101,7 @@
       line-height: 1.7;
     }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
      crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
@@ -134,11 +135,11 @@
     <div class="article-container">
       <div class="article-meta">
         <span class="category-badge badge-ai">AI & ML</span>
-        <span class="meta-info"><i class="fas fa-clock"></i> 9 min read</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 10 min read</span>
         <span class="meta-info"><i class="fas fa-calendar"></i> June 18, 2026</span>
       </div>
-      <h1 class="article-title">Pandas for Machine Learning: Essential Features You Need to Know (With Examples)</h1>
-      <p class="article-subtitle">The Python library that turns messy, real-world data into something a machine learning model can actually learn from — DataFrames, missing values, GroupBy, merging, feature engineering, and encoding, with verified, working examples.</p>
+      <h1 class="article-title">Pandas for Machine Learning: 10 Essential Features You Need to Know</h1>
+      <p class="article-subtitle">Before data ever reaches a model, it spends time in pandas. Here are 10 core features — from reading CSVs to one-hot encoding — with verified syntax and realistic examples.</p>
       <div class="article-author">
         <div class="author-avatar">Y</div>
         <div>
@@ -154,17 +155,16 @@
     <div class="article-container">
 
       <p class="article-intro">
-        Before any machine learning model can learn from data, that data has to be loaded, cleaned, explored, and reshaped into a usable form — and that's exactly the job pandas was built for. This guide walks through the pandas features that matter most for ML work, with a single running dataset and verified, working code for every section.
+        Most time in machine learning isn't spent building models — it's spent preparing the data that goes into them. Pandas is the industry-standard Python library for exactly that: loading, cleaning, transforming, and inspecting datasets.
       </p>
 
-      <h2>What is Pandas and Why Does It Matter So Much in ML?</h2>
-      <p>Pandas is a Python library built specifically for working with structured, tabular data — the rows-and-columns format that almost every real-world dataset comes in. It's built on top of NumPy, and it sits right at the start of nearly every machine learning pipeline.</p>
-      <p>Think of a plain Python list or dictionary as a box of loose paper records — technically all the information is there, but finding, filtering, or fixing anything means digging through it by hand. A pandas DataFrame is the same data filed into a proper spreadsheet, with labeled rows and columns, instant search, and one-line tools for cleaning and reshaping. Same data, dramatically less manual work.</p>
-      <p>Let's create the dataset we'll use throughout this guide:</p>
+      <p>
+        To keep things grounded, every example below works with a single sample dataset built using the code below.
+      </p>
 
       <div class="code-block">
         <div class="code-block-header">
-          <span class="code-block-label">setup.py — Creating the Example Dataset</span>
+          <span class="code-block-label">setup.py — Create Sample DataFrame</span>
           <button class="copy-btn" onclick="copyCode(this)">
             <i class="fas fa-copy"></i> Copy
           </button>
@@ -174,18 +174,16 @@
 
 data = {
     <span class="string">'StudentID'</span>: [<span class="attr">1</span>, <span class="attr">2</span>, <span class="attr">3</span>, <span class="attr">4</span>, <span class="attr">5</span>, <span class="attr">6</span>],
-    <span class="string">'Name'</span>: [<span class="string">'Aarav'</span>, <span class="string">'Priya'</span>, <span class="string">'Rohan'</span>, <span class="string">'Sneha'</span>, <span class="string">'Karan'</span>, <span class="string">'Isha'</span>],
-    <span class="string">'Age'</span>: [<span class="attr">21</span>, <span class="attr">22</span>, np.<span class="attr">nan</span>, <span class="attr">23</span>, <span class="attr">21</span>, <span class="attr">24</span>],
-    <span class="string">'City'</span>: [<span class="string">'Delhi'</span>, <span class="string">'Mumbai'</span>, <span class="string">'Delhi'</span>, np.<span class="attr">nan</span>, <span class="string">'Bangalore'</span>, <span class="string">'Mumbai'</span>],
-    <span class="string">'Score'</span>: [<span class="attr">85</span>, <span class="attr">92</span>, <span class="attr">78</span>, <span class="attr">88</span>, np.<span class="attr">nan</span>, <span class="attr">95</span>],
+    <span class="string">'Name'</span>: [<span class="string">'Aarav'</span>, <span class="string">'Priya'</span>, <span class="string">'Rohan'</span>, <span class="string">'Ananya'</span>, <span class="string">'Vikram'</span>, <span class="string">'Neha'</span>],
+    <span class="string">'Age'</span>: [<span class="attr">20</span>, <span class="attr">21</span>, np.nan, <span class="attr">22</span>, <span class="attr">20</span>, <span class="attr">21</span>],
+    <span class="string">'City'</span>: [<span class="string">'Delhi'</span>, <span class="string">'Mumbai'</span>, <span class="string">'Delhi'</span>, <span class="string">'Bangalore'</span>, np.nan, <span class="string">'Mumbai'</span>],
+    <span class="string">'Score'</span>: [<span class="attr">85</span>, <span class="attr">92</span>, <span class="attr">78</span>, np.nan, <span class="attr">88</span>, <span class="attr">95</span>],
     <span class="string">'Passed'</span>: [<span class="attr">1</span>, <span class="attr">1</span>, <span class="attr">0</span>, <span class="attr">1</span>, <span class="attr">1</span>, <span class="attr">1</span>]
 }
 
 df = pd.<span class="function">DataFrame</span>(data)
 <span class="function">print</span>(df)</code></pre>
       </div>
-
-      <p>This gives us a small dataset with numeric values, categorical values, and a few missing entries — exactly the kind of slightly messy real-world data you'll run into before training any ML model. Now let's go through the features that help us work with it.</p>
 
       <h2>1. DataFrames and Series: The Core Data Structures</h2>
       <p>Everything in pandas is built around two structures: the <code>Series</code>, a single labeled column of data, and the <code>DataFrame</code>, a full table made up of multiple Series. Together they let you store and manipulate data the way a spreadsheet would, but with the speed and programmability of Python.</p>
@@ -407,32 +405,6 @@ merged_df[<span class="string">'ScorePerAttendance'</span>] = merged_df.<span cl
 <span class="function">print</span>(merged_df.<span class="function">duplicated</span>().<span class="function">sum</span>())
 merged_df = merged_df.<span class="function">drop_duplicates</span>()</code></pre>
       </div>
-
-      <p>These two checks are quick, but skipping them can quietly distort your model's training process without you ever noticing.</p>
-
-      <h2>Bringing It All Together for ML</h2>
-      <p>Once your DataFrame is clean, encoded, and feature-engineered, you're just one step away from training a model. Pandas hands off cleanly into Scikit-learn like this:</p>
-
-      <div class="code-block">
-        <div class="code-block-header">
-          <span class="code-block-label">train_test_split.py — Handing Off to Scikit-learn</span>
-          <button class="copy-btn" onclick="copyCode(this)">
-            <i class="fas fa-copy"></i> Copy
-          </button>
-        </div>
-        <pre><code id="code-12"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split
-
-X = encoded_df.<span class="function">drop</span>([<span class="string">'StudentID'</span>, <span class="string">'Name'</span>, <span class="string">'Passed'</span>, <span class="string">'ScoreCategory'</span>], axis=<span class="attr">1</span>)
-y = encoded_df[<span class="string">'Passed'</span>]
-
-X_train, X_test, y_train, y_test = <span class="function">train_test_split</span>(
-    X, y, test_size=<span class="attr">0.2</span>, random_state=<span class="attr">42</span>
-)
-
-<span class="function">print</span>(X_train.<span class="attr">shape</span>, X_test.<span class="attr">shape</span>)</code></pre>
-      </div>
-
-      <p>This is the moment everything pandas did — loading, cleaning, exploring, transforming — finally pays off: a clean <code>X</code> and <code>y</code>, ready for any machine learning algorithm.</p>
 
       <h2>Try It Yourself</h2>
       <div class="article-challenge">

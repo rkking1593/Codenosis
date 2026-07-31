@@ -20,7 +20,57 @@
     gtag('js', new Date());
     gtag('config', 'G-24SHHE3YCP');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
+     crossorigin="anonymous"></script>
   <style>
+    /* Code-block & Copy Button Styling */
+    .code-block {
+      background: #1e1e2e;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: #13131f;
+      border-bottom: 1px solid var(--border);
+    }
+    .code-block-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre {
+      margin: 0;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
     .tp-visual { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; overflow-x: auto; }
     .tp-visual-title { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); margin-bottom: 1.2rem; }
     .tp-array { display: flex; gap: 0.5rem; flex-wrap: nowrap; margin-bottom: 0.8rem; }
@@ -60,8 +110,6 @@
     .pitfall-box p { margin: 0 !important; color: var(--text-primary) !important; font-weight: 500; }
     @media (max-width: 600px) { .usecase-grid { grid-template-columns: 1fr; } .tp-cell, .tp-label { width: 38px; height: 38px; font-size: 0.9rem; } }
   </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309"
-     crossorigin="anonymous"></script>
 </head>
 <body class="dark-mode">
 
@@ -214,7 +262,12 @@
       </div>
 
       <h2>Python Code — Two Sum (Sorted)</h2>
-      <pre><code class="language-python">def two_sum_sorted(nums, target):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Two Sum (Sorted)</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def two_sum_sorted(nums, target):
     left = 0
     right = len(nums) - 1
 
@@ -233,6 +286,7 @@
 nums = [2, 7, 11, 15]
 target = 9
 print(two_sum_sorted(nums, target))  # Output: [1, 2]</code></pre>
+      </div>
 
       <div class="complexity-grid">
         <div class="complexity-box">
@@ -251,7 +305,12 @@ print(two_sum_sorted(nums, target))  # Output: [1, 2]</code></pre>
       <p><strong>Problem:</strong> Given a string, check whether it reads the same forwards and backwards (ignoring non-alphanumeric characters and case).</p>
       <p><strong>Input:</strong> <code>"A man, a plan, a canal: Panama"</code> → <strong>Output:</strong> <code>True</code></p>
 
-      <pre><code class="language-python">def is_palindrome(s):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Valid Palindrome</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def is_palindrome(s):
     left = 0
     right = len(s) - 1
 
@@ -271,11 +330,17 @@ print(two_sum_sorted(nums, target))  # Output: [1, 2]</code></pre>
 
 print(is_palindrome("A man, a plan, a canal: Panama"))  # True
 print(is_palindrome("race a car"))                       # False</code></pre>
+      </div>
 
       <h2>Example 3 — Remove Duplicates from Sorted Array</h2>
       <p><strong>Problem:</strong> Given a sorted array, remove duplicates in-place so that each element appears only once. Return the new length.</p>
 
-      <pre><code class="language-python">def remove_duplicates(nums):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Remove Duplicates</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def remove_duplicates(nums):
     if not nums:
         return 0
 
@@ -292,6 +357,7 @@ nums = [1, 1, 2, 3, 3, 3, 4, 5, 5]
 k = remove_duplicates(nums)
 print(k)         # 5
 print(nums[:k])  # [1, 2, 3, 4, 5]</code></pre>
+      </div>
 
       <table class="step-table">
         <thead>
@@ -313,7 +379,12 @@ print(nums[:k])  # [1, 2, 3, 4, 5]</code></pre>
       <p><strong>Problem:</strong> Given an array <code>height</code>, find two lines that form a container holding the most water.</p>
       <p><strong>Key insight:</strong> Area = <code>min(height[L], height[R]) × (R - L)</code>. Move the shorter side inward.</p>
 
-      <pre><code class="language-python">def max_water(height):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — Container With Most Water</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def max_water(height):
     left = 0
     right = len(height) - 1
     max_area = 0
@@ -333,6 +404,7 @@ print(nums[:k])  # [1, 2, 3, 4, 5]</code></pre>
 
 height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 print(max_water(height))  # Output: 49</code></pre>
+      </div>
 
       <div class="article-challenge">
         <i class="fa-solid fa-bolt"></i>
@@ -368,7 +440,12 @@ print(max_water(height))  # Output: 49</code></pre>
       </div>
 
       <h2>Bonus — 3Sum (Extending Two Pointers)</h2>
-      <pre><code class="language-python">def three_sum(nums):
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">python — 3Sum Problem</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">def three_sum(nums):
     nums.sort()
     result = []
 
@@ -399,6 +476,7 @@ print(max_water(height))  # Output: 49</code></pre>
 
 nums = [-1, 0, 1, 2, -1, -4]
 print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
+      </div>
 
       <div class="complexity-grid">
         <div class="complexity-box">
@@ -508,7 +586,6 @@ print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
     </div>
   </section>
 
-
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
@@ -556,6 +633,20 @@ print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
 
   <script src="../script.js"></script>
   <script>hljs.highlightAll();</script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>
