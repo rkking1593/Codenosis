@@ -154,7 +154,7 @@
       <div class="article-meta">
         <span class="category-badge badge-fundamentals">Fundamentals</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 7 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 18, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 03, 2026</span>
       </div>
       <h1 class="article-title">Var, Let, and Const: Stop Using the Wrong One</h1>
       <p class="article-subtitle">Still defaulting to var without knowing why? Here's the honest breakdown of what each one actually does — and why it matters more than you think.</p>
@@ -164,6 +164,22 @@
           <p class="author-name">Sarthak</p>
           <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
         </div>
+      </div>
+    </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What is var — And Why It's Problematic</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> What is let — And When to Use It</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> What is const — And Why It Should Be Your ...</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> The Simple Rule You Need to Remember</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> A Quick Visual Comparison</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -182,7 +198,7 @@
 
       <p>The frustrating part is that var works. Your code won't crash. Your browser won't yell at you. The bugs it creates are silent — the kind that show up at the worst possible moment and take forever to trace back to the source. That's exactly what makes it dangerous for beginners.</p>
 
-      <h2>What is var — And Why It's Problematic</h2>
+      <h2 id="sec-1">What is var — And Why It's Problematic</h2>
       <p>
         Back in 1995, var was the original, old-school way to declare variables in JavaScript. While it worked fine for simple scripts in the early days of the web, it has a massive architectural defect: var is function-scoped rather than block-scoped.
       </p>
@@ -201,7 +217,7 @@
         Silent bugs are the worst kind because your code doesn't crash to warn you — it just silently breaks your website. Because var is full of these hidden traps, using it today is just asking for a headache.
       </p>
 
-      <h2>What is let — And When to Use It</h2>
+      <h2 id="sec-2">What is let — And When to Use It</h2>
       <p>
         To save everyone from the problems of var, JavaScript introduced <strong>let</strong> in 2015 as part of the ES6 update. It was created specifically to fix those old, broken behaviors and bring sanity back to coding.
       </p>
@@ -215,7 +231,7 @@
         Use let whenever you know the value of a variable is going to change down the line — things like a counter in a loop, a player's score in a game, or a toggle state that flips between true and false.
       </p>
 
-      <h2>What is const — And Why It Should Be Your Default</h2>
+      <h2 id="sec-3">What is const — And Why It Should Be Your Default</h2>
       <p>
         Introduced alongside let in the ES6 update, const is short for "constant." Just like let, const is strictly block-scoped — it stays locked safely inside the curly braces where you created it.
       </p>
@@ -226,7 +242,7 @@
         Make const your default choice whenever you create a new variable. Only switch to let when you're certain the value needs to change later. This one habit alone makes your code cleaner, more predictable, and far easier to debug.
       </p>
 
-      <h2>The Simple Rule You Need to Remember</h2>
+      <h2 id="sec-4">The Simple Rule You Need to Remember</h2>
       <p>You don't need to overcomplicate this. Lock this three-step rule into your brain and you'll be fine:</p>
       <ul>
         <li><strong>Default to const</strong> — use this always, right out of the gate</li>
@@ -237,7 +253,7 @@
         This isn't a random opinion — it's the modern JavaScript standard every professional developer follows today. Most modern code editors and team tools will actually throw a warning if you type var into your file.
       </p>
 
-      <h2>A Quick Visual Comparison</h2>
+      <h2 id="sec-5">A Quick Visual Comparison</h2>
       <p>Let's look at exactly how these three behave in real code, so you can see the difference with your own eyes.</p>
 
       <div class="code-block">

@@ -141,7 +141,7 @@
       <div class="article-meta">
         <span class="category-badge badge-fundamentals">Fundamentals</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 6 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 23, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 15, 2026</span>
       </div>
       <h1 class="article-title">How to Fix "Cannot Read Properties of Null" in JavaScript</h1>
       <p class="article-subtitle">This error has stopped more beginners in their tracks than almost any other — and the fix is usually one line away.</p>
@@ -151,6 +151,22 @@
           <p class="author-name">Sarthak</p>
           <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
         </div>
+      </div>
+    </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What This Error Actually Means</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> The #1 Cause — Script Running Before HTML ...</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> The #2 Cause — Misspelled IDs or Classes</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> The #3 Cause — Element Doesn't Exist Yet</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> The Safe Way to Prevent This Forever</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -163,7 +179,7 @@
         You open the console. Red text. "Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')". Your button doesn't work. Your code looks fine. You stare at it for twenty minutes. This error has stopped more beginners — including me — in their tracks than almost any other, and the fix is usually one line away.
       </p>
 
-      <h2>What This Error Actually Means</h2>
+      <h2 id="sec-1">What This Error Actually Means</h2>
       <p>
         When JavaScript says it "cannot read properties of null," it means your code tried to access a property, a class, or an event listener on an HTML element that doesn't actually exist on the page. In programming, "null" specifically means absolute nothingness.
       </p>
@@ -174,7 +190,7 @@
         The best part about this error is that it always points you directly to the exact line number and the specific property where it failed. Instead of panicking, look at that line number — it is the ultimate clue telling you exactly where to start.
       </p>
 
-      <h2>The #1 Cause — Script Running Before HTML Loads</h2>
+      <h2 id="sec-2">The #1 Cause — Script Running Before HTML Loads</h2>
       <p>
         This one mistake is responsible for probably 80% of this exact error, and it trips up almost every single beginner.
       </p>
@@ -203,7 +219,7 @@
 <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span> <span class="attr">defer</span><span class="tag">&gt;&lt;/script&gt;</span></code></pre>
       </div>
 
-      <h2>The #2 Cause — Misspelled IDs or Classes</h2>
+      <h2 id="sec-3">The #2 Cause — Misspelled IDs or Classes</h2>
       <p>
         Another super common trap is a simple typo between your HTML and your JavaScript. A single wrong letter will completely break the connection between your files. JavaScript is also incredibly strict about capital letters — <code>submitBtn</code> and <code>submitbtn</code> might as well be from two different planets.
       </p>
@@ -224,7 +240,7 @@
 <span class="keyword">const</span> btn = document.<span class="function">getElementById</span>(<span class="string">'submitbtn'</span>);</code></pre>
       </div>
 
-      <h2>The #3 Cause — Element Doesn't Exist Yet</h2>
+      <h2 id="sec-4">The #3 Cause — Element Doesn't Exist Yet</h2>
       <p>
         This one is sneaky, but it happens all the time in real projects. Sometimes the HTML element you're looking for isn't on the page when it first loads — it gets created later, like after a fetch request finishes, after a user clicks a button, or after a timer runs out.
       </p>
@@ -232,7 +248,7 @@
         If your JavaScript runs immediately and searches for that element the second the page loads, it comes back empty. The fix — make sure your JavaScript only tries to access that element after the function that creates it has fully finished. Or look into event delegation — attaching the listener to a parent element that already exists.
       </p>
 
-      <h2>The Safe Way to Prevent This Forever</h2>
+      <h2 id="sec-5">The Safe Way to Prevent This Forever</h2>
       <p>
         Instead of constantly fighting this error, build one simple habit — always check if JavaScript actually found the element before trying to use it.
       </p>

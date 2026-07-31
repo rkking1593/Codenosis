@@ -173,7 +173,7 @@
       <div class="article-meta">
         <span class="category-badge badge-ai">AI & ML</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 11 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 17, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 01, 2026</span>
       </div>
       <h1 class="article-title">NumPy for Machine Learning: Complete Guide with Important Syntax & Examples</h1>
       <p class="article-subtitle">The Python library without which no Machine Learning code can really run — array creation, indexing, broadcasting, linear algebra, and a real normalization example, with verified syntax.</p>
@@ -183,6 +183,30 @@
           <p class="author-name">Yogesh</p>
           <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
         </div>
+      </div>
+    </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What is NumPy and Why Does It Matter So Mu...</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> Installation and Import</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Creating Arrays</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Array Attributes — Knowing Your Array</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Indexing and Slicing</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> Reshaping and Combining Arrays</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Mathematical and Statistical Operations</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> Broadcasting — NumPy's Superpower</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Linear Algebra — The Backbone of ML</a></li>
+            <li><a href="#sec-10"><span class="toc-number">10.</span> The Random Module — Synthetic Data and Wei...</a></li>
+            <li><a href="#sec-11"><span class="toc-number">11.</span> A Practical ML Example: Z-Score Normalization</a></li>
+            <li><a href="#sec-12"><span class="toc-number">12.</span> Quick Reference Cheat Sheet</a></li>
+            <li><a href="#sec-13"><span class="toc-number">13.</span> Conclusion</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -195,7 +219,7 @@
         Whenever you train a Machine Learning model — whether it's Scikit-learn, TensorFlow, or PyTorch — somewhere underneath, NumPy arrays are doing the heavy lifting. This guide walks through the syntax that actually matters, with verified, working examples for every section.
       </p>
 
-      <h2>What is NumPy and Why Does It Matter So Much in ML?</h2>
+      <h2 id="sec-1">What is NumPy and Why Does It Matter So Much in ML?</h2>
       <p>NumPy (Numerical Python) is a library built specifically for fast mathematical operations on large numerical datasets. It's the foundation that almost every ML library is quietly built on top of.</p>
       <p>Think of a factory that needs to inspect a million products one by one, by hand — that would take forever. Now imagine an automated conveyor belt that processes all of them together — the same job gets done in seconds. A plain Python list is like that manual inspector, while a NumPy array is the automated conveyor belt: same task, dramatically faster.</p>
       <p>I tested this myself — adding 500,000 numbers:</p>
@@ -228,7 +252,7 @@ result = arr1 + arr2
         <p>The Python list took ~0.17 seconds, while the NumPy array took only ~0.025 seconds — that's over 7x faster, and the gap only grows as data size increases (50–100x is common on larger, real-world datasets). This is exactly why NumPy is the default choice for ML work.</p>
       </div>
 
-      <h2>1. Installation and Import</h2>
+      <h2 id="sec-2">1. Installation and Import</h2>
 
       <div class="code-block">
         <div class="code-block-header">
@@ -252,7 +276,7 @@ result = arr1 + arr2
 
       <p><code>np</code> is the standard convention — you don't need to type out <code>numpy</code> everywhere.</p>
 
-      <h2>2. Creating Arrays</h2>
+      <h2 id="sec-3">2. Creating Arrays</h2>
       <p>NumPy's core data structure is the <code>ndarray</code> (N-dimensional array).</p>
 
       <div class="code-block">
@@ -290,7 +314,7 @@ matrix = np.<span class="function">array</span>([[<span class="attr">1</span>, <
 
       <p><code>np.zeros()</code> and random-generation functions are especially common when initializing neural network weights.</p>
 
-      <h2>3. Array Attributes — Knowing Your Array</h2>
+      <h2 id="sec-4">3. Array Attributes — Knowing Your Array</h2>
       <p>After loading a dataset, checking these four attributes is a good habit:</p>
 
       <div class="code-block">
@@ -310,7 +334,7 @@ matrix = np.<span class="function">array</span>([[<span class="attr">1</span>, <
 
       <p><code>.shape</code> is the most frequently used attribute — whenever a "shape mismatch" error shows up, this is the first thing to check.</p>
 
-      <h2>4. Indexing and Slicing</h2>
+      <h2 id="sec-5">4. Indexing and Slicing</h2>
 
       <div class="code-block">
         <div class="code-block-header">
@@ -344,7 +368,7 @@ matrix = np.<span class="function">array</span>([[<span class="attr">1</span>, <
 
       <p>This same technique shows up in outlier removal, data labeling, and threshold-based classification.</p>
 
-      <h2>5. Reshaping and Combining Arrays</h2>
+      <h2 id="sec-6">5. Reshaping and Combining Arrays</h2>
       <p>Models often need data in a specific shape — flattening an image or building feature columns:</p>
 
       <div class="code-block">
@@ -380,7 +404,7 @@ np.<span class="function">hstack</span>([a, b])        <span class="comment"># [
 
       <p>This is handy when merging train/test splits or joining separate feature columns back together.</p>
 
-      <h2>6. Mathematical and Statistical Operations</h2>
+      <h2 id="sec-7">6. Mathematical and Statistical Operations</h2>
 
       <div class="code-block">
         <div class="code-block-header">
@@ -415,7 +439,7 @@ np.<span class="function">hstack</span>([a, b])        <span class="comment"># [
 
       <p>A simple way to remember it: <code>axis=0</code> means "collapse the rows" (you get one value per column), and <code>axis=1</code> means "collapse the columns" (you get one value per row). This trips up almost every beginner at first, so it's worth writing out a few examples by hand until it clicks.</p>
 
-      <h2>7. Broadcasting — NumPy's Superpower</h2>
+      <h2 id="sec-8">7. Broadcasting — NumPy's Superpower</h2>
       <p>Broadcasting lets arrays of different shapes interact in operations without writing an explicit loop.</p>
 
       <div class="code-block">
@@ -438,7 +462,7 @@ vector = np.<span class="function">array</span>([<span class="attr">10</span>, <
 
       <p>Feature scaling, normalization, and adding bias terms in neural networks all rely on broadcasting under the hood. Without it, you'd have to write all of this manually with loops, which would be far slower.</p>
 
-      <h2>8. Linear Algebra — The Backbone of ML</h2>
+      <h2 id="sec-9">8. Linear Algebra — The Backbone of ML</h2>
       <p>Neural networks, PCA, linear regression — matrix multiplication is running underneath all of them.</p>
 
       <div class="code-block">
@@ -478,7 +502,7 @@ output = inputs @ weights + bias
 
       <p>That one line — <code>inputs @ weights + bias</code> — captures the math happening inside every neural network; real models just scale it up to thousands of neurons across multiple layers.</p>
 
-      <h2>9. The Random Module — Synthetic Data and Weight Initialization</h2>
+      <h2 id="sec-10">9. The Random Module — Synthetic Data and Weight Initialization</h2>
 
       <div class="code-block">
         <div class="code-block-header">
@@ -496,7 +520,7 @@ output = inputs @ weights + bias
 
       <p>Setting <code>np.random.seed()</code> is an important habit — it guarantees the same random numbers on every run, which matters when submitting assignments or reproducing results.</p>
 
-      <h2>10. A Practical ML Example: Z-Score Normalization</h2>
+      <h2 id="sec-11">10. A Practical ML Example: Z-Score Normalization</h2>
       <p>Let's bring everything together — this preprocessing step (feature scaling) shows up in almost every ML pipeline:</p>
 
       <div class="code-block">
@@ -530,7 +554,7 @@ normalized_data = (data - mean) / std
 
       <p>That single line — <code>(data - mean) / std</code> — is exactly what Scikit-learn's <code>StandardScaler</code> does internally. This example brings together <code>axis=0</code>, broadcasting, and basic statistics all at once.</p>
 
-      <h2>Quick Reference Cheat Sheet</h2>
+      <h2 id="sec-12">Quick Reference Cheat Sheet</h2>
 
       <table>
         <thead>
@@ -547,7 +571,7 @@ normalized_data = (data - mean) / std
         </tbody>
       </table>
 
-      <h2>Conclusion</h2>
+      <h2 id="sec-13">Conclusion</h2>
       <p>NumPy is the grammar of ML — until its syntax feels natural, learning Pandas, Scikit-learn, or TensorFlow will feel harder than it needs to, since all of them are built on top of NumPy arrays. The best way to get there is simple: take small datasets and practice the operations covered here — reshaping, broadcasting, axis-wise statistics, matrix multiplication — by writing the code yourself.</p>
 
       <div class="article-challenge">
@@ -585,7 +609,7 @@ normalized_data = (data - mean) / std
         <a href="python-projects-for-beginners.html" class="related-card">
           <div class="related-icon"><i class="fas fa-code"></i></div>
           <div>
-            <span class="category-badge badge-python">Python</span>
+            <span class="category-badge badge-programmingLanguages">Programming Languages</span>
             <p>5 Python Projects That Actually Get You Hired</p>
           </div>
         </a>
@@ -593,7 +617,7 @@ normalized_data = (data - mean) / std
         <a href="ai-learning-roadmap.html" class="related-card">
           <div class="related-icon"><i class="fas fa-robot"></i></div>
           <div>
-            <span class="category-badge badge-ai-ml">AI & ML</span>
+            <span class="category-badge badge-ai">AI & ML</span>
             <p>Learn AI From Zero: A Beginner's Complete Guide</p>
           </div>
         </a>

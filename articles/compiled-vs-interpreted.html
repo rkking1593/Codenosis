@@ -239,7 +239,7 @@
       <div class="article-meta">
         <span class="category-badge badge-programmingLanguages">Programming Languages</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 8 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 22, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 07, 2026</span>
       </div>
       <h1 class="article-title">Compiled vs Interpreted Languages — What Happens When Your Code Runs</h1>
       <p class="article-subtitle">
@@ -253,6 +253,26 @@
         </div>
       </div>
     </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What Does a Computer Actually Understand?</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> Compiled Languages — Translate First, Run ...</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Languages That Are Compiled</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Interpreted Languages — Translate as You Go</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Languages That Are Interpreted</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> The Modern Reality — It's Not Black and White</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Side-by-Side Comparison</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> Common Myths, Busted</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Which Should You Use?</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- BODY -->
@@ -263,12 +283,12 @@
         Every programming language you write in must eventually become machine code before your CPU can run it. The question is <em>when</em> and <em>how</em> that translation happens — and that single difference changes everything about how a language feels, performs, and gets deployed.
       </p>
 
-      <h2>What Does a Computer Actually Understand?</h2>
+      <h2 id="sec-1">What Does a Computer Actually Understand?</h2>
       <p>
         Your CPU understands exactly one thing: <strong>machine code</strong> — raw binary instructions like <code>10110000 01100001</code>. Not Python. Not JavaScript. Not C++. Every language you write must, at some point, become machine code. The compiled vs interpreted distinction is just about <em>when</em> that translation happens.
       </p>
 
-      <h2>Compiled Languages — Translate First, Run Later</h2>
+      <h2 id="sec-2">Compiled Languages — Translate First, Run Later</h2>
       <p>
         A <strong>compiler</strong> reads your entire source code and translates it into machine code <em>before</em> you run it. The output is a standalone executable — a binary the OS can run directly, no translator needed at runtime.
       </p>
@@ -313,7 +333,7 @@ int main() {
         </p>
       </div>
 
-      <h2>Languages That Are Compiled</h2>
+      <h2 id="sec-3">Languages That Are Compiled</h2>
       <div class="lang-pills">
         <span class="lang-pill pill-compiled">C</span>
         <span class="lang-pill pill-compiled">C++</span>
@@ -328,7 +348,7 @@ int main() {
         <li><strong>Platform-specific output</strong> — a Windows x64 binary won't run on Linux ARM without recompiling.</li>
       </ul>
 
-      <h2>Interpreted Languages — Translate as You Go</h2>
+      <h2 id="sec-4">Interpreted Languages — Translate as You Go</h2>
       <p>
         An <strong>interpreter</strong> reads your source code line by line and executes it on the fly — no separate compilation step, no binary output. The interpreter itself is the runtime.
       </p>
@@ -365,7 +385,7 @@ print("Hello, World!")
         </p>
       </div>
 
-      <h2>Languages That Are Interpreted</h2>
+      <h2 id="sec-5">Languages That Are Interpreted</h2>
       <div class="lang-pills">
         <span class="lang-pill pill-interpreted">Python</span>
         <span class="lang-pill pill-interpreted">Ruby</span>
@@ -380,7 +400,7 @@ print("Hello, World!")
         <li><strong>Slower execution</strong> — the interpreter adds overhead at runtime. Translation happens every single time the program runs.</li>
       </ul>
 
-      <h2>The Modern Reality — It's Not Black and White</h2>
+      <h2 id="sec-6">The Modern Reality — It's Not Black and White</h2>
       <p>
         Most modern languages live somewhere in the middle. The compiled/interpreted line has blurred significantly. Here are the two big hybrid models:
       </p>
@@ -414,7 +434,7 @@ print("Hello, World!")
         </p>
       </div>
 
-      <h2>Side-by-Side Comparison</h2>
+      <h2 id="sec-7">Side-by-Side Comparison</h2>
       <table class="comparison-table">
         <thead>
           <tr>
@@ -434,7 +454,7 @@ print("Hello, World!")
         </tbody>
       </table>
 
-      <h2>Common Myths, Busted</h2>
+      <h2 id="sec-8">Common Myths, Busted</h2>
       <div class="myth-grid">
         <div class="myth-box myth">
           <strong>Myth: Python is slow because it's interpreted.</strong>
@@ -457,7 +477,7 @@ print("Hello, World!")
         </div>
       </div>
 
-      <h2>Which Should You Use?</h2>
+      <h2 id="sec-9">Which Should You Use?</h2>
       <p>
         <strong>Compiled (C, Go, Rust)</strong> — when raw performance matters: OS kernels, game engines, embedded systems, CLI tools where startup time counts.
       </p>
@@ -508,7 +528,7 @@ print("Hello, World!")
         <a href="pandas-for-machine-learning.html" class="related-card">
           <div class="related-icon"><i class="fas fa-table"></i></div>
           <div>
-            <span class="category-badge badge-python">Python</span>
+            <span class="category-badge badge-programmingLanguages">Programming Languages</span>
             <p>Pandas for Machine Learning: Essential Features You Need to Know</p>
           </div>
         </a>
@@ -516,7 +536,7 @@ print("Hello, World!")
         <a href="numpy-for-machine-learning.html" class="related-card">
           <div class="related-icon"><i class="fas fa-table-cells"></i></div>
           <div>
-            <span class="category-badge badge-python">Python</span>
+            <span class="category-badge badge-programmingLanguages">Programming Languages</span>
             <p>NumPy for Machine Learning: Complete Guide with Syntax & Examples</p>
           </div>
         </a>

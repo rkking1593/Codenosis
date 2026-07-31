@@ -246,3 +246,143 @@
   text-decoration: underline;
   font-weight: bolder;
 }
+
+
+/* ===== ARTICLE TOC SECTION ===== */
+.article-toc-section {
+  padding: 2.5rem 2rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.toc-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.toc-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.toc-title i {
+  color: var(--accent);
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.6rem 1.8rem;
+}
+
+.toc-list li a {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  transition: all 0.2s ease;
+}
+
+.toc-list li a:hover {
+  color: var(--accent);
+  transform: translateX(5px);
+}
+
+.toc-number {
+  font-weight: 700;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.85rem;
+  background: rgba(99, 102, 241, 0.12);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* ===== HIGH CONTRAST IDE CODE BLOCK STYLING ===== */
+.code-block {
+  background: #090c15;
+  border: 1px solid #283754;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.code-block-header {
+  background: #05070e;
+  border-bottom: 1px solid #283754;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.code-block-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  font-family: monospace;
+}
+
+.copy-btn {
+  background: transparent;
+  border: 1px solid #3b4c70;
+  color: #cbd5e1;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  border-color: #818cf8;
+  color: #818cf8;
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  font-family: 'Courier New', Consolas, monospace;
+}
+
+.code-block code {
+  color: #f8fafc;
+}
+
+/* High Contrast Syntax Colors (IDE Style) */
+.tag { color: #80cafc; font-weight: 600; }
+.attr { color: #ffb86c; }
+.val { color: #50fa7b; }
+.comment { color: #8a95b3; font-style: italic; }
+.keyword { color: #ff79c6; font-weight: 600; }
+.string { color: #50fa7b; }
+.function { color: #80cafc; font-weight: 600; }

@@ -174,7 +174,7 @@
       <div class="article-meta">
         <span class="category-badge badge-DSA">DSA</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 12 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 24, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 19, 2026</span>
       </div>
       <h1 class="article-title">Two Pointer Approach — The Art of Shrinking Your Search Space</h1>
       <p class="article-subtitle">One technique. Dozens of classic interview problems. Learn how two pointers work, when to reach for them, and how to walk through real problems like a pro.</p>
@@ -186,6 +186,29 @@
         </div>
       </div>
     </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What Is the Two Pointer Technique?</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> The Three Main Flavors</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Example 1 — Two Sum in a Sorted Array</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Python Code — Two Sum (Sorted)</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Example 2 — Valid Palindrome</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> Example 3 — Remove Duplicates from Sorted ...</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Example 4 — Container With Most Water</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> When to Apply the Two Pointer Technique</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Bonus — 3Sum (Extending Two Pointers)</a></li>
+            <li><a href="#sec-10"><span class="toc-number">10.</span> Common Mistakes to Avoid</a></li>
+            <li><a href="#sec-11"><span class="toc-number">11.</span> Quick Reference — Problems to Practice</a></li>
+            <li><a href="#sec-12"><span class="toc-number">12.</span> Wrapping Up</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <article class="article-body">
@@ -195,7 +218,7 @@
         The Two Pointer technique is one of those rare algorithmic tools that feels like cheating once you truly understand it. Problems that look like they need nested loops — O(n²) brute force — suddenly collapse into a single O(n) pass. This article covers everything: the intuition, the patterns, step-by-step walkthroughs, and a map of when to actually use it.
       </p>
 
-      <h2>What Is the Two Pointer Technique?</h2>
+      <h2 id="sec-1">What Is the Two Pointer Technique?</h2>
       <p>At its core, the two pointer approach uses <strong>two index variables</strong> (pointers) that traverse a data structure — usually an array or string — simultaneously. Instead of checking every pair of elements with two nested loops, you use the positions of these two pointers cleverly so that you only ever do one pass through the data.</p>
       <p>The key insight is that in many problems, you can <strong>eliminate large chunks of the search space</strong> based on a comparison between what the pointers currently point at. This is why the approach is so powerful.</p>
 
@@ -204,7 +227,7 @@
         <p>Think of two pointers like two fingers scanning a book — one from the left margin, one from the right. Depending on what each finger sees, you decide which one to move inward. You never need to compare every possible pair of pages.</p>
       </div>
 
-      <h2>The Three Main Flavors</h2>
+      <h2 id="sec-2">The Three Main Flavors</h2>
       <div class="usecase-grid">
         <div class="usecase-card">
           <div class="usecase-icon"><i class="fa-solid fa-left-right"></i></div>
@@ -236,7 +259,7 @@
         </div>
       </div>
 
-      <h2>Example 1 — Two Sum in a Sorted Array</h2>
+      <h2 id="sec-3">Example 1 — Two Sum in a Sorted Array</h2>
       <p><strong>Problem:</strong> Given a sorted array and a target number, find two elements that add up to the target. Return their indices (1-indexed).</p>
       <p><strong>Array:</strong> <code>[2, 7, 11, 15]</code> &nbsp;|&nbsp; <strong>Target:</strong> <code>9</code></p>
 
@@ -298,7 +321,7 @@
         </div>
       </div>
 
-      <h2>Python Code — Two Sum (Sorted)</h2>
+      <h2 id="sec-4">Python Code — Two Sum (Sorted)</h2>
       <div class="code-block">
         <div class="code-block-header">
           <span class="code-block-label">python — Two Sum (Sorted)</span>
@@ -338,7 +361,7 @@ print(two_sum_sorted(nums, target))  # Output: [1, 2]</code></pre>
         </div>
       </div>
 
-      <h2>Example 2 — Valid Palindrome</h2>
+      <h2 id="sec-5">Example 2 — Valid Palindrome</h2>
       <p><strong>Problem:</strong> Given a string, check whether it reads the same forwards and backwards (ignoring non-alphanumeric characters and case).</p>
       <p><strong>Input:</strong> <code>"A man, a plan, a canal: Panama"</code> → <strong>Output:</strong> <code>True</code></p>
 
@@ -369,7 +392,7 @@ print(is_palindrome("A man, a plan, a canal: Panama"))  # True
 print(is_palindrome("race a car"))                       # False</code></pre>
       </div>
 
-      <h2>Example 3 — Remove Duplicates from Sorted Array</h2>
+      <h2 id="sec-6">Example 3 — Remove Duplicates from Sorted Array</h2>
       <p><strong>Problem:</strong> Given a sorted array, remove duplicates in-place so that each element appears only once. Return the new length.</p>
 
       <div class="code-block">
@@ -412,7 +435,7 @@ print(nums[:k])  # [1, 2, 3, 4, 5]</code></pre>
         </tbody>
       </table>
 
-      <h2>Example 4 — Container With Most Water</h2>
+      <h2 id="sec-7">Example 4 — Container With Most Water</h2>
       <p><strong>Problem:</strong> Given an array <code>height</code>, find two lines that form a container holding the most water.</p>
       <p><strong>Key insight:</strong> Area = <code>min(height[L], height[R]) × (R - L)</code>. Move the shorter side inward.</p>
 
@@ -448,7 +471,7 @@ print(max_water(height))  # Output: 49</code></pre>
         <p>Why move the shorter side? Because if you move the taller side, the width decreases AND the height stays limited by the same shorter side — area can only get worse. Moving the shorter side is the only chance to find a taller wall that could compensate for the reduced width.</p>
       </div>
 
-      <h2>When to Apply the Two Pointer Technique</h2>
+      <h2 id="sec-8">When to Apply the Two Pointer Technique</h2>
       <ul>
         <li><strong>The input is sorted (or can be sorted)</strong> — Sorted order lets you make intelligent decisions about which pointer to move.</li>
         <li><strong>You need to find a pair or triplet satisfying a condition</strong> — Two Sum, Three Sum, pair with max product.</li>
@@ -476,7 +499,7 @@ print(max_water(height))  # Output: 49</code></pre>
         </div>
       </div>
 
-      <h2>Bonus — 3Sum (Extending Two Pointers)</h2>
+      <h2 id="sec-9">Bonus — 3Sum (Extending Two Pointers)</h2>
       <div class="code-block">
         <div class="code-block-header">
           <span class="code-block-label">python — 3Sum Problem</span>
@@ -528,7 +551,7 @@ print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
         </div>
       </div>
 
-      <h2>Common Mistakes to Avoid</h2>
+      <h2 id="sec-10">Common Mistakes to Avoid</h2>
       <div class="pitfall-box">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <p>Applying two pointers to an unsorted array — it won't work unless you sort first. The logic of "move left to increase, move right to decrease" only holds in sorted order.</p>
@@ -546,7 +569,7 @@ print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
         <p>Confusing two pointers with sliding window — both use two indices, but sliding window expands/contracts based on a constraint, not a fixed comparison rule.</p>
       </div>
 
-      <h2>Quick Reference — Problems to Practice</h2>
+      <h2 id="sec-11">Quick Reference — Problems to Practice</h2>
       <table class="step-table">
         <thead>
           <tr><th>Problem</th><th>Pattern</th><th>Difficulty</th></tr>
@@ -565,7 +588,7 @@ print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
         </tbody>
       </table>
 
-      <h2>Wrapping Up</h2>
+      <h2 id="sec-12">Wrapping Up</h2>
       <p>The two pointer technique is not a magic trick — it's a <strong>deliberate reduction of the search space</strong>. Every time you move a pointer, you're making a guarantee: "I know for certain this region can't hold a better answer." That guarantee comes from the structure of the data and the property you're searching for.</p>
       <p>Once you internalize that idea, you'll start recognizing two-pointer problems on sight. Start with the easy problems in the practice table, implement each one from scratch, and trace through your pointer movements manually on paper at least once. That tactile understanding is what makes the technique click.</p>
 
@@ -601,21 +624,21 @@ print(three_sum(nums))  # [[-1, -1, 2], [-1, 0, 1]]</code></pre>
         <a href="dijkstra-algorithm.html" class="related-card">
           <div class="related-icon"><i class="fa-solid fa-route"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">DSA</span>
+            <span class="category-badge badge-DSA">DSA</span>
             <p>Dijkstra's Algorithm — Shortest Path Explained</p>
           </div>
         </a>
         <a href="time-and-space-complexity.html" class="related-card">
           <div class="related-icon"><i class="fa-solid fa-gauge-high"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">DSA</span>
+            <span class="category-badge badge-DSA">DSA</span>
             <p>Time & Space Complexity — Big O Demystified</p>
           </div>
         </a>
         <a href="dynamic-programming.html" class="related-card">
           <div class="related-icon"><i class="fa-solid fa-table-cells"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">DSA</span>
+            <span class="category-badge badge-DSA">DSA</span>
             <p>Dynamic Programming — Memoization & Tabulation</p>
           </div>
         </a>

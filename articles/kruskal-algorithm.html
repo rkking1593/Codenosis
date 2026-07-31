@@ -145,7 +145,7 @@
       <div class="article-meta">
         <span class="category-badge badge-DSA">DSA</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 12 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 23, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 12, 2026</span>
       </div>
       <h1 class="article-title">Kruskal's Algorithm — Finding the Minimum Spanning Tree</h1>
       <p class="article-subtitle">A clear, beginner-friendly walkthrough of Kruskal's algorithm — with a real graph example, step-by-step edge selection, and clean Python code.</p>
@@ -155,6 +155,29 @@
           <p class="author-name">Yogesh</p>
           <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
         </div>
+      </div>
+    </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What Problem Does It Solve?</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> The Core Idea in One Line</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> The Algorithm — Step by Step</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Graph Example — Let's Walk Through It</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Step-by-Step Walkthrough</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> The Secret Weapon: Union-Find</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Pseudocode</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> Python Implementation</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Time &amp; Space Complexity</a></li>
+            <li><a href="#sec-10"><span class="toc-number">10.</span> Kruskal's vs Prim's — Which Should You Use?</a></li>
+            <li><a href="#sec-11"><span class="toc-number">11.</span> Where Is This Used in Real Life?</a></li>
+            <li><a href="#sec-12"><span class="toc-number">12.</span> Quick Recap</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -168,7 +191,7 @@
       </p>
       <p>Let's break it down — simply, visually, and completely.</p>
 
-      <h2>What Problem Does It Solve?</h2>
+      <h2 id="sec-1">What Problem Does It Solve?</h2>
       <p>Imagine you're a city planner. You have 5 cities and a list of possible roads between them, each road with a construction cost. Your goal: connect all 5 cities using the <strong>minimum total cost</strong>, without creating any loops (because loops waste money — you don't need two paths between the same two cities).</p>
       <p>What you're trying to build is called a <strong>Minimum Spanning Tree (MST)</strong>.</p>
 
@@ -179,11 +202,11 @@
 
       <p>Kruskal's Algorithm is one of the most popular ways to find this MST. It was published by Joseph Kruskal in 1956 and is a classic example of a <strong>greedy algorithm</strong> — it makes the locally optimal choice at each step, and this guarantees a globally optimal result.</p>
 
-      <h2>The Core Idea in One Line</h2>
+      <h2 id="sec-2">The Core Idea in One Line</h2>
       <blockquote>Sort all edges by weight. Keep picking the smallest one — unless it creates a cycle.</blockquote>
       <p>That's Kruskal's in its purest form. Now let's see exactly how it works.</p>
 
-      <h2>The Algorithm — Step by Step</h2>
+      <h2 id="sec-3">The Algorithm — Step by Step</h2>
       <ol>
         <li><strong>Sort</strong> all edges of the graph in non-decreasing order of weight.</li>
         <li><strong>Initialize</strong> a disjoint set (Union-Find) — each vertex starts as its own component.</li>
@@ -196,7 +219,7 @@
         <li><strong>Stop</strong> when the MST has exactly <em>V−1</em> edges (where V = number of vertices).</li>
       </ol>
 
-      <h2>Graph Example — Let's Walk Through It</h2>
+      <h2 id="sec-4">Graph Example — Let's Walk Through It</h2>
       <p>Let's take a graph with <strong>5 vertices</strong> (A, B, C, D, E) and <strong>7 edges</strong>. Here's the original weighted graph:</p>
 
       <div class="graph-box">
@@ -248,7 +271,7 @@
 
       <p>After sorting by weight: <code>A–B(2) → B–C(3) → B–E(5) → A–D(6) → C–E(7) → B–D(8) → D–E(9)</code></p>
 
-      <h2>Step-by-Step Walkthrough</h2>
+      <h2 id="sec-5">Step-by-Step Walkthrough</h2>
 
       <h3>Step 1 — Pick A–B (weight 2)</h3>
       <p>A and B are in different components. Add it. No cycle formed.</p>
@@ -298,7 +321,7 @@
         <p><strong>Edges C–E(7), B–D(8), D–E(9) were skipped.</strong> Adding any of them would form a cycle with edges already in the MST.</p>
       </div>
 
-      <h2>The Secret Weapon: Union-Find</h2>
+      <h2 id="sec-6">The Secret Weapon: Union-Find</h2>
       <p>The key operation in Kruskal's is cycle detection — knowing whether two vertices are already connected. This is handled efficiently by a data structure called <strong>Union-Find</strong> (also called Disjoint Set Union or DSU).</p>
       <p>It has two core operations:</p>
       <ul>
@@ -307,7 +330,7 @@
       </ul>
       <p>If <code>Find(u) == Find(v)</code> for an edge <code>u–v</code>, they're already in the same component — adding this edge would form a cycle. So we skip it.</p>
 
-      <h2>Pseudocode</h2>
+      <h2 id="sec-7">Pseudocode</h2>
       <div class="code-block">
         <div class="code-block-header">
           <span class="code-block-label">pseudocode.txt — Kruskal's Algorithm</span>
@@ -330,7 +353,7 @@
   return MST</code></pre>
       </div>
 
-      <h2>Python Implementation</h2>
+      <h2 id="sec-8">Python Implementation</h2>
       <div class="code-block">
         <div class="code-block-header">
           <span class="code-block-label">kruskal.py — Full Implementation</span>
@@ -416,7 +439,7 @@ print(f"\nTotal MST Weight: {cost}")</code></pre>
 Total MST Weight: 16</code></pre>
       </div>
 
-      <h2>Time &amp; Space Complexity</h2>
+      <h2 id="sec-9">Time &amp; Space Complexity</h2>
       <div class="tbl-wrap">
         <table class="art-table">
           <thead><tr><th>Operation</th><th>Complexity</th><th>Why</th></tr></thead>
@@ -430,7 +453,7 @@ Total MST Weight: 16</code></pre>
       </div>
       <p><em>α(V)</em> is the inverse Ackermann function — it grows so slowly that it's effectively constant for any real-world graph size. So Union-Find is essentially O(1) per operation in practice.</p>
 
-      <h2>Kruskal's vs Prim's — Which Should You Use?</h2>
+      <h2 id="sec-10">Kruskal's vs Prim's — Which Should You Use?</h2>
       <div class="tbl-wrap">
         <table class="art-table">
           <thead><tr><th></th><th>Kruskal's</th><th>Prim's</th></tr></thead>
@@ -445,7 +468,7 @@ Total MST Weight: 16</code></pre>
       </div>
       <p>Both produce a valid MST for connected graphs. Kruskal's is often the simpler one to implement and reason about — which is why it's the more popular choice in interviews and competitive programming.</p>
 
-      <h2>Where Is This Used in Real Life?</h2>
+      <h2 id="sec-11">Where Is This Used in Real Life?</h2>
       <ul>
         <li><strong>Network design</strong> — laying cables, fiber, or pipelines to connect cities or buildings at minimum cost.</li>
         <li><strong>Cluster analysis</strong> — building MSTs is a step in single-linkage clustering for grouping data points.</li>
@@ -454,7 +477,7 @@ Total MST Weight: 16</code></pre>
         <li><strong>Electrical circuit design</strong> — minimizing the wire length to connect components on a PCB.</li>
       </ul>
 
-      <h2>Quick Recap</h2>
+      <h2 id="sec-12">Quick Recap</h2>
       <ul>
         <li>Kruskal's finds the <strong>Minimum Spanning Tree</strong> of a weighted, undirected graph.</li>
         <li>It's a <strong>greedy algorithm</strong> — always picks the cheapest edge that doesn't create a cycle.</li>
@@ -495,7 +518,7 @@ Total MST Weight: 16</code></pre>
         <a href="dijkstra-algorithm.html" class="related-card">
           <div class="related-icon"><i class="fas fa-route"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">DSA</span>
+            <span class="category-badge badge-DSA">DSA</span>
             <p>Dijkstra's Algorithm — Shortest Path, Explained Simply</p>
           </div>
         </a>
@@ -503,7 +526,7 @@ Total MST Weight: 16</code></pre>
         <a href="how-to-start-web-development.html" class="related-card">
           <div class="related-icon"><i class="fas fa-code"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">Beginner's Guide</span>
+            <span class="category-badge badge-beginners">Beginner's Guide</span>
             <p>How to Start Learning Web Development From Zero — Honest Guide</p>
           </div>
         </a>

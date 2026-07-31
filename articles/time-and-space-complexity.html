@@ -165,9 +165,9 @@
   <section class="article-hero">
     <div class="article-container">
       <div class="article-meta">
-        <span class="category-badge badge-fundamentals">DSA</span>
+        <span class="category-badge badge-DSA">DSA</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 10 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 23, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 09, 2026</span>
       </div>
       <h1 class="article-title">Time Complexity &amp; Space Complexity — Explained with Examples</h1>
       <p class="article-subtitle">Every programmer writes code that works. But a great programmer writes code that's <em>efficient</em>. Learn how to measure and reason about your algorithm's performance using Big O notation.</p>
@@ -179,6 +179,26 @@
         </div>
       </div>
     </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What is Time Complexity?</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> Common Time Complexities with Examples</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Growth Rate Comparison (Visual)</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Big O Cheat Sheet</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> What is Space Complexity?</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> Space Complexity Examples</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> The Classic Trade-off: Time vs Space</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> How to Analyze an Algorithm Step-by-Step</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Quick Summary</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <article class="article-body">
@@ -188,7 +208,7 @@
         Imagine two delivery apps. Both show you the nearest restaurant — but one takes 2 seconds, the other takes 20. They both "work," but only one is usable at scale. This is what complexity analysis is all about: not just <em>does it work</em>, but <em>how well does it scale</em>?
       </p>
 
-      <h2>What is Time Complexity?</h2>
+      <h2 id="sec-1">What is Time Complexity?</h2>
       <p>Time complexity describes <strong>how the number of operations your algorithm performs grows</strong> as the input size (n) increases. It is <strong>not</strong> measuring actual clock time — it's measuring the <em>growth rate</em> of work done.</p>
       <p>We express time complexity using <strong>Big O notation</strong> — a mathematical way to describe the upper bound (worst-case scenario) of an algorithm's performance.</p>
 
@@ -197,7 +217,7 @@
         <p><strong>Why worst-case?</strong> Because we need guarantees. If your app is slow for even a few users, that's a problem. Big O tells you how bad things can get.</p>
       </div>
 
-      <h2>Common Time Complexities with Examples</h2>
+      <h2 id="sec-2">Common Time Complexities with Examples</h2>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">1. O(1) — Constant Time</h3>
       <p>The algorithm always does the same number of operations, no matter how large the input is.</p>
@@ -322,7 +342,7 @@ def fib_good(n):
     return fib_good(n - 1) + fib_good(n - 2)</code></pre>
       </div>
 
-      <h2>Growth Rate Comparison (Visual)</h2>
+      <h2 id="sec-3">Growth Rate Comparison (Visual)</h2>
       <p>For n = 100 elements, here's how many operations each complexity requires:</p>
       <div class="complexity-bars">
         <div class="bar-row">
@@ -357,7 +377,7 @@ def fib_good(n):
         </div>
       </div>
 
-      <h2>Big O Cheat Sheet</h2>
+      <h2 id="sec-4">Big O Cheat Sheet</h2>
       <table class="complexity-table">
         <thead><tr><th>Notation</th><th>Name</th><th>Example</th><th>Rating</th></tr></thead>
         <tbody>
@@ -371,7 +391,7 @@ def fib_good(n):
         </tbody>
       </table>
 
-      <h2>What is Space Complexity?</h2>
+      <h2 id="sec-5">What is Space Complexity?</h2>
       <p>Space complexity measures <strong>how much extra memory</strong> your algorithm uses relative to the input size. This includes variables, call stacks (for recursion), and any additional data structures you create.</p>
       <p>It does <em>not</em> usually count the input itself — only the <strong>auxiliary space</strong> (extra memory on top of the input).</p>
 
@@ -386,7 +406,7 @@ def fib_good(n):
         </div>
       </div>
 
-      <h2>Space Complexity Examples</h2>
+      <h2 id="sec-6">Space Complexity Examples</h2>
 
       <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin:1.8rem 0 0.6rem;">O(1) Space — Constant</h3>
       <div class="code-block">
@@ -441,7 +461,7 @@ def fib_good(n):
 # Space: O(n²)</code></pre>
       </div>
 
-      <h2>The Classic Trade-off: Time vs Space</h2>
+      <h2 id="sec-7">The Classic Trade-off: Time vs Space</h2>
       <div class="code-block">
         <div class="code-block-header">
           <span class="code-block-label">python — Time vs Space Trade-off</span>
@@ -477,7 +497,7 @@ def fib_dp(n):
         <p>The bottom-up DP approach is the winner — O(n) time and O(1) space. Always try to find the approach that avoids unnecessary memory use without sacrificing speed.</p>
       </div>
 
-      <h2>How to Analyze an Algorithm Step-by-Step</h2>
+      <h2 id="sec-8">How to Analyze an Algorithm Step-by-Step</h2>
       <ul>
         <li><strong>Drop constants:</strong> O(2n) → O(n)</li>
         <li><strong>Drop lower-order terms:</strong> O(n² + n) → O(n²)</li>
@@ -502,7 +522,7 @@ def fib_dp(n):
 # Total: O(n) + O(n²) → O(n²)</code></pre>
       </div>
 
-      <h2>Quick Summary</h2>
+      <h2 id="sec-9">Quick Summary</h2>
       <table class="complexity-table">
         <thead><tr><th>Concept</th><th>What it measures</th><th>Unit</th><th>Goal</th></tr></thead>
         <tbody>
@@ -546,21 +566,21 @@ def fib_dp(n):
         <a href="dynamic-programming.html" class="related-card">
           <div class="related-icon"><i class="fa-solid fa-table-cells"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">DSA</span>
+            <span class="category-badge badge-DSA">DSA</span>
             <p>Dynamic Programming — Concepts, Algorithms &amp; Examples</p>
           </div>
         </a>
         <a href="dijkstra-algorithm.html" class="related-card">
           <div class="related-icon"><i class="fa-solid fa-route"></i></div>
           <div>
-            <span class="category-badge badge-fundamentals">DSA</span>
+            <span class="category-badge badge-DSA">DSA</span>
             <p>Dijkstra's Algorithm — Shortest Path with Examples</p>
           </div>
         </a>
         <a href="numpy-for-machine-learning.html" class="related-card">
           <div class="related-icon"><i class="fa-solid fa-table-cells"></i></div>
           <div>
-            <span class="category-badge badge-python">Python</span>
+            <span class="category-badge badge-programmingLanguages">Programming Languages</span>
             <p>NumPy for Machine Learning: Complete Guide with Syntax &amp; Examples</p>
           </div>
         </a>

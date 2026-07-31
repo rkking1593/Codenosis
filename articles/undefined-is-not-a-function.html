@@ -134,7 +134,7 @@
       <div class="article-meta">
         <span class="category-badge badge-fundamentals">Fundamentals</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 7 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 28, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 27, 2026</span>
       </div>
       <h1 class="article-title">How to Fix "Undefined is Not a Function" in JavaScript</h1>
       <p class="article-subtitle">This error is JavaScript's most confusing lie — because the function exists. The problem is something else entirely. Here's exactly what's happening and how to fix it.</p>
@@ -146,6 +146,23 @@
         </div>
       </div>
     </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> What This Error Actually Means</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> The #1 Cause — Typo in the Function Name</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> The #2 Cause — Calling a Method That Doesn...</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> The #3 Cause — Accidentally Overwriting a ...</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> The #4 Cause — Wrong this Context in Callb...</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> The Safe Debugging Checklist</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <article class="article-body">
@@ -155,7 +172,7 @@
         You call a function. Nothing happens. You open the console — "TypeError: undefined is not a function." You stare at the code. The function is right there. You defined it yourself. You've called it a hundred times before. And yet — undefined is not a function. This error has wasted more developer hours than almost any other, and the fix is almost always hiding in plain sight.
       </p>
 
-      <h2>What This Error Actually Means</h2>
+      <h2 id="sec-1">What This Error Actually Means</h2>
       <p>
         When JavaScript throws this at you, it means your code tried to run something as a function — but when the browser actually looked at that spot, it found nothing. JavaScript fully expected a usable chunk of code it could run, found a blank space instead, and crashed.
       </p>
@@ -172,7 +189,7 @@
         <p><strong>Key thing to remember:</strong> The line number in the console is always the exact spot where the crash happened. Start your investigation there — not anywhere else in the file.</p>
       </div>
 
-      <h2>The #1 Cause — Typo in the Function Name</h2>
+      <h2 id="sec-2">The #1 Cause — Typo in the Function Name</h2>
       <p>
         JavaScript is case-sensitive. To the browser, <code>myfunction</code> and <code>myFunction</code> are completely different names — they might as well be from two different planets. If you define <code>calculateTotal</code> but call <code>calculatetotal</code>, JavaScript searches for the lowercase version, finds nothing, hands you <code>undefined</code>, and then tries to run that nothingness as a function. Crash.
       </p>
@@ -183,7 +200,7 @@
         <li>Copy-paste function names instead of retyping them whenever possible</li>
       </ul>
 
-      <h2>The #2 Cause — Calling a Method That Doesn't Exist on That Type</h2>
+      <h2 id="sec-3">The #2 Cause — Calling a Method That Doesn't Exist on That Type</h2>
       <p>
         Every data type in JavaScript has its own set of built-in tools (called methods). When you call a method that doesn't exist on a specific type, JavaScript looks it up, finds nothing, and tries to call that nothing as a function — same crash, different cause.
       </p>
@@ -208,7 +225,7 @@ if (typeof myVar === 'string') {
 }</code></pre>
       </div>
 
-      <h2>The #3 Cause — Accidentally Overwriting a Built-in</h2>
+      <h2 id="sec-4">The #3 Cause — Accidentally Overwriting a Built-in</h2>
       <p>
         This is a sneaky mistake that even experienced developers make. The moment you name your variable after a built-in JavaScript feature, you quietly wipe out the original tool and replace it with your own data.
       </p>
@@ -219,7 +236,7 @@ if (typeof myVar === 'string') {
         <li>The fix — if you're unsure about a name, type it in DevTools console first. If it already returns something, pick a different name</li>
       </ul>
 
-      <h2>The #4 Cause — Wrong <code>this</code> Context in Callbacks</h2>
+      <h2 id="sec-5">The #4 Cause — Wrong <code>this</code> Context in Callbacks</h2>
       <p>
         This one hits developers who are past the beginner stage and start working with objects and callbacks. When you pass a regular function inside another function as a callback, the meaning of <code>this</code> changes behind the scenes. If your function depends on <code>this.someMethod()</code>, and <code>this</code> is no longer pointing to your object — <code>this.someMethod</code> becomes undefined and calling it crashes everything.
       </p>
@@ -244,7 +261,7 @@ setTimeout(() => {
 }, 1000);</code></pre>
       </div>
 
-      <h2>The Safe Debugging Checklist</h2>
+      <h2 id="sec-6">The Safe Debugging Checklist</h2>
       <p>The next time you see this error, don't panic or start randomly changing your code. Run through these five steps in order — they will find the cause every single time:</p>
       <ul>
         <li><strong>Check the exact name</strong> — is your function spelled and capitalized identically to how it was defined?</li>

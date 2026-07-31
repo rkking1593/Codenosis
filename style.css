@@ -1,13 +1,13 @@
 /* ===== ROOT VARIABLES ===== */
 :root {
-  --bg-primary: #0a0f1e;
-  --bg-secondary: #111827;
-  --bg-card: #1a2235;
+  --bg-primary: #060913;
+  --bg-secondary: #0d1220;
+  --bg-card: #141c2e;
   --accent: #6366f1;
-  --accent-hover: #4f46e5;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --border: #1e2d45;
+  --accent-hover: #818cf8;
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --border: #283754;
   --font: 'Space Grotesk', sans-serif;
 }
 
@@ -22,6 +22,20 @@ body.light-mode {
 }
 
 /* ===== RESET ===== */
+
+/* ===== GLOBAL RESPONSIVE MEDIA ===== */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ===== GLOBAL RESPONSIVE MEDIA ===== */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -369,57 +383,6 @@ body.light-mode .navbar.scrolled {
   border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 600;
-}
-
-/* ===== CATEGORY BADGE COLOURS ===== */
-.badge-beginners {
-  background: rgba(16, 94, 44, 0.15) !important;
-  color: #00cf9f !important;
-}
-
-.badge-fundamentals {
-  background: rgba(59, 130, 246, 0.15) !important;
-  color: #3b82f6 !important;
-}
-
-.badge-roadmap {
-  background: rgba(168, 85, 247, 0.15) !important;
-  color: #a855f7 !important;
-}
-
-.badge-reality {
-  background: rgba(249, 115, 22, 0.15) !important;
-  color: #f97316 !important;
-}
-
-.badge-personal {
-  background: rgba(236, 72, 153, 0.15) !important;
-  color: #ec4899 !important;
-}
-
-.badge-fullstack {
-  background: rgba(20, 184, 166, 0.15) !important;
-  color: #14b8a6 !important;
-}
-
-.badge-ai {
-  background: rgba(239, 68, 68, 0.15) !important;
-  color: #ef4444 !important;
-}
-
-.badge-DSA {
-  background: rgba(234, 179, 8, 0.15) !important;
-  color: #eab308 !important;
-}
-
-.badge-freelancing {
-  background: rgba(99, 102, 241, 0.15) !important;
-  color: #6366f1 !important;
-}
-
-.badge-programmingLanguages{
-  background: rgb(234, 179, 8, 0.15) !important;
-  color: #07da1c !important;
 }
 
 .meta-info {
@@ -1234,3 +1197,80 @@ body.light-mode .navbar.scrolled {
     text-align: center;
   }
 }
+
+
+
+
+/* ===== ULTRA HIGH CONTRAST CATEGORY BADGES ===== */
+.category-badge {
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.badge-beginners, .badge-beginner, .badge-beginnersguide {
+  background: rgba(45, 212, 191, 0.22) !important;
+  border: 1px solid #2dd4bf !important;
+  color: #00f5d4 !important; /* Vivid Electric Aqua */
+}
+
+.badge-programmingLanguages, .badge-programminglanguages, .badge-python {
+  background: rgba(192, 132, 252, 0.22) !important;
+  border: 1px solid #c084fc !important;
+  color: #e0aaff !important; /* Vivid Electric Purple */
+}
+
+.badge-DSA, .badge-dsa, .badge-Dsa {
+  background: rgba(250, 204, 21, 0.22) !important;
+  border: 1px solid #facc15 !important;
+  color: #ffea00 !important; /* Neon Gold Yellow */
+}
+
+.badge-ai, .badge-ai-ml, .badge-aiml, .badge-AI {
+  background: rgba(248, 113, 113, 0.22) !important;
+  border: 1px solid #f87171 !important;
+  color: #ff6b6b !important; /* Neon Crimson Red */
+}
+
+.badge-fundamentals {
+  background: rgba(96, 165, 250, 0.22) !important;
+  border: 1px solid #60a5fa !important;
+  color: #38bdf8 !important; /* Electric Cyan Blue */
+}
+
+.badge-roadmap {
+  background: rgba(251, 146, 60, 0.22) !important;
+  border: 1px solid #fb923c !important;
+  color: #ff9f1c !important; /* Bright Neon Orange */
+}
+
+.badge-reality {
+  background: rgba(244, 114, 182, 0.22) !important;
+  border: 1px solid #f472b6 !important;
+  color: #ff70a6 !important; /* Vivid Hot Magenta */
+}
+
+.badge-personal {
+  background: rgba(163, 230, 53, 0.22) !important;
+  border: 1px solid #a3e635 !important;
+  color: #ccff00 !important; /* Electric Lime Green */
+}
+
+.badge-fullstack {
+  background: rgba(52, 211, 153, 0.22) !important;
+  border: 1px solid #34d399 !important;
+  color: #00ff87 !important; /* Neon Mint Emerald */
+}
+
+.badge-freelancing {
+  background: rgba(251, 191, 36, 0.22) !important;
+  border: 1px solid #fbbf24 !important;
+  color: #ffd000 !important; /* Vivid Amber Yellow */
+}
+

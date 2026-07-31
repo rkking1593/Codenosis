@@ -173,7 +173,7 @@
       <div class="article-meta">
         <span class="category-badge badge-ai">AI & ML</span>
         <span class="meta-info"><i class="fas fa-clock"></i> 10 min read</span>
-        <span class="meta-info"><i class="fas fa-calendar"></i> June 18, 2026</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> July 05, 2026</span>
       </div>
       <h1 class="article-title">Pandas for Machine Learning: 10 Essential Features You Need to Know</h1>
       <p class="article-subtitle">Before data ever reaches a model, it spends time in pandas. Here are 10 core features — from reading CSVs to one-hot encoding — with verified syntax and realistic examples.</p>
@@ -185,7 +185,59 @@
         </div>
       </div>
     </div>
+
+    <!-- Table of Contents Section -->
+    <section class="article-toc-section">
+      <div class="article-container">
+        <div class="toc-box">
+          <div class="toc-title">
+            <i class="fas fa-list-ul"></i> Table of Contents
+          </div>
+          <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> DataFrames and Series</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> Reading Data from Sources</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Inspection & Exploration</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Handling Missing Values</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Selecting & Filtering Data</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> GroupBy & Aggregation</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Merging & Combining</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> Feature Engineering</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Encoding Categorical Data</a></li>
+            <li><a href="#sec-10"><span class="toc-number">10.</span> Sorting & Deduplication</a></li>
+          </ul>
+        </div>
+      </div>
+    
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> DataFrames and Series: The Core Data Struc...</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> Reading Data from Multiple Sources</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Data Inspection and Exploration</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Handling Missing Values</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Selecting and Filtering Data</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> GroupBy and Aggregation</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Merging, Joining, and Concatenating DataFr...</a></li>
+            <li><a href="#sec-8"><span class="toc-number">08.</span> Applying Functions for Feature Engineering</a></li>
+            <li><a href="#sec-9"><span class="toc-number">09.</span> Encoding Categorical Data</a></li>
+            <li><a href="#sec-10"><span class="toc-number">10.</span> Sorting and Removing Duplicates</a></li>
+            <li><a href="#sec-11"><span class="toc-number">11.</span> Try It Yourself</a></li>
+            <li><a href="#sec-12"><span class="toc-number">12.</span> Quick Reference Cheat Sheet</a></li>
+            <li><a href="#sec-13"><span class="toc-number">13.</span> Conclusion</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
+    
+  </section>
+
+
+  
+
 
   <!-- Article Body -->
   <article class="article-body">
@@ -222,7 +274,7 @@ df = pd.<span class="function">DataFrame</span>(data)
 <span class="function">print</span>(df)</code></pre>
       </div>
 
-      <h2>1. DataFrames and Series: The Core Data Structures</h2>
+      <h2 id="sec-1">1. DataFrames and Series: The Core Data Structures</h2>
       <p>Everything in pandas is built around two structures: the <code>Series</code>, a single labeled column of data, and the <code>DataFrame</code>, a full table made up of multiple Series. Together they let you store and manipulate data the way a spreadsheet would, but with the speed and programmability of Python.</p>
 
       <div class="code-block">
@@ -242,7 +294,7 @@ ages = df[<span class="string">'Age'</span>]
 
       <p>Almost every ML workflow starts by loading data into a DataFrame, since libraries like Scikit-learn are built to work directly with this format.</p>
 
-      <h2>2. Reading Data from Multiple Sources</h2>
+      <h2 id="sec-2">2. Reading Data from Multiple Sources</h2>
       <p>Real datasets rarely arrive as neatly typed-out dictionaries. They usually live in CSV files, Excel sheets, JSON files, or databases. Pandas makes loading any of these formats simple, often in a single line.</p>
 
       <div class="code-block">
@@ -259,7 +311,7 @@ df_json = pd.<span class="function">read_json</span>(<span class="string">'stude
 
       <p>Being able to pull data from almost any source this easily is one of the reasons pandas is the first tool reached for in any ML project, no matter how the raw data shows up.</p>
 
-      <h2>3. Data Inspection and Exploration</h2>
+      <h2 id="sec-3">3. Data Inspection and Exploration</h2>
       <p>Before cleaning or modeling anything, you need to understand what you're actually working with — how many rows and columns you have, what data types each column holds, and whether anything looks off. Pandas has a handful of methods built specifically for this.</p>
 
       <div class="code-block">
@@ -277,7 +329,7 @@ df_json = pd.<span class="function">read_json</span>(<span class="string">'stude
 
       <p><code>describe()</code> is especially useful for ML: it instantly shows the mean, standard deviation, and range of your numeric features, which helps you spot outliers or scaling issues before they reach your model.</p>
 
-      <h2>4. Handling Missing Values</h2>
+      <h2 id="sec-4">4. Handling Missing Values</h2>
       <p>Missing data is one of the most common problems in real-world datasets, and most machine learning algorithms can't handle <code>NaN</code> values directly. Pandas gives you full control over finding and fixing them.</p>
 
       <div class="code-block">
@@ -303,7 +355,7 @@ df[<span class="string">'City'</span>] = df[<span class="string">'City'</span>].
 
       <p>How you handle missing values — filling them with a statistic versus removing them entirely — can directly affect your model's accuracy, so it's worth giving this step real thought rather than treating it as a formality.</p>
 
-      <h2>5. Selecting and Filtering Data</h2>
+      <h2 id="sec-5">5. Selecting and Filtering Data</h2>
       <p>Once your data is clean, you'll often need to pull out specific rows, columns, or subsets that meet certain conditions — for example, separating your input features from your target variable, or filtering out rows that don't meet a quality threshold.</p>
 
       <div class="code-block">
@@ -330,7 +382,7 @@ high_scorers = df[df[<span class="string">'Score'</span>] > <span class="attr">8
 
       <p>This kind of slicing is exactly how you'll separate your features (<code>X</code>) from your target label (<code>y</code>) before passing data into a model.</p>
 
-      <h2>6. GroupBy and Aggregation</h2>
+      <h2 id="sec-6">6. GroupBy and Aggregation</h2>
       <p><code>groupby()</code> lets you split your data into groups based on a category, run a calculation on each group, and combine the results — invaluable for spotting patterns before you ever start modeling.</p>
 
       <div class="code-block">
@@ -353,7 +405,7 @@ summary = df.<span class="function">groupby</span>(<span class="string">'City'</
 
       <p>Grouped summaries like this often reveal patterns — say, one city's students consistently scoring higher — that can directly inform your feature engineering decisions later on.</p>
 
-      <h2>7. Merging, Joining, and Concatenating DataFrames</h2>
+      <h2 id="sec-7">7. Merging, Joining, and Concatenating DataFrames</h2>
       <p>ML datasets are often split across multiple files or tables — student scores in one file, attendance records in another, for instance. Pandas gives you several ways to bring them back together.</p>
 
       <div class="code-block">
@@ -374,7 +426,7 @@ merged_df = pd.<span class="function">merge</span>(df, attendance, on=<span clas
 
       <p><code>merge()</code> works much like a SQL join, while <code>concat()</code> is handy for stacking datasets that share the same structure — for example, combining training data collected across different months.</p>
 
-      <h2>8. Applying Functions for Feature Engineering</h2>
+      <h2 id="sec-8">8. Applying Functions for Feature Engineering</h2>
       <p>Feature engineering — creating new, more useful columns out of existing ones — is often what separates an average model from a genuinely good one. Pandas' <code>apply()</code> and <code>map()</code> methods let you transform data using your own custom logic.</p>
 
       <div class="code-block">
@@ -405,7 +457,7 @@ merged_df[<span class="string">'ScorePerAttendance'</span>] = merged_df.<span cl
 
       <p>This is exactly how raw columns get turned into the kind of meaningful features that actually move the needle on model performance.</p>
 
-      <h2>9. Encoding Categorical Data</h2>
+      <h2 id="sec-9">9. Encoding Categorical Data</h2>
       <p>Machine learning models work with numbers, not text, so categorical columns like <code>City</code> need to be converted into a numeric form before training. Pandas makes this straightforward with one-hot encoding.</p>
 
       <div class="code-block">
@@ -425,7 +477,7 @@ merged_df[<span class="string">'ScorePerAttendance'</span>] = merged_df.<span cl
         <p>Heads up: depending on your pandas version, the new encoded columns may show up as <code>True</code>/<code>False</code> booleans (newer versions) or <code>1</code>/<code>0</code> integers (older versions). Either way, they behave identically once they reach a model — Scikit-learn treats both as numeric.</p>
       </div>
 
-      <h2>10. Sorting and Removing Duplicates</h2>
+      <h2 id="sec-10">10. Sorting and Removing Duplicates</h2>
       <p>Sorting helps you quickly spot your top or bottom performers, while catching duplicate rows stops your model from accidentally learning from repeated, biased samples.</p>
 
       <div class="code-block">
@@ -443,13 +495,13 @@ merged_df[<span class="string">'ScorePerAttendance'</span>] = merged_df.<span cl
 merged_df = merged_df.<span class="function">drop_duplicates</span>()</code></pre>
       </div>
 
-      <h2>Try It Yourself</h2>
+      <h2 id="sec-11">Try It Yourself</h2>
       <div class="article-challenge">
         <i class="fas fa-bolt"></i>
         <p>The best way to make these features stick is to run through them on a real dataset. Pick any small dataset (Kaggle is a great place to find one) and try to: load it with the right <code>read_*</code> function, check for and handle missing values, create at least one new feature with <code>apply()</code>, one-hot encode any categorical columns with <code>get_dummies()</code>, and split it into training and test sets with <code>train_test_split()</code>. If you can do all five on a dataset you've never seen before, pandas has officially become a tool you know rather than one you're still looking up.</p>
       </div>
 
-      <h2>Quick Reference Cheat Sheet</h2>
+      <h2 id="sec-12">Quick Reference Cheat Sheet</h2>
 
       <table>
         <thead>
@@ -469,7 +521,7 @@ merged_df = merged_df.<span class="function">drop_duplicates</span>()</code></pr
         </tbody>
       </table>
 
-      <h2>Conclusion</h2>
+      <h2 id="sec-13">Conclusion</h2>
       <p>Pandas isn't a machine learning library itself, but it's the foundation almost every ML project is built on. From reading raw files to engineering the final features that go into a model, the ten features covered here — DataFrames, file I/O, inspection tools, missing value handling, selection, GroupBy, merging, apply functions, encoding, and sorting — cover the vast majority of what you'll actually use in day-to-day ML work.</p>
 
       <p class="article-cta-text">Get comfortable with these, and reading real ML project code will stop feeling like decoding a foreign language.</p>
@@ -504,7 +556,7 @@ merged_df = merged_df.<span class="function">drop_duplicates</span>()</code></pr
         <a href="python-projects-for-beginners.html" class="related-card">
           <div class="related-icon"><i class="fas fa-code"></i></div>
           <div>
-            <span class="category-badge badge-python">Python</span>
+            <span class="category-badge badge-programmingLanguages">Programming Languages</span>
             <p>5 Python Projects That Actually Get You Hired</p>
           </div>
         </a>

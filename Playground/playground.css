@@ -1,3 +1,13 @@
+
+/* ===== RESPONSIVE MEDIA & CODE OVERFLOW ===== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+pre, code {
+  overflow-x: auto;
+}
+
 /* ===== PLAYGROUND — CORE LAYOUT ===== */
 .pg-body {
   display: flex;
