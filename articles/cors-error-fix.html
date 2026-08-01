@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Getting a CORS error when fetching APIs in JavaScript? Here's exactly what it means, why it happens, and the 3 real fixes depending on your situation." />
+  <title>How to Fix "CORS Error" When Fetching APIs in JavaScript — Codenosis</title>
+  <!-- Canonical & Social Media OpenGraph Tags -->
+  <link rel="canonical" href="https://codenosis.in/articles/cors-error-fix.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Fix "CORS Error" When Fetching APIs in JavaScript — Codenosis" />
+  <meta property="og:description" content="Getting a CORS error when fetching APIs in JavaScript? Here's exactly what it means, why it happens, and the 3 real fixes depending on your situation." />
+  <meta property="og:url" content="https://codenosis.in/articles/cors-error-fix.html" />
+  <meta property="og:site_name" content="Codenosis" />
+  <meta property="og:image" content="https://codenosis.in/favicon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Fix "CORS Error" When Fetching APIs in JavaScript — Codenosis" />
+  <meta name="twitter:description" content="Getting a CORS error when fetching APIs in JavaScript? Here's exactly what it means, why it happens, and the 3 real fixes depending on your situation." />
+  <meta name="twitter:image" content="https://codenosis.in/favicon.png" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to Fix "CORS Error" When Fetching APIs in JavaScript",
+    "description": "Getting a CORS error when fetching APIs in JavaScript? Here's exactly what it means, why it happens, and the 3 real fixes depending on your situation.",
+    "url": "https://codenosis.in/articles/cors-error-fix.html",
+    "datePublished": "2026-08-01",
+    "dateModified": "2026-08-01",
+    "author": {
+      "@type": "Person",
+      "name": "Sarthak Upadhyay"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Codenosis",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://codenosis.in/favicon.png"
+      }
+    }
+  }
+  </script>
+  <style>
+    .code-block { background: #1e1e2e; border: 1px solid var(--border); border-radius: 12px; margin: 1.5rem 0; overflow: hidden; }
+    .code-block-header { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1.2rem; background: #13131f; border-bottom: 1px solid var(--border); }
+    .code-block-label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); font-family: monospace; }
+    .copy-btn { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 0.4rem; transition: all 0.3s ease; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+    .code-block pre { margin: 0; padding: 1.5rem; overflow-x: auto; font-size: 0.88rem; line-height: 1.7; font-family: 'Courier New', monospace; }
+    .decision-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.88rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .decision-table th { background: var(--bg-secondary); color: var(--accent); font-weight: 700; padding: 0.8rem 1rem; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+    .decision-table td { padding: 0.75rem 1rem; border-top: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; line-height: 1.6; }
+    .decision-table tbody tr:hover td { background: rgba(99,102,241,0.05); }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../articles.html">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-fundamentals">Fundamentals</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 8 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> August 01, 2026</span>
+      </div>
+      <h1 class="article-title">How to Fix "CORS Error" When Fetching APIs in JavaScript</h1>
+      <p class="article-subtitle">You've spent three hours on something with a two-line fix. Here's exactly what CORS is, why your frontend fix didn't work, and the 3 real solutions depending on your situation.</p>
+      <div class="article-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <p class="author-name">Sarthak</p>
+          <p class="author-tag">Frontend Developer & Founder of Codenosis</p>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="toc-box">
+        <div class="toc-title"><i class="fas fa-list-ol"></i> Table of Contents</div>
+        <ul class="toc-list">
+          <li><a href="#sec-1"><span class="toc-number">1.</span> What CORS Actually Is & Why You've Been Thinking About It Wrong</a></li>
+          <li><a href="#sec-2"><span class="toc-number">2.</span> The Error You're Seeing and What It Actually Means</a></li>
+          <li><a href="#sec-3"><span class="toc-number">3.</span> The 3 Real Fixes (Scenario A, B & C)</a></li>
+          <li><a href="#sec-4"><span class="toc-number">4.</span> 2-Minute Decision Chart & Closing Challenge</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        You write a <code>fetch()</code> call. You test it. Red text floods your console — "Access to fetch has been blocked by CORS policy." You check your code. Nothing looks wrong. You Google it. Someone says add a header to your fetch. You add it. Still broken. Someone else says install a Chrome extension. Works locally, breaks in production. You've now spent three hours on something that has a two-line fix — if only someone had told you where to actually look.
+      </p>
+
+      <h2 id="sec-1">What CORS Actually Is — And Why You've Been Thinking About It Wrong</h2>
+      <p>
+        CORS is not a bug in your code. It's not a mistake in your <code>fetch()</code> call. It's not even a server crash. CORS (Cross-Origin Resource Sharing) is your browser acting as a strict security guard — and it's doing exactly what it was built to do.
+      </p>
+      <ul>
+        <li>When your frontend on <code>https://codenosis.in</code> fetches data from <code>https://api.example.com</code>, your browser intercepts the response before your JavaScript ever touches it</li>
+        <li>It asks the server one question: "Did you explicitly give this domain permission to read your data?"</li>
+        <li>If the server didn't send back the right permission — blocked. Even if the request was 100% successful behind the scenes</li>
+        <li>That's why tweaking your frontend JavaScript will never fix this. The fix always lives in the response headers coming from the server</li>
+      </ul>
+
+      <h2 id="sec-2">1. The Error You're Seeing and What It Actually Means</h2>
+      <p>Here's the exact message Chrome throws at you:</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">Console Error</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-plaintext">Access to fetch at 'https://api.example.com/data' from origin 'http://localhost:5500'
+has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present
+on the requested resource.</code></pre>
+      </div>
+
+      <p>Before you panic — open the <strong>Network tab</strong> in DevTools and look at that failed request. You'll often see a green <code>200 OK</code> right next to it. Let that sink in:</p>
+      <ul>
+        <li>Your request traveled across the internet just fine</li>
+        <li>The API server received it, processed it, and sent the data back</li>
+        <li>The data literally arrived on your computer</li>
+        <li>Chrome looked at the response, saw no permission header, and blocked JavaScript from reading it at the very last second</li>
+        <li>Your code worked. The server worked. The browser is the one saying no</li>
+      </ul>
+
+      <div class="article-challenge">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p><strong>The #1 mistake every beginner makes:</strong> Adding <code>'Access-Control-Allow-Origin': '*'</code> inside their <code>fetch()</code> headers. This does absolutely nothing. That header is a permission slip only the server can hand out — you can't grant yourself permission from the frontend.</p>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — what doesn't work</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ❌ This does absolutely nothing
+fetch('https://api.example.com/data', {
+  headers: {
+    'Access-Control-Allow-Origin': '*' // Wrong — you cannot grant yourself permission
+  }
+})</code></pre>
+      </div>
+
+      <h2 id="sec-3">2. The 3 Real Fixes</h2>
+      <p>How you fix CORS depends on one simple question: do you own the backend server?</p>
+
+      <h3>Scenario A — You Own the Backend</h3>
+      <p>If you wrote the server yourself or have access to the code, this is the easiest fix in the world — just tell your server to attach the permission header to its responses.</p>
+
+      <p><strong>Node.js / Express:</strong></p>
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">server.js — Express</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Allow all origins — fine for public APIs and side projects
+app.use(cors());
+
+// OR restrict to your frontend only — better for production
+app.use(cors({ origin: 'https://codenosis.in' }));</code></pre>
+      </div>
+
+      <p><strong>Python / Flask:</strong></p>
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">app.py — Flask</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-python">from flask import Flask
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Enables CORS on all routes. Done.</code></pre>
+      </div>
+
+      <p><strong>PHP:</strong></p>
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">index.php</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-php">&lt;?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+// Rest of your code below</code></pre>
+      </div>
+
+      <ul>
+        <li>Use <code>*</code> for open public APIs and practice projects — any website can call your API</li>
+        <li>If your server handles user passwords, logins, or payments — replace <code>*</code> with your actual frontend URL so random sites can't abuse your API</li>
+      </ul>
+
+      <h3>Scenario B — Third-Party API (Not Your Server)</h3>
+      <p>You can't touch their backend code, so no amount of frontend JavaScript will fix this directly. You have two options:</p>
+      <ul>
+        <li><strong>For testing:</strong> wrap your URL with a free proxy — the proxy fetches server-to-server where browser CORS rules don't apply, then hands the data to your frontend</li>
+        <li><strong>For production:</strong> never rely on public proxies for real user data — write one tiny backend route that fetches the API server-side and returns it to your frontend</li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — proxy for testing</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ❌ Direct call — blocked by Chrome
+fetch('https://api.thirdparty.com/data')
+
+// ✅ Wrapped with CORS proxy — works instantly for testing
+fetch('https://corsproxy.io/?' + encodeURIComponent('https://api.thirdparty.com/data'))
+  .then(res => res.json())
+  .then(data => console.log(data));</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">api/weather.js — Next.js backend route for production</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">// Your server fetches the API — no browser CORS rules apply
+export async function GET() {
+  const res = await fetch('https://api.thirdparty.com/data');
+  const data = await res.json();
+  return Response.json(data); // Frontend fetches /api/weather — same origin, no CORS
+}</code></pre>
+      </div>
+
+      <h3>Scenario C — Breaking Only on Localhost (Vite / React)</h3>
+      <p>Your frontend is on <code>localhost:5173</code>, your backend is on <code>localhost:5000</code> — different ports means different origins to Chrome, CORS triggers even though both are on your machine.</p>
+      <ul>
+        <li>Add a proxy config in <code>vite.config.js</code> — 3 lines, done</li>
+        <li>Now fetch <code>/api/data</code> instead of the full URL — Vite routes it server-to-server behind the scenes, Chrome never complains</li>
+        <li>This only works locally — for deployment you still need Scenario A or B</li>
+      </ul>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">vite.config.js</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      }
+    }
+  }
+});</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-label">script.js — clean local fetch</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ✅ Vite proxies this to localhost:5000 behind the scenes
+fetch('/api/users')
+  .then(res => res.json())
+  .then(data => console.log(data));</code></pre>
+      </div>
+
+      <h2 id="sec-4">2-Minute Decision Chart</h2>
+      <p>The next time red CORS text floods your console, don't touch your code yet. Run through this table first:</p>
+
+      <div style="overflow-x:auto; margin: 1.5rem 0; border-radius: 10px; border: 1px solid var(--border);">
+        <table class="decision-table">
+          <thead>
+            <tr>
+              <th>Situation</th>
+              <th>What's Happening</th>
+              <th>The Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Network tab shows <code>200 OK</code> but console is red</td>
+              <td>Classic CORS block — request worked, browser blocked JS from reading it</td>
+              <td>Stop touching your <code>fetch()</code> syntax — fix is on the server</td>
+            </tr>
+            <tr>
+              <td>You own the backend</td>
+              <td>You can grant access from your server</td>
+              <td>Add <code>cors()</code> middleware or <code>Access-Control-Allow-Origin</code> header — 2 lines</td>
+            </tr>
+            <tr>
+              <td>Third-party API you can't control</td>
+              <td>You can't change their server headers</td>
+              <td>corsproxy.io for testing, your own backend route for production</td>
+            </tr>
+            <tr>
+              <td>Only breaking on localhost</td>
+              <td>Port mismatch — Chrome treats different ports as different origins</td>
+              <td>Add 3-line proxy config in <code>vite.config.js</code></td>
+            </tr>
+            <tr>
+              <td>Added header inside <code>fetch()</code> and still broken</td>
+              <td>You tried to grant yourself permission — doesn't work</td>
+              <td>Remove it. <code>Access-Control-Allow-Origin</code> belongs on the server response</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Open any project where you gave up because of a CORS error. Before touching a single line of code — open DevTools, go to the Network tab, find the failed request, and check if it shows <code>200 OK</code>. If it does, your JavaScript is fine, your <code>fetch()</code> is fine, your API URL is fine. Ask yourself one question: do you own that server? Yes — two lines on the backend. No — one proxy route. That's the entire decision tree. Close the Stack Overflow tabs.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+        <a href="cannot-read-properties-of-null.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-bug"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>How to Fix "Cannot Read Properties of Null" in JavaScript</p>
+          </div>
+        </a>
+        <a href="undefined-is-not-a-function.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-bug"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>How to Fix "Undefined is Not a Function" in JavaScript</p>
+          </div>
+        </a>
+        <a href="var-let-const.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <span class="category-badge badge-fundamentals">Fundamentals</span>
+            <p>Var, Let, and Const: Stop Using the Wrong One</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/cors-error-fix.html";
+      this.page.identifier = "cors-error-fix";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="how-long-to-become-developer.html">How Long Does it Take</a></li>
+            <li><a href="web-dev-mistakes.html">Mistakes I Made</a></li>
+            <li><a href="frontend-backend-fullstack.html">Frontend vs Backend</a></li>
+            <li><a href="../articles.html" class="btn-read-all">View All Articles <i class="fas fa-arrow-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../articles.html">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+            <li><a href="../playground/playground.html">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>
