@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Demystifying Large Language Models and Generative Pre-trained Transformers without the math overload. How GPT predicts the next word, embeddings, self-attention, and why it feels like magic.">
+  <!-- Canonical & Social Media OpenGraph Tags -->
+  <link rel="canonical" href="https://codenosis.in/articles/llm-what-is-gpt-doing.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Large Language Models — What is GPT Actually Doing? — Codenosis" />
+  <meta property="og:description" content="Demystifying Large Language Models and Generative Pre-trained Transformers without the math overload. How GPT predicts the next word, embeddings, self-attention, and why it feels like magic." />
+  <meta property="og:url" content="https://codenosis.in/articles/llm-what-is-gpt-doing.html" />
+  <meta property="og:site_name" content="Codenosis" />
+  <meta property="og:image" content="https://codenosis.in/favicon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Large Language Models — What is GPT Actually Doing? — Codenosis" />
+  <meta name="twitter:description" content="Demystifying Large Language Models and Generative Pre-trained Transformers without the math overload. How GPT predicts the next word, embeddings, self-attention, and why it feels like magic." />
+  <meta name="twitter:image" content="https://codenosis.in/favicon.png" />
+  
+  <title>Large Language Models — What is GPT Actually Doing? — Codenosis</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../article.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" defer/>
+  
+  <!-- Google Analytics & Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24SHHE3YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-24SHHE3YCP');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5688613581134309" crossorigin="anonymous"></script>
+
+  <!-- Schema.org Structured Data for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Large Language Models — What is GPT Actually Doing? — Codenosis",
+    "description": "Demystifying Large Language Models and Generative Pre-trained Transformers without the math overload. How GPT predicts the next word, embeddings, self-attention, and why it feels like magic.",
+    "author": {
+      "@type": "Person",
+      "name": "Yogesh"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Codenosis",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://codenosis.in/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://codenosis.in/articles/llm-what-is-gpt-doing.html"
+    }
+  }
+  </script>
+</head>
+
+<body class="dark-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articles">Articles</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#newsletter">Newsletter</a></li>
+        <li><a href="../playground/playground.html">Playground</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="article-container">
+      <div class="article-meta">
+        <span class="category-badge badge-ai">AI & ML</span>
+        <span class="meta-info"><i class="fas fa-clock"></i> 11 min read</span>
+        <span class="meta-info"><i class="fas fa-calendar"></i> August 1, 2026</span>
+      </div>
+      <h1 class="article-title">Large Language Models — What is GPT Actually Doing?</h1>
+      <p class="article-subtitle">Demystifying Generative Pre-trained Transformers without the math overload. How AI predicts the next word, high-dimensional embeddings, self-attention, and why it feels like sentient intelligence.</p>
+      <div class="article-author">
+        <div class="author-avatar">Y</div>
+        <div>
+          <p class="author-name">Yogesh</p>
+          <p class="author-tag">Software Developer & Co-Founder of Codenosis</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Table of Contents Section -->
+    <div class="article-container" style="margin-top: 2rem;">
+      <div class="toc-box">
+        <div class="toc-title">
+          <i class="fas fa-list-ul"></i> Table of Contents
+        </div>
+        <ul class="toc-list">
+            <li><a href="#sec-1"><span class="toc-number">01.</span> The Illusion of Intelligence: Next-Token Prediction</a></li>
+            <li><a href="#sec-2"><span class="toc-number">02.</span> Step 1: Tokenization — Chopping Text into Pieces</a></li>
+            <li><a href="#sec-3"><span class="toc-number">03.</span> Step 2: Vector Embeddings — Turning Words into Math</a></li>
+            <li><a href="#sec-4"><span class="toc-number">04.</span> Step 3: The Secret Sauce — Self-Attention</a></li>
+            <li><a href="#sec-5"><span class="toc-number">05.</span> Step 4: Pre-Training vs RLHF Fine-Tuning</a></li>
+            <li><a href="#sec-6"><span class="toc-number">06.</span> Why LLMs Hallucinate (And Why Confidence &ne; Truth)</a></li>
+            <li><a href="#sec-7"><span class="toc-number">07.</span> Summary & Mindset for Developers</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="article-body">
+    <div class="article-container">
+
+      <p class="article-intro">
+        When you ask ChatGPT to write a Python script, summarize a 50-page PDF, or write a poem in the style of Shakespeare, it responds in seconds with fluent, coherent, human-like text. It feels like there is a tiny conscious mind sitting inside a server farm, thinking about your question. But what is GPT actually doing under the hood? Is it really "thinking", or is something else happening?
+      </p>
+
+      <h2 id="sec-1">01. The Illusion of Intelligence: Next-Token Prediction</h2>
+      <p>
+        At its fundamental core, GPT (Generative Pre-trained Transformer) does only <strong>one single thing</strong> over and over again:
+      </p>
+      <p>
+        <strong>Given a sequence of words, what is the most statistically probable next word?</strong>
+      </p>
+      <p>
+        That's it. GPT is not a database searching through files, nor is it a logical reasoning engine executing code in a sandbox. It is the world's most sophisticated, high-dimensional <strong>autocomplete engine</strong>.
+      </p>
+      <p>
+        When you type <em>"The sun rises in the..."</em>, GPT doesn't look up an astronomy book. It calculates probabilities based on trillions of text patterns it saw during training and calculates that <em>"east"</em> has a 99.4% probability of coming next. When it picks "east", it appends it to the prompt and asks itself again: <em>"The sun rises in the east..."</em> — what comes next?
+      </p>
+
+      <h2 id="sec-2">02. Step 1: Tokenization — Chopping Text into Pieces</h2>
+      <p>
+        Neural networks don't understand letters or words directly — they only understand numbers. Before GPT can process your prompt, it passes through a <strong>Tokenizer</strong>.
+      </p>
+      <p>
+        Tokenization splits text into small chunks called <strong>tokens</strong>. A token can be a full word (like <code>cat</code>), a subword (like <code>ing</code>), or even a single character. On average, 100 English words equal roughly 130 tokens.
+      </p>
+      <ul>
+        <li>The sentence: <code>"Prompt engineering is awesome!"</code></li>
+        <li>Tokenized: <code>["Prompt", " engineer", "ing", " is", " awesome", "!"]</code></li>
+        <li>Numerical IDs: <code>[34521, 14209, 292, 318, 12490, 0]</code></li>
+      </ul>
+      <p>
+        This is why API pricing is based on tokens rather than words, and why LLMs sometimes struggle with character-level puzzles like <em>"How many R's are in the word 'Strawberry'?"</em> (because the model sees the token <code>Strawberry</code> as a single number ID, not individual letters).
+      </p>
+
+      <h2 id="sec-3">03. Step 2: Vector Embeddings — Turning Words into Math</h2>
+      <p>
+        Once text is converted into token IDs, GPT maps each token into a <strong>High-Dimensional Vector Embedding Space</strong> (often 4,096 to 12,288 dimensions!).
+      </p>
+      <p>
+        Think of an embedding space as a massive multi-dimensional map where words with similar meanings are grouped close together:
+      </p>
+      <ul>
+        <li><code>"king"</code> and <code>"queen"</code> live in the same neighborhood.</li>
+        <li><code>"apple"</code> and <code>"banana"</code> sit near each other in the fruit sector.</li>
+        <li><code>"JavaScript"</code> and <code>"Python"</code> cluster in the programming language sector.</li>
+      </ul>
+      <p>
+        Because words are represented as geometric vectors, the model can literally perform vector math on concepts! The classic example:
+      </p>
+      <p style="font-family: var(--font-mono); background: var(--bg-card); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+        Vector("King") - Vector("Man") + Vector("Woman") &approx; Vector("Queen")
+      </p>
+
+      <h2 id="sec-4">04. Step 3: The Secret Sauce — Self-Attention</h2>
+      <p>
+        Older AI models processed text one word at a time, forgetting the beginning of a long sentence by the time they reached the end. The breakthrough in 2017 was the <strong>Transformer architecture</strong>, created by Google researchers in the paper <em>"Attention Is All You Need"</em>.
+      </p>
+      <p>
+        The key superpower of Transformers is <strong>Self-Attention</strong>. Self-Attention allows every token in a prompt to look at every other token simultaneously and decide how much "attention" to pay to it.
+      </p>
+      <p>Consider these two sentences:</p>
+      <ul>
+        <li>Sentence A: <em>"The river <strong>bank</strong> was muddy."</em></li>
+        <li>Sentence B: <em>"He deposited money in the <strong>bank</strong>."</em></li>
+      </ul>
+      <p>
+        How does GPT know that "bank" means land in Sentence A, but a financial institution in Sentence B? 
+        During Self-Attention, the token <code>bank</code> in Sentence A looks at <code>river</code> and <code>muddy</code>, shifting its mathematical embedding toward geography. In Sentence B, <code>bank</code> looks at <code>money</code> and <code>deposited</code>, shifting its embedding toward finance.
+      </p>
+
+      <h2 id="sec-5">05. Step 4: Pre-Training vs RLHF Fine-Tuning</h2>
+      <p>
+        A raw GPT model right after pre-training on the internet is actually terrible at answering questions. If you type <em>"How do I bake a chocolate cake?"</em>, a raw completion model might complete it as: <em>"How do I bake a chocolate cake? Here are 10 other baking questions people ask."</em> (because it seen internet forum pages).
+      </p>
+      <p>To turn a raw completion model into a helpful chatbot, AI labs use a two-step process:</p>
+      <ul>
+        <li><strong>1. Pre-Training (Unsupervised Learning):</strong> The model reads billions of web pages, books, and code repositories to learn grammar, facts, coding patterns, and reasoning. This costs tens of millions of dollars in GPU compute.</li>
+        <li><strong>2. RLHF (Reinforcement Learning from Human Feedback):</strong> Human annotators rank model responses, teaching the model to follow instructions, be polite, decline harmful requests, and act like an assistant.</li>
+      </ul>
+
+      <h2 id="sec-6">06. Why LLMs Hallucinate (And Why Confidence &ne; Truth)</h2>
+      <p>
+        Understanding what GPT actually does explains why AI <strong>hallucinates</strong> (invents fake facts or non-existent package libraries).
+      </p>
+      <p>
+        Because GPT predicts text based on statistical plausibility rather than a database lookup, its goal is to generate text that <em>looks plausible</em>. If you ask about a niche topic where training data was scarce, GPT will generate names, citations, or functions that match the statistical pattern of real citations — even if they don't exist!
+      </p>
+      <p>
+        To an LLM, a confident wrong answer and a confident correct answer use the exact same mathematical mechanism.
+      </p>
+
+      <h2 id="sec-7">07. Summary & Mindset for Developers</h2>
+
+      <div class="article-challenge">
+        <i class="fas fa-bolt"></i>
+        <p>Key Takeaway: Remember that GPT is a probabilistic pattern matcher, not a database. When writing code with AI, always verify logic, check package imports, and provide explicit context. When you master prompt engineering, you are giving the model the exact context vector it needs to predict the correct answer!</p>
+      </div>
+
+      <p class="article-cta-text">
+        Understanding the machine behind the curtain is what separates developers who get confused by AI from developers who harness it to build incredible software.
+      </p>
+
+    </div>
+  </article>
+
+  <h1 class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</h1>
+
+  <!-- Disqus Comments -->
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  <!-- Related Articles -->
+  <section class="related">
+    <div class="article-container">
+      <h3>Continue Reading</h3>
+      <div class="related-grid">
+
+        <a href="prompt-engineering-guide.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-brain"></i></div>
+          <div>
+            <span class="category-badge badge-ai">AI & ML</span>
+            <p>How to Get the Best Answers From AI — Prompt Engineering Guide</p>
+          </div>
+        </a>
+
+        <a href="ai-learning-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-robot"></i></div>
+          <div>
+            <span class="category-badge badge-ai">AI & ML</span>
+            <p>The Honest AI Learning Roadmap Nobody Talks About</p>
+          </div>
+        </a>
+
+        <a href="web-dev-roadmap.html" class="related-card">
+          <div class="related-icon"><i class="fas fa-map"></i></div>
+          <div>
+            <span class="category-badge badge-roadmap">Roadmap</span>
+            <p>The Web Development Roadmap Nobody Shows Beginners</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">Code<span>nosis</span></a>
+          <p>Learn web development and AI the right way. Honest guides, real roadmaps, zero fluff — written for beginners by someone who's been there.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/rkking1593" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/sarthak-upadhyay-s09" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/codenosis" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61590735604811" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/codenosisofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://in.pinterest.com/codenosis/" target="_blank"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Articles</h4>
+          <ul>
+            <li><a href="how-to-start-web-development.html">How to Start Web Dev</a></li>
+            <li><a href="html-css-js-explained.html">HTML, CSS & JS Explained</a></li>
+            <li><a href="web-dev-roadmap.html">Web Dev Roadmap</a></li>
+            <li><a href="ai-learning-roadmap.html">AI Learning Roadmap</a></li>
+            <li><a href="prompt-engineering-guide.html">Prompt Engineering Guide</a></li>
+            <li><a href="llm-what-is-gpt-doing.html">What is GPT Doing?</a></li>
+            <li><a href="../articles.html" class="btn-read-all">
+              View Articles <i class="fas fa-arrow-right"></i>
+            </a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#articles">Articles</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#newsletter">Newsletter</a></li>
+            <li><a href="../playground/playground.html">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Codenosis. Made with <i class="fas fa-heart"></i> by Sarthak & Yogesh</p>
+        <p>Built to help beginners — share it with someone who needs it.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+
+</body>
+</html>
