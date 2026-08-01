@@ -1201,7 +1201,7 @@ body.light-mode .navbar.scrolled {
 
 
 
-/* ===== ULTRA HIGH CONTRAST CATEGORY BADGES ===== */
+/* ===== DUAL THEME CATEGORY BADGE STYLING (DARK & LIGHT MODE) ===== */
 .category-badge {
   padding: 0.35rem 0.9rem;
   border-radius: 50px;
@@ -1211,66 +1211,139 @@ body.light-mode .navbar.scrolled {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
 }
 
-.badge-beginners, .badge-beginner, .badge-beginnersguide {
+/* --- DARK MODE BADGES --- */
+body.dark-mode .badge-beginners, body.dark-mode .badge-beginner, body.dark-mode .badge-beginnersguide,
+.dark-mode .badge-beginners, .dark-mode .badge-beginner, .dark-mode .badge-beginnersguide {
   background: rgba(45, 212, 191, 0.22) !important;
   border: 1px solid #2dd4bf !important;
-  color: #00f5d4 !important; /* Vivid Electric Aqua */
+  color: #00f5d4 !important;
 }
 
-.badge-programmingLanguages, .badge-programminglanguages, .badge-python {
+body.dark-mode .badge-programmingLanguages, body.dark-mode .badge-programminglanguages, body.dark-mode .badge-python,
+.dark-mode .badge-programmingLanguages, .dark-mode .badge-programminglanguages, .dark-mode .badge-python {
   background: rgba(192, 132, 252, 0.22) !important;
   border: 1px solid #c084fc !important;
-  color: #e0aaff !important; /* Vivid Electric Purple */
+  color: #e0aaff !important;
 }
 
-.badge-DSA, .badge-dsa, .badge-Dsa {
+body.dark-mode .badge-DSA, body.dark-mode .badge-dsa, body.dark-mode .badge-Dsa,
+.dark-mode .badge-DSA, .dark-mode .badge-dsa, .dark-mode .badge-Dsa {
   background: rgba(250, 204, 21, 0.22) !important;
   border: 1px solid #facc15 !important;
-  color: #ffea00 !important; /* Neon Gold Yellow */
+  color: #ffea00 !important;
 }
 
-.badge-ai, .badge-ai-ml, .badge-aiml, .badge-AI {
+body.dark-mode .badge-ai, body.dark-mode .badge-ai-ml, body.dark-mode .badge-aiml, body.dark-mode .badge-AI,
+.dark-mode .badge-ai, .dark-mode .badge-ai-ml, .dark-mode .badge-aiml, .dark-mode .badge-AI {
   background: rgba(248, 113, 113, 0.22) !important;
   border: 1px solid #f87171 !important;
-  color: #ff6b6b !important; /* Neon Crimson Red */
+  color: #ff6b6b !important;
 }
 
-.badge-fundamentals {
+body.dark-mode .badge-fundamentals,
+.dark-mode .badge-fundamentals {
   background: rgba(96, 165, 250, 0.22) !important;
   border: 1px solid #60a5fa !important;
-  color: #38bdf8 !important; /* Electric Cyan Blue */
+  color: #38bdf8 !important;
 }
 
-.badge-roadmap {
+body.dark-mode .badge-roadmap,
+.dark-mode .badge-roadmap {
   background: rgba(251, 146, 60, 0.22) !important;
   border: 1px solid #fb923c !important;
-  color: #ff9f1c !important; /* Bright Neon Orange */
+  color: #ff9f1c !important;
 }
 
-.badge-reality {
+body.dark-mode .badge-reality,
+.dark-mode .badge-reality {
   background: rgba(244, 114, 182, 0.22) !important;
   border: 1px solid #f472b6 !important;
-  color: #ff70a6 !important; /* Vivid Hot Magenta */
+  color: #ff70a6 !important;
 }
 
-.badge-personal {
+body.dark-mode .badge-personal,
+.dark-mode .badge-personal {
   background: rgba(163, 230, 53, 0.22) !important;
   border: 1px solid #a3e635 !important;
-  color: #ccff00 !important; /* Electric Lime Green */
+  color: #ccff00 !important;
 }
 
-.badge-fullstack {
+body.dark-mode .badge-fullstack,
+.dark-mode .badge-fullstack {
   background: rgba(52, 211, 153, 0.22) !important;
   border: 1px solid #34d399 !important;
-  color: #00ff87 !important; /* Neon Mint Emerald */
+  color: #00ff87 !important;
 }
 
-.badge-freelancing {
+body.dark-mode .badge-freelancing,
+.dark-mode .badge-freelancing {
   background: rgba(251, 191, 36, 0.22) !important;
   border: 1px solid #fbbf24 !important;
-  color: #ffd000 !important; /* Vivid Amber Yellow */
+  color: #ffd000 !important;
+}
+
+/* --- LIGHT MODE BADGES --- */
+body:not(.dark-mode) .badge-beginners, body:not(.dark-mode) .badge-beginner, body:not(.dark-mode) .badge-beginnersguide {
+  background: #ccfbf1 !important;
+  border: 1px solid #14b8a6 !important;
+  color: #0f766e !important; /* Deep Teal */
+}
+
+body:not(.dark-mode) .badge-programmingLanguages, body:not(.dark-mode) .badge-programminglanguages, body:not(.dark-mode) .badge-python {
+  background: #f3e8ff !important;
+  border: 1px solid #a855f7 !important;
+  color: #6b21a8 !important; /* Deep Purple */
+}
+
+body:not(.dark-mode) .badge-DSA, body:not(.dark-mode) .badge-dsa, body:not(.dark-mode) .badge-Dsa {
+  background: #fef9c3 !important;
+  border: 1px solid #ca8a04 !important;
+  color: #854d0e !important; /* Deep Gold/Amber */
+}
+
+body:not(.dark-mode) .badge-ai, body:not(.dark-mode) .badge-ai-ml, body:not(.dark-mode) .badge-aiml, body:not(.dark-mode) .badge-AI {
+  background: #fee2e2 !important;
+  border: 1px solid #ef4444 !important;
+  color: #991b1b !important; /* Deep Red */
+}
+
+body:not(.dark-mode) .badge-fundamentals {
+  background: #dbeafe !important;
+  border: 1px solid #3b82f6 !important;
+  color: #1e40af !important; /* Deep Royal Blue */
+}
+
+body:not(.dark-mode) .badge-roadmap {
+  background: #ffedd5 !important;
+  border: 1px solid #f97316 !important;
+  color: #9a3412 !important; /* Deep Orange */
+}
+
+body:not(.dark-mode) .badge-reality {
+  background: #fce7f3 !important;
+  border: 1px solid #ec4899 !important;
+  color: #9d174d !important; /* Deep Pink */
+}
+
+body:not(.dark-mode) .badge-personal {
+  background: #ecfccb !important;
+  border: 1px solid #84cc16 !important;
+  color: #3f6212 !important; /* Deep Lime Green */
+}
+
+body:not(.dark-mode) .badge-fullstack {
+  background: #d1fae5 !important;
+  border: 1px solid #10b981 !important;
+  color: #065f46 !important; /* Deep Emerald */
+}
+
+body:not(.dark-mode) .badge-freelancing {
+  background: #fef3c7 !important;
+  border: 1px solid #f59e0b !important;
+  color: #92400e !important; /* Deep Amber */
 }
 
