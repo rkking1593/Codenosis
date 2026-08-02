@@ -275,22 +275,6 @@
 
   <h1 class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</h1>
 
-  <!-- Disqus Comments -->
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = window.location.href;
-      this.page.identifier = window.location.pathname;
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codenosis.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
   <!-- Related Articles -->
   <section class="related">
     <div class="article-container">
@@ -325,7 +309,25 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  
+  <!-- Disqus Comments -->
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+<!-- Footer -->
   <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
