@@ -355,25 +355,6 @@ fetch('/api/users')
     </div>
   </article>
 
-  <section 
-
-  <p class="comment-prompt">Got a question, found a bug, or just want to say hi? Drop a comment below — we read and reply to every single one.</p>
-  <div 
-  <script>
-    var disqus_config = function () {
-      this.page.url = "https://codenosis.in/articles/cors-error-fix.html";
-      this.page.identifier = "cors-error-fix";
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codenosis.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-
-  id="disqus_thread"></div>
-
   class="related">
     <div class="article-container">
       <h3>Continue Reading</h3>
@@ -403,7 +384,25 @@ fetch('/api/users')
     </div>
   </section>
 
-<footer class="footer">
+  
+  <!-- Disqus Comments -->
+  <h1 class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</h1>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  <footer class="footer">
     <div class="section-container">
       <div class="footer-top">
         <div class="footer-brand">

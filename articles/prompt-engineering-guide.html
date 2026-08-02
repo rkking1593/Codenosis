@@ -252,31 +252,13 @@
 
     </div>
   </article>
-
-  <h1 class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</h1>
-
-  <!-- Disqus Comments -->
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = window.location.href;
-      this.page.identifier = window.location.pathname;
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codenosis.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
+  
   <!-- Related Articles -->
   <section class="related">
     <div class="article-container">
       <h3>Continue Reading</h3>
       <div class="related-grid">
-
+        
         <a href="ai-learning-roadmap.html" class="related-card">
           <div class="related-icon"><i class="fas fa-robot"></i></div>
           <div>
@@ -284,7 +266,7 @@
             <p>The Honest AI Learning Roadmap Nobody Talks About</p>
           </div>
         </a>
-
+        
         <a href="web-dev-roadmap.html" class="related-card">
           <div class="related-icon"><i class="fas fa-map"></i></div>
           <div>
@@ -292,7 +274,7 @@
             <p>The Web Development Roadmap Nobody Shows Beginners</p>
           </div>
         </a>
-
+        
         <a href="how-to-start-web-development.html" class="related-card">
           <div class="related-icon"><i class="fas fa-code"></i></div>
           <div>
@@ -300,10 +282,27 @@
             <p>How to Start Learning Web Development From Zero — Honest Guide</p>
           </div>
         </a>
-
+        
       </div>
     </div>
   </section>
+  
+  <!-- Disqus Comments -->
+    <h1 class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</h1>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = window.location.pathname;
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://codenosis.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   <!-- Footer -->
   <footer class="footer">

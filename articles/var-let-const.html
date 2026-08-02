@@ -290,24 +290,7 @@ score = <span class="string">200</span>; <span class="comment">// Error: Assignm
     </div>
   </article>
   
-  <!-- Comment Prompt -->
-  <p class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</p>
-
-  <!-- Disqus Comments -->
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = "https://codenosis.in/articles/var-let-const.html";
-      this.page.identifier = "var-let-const";
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://codenosis.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-
+  
   <!-- Related Articles -->
   <section class="related">
     <div class="article-container">
@@ -341,7 +324,23 @@ score = <span class="string">200</span>; <span class="comment">// Error: Assignm
       </div>
     </div>
   </section>
-
+  
+  
+  <!-- Disqus Comments -->
+  <p class="comment-prompt">Got a question, found a bug, or have a suggestion? Drop a comment below — we read and reply to every single one.</p>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://codenosis.in/articles/var-let-const.html";
+      this.page.identifier = "var-let-const";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codenosis.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
 
   <!-- Footer -->
   <footer class="footer">
