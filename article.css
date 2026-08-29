@@ -385,3 +385,15 @@
 .keyword { color: #ff79c6; font-weight: 600; }
 .string { color: #50fa7b; }
 .function { color: #80cafc; font-weight: 600; }
+
+
+/* Fix: TOC Heading Smooth Scroll Offset to prevent Header Overlap */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+.article-body h2[id],
+.article-body h3[id] {
+  scroll-margin-top: 90px;
+}
